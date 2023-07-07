@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
 
-  let audio = new Audio("/sonic/test1.mp3")
+  let audio = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/test1.mp3")
   const start = () => {
     audio.play()
   }

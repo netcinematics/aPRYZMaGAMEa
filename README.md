@@ -206,21 +206,25 @@ new viewz
 
 
 ## Manifest v2
-// npm init
-// npm i create-react-app //this was wrong
+// X npm init
+// X npm i create-react-app //this was wrong
 // extreemely weird copy over problem to get name...
-// npm init react-app a_pryzma_game_a //this works, but npm name convention no caps.
+// X npm init react-app a_pryzma_game_a //this works, but npm name convention no caps.
 // SO pasted from create-react into existing github aPRYZMaGAMEa to get desired name.
-// npm start
-// audio test. 
+// X npm start
+// audio test. sonic goes in public only, and load from raw: 
+// https://netcinematics.github.io/aPRYZMaGAMEa/sonic/
 // npm i gh-pages --save-dev
 // add homepage and predeploy deploy to package.json, push, 
-// then github pages, with Branch: gh-pages, save, then npm run deploy
+// then github pages, with Branch: gh-pages, save, then 
+// npm run deploy
 // npm i axios
 // -- later
 // npm i react-reveal --save
 // npm i typewriter-effect
 ---
+// to make warning go away npm install --save-dev @babel/plugin-proposal-private-property-in-object
+//did not install
 
 
 

@@ -1,6 +1,12 @@
 // import logo from './logo.svg';
 import './App.css';
-import "./styles.css";
+import "./styles.css";  //put all styles in here.
+import MainView from './views/MainView';
+import StoryGrid from './views/StoryGrid6';
+// import SongPhrases from './views/SongPhrases';
+// import TicTacToe from './views/TicTacToeView';
+// import AWordaGami1 from './views/aWordaGami1';
+import { useState } from 'react';
 
 function App() {
 

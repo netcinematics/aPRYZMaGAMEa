@@ -18,7 +18,7 @@ Ai ~ Oragami!
 
 > AI PRYZM
 
-O LIVE EXAMPLES: https://netcinematics.github.io/aWordaGami/
+O LIVE EXAMPLES: https://netcinematics.github.io/aPRYZMaGAMEa/
 
 
 ## Runtime INSTRUCTIONS
@@ -26,7 +26,7 @@ O LIVE EXAMPLES: https://netcinematics.github.io/aWordaGami/
 npm install
 
 npm start
-//http://localhost:3000/aWordaGami
+//http://localhost:3000/aPRYZMaGAMEa
 
 ## LIVE EXAMPLE
 
@@ -34,7 +34,7 @@ npm start
 
 // npm run deploy
 
-LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
+LIVE EXAMPLE: https://netcinematics.github.io/aPRYZMaGAMEa/
 
 # ~ : ) 
 
@@ -84,9 +84,9 @@ X - https://node-dashboard-server.vercel.app/news
 
 ### OPTIMIZED PATH v2 (aPRYZMa):
 
-O - minimal reactjs
-O - sound test
-O - minimal deploy (github pages)
+X - minimal reactjs
+X - sound test
+X - minimal deploy (github pages)
 
 ### MINIMAL PATH v1 (aWORDZa): 
 
@@ -155,15 +155,8 @@ gustnado
 ### Category: aWORDZa
 
 Uses short, self-descriptive naming-convention, 
-to enhance english, 
-with significant results.
-
-#### Observable Results:
-
-Apparent plasticity increase, 
-from software mechanism, 
-generative awareness
-needs review.
+to enhance english, with significant results.
+generative plasticity mechanism. Still under review.
 
 ---
 

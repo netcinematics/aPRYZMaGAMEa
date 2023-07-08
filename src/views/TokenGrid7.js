@@ -5,7 +5,8 @@ import TokenFrame from "./TokenFrame4";
 import axios from 'axios'
 // import ReactMarkdown from 'react-markdown'
 
-let sonicTXTAdd = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxTally0d.mp3")
+let sonicTally = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxTally0d.mp3")
+let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxWoop1.mp3")
 
 
 export default function TokenGridFrame () {
@@ -27,7 +28,8 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
         method: 'GET',
         params: {'lookup':'tokenz'},
         // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
-        url: 'https://node-dashboard-server.vercel.app/libz/tokenz/', //prod url
+        // url: 'https://node-dashboard-server.vercel.app/libz/tokenz/', //prod url
+        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index.json', //prod url
         // url: 'http://localhost:8008/libz/tokenz/',
     }
     axios.request(options).then((response) => {
@@ -64,24 +66,24 @@ let DetailView =  ( {token} ) => {
     let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
     let [localDetails,setLocalDetails] = useState([])
 
-    let [localDetailsINDEX,setLocalDetailsINDEX] = useState(0)
-    let [localDetailsCOUNT,setLocalDetailsCOUNT] = useState('')
-    let [localDetailsARRAY,setLocalDetailsARRAY] = useState([])
+    let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
+    let [tokenTXT_COUNT,setTokenTXTCOUNT] = useState('')
+    let [tokenTXT_ARRAY,setTokenTXTARRAY] = useState([])
 
     useEffect(() => {
+        if(token.txtz){
+            // console.log("INIT TXTz",token.title) 
+            setTokenTXTARRAY(token.txtz) 
+        }
         if(token.details){
             // console.log("INIT details",token.title)
-            setLocalDetails(token.details)  //todo needs token.txtz here ?
+            setLocalDetails(token.details)  //todo remove
         }
-        // else { console.log("details",0 )}
      }, [])
 
     function addLocalDetails( addTokenz){
-        sonicTXTAdd.play()
+        sonicTally.play()
         let newArr = [...localDetails , exampleDetail]
-        // let newArr = [...localDetails , addTokenz[0]]
-        // let newArr = [...localDetails , ...addTokenz]
-        // let newArr = addTokenz;
         setLocalDetails(newArr)
         setSelectedDetails(newArr)
         getTokenDETAILS(token)
@@ -108,15 +110,15 @@ let DetailView =  ( {token} ) => {
         axios.request(options).then((response) => {
             // console.log("LOADED JSON DETAILS")
             // debugger;
-            setLocalDetailsINDEX(localDetailsINDEX+1)
-            setLocalDetailsCOUNT(response.data.token.txtz.length)
-            setLocalDetailsARRAY(response.data.token.txtz)
+            setTokenTXTINDEX(tokenTXT_INDEX+1)
+            setTokenTXTCOUNT(response.data.token.txtz.length)
+            setTokenTXTARRAY(response.data.token.txtz)
             // setMarkdownDETAILSView(response.data)
             // displayMarkdown(response.data)
             // setItemCOUNT(`data loaded: $ `)
         }).catch((error) => {
             console.error('oops',error)
-            setLocalDetailsCOUNT("no data")
+            setTokenTXTCOUNT("no data")
         })    
     }
 
@@ -125,7 +127,7 @@ let DetailView =  ( {token} ) => {
         console.log('clicked',token.title)
         debugger;
         // setTokenViewfn( "detailview" , title );
-        setTokenViewfn( "pageview" , token );
+        setTokenViewfn( "cardview" , token );
         // getDynamicTokenz(title)
         //load page view with new selected token
     }
@@ -159,15 +161,15 @@ let DetailView =  ( {token} ) => {
 
     return(
     <>
-        {dynamicDetailDisplay()}
+        { dynamicDetailDisplay() }
         <hr></hr>
         <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >unlock text</button>
-        {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
+        { localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
         { <article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
             }}>
                 
-        {(localDetailsARRAY && localDetailsARRAY.length)?
-            localDetailsARRAY.map( (item, token_idx)=> { //txt_tokenz
+        {(tokenTXT_ARRAY && tokenTXT_ARRAY.length)?
+            tokenTXT_ARRAY.map( (item, token_idx)=> { //txt_tokenz
                 return (
                     <>
                         <section>{item.title}</section>
@@ -186,16 +188,17 @@ let DetailView =  ( {token} ) => {
             })
             :'no tokenz'
         }
-        COUNT: {localDetailsINDEX} of {localDetailsCOUNT}
+        COUNT: {tokenTXT_INDEX} of {tokenTXT_COUNT}
         </article> }
     </>
     )
 }
 
-let pageViewBtnStyle = {width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue'}
+let TokenCardzBtnStyle = {width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue'}
 
-function setPageViewContent(direction){
+function setCardViewContent(direction){
     if(direction==='up'){
+        sonicWoop.play();
         setViewState('overview')
     } else if  (direction==='right'){ //look at numz, calculate offset, apply offset, look up numz, if found load, not loop default.
         debugger;
@@ -211,7 +214,7 @@ function setPageViewContent(direction){
     }
 }
 
-let PageView = ( {token} ) => {  //rename TokenCardz
+let TokenCardz = ( {token} ) => {  //rename TokenCardz
 
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
@@ -220,10 +223,10 @@ let PageView = ( {token} ) => {  //rename TokenCardz
         }}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
-            <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setPageViewContent('up')}}>UP</button>
-            <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setPageViewContent('right')}}>RIGHT</button>
+            <button style={TokenCardzBtnStyle} 
+                onClick={ ()=>{setCardViewContent('up')}}>UP</button>
+            <button style={TokenCardzBtnStyle} 
+                onClick={ ()=>{setCardViewContent('right')}}>RIGHT</button>
                 {/* onClick={ ()=>{setViewState('overview')}}>RIGHT</button> */}
         </header>
         <article className="scrollBarV" style={{flex:1, color:'steelblue',
@@ -234,11 +237,11 @@ let PageView = ( {token} ) => {  //rename TokenCardz
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
-            <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setPageViewContent('overview')}}>LEFT</button>
+            <button style={TokenCardzBtnStyle} 
+                onClick={ ()=>{setCardViewContent('overview')}}>LEFT</button>
                 {/* onClick={ ()=>{setViewState('overview')}}>LEFT</button> */}
-            <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setPageViewContent('overview')}}>DOWN</button>
+            <button style={TokenCardzBtnStyle} 
+                onClick={ ()=>{setCardViewContent('overview')}}>DOWN</button>
                 {/* onClick={ ()=>{setViewState('overview')}}>DOWN</button> */}
         </footer>
     </main>
@@ -313,8 +316,8 @@ return (
     marginRight:'1em',marginLeft:'1em'} }>
         { (viewState==='overview') ? //rename token_grid
             <TokenGrid/>
-        : (viewState==='pageview') ? //token_cardz
-           <PageView token={selectedToken}/>
+        : (viewState==='cardview') ? //token_cardz
+           <TokenCardz token={selectedToken}/>
         : <TokenGrid/>
         }
     </section>

@@ -7,44 +7,18 @@ let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nx
 function TokenFrame ( { token, setTokenViewfn } ) {
     // console.log("tokenFrame",token.title)
     useEffect(() => { document.title = token.title;  }, []);
-    // useEffect(() => { document.title = "ai_tree";  }, []);
-    // console.log("LOAD TOKENFRAME ITEMS", token.title)
-    let [tokenITEMS, setTokenITEMS] = useState([]);
-    let [itemCOUNT, setItemCOUNT] = useState("");
-    // useEffect(() => { getTokenITEMS() }, [itemCOUNT]);
-    // function getTokenITEMS(param){
-    //     if(!param){ param = 'aWORDZa'}
-    //     const options = {
-    //         method: 'GET',
-    //         // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
-    //         params: {'lookup':1},
-    //         url: `http://localhost:8008/libz/tokenz/${param}`,
-    //     }
-    //     axios.request(options).then((response) => {
-    //         debugger;
-    //         setTokenITEMS(response.data.tokenz)
-    //         setItemCOUNT("tokenz "+response.data.tokenz.length)
-    //         console.log("LOADED TOKENFRAME ITEMS", response.data.tokenz.length)
-    //     }).catch((error) => {
-    //         console.error(error)
-    //         setItemCOUNT("no data")
-    //     })    
-    // }
+    // let [tokenITEMS, setTokenITEMS] = useState([]);
+    // let [itemCOUNT, setItemCOUNT] = useState("");
 
+    // hovered is why token frame is a sub component.
     let [isHovered, setHovered] = useState(false);
-
-    let handleMouseEnter = () => {
-        setHovered(true)
-    }
-    let handleMouseLeave = () => {
-        setHovered(false)
-    }
+    let handleMouseEnter = () => { setHovered(true) }
+    let handleMouseLeave = () => { setHovered(false) }
 
     function onTokenCardClick(  ){ 
         console.log("Token Click:",token.title)
-        
         sonicWoop.play()
-        setTokenViewfn("pageview",token);
+        setTokenViewfn("cardview",token);
         // getTokenITEMS()
     }
 

@@ -169,20 +169,24 @@ X - docs
 X - infinite game feature
 X - random mix prompt array - O in ai.randommix()
 X - random load - in ai.puzzleset()
-O - non reload Local Storage
 X - manifest error - logo.svg
-O - reset sound
-O - dynamic category ai.category()
+X - reset sound
+X - dynamic category ai.category()
 X - doublegame error
 X - dynamic className
 X - highlight selected btns
 X - highlight Correct / Wrong words.
 X - add rich visual animations // npm install react-reveal --save
 X - textures
-O - icon / menu
-O - menu / game routing
 X - ai object
 X - GRID in song lyrics. shows Rhyme_Strength. FOCUS.
+O - non reload Local Storage
+O - icon / menu
+O - menu / game routing
+
+O - sonics tally invert, up pitch
+O - sonics win shorter cut beat
+O - locked - puzzle - prize - examples.
 ---
 
 

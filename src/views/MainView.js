@@ -6,53 +6,16 @@ import SocialPhrases_2 from '../data/SocialPhrases_2.js'
 // import React, { useEffect } from "react";
 import { useEffect } from "react";
 // import {useEffect, useState} from 'react'
-// import axios from 'axios'
-// import ReactMarkdown from 'react-markdown'
 import "../styles.css";
 
 export default function MainView () {
-    // let [markdownDATA, setMarkdownDATA] = useState("");
     useEffect(() => { document.title = "aPRYZMaGAMEa";  }, []);
-    // useEffect(() => {
-    //    getMarkdownDATA();
-    // }, [])
-
-    // function getMarkdownDATA(){
-    //     const options = {
-    //         method: 'GET',
-    //         // url: 'https://node-dashboard-server.vercel.app/ai2',
-    //         params: {'lookup':'tokenz'},
-    //         // url: 'http://localhost:8008/news',
-    //         url: 'http://localhost:8008/libz/',
-    //         // params: {prompt:'what time is it?'}
-    //     }
-    //     axios.request(options).then((response) => {
-    //         debugger;
-    //         console.log("CLIENT data:", response.data)
-    //         displayMarkdown(response.data)
-    //         //setResponses(response.data)
-    //     }).catch((error) => {
-    //         console.error(error)
-    //     })    
-    // }
-
-    // function displayMarkdown(md){
-    //     setMarkdownDATA(md)
-    // }
-
-    // function handleClick(){
-    //     getMarkdownDATA();
-    // }
-
 
     return (<>
         <header className="App-header" style={{borderRadius:'13px'}}>
         <div>Welcome!</div>
         {/* <Zoom>Welcome!</Zoom> */}
         </header>
-        {/* <ReactMarkdown>
-            {markdownDATA}
-        </ReactMarkdown> */}
         <article style={{height:'55vh',display:'flex',flexDirection:'column',justifyContent:'space-evenly',
             borderRadius:'10px', backgroundColor: 'rgb(22 35 62)'}}>
             <code>Artificial Intelligence AI_WORD_GAMES:</code><br/>

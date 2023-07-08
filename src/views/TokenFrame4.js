@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 
 let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxWoop1.mp3")
 
@@ -41,7 +41,7 @@ function TokenFrame ( { token, setTokenViewfn } ) {
     }
 
     function onTokenCardClick(  ){ 
-        console.log("clicked",token.title)
+        console.log("Token Click:",token.title)
         
         sonicWoop.play()
         setTokenViewfn("pageview",token);
@@ -99,6 +99,7 @@ function TokenFrame ( { token, setTokenViewfn } ) {
                 borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
                 color:'#4c038c'}}>
                 {token.numz}
+                {/* {(!token.state.locked)?'unlocked':'locked'} */}
             </footer>
         </button>
     </>)

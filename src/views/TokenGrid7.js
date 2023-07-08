@@ -5,6 +5,9 @@ import TokenFrame from "./TokenFrame4";
 import axios from 'axios'
 // import ReactMarkdown from 'react-markdown'
 
+let sonicTXTAdd = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxTally0d.mp3")
+
+
 export default function TokenGridFrame () {
     useEffect(() => { document.title = "Token_Gridz";  }, []);
     // let [rootsARR, setRootsARR] = useState([]);
@@ -74,7 +77,7 @@ let DetailView =  ( {token} ) => {
      }, [])
 
     function addLocalDetails( addTokenz){
-        
+        sonicTXTAdd.play()
         let newArr = [...localDetails , exampleDetail]
         // let newArr = [...localDetails , addTokenz[0]]
         // let newArr = [...localDetails , ...addTokenz]
@@ -92,7 +95,8 @@ let DetailView =  ( {token} ) => {
         }
         const options = {
             method: 'GET',
-            url : `https://raw.githubusercontent.com/netcinematics/aWordaGami/main/cardz/aWORDZa.json`
+            url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/aWORDZa.json`
+            // url : `https://raw.githubusercontent.com/netcinematics/aWordaGami/main/cardz/aWORDZa.json`
             // url : `https://raw.githubusercontent.com/netcinematics/node_dashboard_server/main/libz/aBETTaWORDZa.json`
             // params: {'lookup':'markdown'},
             // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url

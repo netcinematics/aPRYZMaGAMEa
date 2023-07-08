@@ -279,15 +279,19 @@ X - Move to new project called aPRYZMaGAMEa
 X - New production on GITHUB.
 O - Responsive Resize.
 
-O - Render cardz on click and details.
+X - Render cardz on click and details.
 O - Clean up other tabs / files.
-O - hydrate grid_tokenz
+X - hydrate grid_tokenz
 O - rename grid_tokenz, card_tokenz, & txt_tokenz
 O - TokenGrid, TokenCardz, TokenTxtz
 
 O - PageView to TokenCard and TokenDetails to TokenTxtz
 
 O - delete all comments
+
+O - switch data path from awordagame to apryzmagame
+
+O - rename localdetails to tokenTxtz and then update init like localdetails. and remove localdetails
 
 
 X - libz to meta_net

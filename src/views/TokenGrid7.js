@@ -5,7 +5,7 @@ import TokenFrame from "./TokenFrame4";
 import axios from 'axios'
 // import ReactMarkdown from 'react-markdown'
 
-export default function StoryGrid () {
+export default function TokenGridFrame () {
     useEffect(() => { document.title = "Token_Gridz";  }, []);
     // let [rootsARR, setRootsARR] = useState([]);
     let [viewState, setViewState] = useState('overview');
@@ -117,7 +117,7 @@ let DetailView =  ( {token} ) => {
     useEffect(() => {
         if(token.details){
             // console.log("INIT details",token.title)
-            setLocalDetails(token.details)
+            setLocalDetails(token.details)  //todo needs token.txtz here ?
         }
         // else { console.log("details",0 )}
      }, [])
@@ -149,19 +149,19 @@ let DetailView =  ( {token} ) => {
            // url: `https://node-dashboard-server.vercel.app/libz/tokenz/`, //prod url working index
             // url: `http://localhost:8008/libz/tokenz/${lookupTitle}`, 
         }
-        // axios.request(options).then((response) => {
-        //     // console.log("LOADED JSON DETAILS")
-        //     // debugger;
-        //     setLocalDetailsINDEX(localDetailsINDEX+1)
-        //     setLocalDetailsCOUNT(response.data.token.txtz.length)
-        //     setLocalDetailsARRAY(response.data.token.txtz)
-        //     // setMarkdownDETAILSView(response.data)
-        //     // displayMarkdown(response.data)
-        //     // setItemCOUNT(`data loaded: $ `)
-        // }).catch((error) => {
-        //     console.error('oops',error)
-        //     setLocalDetailsCOUNT("no data")
-        // })    
+        axios.request(options).then((response) => {
+            // console.log("LOADED JSON DETAILS")
+            // debugger;
+            setLocalDetailsINDEX(localDetailsINDEX+1)
+            setLocalDetailsCOUNT(response.data.token.txtz.length)
+            setLocalDetailsARRAY(response.data.token.txtz)
+            // setMarkdownDETAILSView(response.data)
+            // displayMarkdown(response.data)
+            // setItemCOUNT(`data loaded: $ `)
+        }).catch((error) => {
+            console.error('oops',error)
+            setLocalDetailsCOUNT("no data")
+        })    
     }
 
     // let [tokenITEMS, setTokenITEMS] = useState([]);
@@ -230,7 +230,7 @@ let DetailView =  ( {token} ) => {
         {/* <h1>add details</h1> */}
         {dynamicDetailDisplay()}
         <hr></hr>
-        <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >unlock</button>
+        <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >unlock text</button>
         {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
         {/* <section style={{margin:'1em',fontSize:'22px'}}>{markdownDetailsTXT}</section> */}
         { <article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
@@ -378,7 +378,7 @@ function setSelectedDetails(newDetails){
 
 return (
     < >
-    <h1>aWORDaGAMEa</h1>
+    <h1>aPRYZMaGAMEa</h1>
     {/* <h1>StoryTree</h1> */}
     {/* <ReactMarkdown>
             {markdownDATA}

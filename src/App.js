@@ -2,7 +2,7 @@
 import './App.css';
 import "./styles.css";  //put all styles in here.
 import MainView from './views/MainView';
-import StoryGrid from './views/StoryGrid6';
+import TokenGridFrame from './views/TokenGrid7';
 // import SongPhrases from './views/SongPhrases';
 // import TicTacToe from './views/TicTacToeView';
 // import AWordaGami1 from './views/aWordaGami1';
@@ -44,8 +44,9 @@ function App() {
           // } else if (viewIDX === "TicTacToe") {
           //   return <TicTacToe/>;
           // } else 
-          if (viewIDX === "StoryGrid") {
-            return <StoryGrid/>;
+          // if (viewIDX === "StoryGrid") {
+          if (viewIDX === "aPRYZMaGAMEa") {
+            return <TokenGridFrame/>;
           // } else if (viewIDX === "SongPhrases") {
           //   return <SongPhrases/>;
           } else {
@@ -57,14 +58,14 @@ function App() {
       <nav style={{marginTop:'1em'}}>
         <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px purple'}}
            onClick={CLICKview}>MAIN</button>
-        <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px lime'}}
-           onClick={CLICKview}>aWORDaGAMi</button>
-        <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px yellow'}}
-           onClick={CLICKview}>TicTacToe</button>
+        {/* <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px lime'}}
+           onClick={CLICKview}>aWORDaGAMi</button> */}
+        {/* <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px yellow'}}
+           onClick={CLICKview}>TicTacToe</button> */}
         <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
-           onClick={CLICKview}>StoryGrid</button>
-        <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
-           onClick={CLICKview}>SongPhrases</button>
+           onClick={CLICKview}>aPRYZMaGAMEa</button>
+        {/* <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
+           onClick={CLICKview}>SongPhrases</button> */}
       </nav>
       <section style={{color:'steelblue',fontSize:'0.666em',marginTop:'2em'}}>
         MIT - work in progress by spazefalcon  - &copy; 2023

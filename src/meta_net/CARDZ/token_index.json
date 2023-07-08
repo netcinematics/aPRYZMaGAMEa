@@ -6,6 +6,16 @@
     { "title": "~aQUERIOa~","timestamp":"1_1_2020", "txtz":[{"title":"short5","txtz":["testtxt5"]},{"title":"long","txtz":["1e...","2...","3..."]}], "imgz":"", "linkz":"" },
     { "title": "~aSEEKa~",  "timestamp":"1_1_2020", "txtz":[{"title":"short6","txtz":["testtxt6"]},{"title":"long","txtz":["1f...","2...","3..."]}], "imgz":"", "linkz":"" },
     { "title": "~aEXTRAa~", "timestamp":"1_1_2020", "txtz":[{"title":"short7","txtz":["testtxt7"]},{"title":"long","txtz":["1g...","2...","3..."]}], "imgz":"", "linkz":"" },
-    { "title": "~aWIZDOa~", "timestamp":"1_1_2020", "txtz":[{"title":"short8","txtz":["testtxt8"]},{"title":"long","txtz":["1h...","2...","3..."]}], "imgz":"", "linkz":"" }
+    { "title": "~aWIZDOa~", "timestamp":"1_1_2020", "txtz":[{"title":"short8","txtz":["testtxt8"]},{"title":"long","txtz":["1h...","2...","3..."]}], "imgz":"", "linkz":"" },
+    { "title": "Third.5", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"clue","txtz":["you get clue"]} },
+    { "title": "First.2", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"","state":{"title":"clue","txtz":["you get clue"]} },
+    { "title": "Third.1", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"prize","txtz":["you win prize"]} },
+    { "title": "Third.2", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"prize","txtz":["you win prize"]} },
+    { "title": "Third.3", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"prize","txtz":["you win prize"]} },
+    { "title": "Third.4", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"locked","txtz":["you unlock this"]} },
+    { "title": "Third.6", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"locked","txtz":["you unlock this"]} },
+    { "title": "Third.7", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"locked","txtz":["you unlock this"]} },
+    { "title": "Third.8", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"locked","txtz":["you unlock this"]} },
+    { "title": "Third.9", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"title":"locked","txtz":["you unlock this"]} }    
   ]
 }

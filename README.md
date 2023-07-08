@@ -186,6 +186,7 @@ O - menu / game routing
 
 O - sonics tally invert, up pitch
 O - sonics win shorter cut beat
+O - sonics up is swoosh
 O - locked - puzzle - prize - examples.
 ---
 

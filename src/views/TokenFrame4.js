@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
+let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxWoop1.mp3")
+
 function TokenFrame ( { token, setTokenViewfn } ) {
     // console.log("tokenFrame",token.title)
     useEffect(() => { document.title = token.title;  }, []);
@@ -40,6 +42,8 @@ function TokenFrame ( { token, setTokenViewfn } ) {
 
     function onTokenCardClick(  ){ 
         console.log("clicked",token.title)
+        
+        sonicWoop.play()
         setTokenViewfn("pageview",token);
         // getTokenITEMS()
     }

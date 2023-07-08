@@ -36,6 +36,7 @@ npm start
 
 LIVE EXAMPLE: https://netcinematics.github.io/aPRYZMaGAMEa/
 
+
 # ~ : ) 
 
 ---
@@ -73,6 +74,7 @@ X - http://localhost:8008/news
 X - https://node-dashboard-server.vercel.app/news
 
 - PREFER RAW FILE PATH directly to GitHub.
+https://raw.githubusercontent.com/netcinematics/aWordaGami/main/cardz/aWORDZa.json
 ---
 
 1) X Rescue 20 year old.. Ai Ii Song Lyrics "Social-Phrases" from DATA STORAGE!

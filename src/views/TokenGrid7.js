@@ -28,61 +28,13 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
         // url: 'http://localhost:8008/libz/tokenz/',
     }
     axios.request(options).then((response) => {
-        // console.log("LOADED token_INDEX",response.data.token_index.length)
         setTokenz_INDEX_DATA(response.data.token_index)
         setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
-        // setTokenz_INDEX_DATA(response.data.tokenz)
-        // setTokenz_CARD_COUNT("tokenz "+response.data.tokenz.length)
-        // console.log("LOADED INDEX",response.data.tokenz.length)
     }).catch((error) => {
         console.error(error)
         setTokenz_CARD_COUNT("no data")
     })    
 }
-
-// function getMarkdownDATA(){
-//     const options = {
-//         method: 'GET',
-//         // url: 'https://node-dashboard-server.vercel.app/ai2',
-//         params: {'lookup':'tokenz'},
-//         url: 'http://localhost:8008/libz/',
-//     }
-//     axios.request(options).then((response) => {
-//         displayMarkdown(response.data)
-//     }).catch((error) => {
-//         console.error(error)
-//     })    
-// }
-
-// function displayMarkdown(md){
-//     // setMarkdownDATA(md)
-//     let spaceData = md.split(' ');
-//     let linkData = spaceData.map( (item)=>{
-//         if(item.includes('~')){
-//             return '!~!'
-//         } else if (item.includes('_')) {
-//             return '!_!'
-//         } else {
-//             return item
-//         }
-//     } )
-//     setMarkdownDATA(md)
-// }
-
-
-//  useEffect(() => { loadTokenData(); }, [])
-//  function loadTokenData(){  //This is local social_phrase data.
-//     let nn = LangData(); 
-//     let tgtRootARR = [], tgtStemARR=[],tgtRootSTR='';
-//     for(let i=0; i<nn.length;i++){ //TASK: LOOP nn, match exact, match synonym, sort by length
-//         tgtStemARR = nn[i].split(' ');
-//         tgtRootSTR = tgtStemARR[tgtStemARR.length-1];
-//         tgtRootARR.push(tgtRootSTR);//Save ROOT.
-//     }
-
-//     setRootsARR( tgtRootARR );
-//  }
-
 
 function TokenCard({ token }) {
     // console.log("tokenCard",token)
@@ -108,7 +60,6 @@ function gameAGENT(token){ //REACT to state to update game view state.
 let DetailView =  ( {token} ) => { 
     let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
     let [localDetails,setLocalDetails] = useState([])
-    let [markdownDetailsTXT,setMarkdownDETAILSView] = useState('')
 
     let [localDetailsINDEX,setLocalDetailsINDEX] = useState(0)
     let [localDetailsCOUNT,setLocalDetailsCOUNT] = useState('')
@@ -123,6 +74,7 @@ let DetailView =  ( {token} ) => {
      }, [])
 
     function addLocalDetails( addTokenz){
+        
         let newArr = [...localDetails , exampleDetail]
         // let newArr = [...localDetails , addTokenz[0]]
         // let newArr = [...localDetails , ...addTokenz]
@@ -164,30 +116,6 @@ let DetailView =  ( {token} ) => {
         })    
     }
 
-    // let [tokenITEMS, setTokenITEMS] = useState([]);
-    // let [itemCOUNT, setItemCOUNT] = useState("");
-    // useEffect(() => { getTokenzITEMS() }, [itemCOUNT]);
-    // function getDynamicTokenz(title){
-    //     if(!title){ title = 'aWORDZa'}
-    //     const options = {
-    //         method: 'GET',
-    //         // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
-    //         // params: {'lookup':'tokenz'},
-    //         url: `http://localhost:8008/libz/tokenz/${title}`,
-    //     }
-    //     axios.request(options).then((response) => {
-    //         console.log(response.data.tokenz)
-    //         // setTokenITEMS(response.data.tokenz)
-    //         // setItemCOUNT("tokenz "+response.data.tokenz.length)
-    //         debugger;
-    //         addLocalDetails(response.data.tokenz)
-    //         // setLocalDetails(token.details)
-    //     }).catch((error) => {
-    //         console.error(error)
-    //         // setItemCOUNT("no data")
-    //     })    
-    // }
-
     function dynamicLink(token){
         if(!token || !token.title) return;
         console.log('clicked',token.title)
@@ -227,18 +155,13 @@ let DetailView =  ( {token} ) => {
 
     return(
     <>
-        {/* <h1>add details</h1> */}
         {dynamicDetailDisplay()}
         <hr></hr>
         <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >unlock text</button>
         {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
-        {/* <section style={{margin:'1em',fontSize:'22px'}}>{markdownDetailsTXT}</section> */}
         { <article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
             }}>
                 
-        {/* <ReactMarkdown>
-            {markdownDATA}
-        </ReactMarkdown> */}
         {(localDetailsARRAY && localDetailsARRAY.length)?
             localDetailsARRAY.map( (item, token_idx)=> { //txt_tokenz
                 return (
@@ -254,10 +177,6 @@ let DetailView =  ( {token} ) => {
                             })
                             :'no txtz'
                         }
-
-
-
-
                     </>
                 )
             })
@@ -288,7 +207,7 @@ function setPageViewContent(direction){
     }
 }
 
-let PageView =  ( {token} ) => {  //rename TokenCardz
+let PageView = ( {token} ) => {  //rename TokenCardz
 
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',

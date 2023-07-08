@@ -276,29 +276,59 @@ Reduced design to:
 REACTJS:
 X - Add details click
 X - Move to new project called aPRYZMaGAMEa
-O - New production on GITHUB.
+X - New production on GITHUB.
 O - Responsive Resize.
-O - Clean up other tabs / files.
-O - token_net/ taxonomy data files.
-O - token_net/token_cardz/
-O - token_net/token_markdown/
+
 O - Render cardz on click and details.
-O - Error, not found.
-
+O - Clean up other tabs / files.
+O - hydrate grid_tokenz
 O - rename grid_tokenz, card_tokenz, & txt_tokenz
-O - get files from dashboard_server put into libz/
-O - use scriptz to read all libz, and write versioned_tokenz.
+O - TokenGrid, TokenCardz, TokenTxtz
 
+O - PageView to TokenCard and TokenDetails to TokenTxtz
+
+O - delete all comments
+
+
+X - libz to meta_net
+X - meta_net/ taxonomy data files.
+X - meta_net/scriptz/
+X - meta_net/token_cardz/
+X - meta_net/token_markdown/
+X - meta_net/token_txtz
+X - meta_net/readme.md
+X - meta_net/meta_net_schema.js
+X - clean up libz files...
+
+
+
+X - get files from dashboard_server put into libz/
+
+#### RICH RENDERING ENGINE
+O a) parse by empty line
+O a0) `~...~` LINKZ tilde words, turn into links, for INDEX
+O a1) [_] underscore WORDZ.
+O c) WORDZ begin and end in 'a'. secondary references.
+O c1) all WORDZ with 'z'
+O c2) TITLEZ ### h3
+O d1) QUOTEZ >>> multiline
+O d) CARDZ are like content FILTER.
+O e) TXTZ are like content SORT.
+O f) NETZ are like interfaces
+O g) camelcase 'a' or uppercase 2nd, or 3rd letters.
+O h) ALL CAPS words. 
 
 NODEJS - SCRIPTZ
 X - train/ data1/ folder with txt and md and scriptz/: 
 X - tokenz/ folder with ontology names.
 O - scriptz/markdown_to_cardz
-O a) [_] underscore words.
-O b) `~...~` tilde words, turn into links...
-O c) wordz begin and end in 'a'.
-O d) cardz are like content FILTER.
-O e) txtz are like content SORT.
+O - scriptz/generate_INDEX. 
+O - scriptz/meta_netz_linkz
+O - npm run scriptz
+O - scriptz to read all libz, and write versioned_tokenz.
+O - Error, not found.
+
+
 
 1) NODEJS LOOPS
 X - open md file, or txt file, or html file

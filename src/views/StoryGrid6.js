@@ -2,22 +2,24 @@ import "../styles.css";
 // import LangData from '../data/SocialPhraseCLM'
 import { useState, useEffect } from 'react';
 import TokenFrame from "./TokenFrame4";
-// import axios from 'axios'
+import axios from 'axios'
 // import ReactMarkdown from 'react-markdown'
 
 export default function StoryGrid () {
     useEffect(() => { document.title = "Token_Gridz";  }, []);
-    let [rootsARR, setRootsARR] = useState([]);
+    // let [rootsARR, setRootsARR] = useState([]);
     let [viewState, setViewState] = useState('overview');
     let [selectedToken, setSelectedTokenObj] = useState({});
 
-    let [markdownDATA, setMarkdownDATA] = useState("");
+    // let [markdownDATA, setMarkdownDATA] = useState("");
     let [tokenz_INDEX_DATA, setTokenz_INDEX_DATA] = useState([]);
     let [tokenz_CARD_COUNT, setTokenz_CARD_COUNT] = useState("");
 
+// useEffect(() => { getTokenzINDEX() }, []); 
 // useEffect(() => { getTokenzINDEX() }, [tokenz_CARD_COUNT]); 
+useEffect(() => { getTokenzINDEX() }, [setTokenz_INDEX_DATA]); 
 function getTokenzINDEX(){ //SHOW MAIN CARDS.
-    console.log("LOAD INDEX")
+    // console.log("LOAD INDEX",tokenz_CARD_COUNT)
     const options = {
         method: 'GET',
         params: {'lookup':'tokenz'},
@@ -25,17 +27,17 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
         url: 'https://node-dashboard-server.vercel.app/libz/tokenz/', //prod url
         // url: 'http://localhost:8008/libz/tokenz/',
     }
-    // axios.request(options).then((response) => {
-    //     console.log("LOADED token_INDEX",response.data.token_index.length)
-    //     setTokenz_INDEX_DATA(response.data.token_index)
-    //     setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
-    //     // setTokenz_INDEX_DATA(response.data.tokenz)
-    //     // setTokenz_CARD_COUNT("tokenz "+response.data.tokenz.length)
-    //     // console.log("LOADED INDEX",response.data.tokenz.length)
-    // }).catch((error) => {
-    //     console.error(error)
-    //     setTokenz_CARD_COUNT("no data")
-    // })    
+    axios.request(options).then((response) => {
+        // console.log("LOADED token_INDEX",response.data.token_index.length)
+        setTokenz_INDEX_DATA(response.data.token_index)
+        setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
+        // setTokenz_INDEX_DATA(response.data.tokenz)
+        // setTokenz_CARD_COUNT("tokenz "+response.data.tokenz.length)
+        // console.log("LOADED INDEX",response.data.tokenz.length)
+    }).catch((error) => {
+        console.error(error)
+        setTokenz_CARD_COUNT("no data")
+    })    
 }
 
 // function getMarkdownDATA(){
@@ -52,20 +54,20 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
 //     })    
 // }
 
-function displayMarkdown(md){
-    // setMarkdownDATA(md)
-    let spaceData = md.split(' ');
-    let linkData = spaceData.map( (item)=>{
-        if(item.includes('~')){
-            return '!~!'
-        } else if (item.includes('_')) {
-            return '!_!'
-        } else {
-            return item
-        }
-    } )
-    setMarkdownDATA(md)
-}
+// function displayMarkdown(md){
+//     // setMarkdownDATA(md)
+//     let spaceData = md.split(' ');
+//     let linkData = spaceData.map( (item)=>{
+//         if(item.includes('~')){
+//             return '!~!'
+//         } else if (item.includes('_')) {
+//             return '!_!'
+//         } else {
+//             return item
+//         }
+//     } )
+//     setMarkdownDATA(md)
+// }
 
 
 //  useEffect(() => { loadTokenData(); }, [])
@@ -114,7 +116,7 @@ let DetailView =  ( {token} ) => {
 
     useEffect(() => {
         if(token.details){
-            console.log("INIT details",token.title)
+            // console.log("INIT details",token.title)
             setLocalDetails(token.details)
         }
         // else { console.log("details",0 )}
@@ -229,7 +231,7 @@ let DetailView =  ( {token} ) => {
         {dynamicDetailDisplay()}
         <hr></hr>
         <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >unlock</button>
-        {/* {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )} */}
+        {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
         {/* <section style={{margin:'1em',fontSize:'22px'}}>{markdownDetailsTXT}</section> */}
         { <article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
             }}>
@@ -286,7 +288,7 @@ function setPageViewContent(direction){
     }
 }
 
-let PageView =  ( {token} ) => { 
+let PageView =  ( {token} ) => {  //rename TokenCardz
 
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
@@ -320,24 +322,29 @@ let PageView =  ( {token} ) => {
     </>)
 }
 
-
+ 
 let colm = [];
 let COLNUM=6; //vertical wrap limit
-let tokenCOLUMNS = [];
+let tokenCOLUMNS = []; //available for meta data lookup on MOVE.
 let humanIDX = 0; //column header
 function TokenGrid (){ 
-    // let colm = [];
+    // let colm = []; 
     // let COLNUM=6; //vertical wrap limit
     // let tokenCOLUMNS = [];
-    // let humanIDX = 0; //column header
-    for(let i=0; i<tokenz_INDEX_DATA.length; i += COLNUM){
-        colm = tokenz_INDEX_DATA.slice(i,i+COLNUM);
+    // debugger;
+    // console.log('rendering', tokenz_INDEX_DATA.length)
+    colm = [];
+    humanIDX = 0; //column header
+    tokenCOLUMNS = [];
+    for(let i=0; i < tokenz_INDEX_DATA.length; i += COLNUM){
+        colm = tokenz_INDEX_DATA.slice(i, i+COLNUM);
         ++humanIDX;
-         tokenCOLUMNS.push( <div style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
+         tokenCOLUMNS.push( 
+         <div  key={'col_'+i} style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
             <header style={{minHeight:'2em'}}></header>
             <header>{humanIDX}</header>
             { colm.map( (token,idx)=>{ token.numz = humanIDX+'.'+idx;       //apply dynamic_numz
-                return <TokenCard token={token}/>
+                return <TokenCard key={'tokencard_'+idx} token={token}/>
             }) }
             <footer style={{minHeight:'3em'}}></footer>
          </div> 
@@ -381,9 +388,9 @@ return (
     boxShadow:'0px 1px 14px 1px purple',paddingBottom:'1em',
     marginTop:'0.444em',paddingLeft:'1.444em',paddingRight:'1.444em',flex:1,
     marginRight:'1em',marginLeft:'1em'} }>
-        { (viewState==='overview') ?
+        { (viewState==='overview') ? //rename token_grid
             <TokenGrid/>
-        : (viewState==='pageview') ?
+        : (viewState==='pageview') ? //token_cardz
            <PageView token={selectedToken}/>
         : <TokenGrid/>
         }

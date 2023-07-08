@@ -1,0 +1,23 @@
+export default function SocialPhrases_2(){ //CUSTOM-LANGUAGE-MODEL
+    return ['rise to the occasion','over the moon','in seventh heaven','on cloud nine','on top of the world','have a whale of a time','paint the town red','bottom of the ocean','act of desperation','warm congratulations','just a simulation','fill in the blank','raise all boats', 'good to go', 'early bird gets the worm', 'get it while its hot',
+        'so far so good', 'have your cake and eat it too','runnin out of time','lay it on the line','what can I say',
+        'it was a grey gloomy day','it was a dark and stormy night','you get the idea','instant gratification','have the time of your life','wind at your back',
+        'across the ocean','sense of devotion','overcome with emotion','ask a silly question','check the expiration', 'make my day', 'kick the bucket',
+        'off the bucket list', 'a clean bill of health', 'as fit as a fiddle','go under the knife','one foot in the the grave',
+        'recharge my battery', 'as right as rain', 'fresh as a daisy', 'beyond the pale', 'pale as a ghost', 'look like youve seen a ghost',
+        'calm before the storm', 'steal my thunder', 'outshine the sun', 'where there is smoke there is fire', 'throw caution to the wind', 'chasing a rainbow',
+        'make or break situation','a perfectly logical explanation','break a leg','head over heels','spill the beans','off the clock', 'snowed under', 'under the weather',
+        'have your head in the clouds', 'take a raincheck', 'thirst for adventure', 'epic adventure', 'off the beaten trail',
+        'get away from it all', 'escape reality', 'hit the road', 'a mile a minute', 'all in the same boat',
+        'not a moment to lose', 'around the clock', 'call it a day', 'going around in circles', 'the moment of truth',
+        'once in a blue moon', 'just around the corner', 'like clockwork','down to the wire', 'keep me on edge', 'at the last possible moment',
+        'at the eleventh hour', 'in the knick of time','fall head over heals', 'stole my heart', 'pop the question', 'play hard to get',
+        ' we really hit it off', 'an old flame', 'get the green light', 'out of the blue', 'reality check', 'in a grey area', 'caught red handed',
+        'raining cats and dogs','piece of cake','hold your horses','hit the road','over the moon','duck into the saloon','at high noon',
+        'statute of limitations','empty threats and allegations','the suspense is killing me','get a piece of the action',
+        'take the bull by the horns', 'let the cat out of the bag', 'drop like flies', 'smell a rat', 'ants in the pants', 'bigger fish to fry',
+        'blown out of porportion','up to no good','get the notion', 'off like a loose cannon', 'like a wet blanket', 'rain on the parade',
+        'scratch the surface', 'dressed to kill', 'tip of the iceberg', 'put two and two together', 'in too deep', 
+        'back to square one', 'to the third degree', 'second to none', 'like nothing before', 'above and beyond', 'save the best for last',
+        'like my bread and butter', 'bad apple', 'big apple', 'spill the beans', 'in a nutshell'  
+    ]}

@@ -1,0 +1,11 @@
+{ "token_index" : [  
+    { "title": "~aWORDZa~", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"" },
+    { "title": "~aPRIZMa~", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"" },
+    { "title": "~aFOCOa~",  "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"" },
+    { "title": "~aCURIOa~", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"" },
+    { "title": "~aQUERIOa~","timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"" },
+    { "title": "~aSEEKa~",  "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"" },
+    { "title": "~aEXTRAa~", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"" },
+    { "title": "~aWIZDOa~", "timestamp":"1_1_2020", "txtz":[{"title":"short","txtz":["testtxt1"]},{"title":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"" }
+  ]
+}

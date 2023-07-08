@@ -33,7 +33,7 @@ function App() {
            <button onClick={playBlip}>Play1</button>
            <button onClick={playSonar}>Play2</button>
          </div>
-      <main style={{color:'skyblue',color:'skyblue', paddingTop:'1.5em',
+      <main style={{color:'skyblue', paddingTop:'1.5em',
         borderRadius:'13px',margin:'1em',height:'48em',
         display:'flex',flexDirection:'column'}}>
 
@@ -43,13 +43,14 @@ function App() {
           //   return <AWordaGami1/>;
           // } else if (viewIDX === "TicTacToe") {
           //   return <TicTacToe/>;
-          // } else if (viewIDX === "StoryGrid") {
-          //   return <StoryGrid/>;
+          // } else 
+          if (viewIDX === "StoryGrid") {
+            return <StoryGrid/>;
           // } else if (viewIDX === "SongPhrases") {
           //   return <SongPhrases/>;
-          // } else {
+          } else {
             return <MainView/>;
-          // }
+          }
         })()
       }
       </main>

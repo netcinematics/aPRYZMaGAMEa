@@ -1,0 +1,12 @@
+{ "tokenz" : [  
+    { "title": "~aWORDZa~", "numz": "1_0", "id":1 },
+    { "title": "First.1", "numz": "1_1", "id":4 },
+    { "title": "First.2", "numz": "1_2", "id":5 },
+    { "title": "First.2", "numz": "1_3", "id":7,"state":"locked" },
+    { "title": "Second", "numz": "2_0", "id":2},
+    { "title": "Second.1", "numz": "2_1", "id":6},
+    { "title": "Second.2", "numz": "2_2", "id":8, "state":"clue"},
+    { "title": "Third", "numz": "3_0", "id":3 },
+    { "title": "Third.1", "numz": "3_1", "id":9, "state":"prize" }
+  ]
+}

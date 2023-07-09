@@ -73,7 +73,7 @@ function TokenFrame ( { token, setTokenViewfn } ) {
                 borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
                 color:'#4c038c'}}>
                 {token.numz}
-                {/* {(!token.state.locked)?'unlocked':'locked'} */}
+                {(token && token.state && token.state!="locked")?'unlocked': 'locked'}
             </footer>
         </button>
     </>)

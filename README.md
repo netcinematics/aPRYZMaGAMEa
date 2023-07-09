@@ -289,15 +289,11 @@ O - Responsive Resize.
 X - Render cardz on click and details.
 X - Clean up other tabs / files.
 X - hydrate grid_tokenz
-O - rename grid_tokenz, card_tokenz, & txt_tokenz
-O - TokenGrid, TokenCardz, TokenTxtz
-
+X - rename grid_tokenz, card_tokenz, & txt_tokenz
+X - TokenGrid, TokenCardz, TokenTxtz
 X - PageView to TokenCard and TokenDetails to TokenTxtz
-
 X - delete all comments
-
 X - switch data path from awordagame to apryzmagame
-
 X - rename localdetails to tokenTxtz and then update init like localdetails. 
 X - remove localdetails after test txt load correctly.
 
@@ -312,6 +308,11 @@ X - meta_net/readme.md
 X - meta_net/meta_net_schema.js
 X - clean up libz files...
 X - get files from dashboard_server put into libz/
+
+O - dynamic load by token click
+O - scripts create cards.
+O - INDEX TOKENZ have 1 txt, and btn adds TXTs from TXT JSON file with ARRAY, by index.
+O - the first unlock TXT loads the ARRAY, then subsequent unlockbtn reveals each section.
 
 #### RICH RENDERING ENGINE
 O a) parse by empty line

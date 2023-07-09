@@ -38,6 +38,7 @@ function TokenCard({ token }) {
     let fontColor = (token.state==='prize')?'mediumpurple':(token.state==='clue')
                     ?'#d08701':(token.state==='locked')?'#de6666':'steelblue';
     let gameTitle = gameAGENT(token); //GAMIFICATION AGENT
+
     return ( <TokenFrame token={token} setTokenViewfn={setTokenViewfn}/> );
 }
 
@@ -82,7 +83,7 @@ let TXTzView =  ( {token} ) => {
         }
         const options = {
             method: 'GET',
-            url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/aWORDZa.json`
+            url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
         }
         axios.request(options).then((response) => {
             setTokenTXTINDEX(tokenTXT_INDEX+1)
@@ -108,7 +109,7 @@ let TXTzView =  ( {token} ) => {
         let newArr = [...localDetails , exampleDetail]
         setLocalDetails(newArr)
         setSelectedDetails(newArr)
-        getTokenDETAILS(token)
+        // getTokenDETAILS(token)
     }
     function getTokenDETAILS(token){
         if(!token || !token.title){ return }
@@ -118,9 +119,11 @@ let TXTzView =  ( {token} ) => {
         }
         const options = {
             method: 'GET',
-            url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/aWORDZa.json`
+            url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
+            // url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/aWORDZa.json`
         }
         axios.request(options).then((response) => {
+            debugger;
             setTokenTXTINDEX(tokenTXT_INDEX+1)
             setTokenTXTCOUNT(response.data.token.txtz.length)
             setTokenTXTARRAY(response.data.token.txtz)
@@ -152,7 +155,7 @@ let TXTzView =  ( {token} ) => {
         <br></br>
         {(token && token.txtz)?
             token.txtz.map( (item, idx)=> { //short description txt
-                return (item.title==="short")?item.txtz[0]:'';
+                return (item && item.title && item.title==="short")?item.txtz[0]:'';
             })
             :'no short description'
         }

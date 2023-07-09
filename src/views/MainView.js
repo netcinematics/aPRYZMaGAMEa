@@ -1,9 +1,7 @@
 // import Typewriter from "typewriter-effect";
 // import Zoom from 'react-reveal/Zoom';
 // import Fade from 'react-reveal/Fade';
-// import { useState } from 'react';
 import SocialPhrases_2 from '../data/SocialPhrases_2.js'
-// import React, { useEffect } from "react";
 import { useEffect } from "react";
 // import {useEffect, useState} from 'react'
 import "../styles.css";
@@ -51,7 +49,7 @@ export default function MainView () {
 
                 {/* </Fade> */}
                 <br></br><br></br>fork, PR, or drop a star:&nbsp;
-                <a href='https://github.com/netcinematics/aWordaGami' rel="noreferrer" target="_blank">GitHub</a>...
+                <a href='https://github.com/netcinematics/aPRYZMaGAMEa' rel="noreferrer" target="_blank">GitHub</a>...
             </section>
         </article>
     </>)

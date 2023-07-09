@@ -187,7 +187,7 @@ O - menu / game routing
 O - sonics tally invert, up pitch
 O - sonics win shorter cut beat
 O - sonics up is swoosh
-O - locked - puzzle - prize - examples.
+X - locked - puzzle - prize - examples.
 ---
 
 
@@ -249,7 +249,7 @@ Raw JSON /tokenz/, generated from /libz/ of markdown.
 ### NEW CLEAN PROJECT - aPRYZMaGAMEa
 X Jettison Vercel dependency
 X Jettison Crypto dependency
-O Delay Typewriter dependency
+O Delay Typewriter dependency fade and reveal fx
 X Jettison AI ChatGPT dependency
 X Jettison Markup dependency
 O Custom_Rich_Rendererz (EPICZ)
@@ -287,18 +287,19 @@ X - New production on GITHUB.
 O - Responsive Resize.
 
 X - Render cardz on click and details.
-O - Clean up other tabs / files.
+X - Clean up other tabs / files.
 X - hydrate grid_tokenz
 O - rename grid_tokenz, card_tokenz, & txt_tokenz
 O - TokenGrid, TokenCardz, TokenTxtz
 
-O - PageView to TokenCard and TokenDetails to TokenTxtz
+X - PageView to TokenCard and TokenDetails to TokenTxtz
 
-O - delete all comments
+X - delete all comments
 
-O - switch data path from awordagame to apryzmagame
+X - switch data path from awordagame to apryzmagame
 
-O - rename localdetails to tokenTxtz and then update init like localdetails. and remove localdetails
+X - rename localdetails to tokenTxtz and then update init like localdetails. 
+X - remove localdetails after test txt load correctly.
 
 
 X - libz to meta_net
@@ -310,9 +311,6 @@ X - meta_net/token_txtz
 X - meta_net/readme.md
 X - meta_net/meta_net_schema.js
 X - clean up libz files...
-
-
-
 X - get files from dashboard_server put into libz/
 
 #### RICH RENDERING ENGINE

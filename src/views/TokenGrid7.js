@@ -1,36 +1,23 @@
 import "../styles.css";
-// import LangData from '../data/SocialPhraseCLM'
 import { useState, useEffect } from 'react';
 import TokenFrame from "./TokenFrame4";
 import axios from 'axios'
-// import ReactMarkdown from 'react-markdown'
 
+let sonicSonar = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxSonar1d.mp3")
 let sonicTally = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxTally0d.mp3")
-let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxWoop1.mp3")
-
 
 export default function TokenGridFrame () {
-    useEffect(() => { document.title = "Token_Gridz";  }, []);
-    // let [rootsARR, setRootsARR] = useState([]);
-    let [viewState, setViewState] = useState('overview');
-    let [selectedToken, setSelectedTokenObj] = useState({});
+useEffect(() => { document.title = "Token_Gridz";  }, []);
+let [viewState, setViewState] = useState('overview');
+let [selectedToken, setSelectedTokenObj] = useState({});
+let [tokenz_INDEX_DATA, setTokenz_INDEX_DATA] = useState([]);
+let [tokenz_CARD_COUNT, setTokenz_CARD_COUNT] = useState("");
 
-    // let [markdownDATA, setMarkdownDATA] = useState("");
-    let [tokenz_INDEX_DATA, setTokenz_INDEX_DATA] = useState([]);
-    let [tokenz_CARD_COUNT, setTokenz_CARD_COUNT] = useState("");
-
-// useEffect(() => { getTokenzINDEX() }, []); 
-// useEffect(() => { getTokenzINDEX() }, [tokenz_CARD_COUNT]); 
 useEffect(() => { getTokenzINDEX() }, [setTokenz_INDEX_DATA]); 
 function getTokenzINDEX(){ //SHOW MAIN CARDS.
-    // console.log("LOAD INDEX",tokenz_CARD_COUNT)
     const options = {
         method: 'GET',
-        params: {'lookup':'tokenz'},
-        // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
-        // url: 'https://node-dashboard-server.vercel.app/libz/tokenz/', //prod url
         url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index.json', //prod url
-        // url: 'http://localhost:8008/libz/tokenz/',
     }
     axios.request(options).then((response) => {
         setTokenz_INDEX_DATA(response.data.token_index)
@@ -42,7 +29,6 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
 }
 
 function TokenCard({ token }) {
-    // console.log("tokenCard",token)
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
         borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
         color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
@@ -62,9 +48,9 @@ function gameAGENT(token){ //REACT to state to update game view state.
   else if (token.state==='clue'){return '?'}
 }
 
-let DetailView =  ( {token} ) => { 
+let TXTzView =  ( {token} ) => { 
     let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
-    let [localDetails,setLocalDetails] = useState([])
+    let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
 
     let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
     let [tokenTXT_COUNT,setTokenTXTCOUNT] = useState('')
@@ -75,20 +61,55 @@ let DetailView =  ( {token} ) => {
             // console.log("INIT TXTz",token.title) 
             setTokenTXTARRAY(token.txtz) 
         }
-        if(token.details){
+        if(token.details){ //remove
             // console.log("INIT details",token.title)
             setLocalDetails(token.details)  //todo remove
         }
      }, [])
 
-    function addLocalDetails( addTokenz){
+    function addUnlockTXTz(  ){
         sonicTally.play()
+        getTokenTXTZ()
+        // let newArr = [...localDetails , exampleDetail]
+        // setLocalDetails(newArr)
+        // setSelectedDetails(newArr)
+    }
+    function getTokenTXTZ(){
+        if(!token || !token.title){ return }
+        let lookupTitle = token.title;
+        if(token.title.indexOf('~')>-1){
+            lookupTitle = token.title.replaceAll('~','')
+        }
+        const options = {
+            method: 'GET',
+            url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/aWORDZa.json`
+        }
+        axios.request(options).then((response) => {
+            setTokenTXTINDEX(tokenTXT_INDEX+1)
+            // setTokenTXTCOUNT(response.data.token.txtz.length)
+            // setTokenTXTARRAY(response.data.token.txtz)
+            let newArr = [ ...token.txtz , response.data.token.txtz[tokenTXT_INDEX]]
+            setTokenTXTARRAY(newArr)
+            setSelectedTXTz(newArr)
+            // let newArr = [...localDetails , exampleDetail]
+            // setLocalDetails(newArr)
+            // setSelectedDetails(newArr)
+
+        }).catch((error) => {
+            console.error('oops',error)
+            // setTokenTXTCOUNT("no data")
+        })   
+
+    }
+
+    function addLocalDetails( ){
+        sonicTally.play()
+        //TODO REMOVE
         let newArr = [...localDetails , exampleDetail]
         setLocalDetails(newArr)
         setSelectedDetails(newArr)
         getTokenDETAILS(token)
     }
-
     function getTokenDETAILS(token){
         if(!token || !token.title){ return }
         let lookupTitle = token.title;
@@ -98,24 +119,11 @@ let DetailView =  ( {token} ) => {
         const options = {
             method: 'GET',
             url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/aWORDZa.json`
-            // url : `https://raw.githubusercontent.com/netcinematics/aWordaGami/main/cardz/aWORDZa.json`
-            // url : `https://raw.githubusercontent.com/netcinematics/node_dashboard_server/main/libz/aBETTaWORDZa.json`
-            // params: {'lookup':'markdown'},
-            // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
-            // url: `https://node-dashboard-server.vercel.app/libz/lookup/${lookupTitle}`, //prod url broke
-            // url: `https://node-dashboard-server.vercel.app/libz/tokenz/${lookupTitle}`, //prod url
-           // url: `https://node-dashboard-server.vercel.app/libz/tokenz/`, //prod url working index
-            // url: `http://localhost:8008/libz/tokenz/${lookupTitle}`, 
         }
         axios.request(options).then((response) => {
-            // console.log("LOADED JSON DETAILS")
-            // debugger;
             setTokenTXTINDEX(tokenTXT_INDEX+1)
             setTokenTXTCOUNT(response.data.token.txtz.length)
             setTokenTXTARRAY(response.data.token.txtz)
-            // setMarkdownDETAILSView(response.data)
-            // displayMarkdown(response.data)
-            // setItemCOUNT(`data loaded: $ `)
         }).catch((error) => {
             console.error('oops',error)
             setTokenTXTCOUNT("no data")
@@ -163,7 +171,8 @@ let DetailView =  ( {token} ) => {
     <>
         { dynamicDetailDisplay() }
         <hr></hr>
-        <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >unlock text</button>
+        <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >add details</button>
+        <button style={{marginTop:'1em'}} onClick={ ()=>{ addUnlockTXTz()   }  } >unlock text</button>
         { localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
         { <article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
             }}>
@@ -194,11 +203,12 @@ let DetailView =  ( {token} ) => {
     )
 }
 
-let TokenCardzBtnStyle = {width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue'}
+let TokenCardzBtnStyle = {width:'4em',cursor:'pointer',borderRadius:'13px',
+        background:'skyblue',border:'1px solid steelblue'}
 
 function setCardViewContent(direction){
     if(direction==='up'){
-        sonicWoop.play();
+        sonicSonar.play();
         setViewState('overview')
     } else if  (direction==='right'){ //look at numz, calculate offset, apply offset, look up numz, if found load, not loop default.
         debugger;
@@ -214,7 +224,7 @@ function setCardViewContent(direction){
     }
 }
 
-let TokenCardz = ( {token} ) => {  //rename TokenCardz
+let TokenCardz = ( {token} ) => {  
 
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
@@ -227,22 +237,18 @@ let TokenCardz = ( {token} ) => {  //rename TokenCardz
                 onClick={ ()=>{setCardViewContent('up')}}>UP</button>
             <button style={TokenCardzBtnStyle} 
                 onClick={ ()=>{setCardViewContent('right')}}>RIGHT</button>
-                {/* onClick={ ()=>{setViewState('overview')}}>RIGHT</button> */}
         </header>
         <article className="scrollBarV" style={{flex:1, color:'steelblue',
             boxShadow:'inset 0px 0px 10px 0px blue'}}>
-            {/* {(selectedToken && selectedToken.title)?selectedToken.title:'_'} */}
             <hr></hr>
-            <DetailView token={selectedToken}/>
+            <TXTzView token={selectedToken}/>
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
             <button style={TokenCardzBtnStyle} 
                 onClick={ ()=>{setCardViewContent('overview')}}>LEFT</button>
-                {/* onClick={ ()=>{setViewState('overview')}}>LEFT</button> */}
             <button style={TokenCardzBtnStyle} 
                 onClick={ ()=>{setCardViewContent('overview')}}>DOWN</button>
-                {/* onClick={ ()=>{setViewState('overview')}}>DOWN</button> */}
         </footer>
     </main>
     </>)
@@ -293,6 +299,11 @@ function setTokenViewfn(selectedView,token){ //update app, show view
 function setSelectedDetails(newDetails){
     let newObj = selectedToken
     newObj.details = newDetails
+    setSelectedTokenObj(newObj);
+}
+function setSelectedTXTz(newTXTz){
+    let newObj = selectedToken
+    newObj.txtz = newTXTz
     setSelectedTokenObj(newObj);
 }
 

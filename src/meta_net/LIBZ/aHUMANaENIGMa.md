@@ -390,13 +390,38 @@ New insight and new innovation all most alwayz correlate with new words, because
 The critics of creating new words - do no benefit to confuzion, while suppressing new thoughts.
 Who is at fault for suppressing new thoughts?
 
-> Test of md quotes
+### Necessary to SOLVE
 
->> I wonder if this works.
+> anymind can guess at the distortions in the cracked mirror, but save_a_few_minds who diligently seek_to_know exactly the contours of the illuzion, restlessly and relentlessly, a curious and questioning nature of actual_seek_to_know mind will fight_for_clarity just as some minds fight_for_closure.
 
->>> and a third
+aSEEKa -  is necessary active_ingredient to solve_all_human_enigma, of why we do what we do, and how we chooze to do it.
 
-some text
+> If a mind is surrounded by minds_who_chooze_to_guess, or minds_who_chooze_to_not_know, or minds_who_pretend_aKnowa - it is reasonable that most minds will be asimilated_to_society.
 
->>> and a third
-with text beneath.
+But one mind, looks the exact opposite view of all concurrent opinion, to the the opinions of various actual_flaw, like cracked glass, and upon investigation find conclusively - the expert never actually evaluated or articulated, at depth, all_concepts_beneath_words. But instead repeated the answers of before, just like the_telephone_game, with deceasing fidelity over the years.
+
+Until someone is required, by this dis_force_of_disinterest, to summon an en_force_of_interest. 
+And look at what existence actually is, and compare it (honestly) to the unjust_repetitive_diatribe.
+
+And where present, every significanly aware mind - must see the same viewz. In someway yetArticulated, society is somehow twisted. `~aTWISTaWIZDOa~`. We_cannot_see. And society cooks up all possible guesses, where only a few rhyme_with_existence or reflect_actual_reality. And we can guess as to the transforms within the pryzm. And we can fight_about_what_is_real. But also, we can decipher the entire puzzle - of actual_reality -  precisely. By using a system like aWORDZa.
+By enhanced_and_advanced_linguistics
+
+> common misconceptions are buried in words, and words are the soil for each generation.
+
+
+It is very difficult for a plant to depart from the toxicity in the soil which it grows, or from the plumes of polluted air flows, or shrink from intense solar rays that shine down - without dying.
+
+The plants must injest poison to survive, up until the point - that poison fully chokes off growth.
+
+The poison and the darkness are the same. Being consumed by a tiger or shot by a soldier.
+
+The return_to_darkness is absolute and definitive. The one_body now turns_to_dust and through decay will dissolve, with an observable_loss_of_spark. The same as a black_hole consumes entire galaxies (of life). So too, you and I eat, to sustain energy - and stay_alive. 
+
+> One_Life, is just another highly_abstract_energy_rotation.
+
+> aSPARKa that transcends from your birth until death.
+
+> Everything that exists, is a spark in the dark.
+
+
+

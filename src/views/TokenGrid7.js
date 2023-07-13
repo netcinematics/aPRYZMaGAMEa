@@ -258,16 +258,11 @@ let TokenCardz = ( {token} ) => {
 }
 
  
-let colm = [];
+let colm = [];//global for dashboard of COUNTS and LOOKUP render.
 let COLNUM=6; //vertical wrap limit
 let tokenCOLUMNS = []; //available for meta data lookup on MOVE.
 let humanIDX = 0; //column header
 function TokenGrid (){ 
-    // let colm = []; 
-    // let COLNUM=6; //vertical wrap limit
-    // let tokenCOLUMNS = [];
-    // debugger;
-    // console.log('rendering', tokenz_INDEX_DATA.length)
     colm = [];
     humanIDX = 0; //column header
     tokenCOLUMNS = [];
@@ -310,19 +305,9 @@ function setSelectedTXTz(newTXTz){
     setSelectedTokenObj(newObj);
 }
 
-// let btnCardStyle = { background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
-// borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
-// color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
-// alignContent:'flex-end',alignItems:'stretch',height:'10em',flex:'1',minWidth:'6em',
-// flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly' }
-
 return (
-    < >
-    <h1>aPRYZMaGAMEa</h1>
-    {/* <h1>StoryTree</h1> */}
-    {/* <ReactMarkdown>
-            {markdownDATA}
-        </ReactMarkdown> */}
+<>
+<h1>aPRYZMaGAMEa</h1>
 <main className='scrollBarH' style={{overflowY:'auto'}}>
     <section className='mainframe scrollBarV' style={{display:'flex',
     boxShadow:'0px 1px 14px 1px purple',paddingBottom:'1em',
@@ -335,20 +320,8 @@ return (
         : <TokenGrid/>
         }
     </section>
-    {/* <section style={{display:'flex',justifyContent:'flex-start',paddingLeft:'1.444em',
-        paddingRight:'1.444em',flexWrap:'wrap'}}>
-        <div className='cardTileBtn'>X</div>
-        <div className='cardTileBtn'>X</div>
-        <div className='cardTileBtn'>X</div>
-        <div className='cardTileBtn'>X</div>
-        <div className='cardTileBtn'>X</div>
-        <div className='cardTileBtn'>X</div>
-        <div className='cardTileBtn'>X</div>
-        <div className='cardTileBtn'>X</div>
-    </section> */}
-
         </main>
-        <footer style={{marginTop:'2em'}}>
+        <footer style={{marginTop:'2em',fontSize:'smaller'}}>
           WORD_GAME : {tokenz_CARD_COUNT}
         </footer>
     </>

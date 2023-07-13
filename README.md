@@ -224,7 +224,7 @@ The endless search for new viewz in language.
 // npm i axios
 // -- later
 // npm i react-reveal --save
-// npm i typewriter-effect
+// npm i typewriter-effect --save
 ---
 // to make warning go away npm install --save-dev @babel/plugin-proposal-private-property-in-object
 //did not install
@@ -248,9 +248,11 @@ Raw JSON /tokenz/, generated from /libz/ of markdown.
 ### NEW CLEAN PROJECT - aPRYZMaGAMEa
 X Jettison Vercel dependency
 X Jettison Crypto dependency
-O Delay Typewriter dependency fade and reveal fx
+X RE-INSTATE Animated Typewriter dependency, fade and reveal fx too.
 X Jettison AI ChatGPT dependency
 X Jettison Markup dependency
+O New Project Layout
+O Responsive Layout
 O Custom_Rich_Rendererz (EPICZ)
 
 All CUSTOM! Simple. 
@@ -310,6 +312,7 @@ X - get files from dashboard_server put into libz/
 X - dynamic load by token click
 O - scriptz create INDEX.
 O - scripts create cards.
+O - scripts create token_netz by token_keyz (linkz with numz)
 O - INDEX TOKENZ have 1 txt, and btn adds TXTs from TXT JSON file with ARRAY, by index.
 O - the first unlock TXT loads the ARRAY, then subsequent unlockbtn reveals each section.
 

@@ -1,25 +1,25 @@
 # aPRYZMaGAMEa
-Artificial Game of Actual Intelligence. 
+Artificial Intelligence WORD_GAME
 
-An easy way to look through many viewz.
+A view of many VIEWZ, where you, solve word puzzles, and
+
+> UNLOCK_TOKENZ.
 
 --- 
 
-# aPRYZMaGAMEa
-pronounced: [ ah-Prism-ah-GAME-ah ]
+pronounced: [ ah-PRISM-ah-GAME-eee-ah ]
 
-Ai ~ Oragami!
+Like: Ai ~ Oragami!
 
-> AI WORD-GAME.
+> AI_WORD_GAMEZ
 
-> AI SONG-LYRICS.
+> AI_SONG_LYRICZ.
 
-> AI STORY
+> AI_STORYZ
 
-> AI PRYZM
+> AI_PRYZM
 
-O LIVE EXAMPLES: https://netcinematics.github.io/aPRYZMaGAMEa/
-
+X LIVE EXAMPLE: https://netcinematics.github.io/aPRYZMaGAMEa/
 
 ## Runtime INSTRUCTIONS
 
@@ -30,19 +30,20 @@ npm start
 
 ## LIVE EXAMPLE
 
-//change paths from local to remote
+//change paths between local to remote 
+
+//to instrument custom language data.
 
 // npm run deploy
 
-LIVE EXAMPLE: https://netcinematics.github.io/aPRYZMaGAMEa/
-
+LINK: https://netcinematics.github.io/aPRYZMaGAMEa/
 
 # ~ : ) 
 
 ---
-1. EXAMPLE Artificial Intelligence USE-CASES and 
-2. Constructs, Data Structures, Design Patterns.
-3. To deploy aWordza X.
+1. Artificial Intelligence USE-CASES with NATURAL_LANGUAGE_PROCESSING (NLP)
+2. Constructs, Data Structures, and Design Patterns.
+3. To deploy aWordza 2.
 ---
 
 ## AI-Generated Word-Game & Song-Lyrics & Story-Tree UI.
@@ -154,7 +155,7 @@ wildfire-haze
 superfire
 gustnado
 
-### Category: aWORDZa
+### aWORDZa -  DESIGN_PRINCIPLES
 
 Uses short, self-descriptive naming-convention, 
 to enhance english, with significant results.
@@ -193,14 +194,16 @@ X - locked - puzzle - prize - examples.
 
 # HYPOTHESIS
 
-new viewz
+The endless search for new viewz in language.
 
 
 # CONCLUSIONS / 
 
-> Use ChatGPT as copilot with Google to code. on hold
-> Use GitHub as forever storage, self-generative app.
-> Use JS/JSON as multi-faceted prysm of viewz.
+> X VERCEL NodeJS with Express on hold (serverless)
+> X Use ChatGPT as copilot with Google to code. on hold (not needed)
+> X Use GitHub as forever storage, self-generative app. DONE.
+> X Use JS/JSON as dynamic, multi-faceted, prysm of viewz. DONE.
+> O GAMIFY front end with local storage.
 
 ---
 
@@ -226,8 +229,6 @@ new viewz
 // to make warning go away npm install --save-dev @babel/plugin-proposal-private-property-in-object
 //did not install
 
-
-
 ## Manifest v1
 // npm i create-react-app
 // npm i react-reveal --save
@@ -239,9 +240,7 @@ new viewz
 // npm install react-markdown
 
 ## DATA SERVICE
-
 Raw JSON /tokenz/, generated from /libz/ of markdown.
-
 // NOTE: vercel server - was a problem with dynamic routes
 // after creating scriptz to convert markdown to json
 // github raw data format was discovered server unnecessary!
@@ -253,7 +252,6 @@ O Delay Typewriter dependency fade and reveal fx
 X Jettison AI ChatGPT dependency
 X Jettison Markup dependency
 O Custom_Rich_Rendererz (EPICZ)
-
 
 All CUSTOM! Simple. 
 
@@ -309,7 +307,8 @@ X - meta_net/meta_net_schema.js
 X - clean up libz files...
 X - get files from dashboard_server put into libz/
 
-O - dynamic load by token click
+X - dynamic load by token click
+O - scriptz create INDEX.
 O - scripts create cards.
 O - INDEX TOKENZ have 1 txt, and btn adds TXTs from TXT JSON file with ARRAY, by index.
 O - the first unlock TXT loads the ARRAY, then subsequent unlockbtn reveals each section.
@@ -337,21 +336,23 @@ O - scriptz/meta_netz_linkz
 O - npm run scriptz
 O - scriptz to read all libz, and write versioned_tokenz.
 O - Error, not found.
-
+O - unlock tokenz for community, with reference.
 
 
 1) NODEJS LOOPS
 X - open md file, or txt file, or html file
 X - search for keywords.
+O - write to tokenz
+O - unlock tokenz
 
 2) NODEJS "training" 
-- TOKENIZE search results
-- TRANSFORM data into TAXONOMY by title
-- Title is KEY for different "training" loops
+- X TOKENIZE search results
+- X TRANSFORM data into TAXONOMY by title CARDZ, and ONTOLOGY by timestamped TXTZ.
+- X Title is KEY for TOKENZ "training"
 
-3) Additional NODEJS SCRIPTS for PARSE_PIPELINE
-- parse_tokenz () 
-- index_tokenz ()
+3) NODEJS SCRIPTS for PARSE_PIPELINE
+- O advanced_parse_tokenz () 
+- O advanced_index_tokenz ()
 - alpha_tokenz ()
 - prefix_tokenz ()
 - postfix_tokenz ()
@@ -359,4 +360,6 @@ X - search for keywords.
 - all_reference_tokenz ()
 - reference_link_tokenz ()
 
-DESCRIPTION: add super~powers to tokenz (above).
+---
+
+DESCRIPTION: add NLP-super-powers, to tokenz (above).

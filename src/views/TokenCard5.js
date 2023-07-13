@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react';
 
 let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxWoop1.mp3")
 
-function TokenFrame ( { token, setTokenViewfn } ) {
-    // console.log("tokenFrame",token.title)
-    useEffect(() => { document.title = token.title;  }, []);
-    // let [tokenITEMS, setTokenITEMS] = useState([]);
-    // let [itemCOUNT, setItemCOUNT] = useState("");
-
+function TokenCard ( { token, setTokenViewfn } ) {
+    useEffect(() => { 
+        document.title = (token && token.title)?token.title:'';  
+        // token.numz = humanIDX.toString()+'.'+idx;       //apply dynamic_numz
+    }, [token]);
     // hovered is why token frame is a sub component.
     let [isHovered, setHovered] = useState(false);
     let handleMouseEnter = () => { setHovered(true) }
@@ -19,7 +18,6 @@ function TokenFrame ( { token, setTokenViewfn } ) {
         console.log("Token Click:",token.title)
         sonicWoop.play()
         setTokenViewfn("cardview",token);
-        // getTokenITEMS()
     }
 
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
@@ -46,7 +44,6 @@ function TokenFrame ( { token, setTokenViewfn } ) {
     // ?'#d08701':(token.state.title ==='locked')?'#de6666':'steelblue';
     //-----------------TOKEN---------------
     return (<>
-        {/* <h2>StoryFrame</h2> */}
         <button className={isHovered ? 'btnHover' : ''} style={cardStyle}
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
             onClick={onTokenCardClick}>
@@ -73,11 +70,11 @@ function TokenFrame ( { token, setTokenViewfn } ) {
                 borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
                 color:'#4c038c'}}>
                 {token.numz}
-                {(token && token.state && token.state!="locked")?'unlocked': 'locked'}
+                {(token && token.state && token.state!=="locked")?'unlocked': 'locked'}
             </footer>
         </button>
     </>)
 
 }
 
-export default TokenFrame;
+export default TokenCard;

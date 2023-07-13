@@ -251,7 +251,7 @@ X Jettison Crypto dependency
 X RE-INSTATE Animated Typewriter dependency, fade and reveal fx too.
 X Jettison AI ChatGPT dependency
 X Jettison Markup dependency
-O New Project Layout
+X New Project Layout
 O Responsive Layout
 O Custom_Rich_Rendererz (EPICZ)
 
@@ -284,8 +284,6 @@ REACTJS:
 X - Add details click
 X - Move to new project called aPRYZMaGAMEa
 X - New production on GITHUB.
-O - Responsive Resize.
-
 X - Render cardz on click and details.
 X - Clean up other tabs / files.
 X - hydrate grid_tokenz
@@ -296,8 +294,6 @@ X - delete all comments
 X - switch data path from awordagame to apryzmagame
 X - rename localdetails to tokenTxtz and then update init like localdetails. 
 X - remove localdetails after test txt load correctly.
-
-
 X - libz to meta_net
 X - meta_net/ taxonomy data files.
 X - meta_net/scriptz/
@@ -308,7 +304,6 @@ X - meta_net/readme.md
 X - meta_net/meta_net_schema.js
 X - clean up libz files...
 X - get files from dashboard_server put into libz/
-
 X - dynamic load by token click
 O - scriptz create INDEX.
 O - scripts create cards.
@@ -317,18 +312,20 @@ O - INDEX TOKENZ have 1 txt, and btn adds TXTs from TXT JSON file with ARRAY, by
 O - the first unlock TXT loads the ARRAY, then subsequent unlockbtn reveals each section.
 
 #### RICH RENDERING ENGINE
-O a) parse by empty line
-O a0) `~...~` LINKZ tilde words, turn into links, for INDEX
-O a1) [_] underscore WORDZ.
-O c) WORDZ begin and end in 'a'. secondary references.
-O c1) all WORDZ with 'z'
-O c2) TITLEZ ### h3
-O d1) QUOTEZ >>> multiline
+O c2) parse by section `###` 
+O a2) parse by `---` section end.
+O a) parse by empty line `\r`
+O a0) `~...~` LINKZ, KEYZ, MAPZ, tilde words, turn into links, for INDEX
+O a1) `_` underscore WORDZ.
+O c) WORDZ begin and end in `a`. 
+O c1) all WORDZ with `z`
+O d1) QUOTEZ `>>>` multiline
+O g) `camelCase` or uppercase 2nd letter.
+O h) `ALL CAPS` words. 
+
 O d) CARDZ are like content FILTER.
 O e) TXTZ are like content SORT.
 O f) NETZ are like interfaces
-O g) camelcase 'a' or uppercase 2nd, or 3rd letters.
-O h) ALL CAPS words. 
 
 NODEJS - SCRIPTZ
 X - train/ data1/ folder with txt and md and scriptz/: 
@@ -340,7 +337,6 @@ O - npm run scriptz
 O - scriptz to read all libz, and write versioned_tokenz.
 O - Error, not found.
 O - unlock tokenz for community, with reference.
-
 
 1) NODEJS LOOPS
 X - open md file, or txt file, or html file

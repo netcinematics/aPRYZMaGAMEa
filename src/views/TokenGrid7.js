@@ -1,6 +1,6 @@
 import "../styles.css";
 import { useState, useEffect } from 'react';
-import TokenFrame from "./TokenFrame4";
+import TokenCard from "./TokenCard5";
 import axios from 'axios'
 
 let sonicSonar = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxSonar1d.mp3")
@@ -28,27 +28,6 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
     })    
 }
 
-function TokenCard({ token }) {
-    let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
-        borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
-        color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
-        alignContent:'flex-end',alignItems:'stretch',height:'10em',width:'95%',
-        flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly'
-    } 
-    let fontColor = (token.state==='prize')?'mediumpurple':(token.state==='clue')
-                    ?'#d08701':(token.state==='locked')?'#de6666':'steelblue';
-    let gameTitle = gameAGENT(token); //GAMIFICATION AGENT
-
-    return ( <TokenFrame token={token} setTokenViewfn={setTokenViewfn}/> );
-}
-
-function gameAGENT(token){ //REACT to state to update game view state.
-  if(!token){return ''}
-  else if (token.state==='locked'){return 'X'}
-  else if (token.state==='prize'){return '!'}
-  else if (token.state==='clue'){return '?'}
-}
-
 let TXTzView =  ( {token} ) => { 
     let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
     let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
@@ -66,7 +45,7 @@ let TXTzView =  ( {token} ) => {
             // console.log("INIT details",token.title)
             setLocalDetails(token.details)  //todo remove
         }
-     }, [])
+     }, [token])
 
     function addUnlockTXTz(  ){
         sonicTally.play()
@@ -228,7 +207,6 @@ function setCardViewContent(direction){
 }
 
 let TokenCardz = ( {token} ) => {  
-
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
         display:'flex',width:'100%',flexDirection:'column',marginRight:'1.444em',
@@ -269,19 +247,33 @@ function TokenGrid (){
     for(let i=0; i < tokenz_INDEX_DATA.length; i += COLNUM){
         colm = tokenz_INDEX_DATA.slice(i, i+COLNUM);
         ++humanIDX;
+        // let setHumanIDX = function(token,idx){ //required scope closure by LINTER warning.
+        //     token.numz = humanIDX.toString()+'.'+idx;       //apply dynamic_numz
+        //     return <TokenFrame token={token} setTokenViewfn={setTokenViewfn}/>
+        // }
          tokenCOLUMNS.push( 
          <div  key={'col_'+i} style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
             <header style={{minHeight:'2em'}}></header>
             <header>{humanIDX}</header>
-            { colm.map( (token,idx)=>{ token.numz = humanIDX+'.'+idx;       //apply dynamic_numz
-                return <TokenCard key={'tokencard_'+idx} token={token}/>
-            }) }
+
+            { 
+            // colm.map(setHumanIDX) //LINT: cannot use arrow fn here.
+            colm.map( (token,idx)=>{ 
+                // token.numz = humanIDX.toString()+'.'+idx;       //apply dynamic_numz
+                // return <TokenCardFrame key={'tokencard_'+idx} token={token} idx={idx}/>
+                return <TokenCard token={token} idx={idx} setTokenViewfn={setTokenViewfn}/>
+            }) 
+            }
             <footer style={{minHeight:'3em'}}></footer>
          </div> 
          );
     }    
     return(tokenCOLUMNS)
 }
+
+// function TokenCardFrame({ token }) { //todo refactor
+//     return ( <TokenFrame token={token} setTokenViewfn={setTokenViewfn}/> );
+// }
 
 function lookUpNUMZToken(tgt){
     debugger;

@@ -1,9 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import axios from 'axios'
 
 let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxWoop1.mp3")
-
+let btnKey = 0;
 function TokenCard ( { token, setTokenViewfn } ) {
     useEffect(() => { 
         document.title = (token && token.title)?token.title:'';  
@@ -44,7 +43,7 @@ function TokenCard ( { token, setTokenViewfn } ) {
     // ?'#d08701':(token.state.title ==='locked')?'#de6666':'steelblue';
     //-----------------TOKEN---------------
     return (<>
-        <button className={isHovered ? 'btnHover' : ''} style={cardStyle}
+        <button  className={isHovered ? 'btnHover' : ''} style={cardStyle}
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
             onClick={onTokenCardClick}>
             { (token.state)?

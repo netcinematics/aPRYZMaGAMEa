@@ -251,7 +251,7 @@ X Jettison Crypto dependency
 X RE-INSTATE Animated Typewriter dependency, fade and reveal fx too.
 X Jettison AI ChatGPT dependency
 X Jettison Markup dependency
-X New Project Layout
+X New Project Layout w/ LINT passing
 O Responsive Layout
 O Custom_Rich_Rendererz (EPICZ)
 

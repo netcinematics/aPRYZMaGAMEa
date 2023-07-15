@@ -60,19 +60,18 @@ let TXTViewz =  ( {token} ) => {
         if(token.title.indexOf('~')>-1){
             lookupTitle = token.title.replaceAll('~','')
         }
-        // debugger;
         const options = {
             method: 'GET',
             url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
         }
         axios.request(options).then((response) => {
-            debugger;
+            // debugger;
             setTokenTXTINDEX(tokenTXT_INDEX+1)
             setTokenTXTCOUNT(response.data.token.txtz.length)
             // setTokenTXTARRAY(response.data.token.txtz)
             let newArr = [ ...token.txtz , response.data.token.txtz[tokenTXT_INDEX]]
             setTokenTXTARRAY(newArr)
-            setSelectedTXTz(newArr)
+            setSelectedTXTz(newArr)   //TODO bring back.
             // let newArr = [...localDetails , exampleDetail]
             // setLocalDetails(newArr)
             // setSelectedDetails(newArr)
@@ -147,8 +146,31 @@ let TXTViewz =  ( {token} ) => {
     </>)
     }
 
+    function displayTokenTXTArray(){
+        return (
+            <> 
+            {tokenTXT_ARRAY.length}
+            {tokenTXT_ARRAY.map( (item,idx)=>{
+                if(item.title){
+                    return <h1>{item.title}</h1>   
+                }
+                return idx
+            })}
+            {tokenTXT_ARRAY.map( (item,idx)=>{
+                // debugger;
+
+                if(item.txt && item.txt.length){
+                    return item.txt.map( (txtitem,txtidx)=>{
+                        return (<p><h1>txtitem.title</h1>{txtidx}:{txtitem}</p>)
+                    }) 
+                }
+                return idx
+            })}            
+            </>)        
+    }
     return(
     <>
+        {displayTokenTXTArray()}
         {dynamicDetailDisplay()}
         <hr></hr>
         <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button>
@@ -178,6 +200,36 @@ let TXTViewz =  ( {token} ) => {
             :'no tokenz'
         } */}
         COUNT: {tokenTXT_INDEX} of {tokenTXT_COUNT}
+        &nbsp; locked 
+        &#x1f512; &#128275; &#128272;  	
+        &#11022; 	&#11023; 	&#11024; 	&#11025;
+        &#128161;    &#128367;   &#128273; &#10024;	 
+        &#10042; 	&#10059; 	&#10046; 	&#10050;
+        &#10051;  	&#10036; 	&#10019; 	&#10023;
+        &#10170; 	&#10041; &#10034;
+        &#10026;	 	&#10029;	 	&#10031;	
+        &#10037;	 	&#10042;	 	&#10041;	
+        &#10045;		&#10050;	 	&#10055;	
+        &#10056;	 	&#10059;		&#10070;	
+        &#10083;		&#10146;		&#10164;	
+        &#10169;		&#9889;	  
+         	&#9967;	   	&#9965;	
+             &#9734;  &#9733;
+
+        &#127775; &#128142; 	&#128077; &#128078; &#128079; 	&#128128; &#128123;
+        &#128165; &#128151;  &#128261;  &#128295; 	&#10035; 	&#10020; 	&#10084;
+        &#128270;  &#128264; 	&#128265;  	&#128266;  	&#128369; 	&#128420;
+        &#128366; 	&#128365;  	&#128375;  	&#128376;  	&#128440; &#128279;
+        &#128280;  	&#128293;  &#128163; &#128171; 	&#128064; 	&#128045; 	&#128047;
+        &#128058; &#128059; 	&#127993; &#128028; &#128025; &#128013; 	&#128035;
+        &#127892; 	&#127894; 	&#127900; &#127916; 	&#127942;
+
+          	&#128009;  	&#127911; 
+
+
+              &#10549; 	&#10548; 	&#10531; 	&#10532; 	&#10533; &#10534;
+              &#10556; 	&#10555; 	&#10554; 	&#10552;
+
         </article> }
     </>
     )

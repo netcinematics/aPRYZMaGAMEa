@@ -2,14 +2,14 @@
   "token" :   
     { "title": "aWORDZa", 
       "txtz":[
+        {"type":"txt","txtz":["text1... ","text2..."],"imgz":[],"meta":[]},
         {"type":"quote","txtz":["awordza 123"],"imgz":[],"meta":[]},
-        {"type":"item","txtz":["awordza 123"],"imgz":[],"meta":[]},
         {"title":"first token txt","txtz":["awordza 123"],"imgz":[],"meta":[]},
         {"title":"first token txt","txtz":["awordza 123"],"imgz":[],"meta":[]},
         {"title":"second token txt","txtz":["a1...","a2...","a3..."]}], 
       "imgz":[], 
       "meta":[] },
     "date":"1_1_2020",
-    "src":"source_file.md",
-    "version":"0.1.1.1"
+    "src":["source_file.md"],
+    "version":"1.1.1.1"
 }

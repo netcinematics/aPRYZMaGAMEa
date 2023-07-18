@@ -346,8 +346,8 @@ O - unlock tokenz
 
 2) NODEJS "training" 
 - X TOKENIZE search results
-- X TRANSFORM data into TAXONOMY by title CARDZ, and ONTOLOGY by timestamped TXTZ.
-- X Title is KEY for TOKENZ "training"
+- X TRANSFORM data into TAXONOMY by key CARDZ, and ONTOLOGY by timestamped TXTZ.
+- X key is KEY for TOKENZ "training"
 
 3) NODEJS SCRIPTS for PARSE_PIPELINE
 - O advanced_parse_tokenz () 
@@ -361,4 +361,15 @@ O - unlock tokenz
 
 ---
 
-DESCRIPTION: add NLP-super-powers, to tokenz (above).
+#### DESCRIPTION: add NLP-super-powers, to tokenz (above).
+
+---
+
+## POPULATE TOKEN (training_script)
+
+- scriptz/TXT_TOKEN (default)
+
+O TRAIN_TXT_TOKENZ_1.js
+O open all files in LIBZ
+X TOKEN_KEYZ '~' - key_tokenz used as keyz. (standard tokenizer)
+X write json to CARDZ

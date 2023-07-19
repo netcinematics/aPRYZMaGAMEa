@@ -1,12 +1,12 @@
-{ "title": "aWORDZa",
+{ "key": "aWORDZa",
   "token" :   
-    { "title": "aWORDZa", 
+    { "key": "aWORDZa", 
       "txtz":[
         {"type":"txt","txtz":["text1... ","text2..."],"imgz":[],"meta":[]},
         {"type":"quote","txtz":["awordza 123"],"imgz":[],"meta":[]},
-        {"title":"first token txt","txtz":["awordza 123"],"imgz":[],"meta":[]},
-        {"title":"first token txt","txtz":["awordza 123"],"imgz":[],"meta":[]},
-        {"title":"second token txt","txtz":["a1...","a2...","a3..."]}], 
+        {"key":"first token txt","txtz":["awordza 123"],"imgz":[],"meta":[]},
+        {"key":"first token txt","txtz":["awordza 123"],"imgz":[],"meta":[]},
+        {"key":"second token txt","txtz":["a1...","a2...","a3..."]}], 
       "imgz":[], 
       "meta":[] },
     "date":"1_1_2020",

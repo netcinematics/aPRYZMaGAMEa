@@ -8,7 +8,7 @@
 const token_1 = ( config ) => { 
 //programattically model the output, based on input.
 return {
-    title:'testtoken1',
+    key:'testtoken1',
     desc:'descriptive text',
     txtIdx:[1,2,3,4],
     txtz:[{txt:"a"},{txt:"b"}],

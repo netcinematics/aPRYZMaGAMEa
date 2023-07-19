@@ -9,7 +9,7 @@
         {"key":"second token txt","txtz":["a1...","a2...","a3..."]}], 
       "imgz":[], 
       "meta":[] },
-    "date":"1_1_2020",
-    "src":"source_file.md",
-    "version":"0.1.1.1"
+    "datestamp":"YMD:2020,1,1",
+    "srcfiles":["../LIBZ/source_file.md"],
+    "version":"0.0.0.0"
 }

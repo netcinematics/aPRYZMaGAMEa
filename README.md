@@ -154,6 +154,9 @@ toxic-fog
 wildfire-haze
 superfire
 gustnado
+heathell
+Thousand-Year-Storm
+extreme-weather
 
 ### aWORDZa -  DESIGN_PRINCIPLES
 

@@ -40,6 +40,8 @@ So, since no market can be found - create the market. After perfecting the rich_
 
 and a rich_digital_art_pipeline, so too a rich_digital_art_market... was necessary to build.
 
+---
+
 ### INFINITE SOLUTION
 
 >> The biggest problems with any publishing environment is - will it exist forever?
@@ -60,11 +62,11 @@ That is how. That is best. That is the point.
 
 ---
 
+~X~
 
 YMD:2023,7,18
 SIG: ENZO ~ : )
 
-~X~
 
 
 

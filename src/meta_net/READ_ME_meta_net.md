@@ -31,7 +31,15 @@ X - meta_net/token_txtz       TXTZ
 X - meta_net/readme.md
 X - meta_net/meta_net_schema.js
 X - clean up libz files...
-O - import scriptz
-O - organize scriptz
+X - import scriptz
+X - organize scriptz
 
 ---
+
+# ALGORITHMS
+
+X first-class-function architecture for standard_tokenizer to advanced_tokenizer
+O add version tag to output
+O add timestamp tag to output
+O add key
+O add txt and txtz

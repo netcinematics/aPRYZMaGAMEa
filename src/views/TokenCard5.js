@@ -5,7 +5,7 @@ let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nx
 let btnKey = 0;
 function TokenCard ( { token, setTokenViewfn } ) {
     useEffect(() => { 
-        document.title = (token && token.title)?token.title:'';  
+        document.key = (token && token.key)?token.key:'';  
         // token.numz = humanIDX.toString()+'.'+idx;       //apply dynamic_numz
     }, [token]);
     // hovered is why token frame is a sub component.
@@ -14,7 +14,7 @@ function TokenCard ( { token, setTokenViewfn } ) {
     let handleMouseLeave = () => { setHovered(false) }
 
     function onTokenCardClick(  ){ 
-        console.log("Token Click:",token.title)
+        console.log("Token Click:",token.key)
         sonicWoop.play()
         setTokenViewfn("cardview",token);
     }
@@ -26,21 +26,18 @@ function TokenCard ( { token, setTokenViewfn } ) {
         flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly'
     } 
 
-    let gameTitle = "";
+    let gameKey = "";
     let gameFontColor = "";
     function gameAGENT(token){ //REACT to state and RESPOND
         if(!token || !token.state){return}
-        else if (token.state.title ==='locked'){gameTitle =  'X'}
-        else if (token.state.title ==='prize'){gameTitle =  '!'}
-        else if (token.state.title ==='clue'){gameTitle =  '?'}
+        else if (token.state.key ==='lock'){gameKey =  'X'}
+        else if (token.state.key ==='prize'){gameKey =  '!'}
+        else if (token.state.key ==='clue'){gameKey =  '?'}
 
-        gameFontColor = (token.state.title ==='prize')?'mediumpurple':(token.state.title ==='clue')
-        ?'#d08701':(token.state.title ==='locked')?'#de6666':'steelblue';
-    }
-    // let gameTitle = gameAGENT(token); 
-    gameAGENT(token); 
-    // let dynamicFontColor = (token.state.title ==='prize')?'mediumpurple':(token.state.title ==='clue')
-    // ?'#d08701':(token.state.title ==='locked')?'#de6666':'steelblue';
+        gameFontColor = (token.state.key ==='prize')?'mediumpurple':(token.state.key ==='clue')
+        ?'#d08701':(token.state.key ==='lock')?'#de6666':'steelblue';
+    }; gameAGENT(token); 
+
     //-----------------TOKEN---------------
     return (<>
         <button  className={isHovered ? 'btnHover' : ''} style={cardStyle}
@@ -51,9 +48,9 @@ function TokenCard ( { token, setTokenViewfn } ) {
                     borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
                     color:gameFontColor, flexDirection:'column',
                     alignItems:'center',fontSize:'xx-large',paddingTop:'0.333em'}}>
-                    <main style={{display:'flex',flex:'1',alignItems:'center'}}>{gameTitle}</main>
+                    <main style={{display:'flex',flex:'1',alignItems:'center'}}>{gameKey}</main>
                     <aside style={{fontSize:'x-small', color:'steelblue'}}>
-                       {token.state.title}
+                       {token.state.key}
                     </aside>
                 </section>
                 :
@@ -61,15 +58,21 @@ function TokenCard ( { token, setTokenViewfn } ) {
                     borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
                     color:'#2374b7',
                     alignItems:'flex-end',fontSize:'large',paddingBottom:'0.222em'}}>
-                    {token.title}
+                    {token.key}
                 </section>            
             }
             
             <footer style={{background:'cornflowerblue',fontSize:'x-small',
                 borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
-                color:'#4c038c'}}>
+                color:'#4c038c',display:'flex',justifyContent:'space-between',
+                padding:'0.222em 0.444em'
+                }}>
                 {token.numz}
-                {(token && token.state && token.state!=="locked")?'unlocked': 'locked'}
+                {(token && token.state && token.state.key==="lock")?
+                    <div className='lockStatus'>&#x1f512;</div>
+                    :
+                    <div className='unlockStatus'>&#9989;</div>
+                } 
             </footer>
         </button>
     </>)

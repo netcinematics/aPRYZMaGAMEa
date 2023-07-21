@@ -17,7 +17,7 @@ useEffect(() => { getTokenzINDEX() }, [setTokenz_INDEX_DATA]);
 function getTokenzINDEX(){ //SHOW MAIN CARDS.
     const options = {
         method: 'GET',
-        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index.json', //prod url
+        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_0.json', //prod url
     }
     axios.request(options).then((response) => {
         setTokenz_INDEX_DATA(response.data.token_index)
@@ -151,17 +151,16 @@ let TXTViewz =  ( {token} ) => {
             <> 
             {tokenTXT_ARRAY.length}
             {tokenTXT_ARRAY.map( (item,idx)=>{
-                if(item.title){
-                    return <h1>{item.title}</h1>   
+                if(item.key){
+                    return <h1>{item.key}</h1>   
                 }
                 return idx
             })}
             {tokenTXT_ARRAY.map( (item,idx)=>{
-                // debugger;
 
                 if(item.txt && item.txt.length){
                     return item.txt.map( (txtitem,txtidx)=>{
-                        return (<p><h1>txtitem.title</h1>{txtidx}:{txtitem}</p>)
+                        return (<p><h1>txtitem.key</h1>{txtidx}:{txtitem}</p>)
                     }) 
                 }
                 return idx

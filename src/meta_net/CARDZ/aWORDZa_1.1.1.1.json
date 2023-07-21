@@ -1,5 +1,5 @@
 { "key": "aWORDZa",
-  "token" :   
+  "tokenz" :[  
     { "key": "aWORDZa", 
       "txtz":[
         {"type":"txt","txtz":["text1... ","text2..."],"imgz":[],"meta":[]},
@@ -8,8 +8,9 @@
         {"key":"first token txt","txtz":["awordza 123"],"imgz":[],"meta":[]},
         {"key":"second token txt","txtz":["a1...","a2...","a3..."]}], 
       "imgz":[], 
-      "meta":[] },
-    "date":"1_1_2020",
-    "src":["source_file.md"],
-    "version":"1.1.1.1"
+      "meta":[] }
+  ],
+  "date":"1_1_2020",
+  "src":["source_file.md"],
+  "version":"1.1.1.1"
 }

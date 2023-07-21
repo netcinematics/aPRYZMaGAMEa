@@ -153,3 +153,12 @@
   text-align-last: end !important;
   color:black;
 }
+
+.lockStatus {
+  font-size:1.666em;
+}
+
+
+.unlockStatus {
+  font-size:0.888em;
+}

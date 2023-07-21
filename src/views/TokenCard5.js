@@ -21,7 +21,7 @@ function TokenCard ( { token, setTokenViewfn } ) {
 
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
         borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
-        color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
+        color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',minWidth:'9em',
         alignContent:'flex-end',alignItems:'stretch', minHeight:'10em',width:'95%',
         flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly'
     } 

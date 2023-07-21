@@ -205,37 +205,48 @@ let TXTViewz =  ( {token} ) => {
         &#128161;    &#128367;   &#128273; &#10024;	 
         &#10042; 	&#10059; 	&#10046; 	&#10050;
         &#10051;  	&#10036; 	&#10019; 	&#10023;
+        <hr></hr>
         &#10170; 	&#10041; &#10034;
+        <hr></hr>
         &#10026;	 	&#10029;	 	&#10031;	
         &#10037;	 	&#10042;	 	&#10041;	
         &#10045;		&#10050;	 	&#10055;	
+        <hr></hr>
         &#10056;	 	&#10059;		&#10070;	
         &#10083;		&#10146;		&#10164;	
         &#10169;		&#9889;	  
+        <hr></hr>
          	&#9967;	   	&#9965;	
              &#9734;  &#9733;
-
+        <hr></hr>
         &#127775; &#128142; 	&#128077; &#128078; &#128079; 	&#128128; &#128123;
         &#128165; &#128151;  &#128261;  &#128295; 	&#10035; 	&#10020; 	&#10084;
-        &#128270;  &#128264; 	&#128265;  	&#128266;  	&#128369; 	&#128420;
-        &#128366; 	&#128365;  	&#128375;  	&#128376;  	&#128440; &#128279;
+        <hr></hr>
+        &#128270;  &#128264; 	&#128265;  	&#128266;   	&#128420;
+        {/* &#128366; 	&#128365;  	&#128375;  	&#128376;  	&#128440; 	&#128369;*/}
+         &#128279;
+        <hr></hr>
         &#128280;  	&#128293;  &#128163; &#128171; 	&#128064; 	&#128045; 	&#128047;
+        <hr></hr>
         &#128058; &#128059; 	&#127993; &#128028; &#128025; &#128013; 	&#128035;
-        &#127892; 	&#127894; 	&#127900; &#127916; 	&#127942;
+        <hr></hr>
+        {/* &#127892; 	&#127894; 	&#127900;  */}
+        &#127916; 	&#127942;
 
           	&#128009;  	&#127911; 
 
-
-              &#10549; 	&#10548; 	&#10531; 	&#10532; 	&#10533; &#10534;
+              &#10549; 	&#10548; 	
+              <hr></hr>
+              {/* trbl btn icons */}
+              &#10531; 	&#10532; 	&#10533; &#10534;
+              <hr></hr>
               &#10556; 	&#10555; 	&#10554; 	&#10552;
 
         </article> }
     </>
     )
 }
-
-let TokenCardzBtnStyle = {width:'4em',cursor:'pointer',borderRadius:'13px',
-        background:'skyblue',border:'1px solid steelblue'}
+ 
 
 function setCardViewContent(direction){
     if(direction==='up'){
@@ -262,10 +273,12 @@ let TokenCardz = ( {token} ) => {
         }}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
-            <button style={TokenCardzBtnStyle} 
-                onClick={ ()=>{setCardViewContent('up')}}>UP</button>
-            <button style={TokenCardzBtnStyle} 
-                onClick={ ()=>{setCardViewContent('right')}}>RIGHT</button>
+            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',
+        background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
+                onClick={ ()=>{setCardViewContent('up')}}><span style={{fontSize:'1.555em'}}>&#10531;</span>&nbsp;UP</button>
+            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',
+        background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
+                onClick={ ()=>{setCardViewContent('right')}}>RIGHT <span style={{fontSize:'1.555em'}}>&#10532;</span></button>
         </header>
         <article className="scrollBarV" style={{flex:1, color:'steelblue',
             boxShadow:'inset 0px 0px 10px 0px blue'}}>
@@ -274,10 +287,12 @@ let TokenCardz = ( {token} ) => {
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
-            <button style={TokenCardzBtnStyle} 
-                onClick={ ()=>{setCardViewContent('overview')}}>LEFT</button>
-            <button style={TokenCardzBtnStyle} 
-                onClick={ ()=>{setCardViewContent('overview')}}>DOWN</button>
+            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',
+        background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
+                onClick={ ()=>{setCardViewContent('overview')}}><span style={{fontSize:'1.555em'}}>&#10534;</span>&nbsp;LEFT</button>
+            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',
+        background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
+                onClick={ ()=>{setCardViewContent('overview')}}>DOWN <span style={{fontSize:'1.555em'}}>&#10533;</span></button>
         </footer>
     </main>
     </>)

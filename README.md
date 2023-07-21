@@ -232,6 +232,9 @@ The endless search for new viewz in language.
 // to make warning go away npm install --save-dev @babel/plugin-proposal-private-property-in-object
 //did not install
 
+PROD LINK: https://netcinematics.github.io/aPRYZMaGAMEa/
+REQUIRES > // npm run deploy to push updated after checkin.
+
 ## Manifest v1
 // npm i create-react-app
 // npm i react-reveal --save

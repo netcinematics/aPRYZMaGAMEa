@@ -44,6 +44,7 @@ function TokenCard ( { token, setTokenViewfn } ) {
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
             onClick={onTokenCardClick}>
             { (token.state)?
+            // add to background color unlocked: #95d2f8;
                 <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
                     borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
                     color:gameFontColor, flexDirection:'column',

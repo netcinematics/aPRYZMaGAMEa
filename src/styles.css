@@ -128,6 +128,13 @@
     .cardTileBtn{ width:18vw; height:18vw }  
   }
 
+
+  .btnHover{
+    border: 2px solid skyblue !important;
+    box-shadow: #05f68e 0px 0px 6px 1px !important;
+   }
+
+
 /*  custom scroll bar */
 /* .scrollBar2 {height:97%; overflow-x:hidden; background:#010111; border: 1px steelblue solid; border-radius:13px; padding:0.5em; } */
 .scrollBarV {height:97%; overflow-x:scroll; background:#010111; border: 1px steelblue solid; border-radius:13px; padding:0.5em; }
@@ -155,7 +162,7 @@
 }
 
 .lockStatus {
-  font-size:1.666em;
+  font-size:1.000em;
 }
 
 

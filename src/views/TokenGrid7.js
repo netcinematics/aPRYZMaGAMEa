@@ -12,6 +12,10 @@ let [viewState, setViewState] = useState('overview');
 let [selectedToken, setSelectedTokenObj] = useState({});
 let [tokenz_INDEX_DATA, setTokenz_INDEX_DATA] = useState([]);
 let [tokenz_CARD_COUNT, setTokenz_CARD_COUNT] = useState("");
+let [tokenz_COLUMN_COUNT, setTokenz_COLUMN_COUNT] = useState(0);
+let [tokenz_COLUMN_LENGTH, setTokenz_COLUMN_LENGTH] = useState(0);
+
+let [tokenz_MATRIX, setTokenz_MATRIX] = useState([]);
 
 useEffect(() => { getTokenzINDEX() }, [setTokenz_INDEX_DATA]); 
 function getTokenzINDEX(){ //SHOW MAIN CARDS.
@@ -199,7 +203,8 @@ let TXTViewz =  ( {token} ) => {
             :'no tokenz'
         } */}
         COUNT: {tokenTXT_INDEX} of {tokenTXT_COUNT}
-        &nbsp; locked 
+        &nbsp; 
+        <hr></hr>
         &#x1f512; &#128275; &#128272;  	
         &#11022; 	&#11023; 	&#11024; 	&#11025;
         &#128161;    &#128367;   &#128273; &#10024;	 
@@ -253,16 +258,73 @@ function setCardViewContent(direction){
         sonicSonar.play();
         setViewState('overview')
     } else if  (direction==='right'){ //look at numz, calculate offset, apply offset, look up numz, if found load, not loop default.
-        debugger;
+debugger;
+        console.log('TEST',tokenz_COLUMN_COUNT)
+        //TODO calculate max right
+        // console.log('TEST',tokenz_MATRIX)
         let tgt = '', offsetRight = 1, offsetVert = 1;
         let numz = selectedToken.numz.split('.');
-        offsetRight = numz[0]++;
-        if(offsetRight>= humanIDX){ offsetRight = 1; } //reset default
-        if(colm && colm.length && offsetVert >= colm[offsetRight].length){ offsetRight = 1; } //reset default
-        tgt = offsetRight+'.'+offsetVert;
+        offsetRight = ++numz[0];
+        if(offsetRight>= tokenz_COLUMN_COUNT){ offsetRight = 1; } //reset default
+       tgt = offsetRight+'.'+offsetVert;
         let nextToken = lookUpNUMZToken(tgt);
         if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
+        //todo possibly change view
+    } else if (direction==='left'){
+        debugger;
+        console.log('TEST < 1',0)
+    } else if (direction==='down'){
+        debugger;
+        console.log('TEST',tokenz_COLUMN_LENGTH)
     }
+}
+
+function lookUpNUMZToken(tgt){
+    console.log('TEST',tokenz_INDEX_DATA)
+    for (var i=0; i<tokenz_INDEX_DATA.length; i++){
+        if(tokenz_INDEX_DATA[i].numz && tokenz_INDEX_DATA[i].numz === tgt ){
+            return tokenz_INDEX_DATA[i]
+        }
+    }
+    //debugger;
+    //console.log("test3",colm.length)
+}
+ 
+//TODO
+// let colm = [];//global for dashboard of COUNTS and LOOKUP render.
+// let COLNUM=6; //vertical wrap limit
+//let tokenCOLUMNS = []; //available for meta data lookup on MOVE.
+// let humanIDX = 0; //column header
+function TokenGrid (){ 
+    let COLNUM=6; //column length, must be dependent on layout, per device.
+    let colmz = [];
+    let colm  = [];
+    let humanIDX = 0; //column header
+    let tokenCOLUMNS = [];
+    for(let i=0; i < tokenz_INDEX_DATA.length; i += COLNUM){
+        colm = tokenz_INDEX_DATA.slice(i, i+COLNUM);
+        colmz.push(colm);
+        ++humanIDX;
+         tokenCOLUMNS.push( 
+         <div  key={'col_'+i} style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
+            <header style={{minHeight:'2em'}}></header>
+            <header>{humanIDX}</header>
+            { 
+            colm.map( (token,idx) => { 
+                token.numz = humanIDX.toString()+'.'+(idx+1).toString();       //apply dynamic_numz
+                return <TokenCard token={token} idx={idx} setTokenViewfn={setTokenViewfn} key={'tokencard'+token.numz}/>
+            }) 
+            }
+            <footer style={{minHeight:'3em'}}></footer>
+         </div> 
+         );
+    }  
+    setTokenz_COLUMN_COUNT(humanIDX)  
+    setTokenz_COLUMN_LENGTH(COLNUM)  
+    // debugger;
+    // let x = tokenz_MATRIX;
+    // setTokenz_MATRIX(colmz)
+    return(tokenCOLUMNS)
 }
 
 let TokenCardz = ( {token} ) => {  
@@ -298,39 +360,6 @@ let TokenCardz = ( {token} ) => {
     </>)
 }
 
- 
-let colm = [];//global for dashboard of COUNTS and LOOKUP render.
-let COLNUM=6; //vertical wrap limit
-let tokenCOLUMNS = []; //available for meta data lookup on MOVE.
-let humanIDX = 0; //column header
-function TokenGrid (){ 
-    colm = [];
-    humanIDX = 0; //column header
-    tokenCOLUMNS = [];
-    for(let i=0; i < tokenz_INDEX_DATA.length; i += COLNUM){
-        colm = tokenz_INDEX_DATA.slice(i, i+COLNUM);
-        ++humanIDX;
-         tokenCOLUMNS.push( 
-         <div  key={'col_'+i} style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
-            <header style={{minHeight:'2em'}}></header>
-            <header>{humanIDX}</header>
-            { 
-            colm.map( (token,idx) => { 
-                token.numz = humanIDX.toString()+'.'+idx.toString();       //apply dynamic_numz
-                return <TokenCard token={token} idx={idx} setTokenViewfn={setTokenViewfn} key={'tokencard'+token.numz}/>
-            }) 
-            }
-            <footer style={{minHeight:'3em'}}></footer>
-         </div> 
-         );
-    }    
-    return(tokenCOLUMNS)
-}
-
-function lookUpNUMZToken(tgt){
-    debugger;
-    console.log("test3",colm.length)
-}
 
 function setTokenViewfn(selectedView,token){ //update app, show view
     console.log("setTokenView",selectedView, token.title)

@@ -5,6 +5,8 @@ A view of many VIEWZ, where you, solve word puzzles, and
 
 > UNLOCK_TOKENZ.
 
+example
+
 --- 
 
 pronounced: [ ah-PRISM-ah-GAME-eee-ah ]

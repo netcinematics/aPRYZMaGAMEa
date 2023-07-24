@@ -15,8 +15,6 @@ let [tokenz_CARD_COUNT, setTokenz_CARD_COUNT] = useState("");
 let [tokenz_COLUMN_COUNT, setTokenz_COLUMN_COUNT] = useState(0);
 let [tokenz_COLUMN_LENGTH, setTokenz_COLUMN_LENGTH] = useState(0);
 
-let [tokenz_MATRIX, setTokenz_MATRIX] = useState([]);
-
 useEffect(() => { getTokenzINDEX() }, [setTokenz_INDEX_DATA]); 
 function getTokenzINDEX(){ //SHOW MAIN CARDS.
     const options = {
@@ -118,8 +116,8 @@ let TXTViewz =  ( {token} ) => {
     // }
 
     function dynamicLink(token){
-        if(!token || !token.title) return;
-        console.log('clicked',token.title)
+        if(!token || !token.key) return;
+        console.log('clicked',token.key)
         debugger;
         // setTokenViewfn( "detailview" , title );
         setTokenViewfn( "cardview" , token );
@@ -130,7 +128,7 @@ let TXTViewz =  ( {token} ) => {
     return(
         <>
         <h1 style={{cursor:"pointer"}} onClick={ ()=>dynamicLink(token)}>
-        {(token && token.title)?token.title:'aWORDZa'}</h1>
+        {(token && token.key)?token.key:'aWORDZa'}</h1>
         {(token && token.state && token.state.txtz && token.state.txtz.length)?
             token.state.txtz[0] : 'unlocked' }
         <br></br>
@@ -138,13 +136,13 @@ let TXTViewz =  ( {token} ) => {
         <br></br>
         {(token && token.txtz)?
             token.txtz.map( (item, idx)=> { //short description txt
-                return (item && item.title && item.title==="short")?item.txtz[0]:'';
+                return (item && item.key && item.key==="short")?item.txtz[0]:'';
             }):'no short description'
         }
         <br></br>
         {(token && token.txtz)?
             token.txtz.map( (item, idx)=> { //long description txt
-                return (item.title==="long")?item.txtz[0]:'';
+                return (item.key==="long")?item.txtz[0]:'';
             }):'no long description'
         }
     </>)
@@ -176,7 +174,7 @@ let TXTViewz =  ( {token} ) => {
         {displayTokenTXTArray()}
         {dynamicDetailDisplay()}
         <hr></hr>
-        <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button>
+        <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button> //todo remove
         <button style={{marginTop:'1em'}} onClick={()=>{ addUnlockTXTz()}}>unlock text</button>
         {localDetails.map((item,idx)=>{ return <div>{item.txt}</div>})}
         {<article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
@@ -204,6 +202,28 @@ let TXTViewz =  ( {token} ) => {
         } */}
         COUNT: {tokenTXT_INDEX} of {tokenTXT_COUNT}
         &nbsp; 
+        
+        <hr></hr>
+        &#8987; &#8986; &#9200; &#9201; &#9203; &#9875;
+        <hr></hr>  
+        &#9935; &#10035;  &#10036;  &#10050;  &#10055;  &#10052;
+        <hr></hr>
+        &#10083;  &#11088;  &#11093;  &#12336; &#127760;
+
+        <hr></hr>
+        &#127775; &#127879; &#127880;  &#127881; &#127919;
+        <hr></hr>
+        &#127925; &#127922; &#127942; &#127968; &#127984;
+        <hr></hr>
+        &#128064; &#128126; &#128160; &#128172; &#128173;
+        <hr></hr>
+        &#128206; &#128218; &#128211; &#128209; &#128225;
+        <hr></hr>
+        &#128263; &#128269; &#128270; &#128293; &#128301;  
+        <hr></hr>
+        &#128300; &#128640; &#128683; &#129322;
+        <hr></hr>
+        &#129412; &#129413; 
         <hr></hr>
         &#x1f512; &#128275; &#128272;  	
         &#11022; 	&#11023; 	&#11024; 	&#11025;
@@ -254,47 +274,60 @@ let TXTViewz =  ( {token} ) => {
  
 
 function setCardViewContent(direction){
-    if(direction==='up'){
+    if(direction==='home'){
         sonicSonar.play();
         setViewState('overview')
+    } else if  (direction==='up'){ 
+        let tgt = '', offsetRight = 1, offsetVert = 1;
+        let numz = selectedToken.numz.split('.');
+        offsetRight = numz[0];
+        offsetVert = --numz[1]
+        if(offsetVert <= 0 ){ offsetVert = tokenz_COLUMN_LENGTH; } //reset default
+        tgt = offsetRight+'.'+offsetVert;
+        let nextToken = lookUpNUMZToken(tgt);
+        if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.        
     } else if  (direction==='right'){ //look at numz, calculate offset, apply offset, look up numz, if found load, not loop default.
-debugger;
-        console.log('TEST',tokenz_COLUMN_COUNT)
-        //TODO calculate max right
-        // console.log('TEST',tokenz_MATRIX)
         let tgt = '', offsetRight = 1, offsetVert = 1;
         let numz = selectedToken.numz.split('.');
         offsetRight = ++numz[0];
-        if(offsetRight>= tokenz_COLUMN_COUNT){ offsetRight = 1; } //reset default
-       tgt = offsetRight+'.'+offsetVert;
+        offsetVert = numz[1]
+        if(offsetRight > tokenz_COLUMN_COUNT){ offsetRight = 1; } //reset default
+        tgt = offsetRight+'.'+offsetVert;
         let nextToken = lookUpNUMZToken(tgt);
         if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
-        //todo possibly change view
     } else if (direction==='left'){
-        debugger;
-        console.log('TEST < 1',0)
+        let tgt = '', offsetRight = 1, offsetVert = 1;
+        let numz = selectedToken.numz.split('.');
+        offsetRight = --numz[0];
+        offsetVert = numz[1]
+        if(offsetRight <= 0 ){ offsetRight = tokenz_COLUMN_COUNT; } //reset default
+        tgt = offsetRight+'.'+offsetVert;
+        let nextToken = lookUpNUMZToken(tgt);
+        if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
     } else if (direction==='down'){
-        debugger;
-        console.log('TEST',tokenz_COLUMN_LENGTH)
+        let tgt = '', offsetRight = 1, offsetVert = 1;
+        let numz = selectedToken.numz.split('.');
+        offsetRight = numz[0];
+        offsetVert = ++numz[1]
+        if(offsetVert > tokenz_COLUMN_LENGTH ){ offsetVert = 1; } //reset default
+        tgt = offsetRight+'.'+offsetVert;
+        let nextToken = lookUpNUMZToken(tgt);
+        if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
+    } else if (direction==='extra'){
+        console.log('extra')
+        // addLocalDetails( )
     }
 }
 
 function lookUpNUMZToken(tgt){
-    console.log('TEST',tokenz_INDEX_DATA)
+    console.log('Lookup:',tgt)
     for (var i=0; i<tokenz_INDEX_DATA.length; i++){
         if(tokenz_INDEX_DATA[i].numz && tokenz_INDEX_DATA[i].numz === tgt ){
             return tokenz_INDEX_DATA[i]
         }
     }
-    //debugger;
-    //console.log("test3",colm.length)
 }
  
-//TODO
-// let colm = [];//global for dashboard of COUNTS and LOOKUP render.
-// let COLNUM=6; //vertical wrap limit
-//let tokenCOLUMNS = []; //available for meta data lookup on MOVE.
-// let humanIDX = 0; //column header
 function TokenGrid (){ 
     let COLNUM=6; //column length, must be dependent on layout, per device.
     let colmz = [];
@@ -321,9 +354,7 @@ function TokenGrid (){
     }  
     setTokenz_COLUMN_COUNT(humanIDX)  
     setTokenz_COLUMN_LENGTH(COLNUM)  
-    // debugger;
-    // let x = tokenz_MATRIX;
-    // setTokenz_MATRIX(colmz)
+
     return(tokenCOLUMNS)
 }
 
@@ -335,11 +366,11 @@ let TokenCardz = ( {token} ) => {
         }}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
-            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',
-        background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
+            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('up')}}><span style={{fontSize:'1.555em'}}>&#10531;</span>&nbsp;UP</button>
-            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',
-        background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
+            <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
+                onClick={ ()=>{setCardViewContent('home')}}><span style={{fontSize:'1.555em'}}>&#127968;</span>&nbsp;</button>
+            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('right')}}>RIGHT <span style={{fontSize:'1.555em'}}>&#10532;</span></button>
         </header>
         <article className="scrollBarV" style={{flex:1, color:'steelblue',
@@ -349,12 +380,12 @@ let TokenCardz = ( {token} ) => {
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
-            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',
-        background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
-                onClick={ ()=>{setCardViewContent('overview')}}><span style={{fontSize:'1.555em'}}>&#10534;</span>&nbsp;LEFT</button>
-            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',
-        background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
-                onClick={ ()=>{setCardViewContent('overview')}}>DOWN <span style={{fontSize:'1.555em'}}>&#10533;</span></button>
+            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
+                onClick={ ()=>{setCardViewContent('left')}}><span style={{fontSize:'1.555em'}}>&#10534;</span>&nbsp;LEFT</button>
+            <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
+                onClick={ ()=>{setCardViewContent('extra')}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button>
+            <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
+                onClick={ ()=>{setCardViewContent('down')}}>DOWN <span style={{fontSize:'1.555em'}}>&#10533;</span></button>
         </footer>
     </main>
     </>)
@@ -362,7 +393,7 @@ let TokenCardz = ( {token} ) => {
 
 
 function setTokenViewfn(selectedView,token){ //update app, show view
-    console.log("setTokenView",selectedView, token.title)
+    console.log("setTokenView",selectedView, token.key)
     setViewState(selectedView);
     setSelectedTokenObj(token);
 }

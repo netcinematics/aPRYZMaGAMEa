@@ -39,7 +39,9 @@ X - organize scriptz
 # ALGORITHMS
 
 X first-class-function architecture for standard_tokenizer to advanced_tokenizer
-O add version tag to output
-O add timestamp tag to output
-O add key
-O add txt and txtz
+X add version tag to output
+X add timestamp tag to output
+X add key
+O add txtz only - no txtz
+O replace ~ tilde wrap with single underscore _aWordza
+

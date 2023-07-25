@@ -174,7 +174,8 @@ let TXTViewz =  ( {token} ) => {
         {displayTokenTXTArray()}
         {dynamicDetailDisplay()}
         <hr></hr>
-        <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button> //todo remove
+        <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button> 
+        {/* //todo remove */}
         <button style={{marginTop:'1em'}} onClick={()=>{ addUnlockTXTz()}}>unlock text</button>
         {localDetails.map((item,idx)=>{ return <div>{item.txt}</div>})}
         {<article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',

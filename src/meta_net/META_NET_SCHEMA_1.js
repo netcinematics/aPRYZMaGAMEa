@@ -19,22 +19,23 @@ return {
 }
 
 const token_parse_SYNTAX_1 = ( config ) => {
-    return {
-        'tokenz_by_tilde':'`~...~`',
-        'tokenz_by_little_a':'a...a',
-        'tokenz_by_little_z':'...z...',
-        'tokenz_by_all_caps':'ALLCAPS',
-        'tokenz_by_underscore':'..._...',
+    return { //ALL TOKENZ by UNDERSCORE.
+        'tokenz_by_any_underscore':'..._...',
+        //'tokenz_by_tilde':'`~...~`',
+        //'tokenz_by_little_a':'a...a',
+        //'tokenz_by_little_z':'...z...',
+        //'tokenz_by_all_caps':'ALLCAPS',
     }
 }
 
 const token_parse_SCRIPTZ_1 = ( config ) => {
     return {
         'token_index':'tokenz_by_tilde',
-        'token_netz':'a...a',
+        // 'token_netz':'a...a',
         'token_cardz':'###...',
         'token_txtz':'single hard return line',
         'token_quotez':'>>>...',
-        'token_endz':'---',
+        'token_subz':'---',
+        'token_endz':'~~~',
     }
 }

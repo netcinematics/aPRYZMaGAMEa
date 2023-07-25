@@ -1,6 +1,10 @@
-# `~SYNTAX_TEST~`
+# `_SYNTAX_TEST_`
 
 aSYNTAXaTESTa - actual description, of syntax test txt.
+
+---
+
+This file is for testing layout of text parsing tokenomics.
 
 ---
 
@@ -8,17 +12,16 @@ aSYNTAXaTESTa - actual description, of syntax test txt.
 
 It is not that easy to invent a system to slice and dice txt such as this.
 
-> tokenz do not create themselves.
-
+> tokenz do not create themselves.~
 ---
 
 ### TRIFECTA_AFFECTA
 
-Many different ways to group text, concepts and story.
+Many different ways to group text, concepts and story, resulting in the affect of a spark of heart, sense, and thought.
 
 ---
 
-# `~aSTORYBOOKaWORDZa~`
+## `_aSTORYBOOKaWORDZa_`
 
 Beyond belief adventures into rich digital worldz.
 
@@ -26,13 +29,13 @@ Captivating STORY of people to love and hate.
 
 ---
 
-## PROBLEM of PUBLISHING
+## PROBLEM_of_PUBLISHING
 
 A decade was spent looking for an appropriate place to publish this digital content.
 
-The ability to create this experience is possible.  
+> The ability to create this experience is possible.  
 
-> The ability to deliver it to the world, remains oddly impossible. 
+> The ability to deliver it to the world, remains oddly impossible. ~
 
 How to get eyeballs to the web? Seems odd that that is a problem, given that the web is world wide afterall. The barren wasteland in cyberspace exists, apparently, because everyone was distracted away. Intentionally.
 
@@ -44,7 +47,7 @@ and a rich_digital_art_pipeline, so too a rich_digital_art_market... was necessa
 
 ### INFINITE SOLUTION
 
->> The biggest problems with any publishing environment is - will it exist forever?
+> The biggest problems with any publishing environment is - will it exist forever?~
 
 Paperback books can be burned. And Platforms of Social Media can go out of business.
 
@@ -58,15 +61,23 @@ That is how. That is best. That is the point.
 
 ## aSTORYBOOKaWORDZa
 
->>> The storybook of WORDZ, is a mezmorizing innovation, and amazing human invention. 
+> The storybook of WORDZ, is a mezmorizing innovation, and amazing human invention. ~
+
+### syntax_of_quotes
+
+> If there is another quote back to back, what happens?~
+
+> Seems to work well.~
+
+# SYNTAX_RULES for quotes
+
+1) single quotes as greater than sign
+2) tilde sign ends quotes, enables multiline
+3) also must have clear line to end quote in md
 
 ---
-
-~X~
-
-YMD:2023,7,18
-SIG: ENZO ~ : )
-
+~~~
+YMD_2023_7_18 SIG_ENZO_~:)
 
 
 

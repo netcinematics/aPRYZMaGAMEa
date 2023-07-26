@@ -35,7 +35,7 @@ A decade was spent looking for an appropriate place to publish this digital cont
 
 > The ability to create this experience is possible.  
 
-> The ability to deliver it to the world, remains oddly impossible. ~
+> While, the ability to deliver it to the world, remains oddly impossible. ~
 
 How to get eyeballs to the web? Seems odd that that is a problem, given that the web is world wide afterall. The barren wasteland in cyberspace exists, apparently, because everyone was distracted away. Intentionally.
 
@@ -72,8 +72,24 @@ That is how. That is best. That is the point.
 # SYNTAX_RULES for quotes
 
 1) single quotes as greater than sign
-2) tilde sign ends quotes, enables multiline
+2) asterisk sign ends quotes, enables multiline
 3) also must have clear line to end quote in md
+
+## understanding advanced parsing
+
+Half way through the most advanced parts, some things are becoming clear.
+There needs to be a "generative" build of many views of the same src document.
+Then those views are used by different tools, when needed.
+Example: KEY_INDEX used by main_menu, and QUOTES, used by QUOTE VIEW.
+There is a tricky problem of wrapping the end points up correctly.
+Going backward to populate metadata is unusual.
+For example quotes should contain the SIG and YMD of the document, but the algorithm may not know about SIG and YMD until the end. So either it runs a SIG and YMD check first (for current document).
+Or it can go backwards and tag context retrospectively, or both. Tricky.
+
+## UNIVERSAL_UNDERSCORE
+
+The universal_underscore_syntax is an interesting concept, to simplify TOKEN_KEYS, INDEXING, LINKING, and TRAINING. Any word with a leading underscore is a primary key, and any word with an underscore after the first letter is a secondary key. 
+
 
 ---
 ~~~

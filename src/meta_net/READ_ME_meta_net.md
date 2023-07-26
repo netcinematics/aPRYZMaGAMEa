@@ -42,6 +42,10 @@ X first-class-function architecture for standard_tokenizer to advanced_tokenizer
 X add version tag to output
 X add timestamp tag to output
 X add key
-O add txtz only - no txtz
-O replace ~ tilde wrap with single underscore _aWordza
+X add txtz only - no txt, txt become type.
+X replace ~ tilde wrap with single underscore _aWordza
+X end of quote is a tilde.
 
+O line_end replace by ;
+O script numerator_1 _2 naming
+O date folder DATA/tokenz_YMD_2023_7_26

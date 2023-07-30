@@ -5,7 +5,7 @@ A view of many VIEWZ, where you, solve word puzzles, and
 
 > UNLOCK_TOKENZ.
 
-example
+example 2
 
 --- 
 

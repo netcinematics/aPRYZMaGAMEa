@@ -17,7 +17,7 @@ function App() {
     <div className="App" style={{display:'flex',flexDirection:'column',backgroundColor: 'black',
       minHeight:'80vh',maxWidth:'55em',margin:'0 auto',padding:'0.444em',borderRadius:'15px'}}>
       <main style={{color:'skyblue', paddingTop:'1.5em',
-        borderRadius:'13px',margin:'1em',height:'48em',
+        borderRadius:'13px',margin:'1em',height:'100%',
         display:'flex',flexDirection:'column'}}>
 
       {         

@@ -15,7 +15,7 @@ export default function MainView () {
         {/* <Zoom>Welcome!</Zoom> */}
         Welcome!
         </header>
-        <article style={{height:'55vh',display:'flex',flexDirection:'column',justifyContent:'space-evenly',
+        <article style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'space-evenly',
             borderRadius:'10px', backgroundColor: 'rgb(22 35 62)',paddingTop:'2em'}}>
             <code>Artificial Intelligence Word Games.</code><br/>
             <p>AI_WORD_GAMEZ.</p>
@@ -28,8 +28,8 @@ export default function MainView () {
             <div className="sub">
                 <Typewriter style={{fontSize:'x-large',paddingTop:'1em'}}
                     options={{
-                    strings: ["a WORKSPACE to PRACTICE Ai CONCEPTS!", 
-                            "Like: NLP and LLMs in JavaScript,",
+                    strings: ["a WORKSPACE for Ai CONCEPTS!", 
+                            "NLP and LLMs in JavaScript,",
                             "ReactJS State Machine grid displays,", 
                             "NodeJS Training Tokenizers",
                             "... MetaData, Algorithms, and more!"],
@@ -45,14 +45,25 @@ export default function MainView () {
             <section style={{fontSize:'smaller',display:'flex',justifyContent:'center'}}>
                 <ol style={{margin:'1em auto',textAlign:'left'}}>
             {/* <Fade cascade  damping={0.444} delay={1000} duration={4000}>*/}
-                    <li>Ai NLP Concepts</li>
-                    <li>Ai Patterns in React</li>
+                    <li>Ai NLP in JavaScript, ReactJS, NodeJS</li>
+                    <li>Ai Enhanced_English</li>
                     <li>Ai Plasticity Generator</li>
-                    <li>Ai Tokenz of meta_conceptz</li>
-                    <li>Audio - Visual integrations.</li>
+                    <li>Ai Tokenz of non-linear meta_conceptz</li>
+                    <li>Audio - Visual gamifications.</li>
             {/*</Fade> */}
                 </ol>
             </section>
+            <code><h3>instructions</h3>
+            generate json tokenz by:
+            <ol>
+            <li> > cd src/meta_net/SCRIPTZ </li>
+            <li> > node train_txt_tokenz_1 </li>
+            <li>  example usage PARAMETERS: </li>
+            <li> > node train_txt_tokenz_1.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,18   </li>
+            
+            </ol>
+            </code>
+
             <section style={{marginBottom:'2em',fontSize:'medium',padding:'0 2em'}}>
 
                 <br></br><br></br>fork, PR, or drop a star on &nbsp;

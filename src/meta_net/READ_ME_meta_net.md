@@ -39,7 +39,23 @@ X - organize scriptz
 # ALGORITHMS
 
 X first-class-function architecture for standard_tokenizer to advanced_tokenizer
-O add version tag to output
-O add timestamp tag to output
-O add key
-O add txt and txtz
+X add version tag to output
+X add timestamp tag to output
+X add key
+X add txtz only - no txt, txt become type.
+X replace ~ tilde wrap with single underscore _aWordza
+X end of quote is a tilde.
+
+O line_end replace by ;
+O script numerator_1 _2 naming
+O date folder DATA/tokenz_YMD_2023_7_26
+
+O continue for every token
+O output each array as build step
+O endline rollup by watcher index and fn.
+O mint_token_factory()
+O finish TITLE, #;--- QUOTE *~
+O finish SIG, DATE
+O finish TXTZ separate repopulation as CARDZ.
+O add reduced /TOKEN_TEST/ file.md
+O add TOPICZ and SUBSETZ

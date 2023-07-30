@@ -129,7 +129,6 @@ confirmation-bias
 eggcorn
 etc..
 
-
 ### Category: natural-disaster words
 atmospheric-river
 long-track-tornado,
@@ -137,7 +136,8 @@ mega-drought,
 bomb-cyclone,
 heat-dome,
 methane-sinkholes,
-dust-nado, fire-nado,
+dust-nado, 
+fire-nado,
 thunder-snow,
 snow-mageddon.
 whale-mouth-cloud
@@ -159,6 +159,13 @@ gustnado
 heathell
 Thousand-Year-Storm
 extreme-weather
+killbots
+seadrones
+doomscrolling
+catastrophic-damage
+sea-level-rise
+superstorm
+
 
 ### aWORDZa -  DESIGN_PRINCIPLES
 
@@ -273,7 +280,7 @@ Reduced design to:
 
 2) X - tokenized by javascript, converted to JSON.
 
-3) O - filtered and sorted by dynamic api
+3) X - filtered and sorted by dynamic api
 
 4) O - gamified in local storage
 
@@ -331,25 +338,25 @@ O d1) QUOTEZ `>>>` multiline
 O g) `camelCase` or uppercase 2nd letter.
 O h) `ALL CAPS` words. 
 
-O d) CARDZ are like content FILTER.
-O e) TXTZ are like content SORT.
-O f) NETZ are like interfaces
+X d) CARDZ are like content FILTER.
+X e) TXTZ are like content SORT.
+X f) NETZ are like interfaces
 
 NODEJS - SCRIPTZ
 X - train/ data1/ folder with txt and md and scriptz/: 
 X - tokenz/ folder with ontology names.
-O - scriptz/markdown_to_cardz
-O - scriptz/generate_INDEX. 
+X - scriptz/markdown_to_cardz
+X - scriptz/generate_INDEX. 
 O - scriptz/meta_netz_linkz
-O - npm run scriptz
-O - scriptz to read all libz, and write versioned_tokenz.
+X - npm run scriptz
+X - scriptz to read all libz, and write versioned_tokenz.
 O - Error, not found.
 O - unlock tokenz for community, with reference.
 
 1) NODEJS LOOPS
 X - open md file, or txt file, or html file
 X - search for keywords.
-O - write to tokenz
+O - write to tokenz file or append
 O - unlock tokenz
 
 2) NODEJS "training" 
@@ -366,6 +373,15 @@ O - unlock tokenz
 - cross_link_tokenz ()
 - all_reference_tokenz ()
 - reference_link_tokenz ()
+
+
+X navigation system up, left, right, down. (with icons)
+X icon locks and icon set for android and apple devices.
+
+O crossover data from index
+O crossover data from master to file lookup of txtz
+O local storage
+O home button, replace up
 
 ---
 

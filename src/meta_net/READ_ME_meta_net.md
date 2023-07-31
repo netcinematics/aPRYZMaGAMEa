@@ -56,6 +56,7 @@ X endline rollup by watcher index and fn.
 X mint_token_factory()
 X add reduced /TOKEN_TEST/ file.md
 X add TOPICZ and SUBSETZ
+O MAINTOPIC and SUBTOPIC s
 
 X remove empty section top/bottom
 O finish TITLE, #;--- QUOTE *~
@@ -63,7 +64,7 @@ O SERIEZ
 O finish SIG, DATE
 O finish TXTZ separate repopulation as CARDZ.
 O add NUMZ
-O little-z-postfix
-O MIX-CASE
+X ENDZkey-postfix
+X MIX-CASE
 O META-LINKZ
 

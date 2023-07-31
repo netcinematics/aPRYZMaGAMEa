@@ -327,20 +327,23 @@ O - INDEX TOKENZ have 1 txt, and btn adds TXTs from TXT JSON file with ARRAY, by
 O - the first unlock TXT loads the ARRAY, then subsequent unlockbtn reveals each section.
 
 #### RICH RENDERING ENGINE
-O c2) parse by section `###` 
-O a2) parse by `---` section end.
-O a) parse by empty line `\r`
-O a0) `~...~` LINKZ, KEYZ, MAPZ, tilde words, turn into links, for INDEX
-O a1) `_` underscore WORDZ.
-O c) WORDZ begin and end in `a`. 
-O c1) all WORDZ with `z`
-O d1) QUOTEZ `>>>` multiline
-O g) `camelCase` or uppercase 2nd letter.
-O h) `ALL CAPS` words. 
+X c2) parse by section `###` 
+X a2) parse by `---` section end.
+X a) parse by empty line `\r`
+X a0) `~...~` LINKZ, KEYZ, MAPZ, tilde words, turn into links, for INDEX
+X a1) `_` universal_underscore WORDZ.
+O c) `ACTZ` : WORDZ begin and end in `a`. 
+X d1) QUOTEZ `>>>` multiline, end by ~
+O g) `MixedCase_` : `lowerUpper_syntax` 2nd letter, (simplified)
+O h) `ascendingCase` : 1 of each `lowerUpper_syntax`.
+O h) `trailing-z` : any word that ends in z
+O h) `SERIEZ` : subtxtz by number. (use exact_position numbering from array. 1.0)
+O h) 'SUBTXTZ' : txtz that rollup into SERIEZ or TOPIC
 
 X d) CARDZ are like content FILTER.
 X e) TXTZ are like content SORT.
 X f) NETZ are like interfaces
+O g) LINKZ
 
 NODEJS - SCRIPTZ
 X - train/ data1/ folder with txt and md and scriptz/: 
@@ -356,7 +359,7 @@ O - unlock tokenz for community, with reference.
 1) NODEJS LOOPS
 X - open md file, or txt file, or html file
 X - search for keywords.
-O - write to tokenz file or append
+X - write to tokenz file or append
 O - unlock tokenz
 
 2) NODEJS "training" 
@@ -373,15 +376,18 @@ O - unlock tokenz
 - cross_link_tokenz ()
 - all_reference_tokenz ()
 - reference_link_tokenz ()
+- vote_tokenz
+- comment_tokenz
+- amended_tokenz
 
 
 X navigation system up, left, right, down. (with icons)
 X icon locks and icon set for android and apple devices.
 
-O crossover data from index
+X crossover data from index
 O crossover data from master to file lookup of txtz
 O local storage
-O home button, replace up
+X home button, replace up
 
 ---
 
@@ -391,9 +397,9 @@ O home button, replace up
 
 ## POPULATE TOKEN (training_script)
 
-- scriptz/TXT_TOKEN (default)
+O scriptz/TXT_TOKEN (default)
 
-O TRAIN_TXT_TOKENZ_1.js
-O open all files in LIBZ
+X TRAIN_TXT_TOKENZ_1.js
+X open all files in LIBZ
 X TOKEN_KEYZ '~' - key_tokenz used as keyz. (standard tokenizer)
 X write json to CARDZ

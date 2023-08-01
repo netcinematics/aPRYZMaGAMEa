@@ -81,11 +81,6 @@
     },
      ymdz : ['YMD_2020_1_1'], //format YMD split by underscore!
      sigz : ['SIG_ENZO_2020_~:)'], //format symbol and year also by underscore
-     idx:{
-        start_topic:0,
-        start_quote:0,
-        start_txt:0
-     },
      setz:{ //all_setz
         all_markdown:[],  //built from many markdown files
         all_raw_tokenz:[], //built from space delimiter and return delimiters.
@@ -169,6 +164,58 @@
          RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[\\]+/g,"");
          RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[/]+/g,"");
      }; cleanMarkdown();
+     //------------------------------------------------------------------------
+     let txt_tokenz = [];
+     let subtxt_tgtz = [] //reusable variables.
+     let subtxt_idx = 0;
+     let aToken = {}; //reusable placeholder
+     let txtToken = {}; //reusable placeholder
+     let txt_slice = [] //reusable variables
+     let txt_tgt = '';        
+     //------------------------------------------------------------------------
+    let delimit_txt_tokenz = () => {
+        txt_tokenz = [];
+        subtxt_tgtz = txt_slice.join(' ').split(';');
+
+        //LOOK FOR SERIES and QUOTES
+        for(var i = 0; i< subtxt_tgtz.length; i++){
+
+            if(subtxt_tgtz[i].indexOf('>') > -1  ){
+                // debugger;
+                txtToken = new Object();
+                txtToken.type = 'QUOTE_TXT' //token
+                // txtToken.key = subtxt_tgtz[i]
+                txtToken.txt = subtxt_tgtz[i]
+                // RUNTIME_STATE.setz.all_idx_tokenz.push(aToken.key); //for iNDEX
+                // RUNTIME_STATE.token_map[i] = aToken.key //used to visualize delimiterz.
+                txt_tokenz.push(txtToken)
+                continue;                
+            } else if (subtxt_tgtz[i].match(/[1-9]./)) {
+                txtToken = new Object();
+                txtToken.type = 'SERIEZ_TXT' //token
+                // txtToken.key = subtxt_tgtz[i]
+                txtToken.txt = subtxt_tgtz[i]
+                txtToken.seriez = subtxt_tgtz[i].match(/[0-9]+./g).toString();
+                // RUNTIME_STATE.setz.all_idx_tokenz.push(aToken.key); //for iNDEX
+                // RUNTIME_STATE.token_map[i] = aToken.key //used to visualize delimiterz.
+                txt_tokenz.push(txtToken)
+                continue;   
+            } 
+            else if (subtxt_tgtz[i]) {
+                console.log('checking', subtxt_tgtz[i])
+                if(subtxt_tgtz[i].indexOf('---') >-1 || subtxt_tgtz[i].indexOf('#') >-1 ){ break }
+                txtToken = new Object();
+                txtToken.type = 'SUB_TXT' //token
+                // txtToken.key = subtxt_tgtz[i]
+                txtToken.txt = subtxt_tgtz[i]
+                // RUNTIME_STATE.setz.all_idx_tokenz.push(aToken.key); //for iNDEX
+                // RUNTIME_STATE.token_map[i] = aToken.key //used to visualize delimiterz.
+                txt_tokenz.push(txtToken)
+                continue;
+            }
+        }
+        return txt_tokenz;
+    }; //delimit_txt_tokenz();
  
      // let tokenz = RUNTIME_STATE.setz.all_markdown[0].split(' ')
     //  RUNTIME_STATE.raw_tokenz = RUNTIME_STATE.setz.all_markdown[0].split(' ')
@@ -179,71 +226,51 @@
         return /\S/.test(str); //remove white space characters but keep end_lines
     });
      console.log(' - all_RAW_tokenz, length: ', RUNTIME_STATE.setz.all_raw_tokenz.length)
-     let aToken = {}; //reusable placeholder
-     let startQuoteIDX = 0;
-     let txt_slice = [] //reusable variables
-     let txt_tgt = '';
+
  
      // let objectTokenz = []; //final return product
-     let delimit_all_tokenz = () => {  //delimit PRIME_KEYZ to key_idx.
+     let delimit_KEY_tokenz = () => {  //delimit PRIME_KEYZ to key_idx.
          for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
             txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];
             txt_tgt = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
-            //---DELIMIT_KEYZ-and_SUBKEYZ----------
-            // let get_all_keys = ()=> {
              if(txt_tgt.indexOf('_') === 0){ //KEY_TOKEN found
                 aToken = new Object();
-                aToken.type = 'primekey' //token
-                aToken.key = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
+                aToken.type = 'UNIVERSAL_KEY' //token
+                aToken.key = txt_tgt
                 RUNTIME_STATE.setz.all_idx_tokenz.push(aToken.key); //for iNDEX
-
                 RUNTIME_STATE.token_map[i] = aToken.key //used to visualize delimiterz.
-                //  if (!RUNTIME_STATE.token_object_map[aToken.key]){ //create
-                //      RUNTIME_STATE.token_object_map[aToken.key] = aToken;
-                //  } else { /*append txtz to object later*/ }
                 continue;
              } else if(txt_tgt.indexOf('_') > 0){ //SUBKEY_TOKEN found
                  aToken = new Object();
-                 aToken.type = 'subkey'  //token
-                 aToken.key = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
+                 aToken.type = 'SUB_KEY'  //token
+                 aToken.key = txt_tgt
                  RUNTIME_STATE.setz.all_idx_tokenz.push(aToken.key); //for iNDEX
                  RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
                  continue;       
              } else if( txt_tgt.charAt(0)==='a' //aWORDZa match
                 && !!txt_tgt.charAt(1).match(/[A-Z]/) ){ 
                     aToken = new Object();
-                    aToken.type = 'actualKey' //token
-                    aToken.key = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
+                    aToken.type = 'PRIME_KEY' //token
+                    aToken.key = txt_tgt
                     RUNTIME_STATE.setz.all_idx_tokenz.push(aToken.key); //for iNDEX
                     RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
                     continue;   
-             } else if( (()=>{ //ADVANCED INLINE_MATCHING_Fn PATTERN (inverted logic)
-                // ascendingCase match: not_upper(0), and at least one upper.
-                // debugger;
-                // console.log('attempting',txt_tgt)
-                // if( !!txt_tgt.charAt(0).match(/[a-z]/) ) return false; //not_upper_first_char
-                // if( !!txt_tgt.charAt(0).match(/[a-z]/) ) return false; //not_upper_first_char
-                // if( txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length >= 1 ) return false;
+             } else if( (()=>{ //INLINE_MATCHING PATTERN (advanced conditions)
                 if(txt_tgt.charAt(0).match(/[a-z]/)){
                     if(txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length >= 1){
-                        // console.log('found ascending',txt_tgt)
-                        // return 'ascendingKey';
                         return true;
                     }// ascendingCase_match
                 }
                 if(txt_tgt.length - txt_tgt.replace(/[a-z]/g, '').length > 1){
                     if(txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length > 1){
-                        // console.log('MixedKey',txt_tgt)
-                        // return 'MixedKey';
                         return true;
                     } // MixedCase_match
-                }
-                // at least one upper, str_replace_match.
+                } 
                 return false; 
              })() ){ // MIXED_CASE: more than one uppercase AND more than one lowercase.
                 aToken = new Object();
-                aToken.type = 'MixedKey' //token
-                aToken.key = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
+                aToken.type = 'MIX_KEY' //token
+                aToken.key = txt_tgt
                 RUNTIME_STATE.setz.all_idx_tokenz.push(aToken.key); //for iNDEX
                 RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
                 continue;   
@@ -252,24 +279,26 @@
                && txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length=== txt_tgt.length ){ 
                 // console.log('found z',txt_tgt)
                  aToken = new Object(); 
-                 aToken.type = 'ENDZkey' //token
-                 aToken.key = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
+                 aToken.type = 'ENDZ_KEY' //token
+                 aToken.key = txt_tgt
                  RUNTIME_STATE.setz.all_idx_tokenz.push(aToken.key); //for iNDEX
                  RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
                  continue;  
           } 
         } //endLOOP
-     }; delimit_all_tokenz();
-     let FILE_NUMBER = 1;
+     }; delimit_KEY_tokenz();
+     //--------------------------------------------
+     let TOPIC_NUMBER = 0;
      let delimit_all_topicz = ()=>{
         for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
             txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];        
-             //---DELIMIT_TOPICZ-and_SUBTOPICZ----------
              if(txt_tgt.indexOf('#') === 0){ //TITLE_TOKEN found
                 aToken = new Object();
-                // aToken.type = 'topic';
-                aToken.type = (txt_tgt.length === 1)?'maintopic':
-                  (txt_tgt.indexOf('##') === 0)?'subtopic':'';
+                if(txt_tgt.length === 1){
+                    aToken.type = 'maintopic';
+                    TOPIC_NUMBER++;
+                    subtxt_idx = 0;
+                } else { aToken.type = 'subtopic';   }    
                 aToken.key = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
                 aToken.txtz = [];
                 RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
@@ -281,7 +310,6 @@
                            txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(i+1,j+1)
                            txt_slice = txt_slice.join(' ').replace(/[;]/g,'');
                            txt_slice = txt_slice.trim();
-                           // txt_slice.replace('---','')//CLEAN_TOKENZ
                            aToken.txtz.push(txt_slice);
                            break;
                        } 
@@ -292,104 +320,81 @@
                        if(RUNTIME_STATE.setz.all_raw_tokenz[k].indexOf('---') === 0 
                            || RUNTIME_STATE.setz.all_raw_tokenz[k].indexOf('#') === 0
                            || k+1>=RUNTIME_STATE.setz.all_raw_tokenz.length){ //SECTION_END found
-                           txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(j+1,k+1)
-                           txt_slice = txt_slice.join(' ').replace(/[;#]/g,'');
-                           txt_slice = txt_slice.replace('---','')//CLEAN_TOKENZ
-                           txt_slice = txt_slice.trim();
-                           if(txt_slice){ aToken.txtz.push(txt_slice) }
-                           break;
-                       } 
+                                txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(j+1,k+1)
+                            if(txt_slice.indexOf('>') > -1 || txt_slice.join('').match(/[1-9]./) ){
+                                console.log('q or n')
+                                txt_slice = delimit_txt_tokenz();
+                            } else {
+                                txt_slice = txt_slice.join(' ').replace(/[;#]/g,'');
+                                txt_slice = txt_slice.replace('---','')//CLEAN_TOKENZ
+                                txt_slice = txt_slice.trim();
+                                if(txt_slice) txt_slice = {txt:txt_slice}
+                            }
+                       
+                            if(txt_slice){ aToken.txtz.push(txt_slice) }
+                            break;
+                    
+                        } 
                    }
                 }; lookahead_subtxt();
-                aToken.numz = `${FILE_NUMBER}.${RUNTIME_STATE.setz.all_topic_tokenz.length}`
+                // aToken.numz = `${TOPIC_NUMBER}.${RUNTIME_STATE.setz.all_topic_tokenz.length}`
+                aToken.numz = `${TOPIC_NUMBER}.${subtxt_idx++}`
                 RUNTIME_STATE.setz.all_topic_tokenz.push(aToken)
                 continue;
             } 
-           //  else if(txt_tgt.indexOf('---') === 0){ //SECTION_END found
-           //     // debugger;
-           //      aToken = new Object();
-           //      aToken.type = 'subtxt'
-           //      aToken.key = txt_tgt;
-           //      aToken.txtz = [];
-           //      if(RUNTIME_STATE.idx.start_topic >= 0){ //REACHBACK-PATTERN
-           //         txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(RUNTIME_STATE.idx.start_topic+1,i+1)
-           //         //todo clean tokens?.replace(/[~.,]/g,'');//CLEAN_TOKEN
-           //         aToken.txtz.push(txt_slice.join(' '));
-           //         RUNTIME_STATE.idx.start_topic = 0;
-           //     }
-           //      RUNTIME_STATE.setz.all_topic_tokenz.push(aToken)
-           //      RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
-           //  } 
- 
         } //ENDLOOP
     }; delimit_all_topicz();
-    let delimit_all_quotez = ()=>{
-        for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
-            txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];             
+
+        //------------------------------------------------------------------------
+    let delimit_all_quotez = () => {
+        // for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
+            // txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];             
             if(txt_tgt.indexOf('>') === 0){ //QUOTE_TOKEN found
-                // debugger;
                 aToken = new Object();
                 aToken.type = 'quote'
                 aToken.key = txt_tgt;
                 RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
-                startQuoteIDX = i;
+                // startQuoteIDX = i;
             } 
-            
             if(txt_tgt.indexOf('~') > 0){ //END_QUOTE_ found
-            //  debugger;
                 aToken = new Object();
                 aToken.type = 'endquote'
                 aToken.key = txt_tgt;
                 aToken.txtz = [];
-                if(startQuoteIDX  >= 0){ //slice values from array to txt storage.
+                // if(startQuoteIDX  >= 0){ //slice values from array to txt storage.
                     txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(startQuoteIDX+1,i+1)
                     //todo push all quotes.
                     aToken.txtz.push(txt_slice);
                     startQuoteIDX = 0;
                     RUNTIME_STATE.token_map[i] = txt_slice.join(' '); //used to visualize delimiterz.
-                } else { console.log('missing quote token')}
+                // } else { console.log('missing quote token')}
 
             } 
-            
-        //  if(txt_tgt.indexOf(';') === 0){ //END_LINE found
+        // }//ENDLOOP
+    }; //delimit_all_quotez();
 
-        //     //  debugger;
-        //     aToken = new Object();
-        //     aToken.type = 'endline'
-        //     aToken.key = txt_tgt;
-        //     aToken.txtz = [];
-        //     if(startSUBIDX){ //slice values from array to txt storage.
-        //         txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(startSUBIDX+1,i+1)
-        //         //todo push all quotes.
-        //         aToken.txtz.push(txt_slice);
-        //         startSUBIDX = 0;
-        //         RUNTIME_STATE.token_map[i] = txt_slice.join(' '); //used to visualize delimiterz.
-        //     } else { console.log('missing SUB token')}
-        //  } 
-
-            if(txt_tgt.indexOf('~~~') === 0){ //DOC_END found
-                aToken = new Object();
-                aToken.type = 'endtxt'
-                aToken.key = txt_tgt;
-                RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
-            } 
-            
-            if(txt_tgt.indexOf('YMD') === 0){ //DOC_END found
-                aToken = new Object();
-                aToken.type = 'ymdz'
-                aToken.key = txt_tgt;
-                RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
-            } 
-            
-            if(txt_tgt.indexOf('SIG') === 0){ //DOC_END found
-                aToken = new Object();
-                aToken.type = 'sigz'
-                aToken.key = txt_tgt;
-                RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
-            } 
-        }//ENDLOOP
-
-    }; delimit_all_quotez();
+    let delimit_metadata = ()=>{
+        if(txt_tgt.indexOf('~~~') === 0){ //DOC_END found
+            aToken = new Object();
+            aToken.type = 'endtxt'
+            aToken.key = txt_tgt;
+            RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
+        } 
+        
+        if(txt_tgt.indexOf('YMD') === 0){ //DOC_END found
+            aToken = new Object();
+            aToken.type = 'ymdz'
+            aToken.key = txt_tgt;
+            RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
+        } 
+        
+        if(txt_tgt.indexOf('SIG') === 0){ //DOC_END found
+            aToken = new Object();
+            aToken.type = 'sigz'
+            aToken.key = txt_tgt;
+            RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
+        } 
+    }; //delimit_metadata();
      //---
      // let getAll_SUBKEY_Tokenz = (token, tgt) => {
      //     for(let i = 0; i<RUNTIME_STATE.raw_tokenz.length; i++){ //SUB-KEY-TOKENZ

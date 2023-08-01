@@ -1,0 +1,66 @@
+{
+    "flat_no_nesting,": {
+        "type": "subkey",
+        "key": "flat_no_nesting,"
+    },
+    "end_line": {
+        "type": "subkey",
+        "key": "end_line"
+    },
+    "triple_dash": {
+        "type": "subkey",
+        "key": "triple_dash"
+    },
+    "triple_tilde": {
+        "type": "subkey",
+        "key": "triple_tilde"
+    },
+    "txt_tokenz": {
+        "type": "subkey",
+        "key": "txt_tokenz"
+    },
+    "_NUMZ_.": {
+        "type": "keytoken",
+        "key": "_NUMZ_."
+    },
+    "dynamically_linked,": {
+        "type": "subkey",
+        "key": "dynamically_linked,"
+    },
+    "not_nested.": {
+        "type": "subkey",
+        "key": "not_nested."
+    },
+    "_NUMZ_": {
+        "type": "keytoken",
+        "key": "_NUMZ_"
+    },
+    "mint_stamp.": {
+        "type": "subkey",
+        "key": "mint_stamp."
+    },
+    "_MINT_STAMP_": {
+        "type": "keytoken",
+        "key": "_MINT_STAMP_"
+    },
+    "mint_stamp": {
+        "type": "subkey",
+        "key": "mint_stamp"
+    },
+    "triple_hyphen": {
+        "type": "subkey",
+        "key": "triple_hyphen"
+    },
+    "triple_tilde.": {
+        "type": "subkey",
+        "key": "triple_tilde."
+    },
+    "END_OF_file": {
+        "type": "subkey",
+        "key": "END_OF_file"
+    },
+    "end_of_file,": {
+        "type": "subkey",
+        "key": "end_of_file,"
+    }
+}

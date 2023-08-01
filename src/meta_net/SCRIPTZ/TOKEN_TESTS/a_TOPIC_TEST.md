@@ -2,20 +2,37 @@
 
 used to test how topics are tokenized. With description of parsing principles.
 
+> main line quote
+
 ---
 
 ## 1.1 PARSING PRINCIPLES
 
+> a key quote on the topic.
+
 flat_no_nesting, end_line is semicolon, triple_dash and triple_tilde are examples.
+
+> a second engaging quote
 
 ---
 
-### 1.2 flat no nesting
+### 1.2 a seriez example
 
-markdown is nested, but we do not need (or want) nesting.
-because it is unnecessary. Instead we use hash to indicate start topic and 3 dashes to indicate end topic. aWORDZa. And EXISTZ. Or ACTZ.
+here is a series of numbered points:
+
+1. a single hash at the top will populate all text until 3 tildes end the topic.
+
+2. The main topics are numbered and subtopics numbered into _NUMZ_.
+
+3. The hashes remain to distinguish type or importance, but they display flat.
+
+4. and do not need nesting, because they are dynamically_linked, not_nested.
+
+and some other text.
 
 then whatever texts are inbetween become a text token. AllHumanzLook DearHumanz
+
+5. And pick it up again.
 
 ---
 
@@ -23,15 +40,16 @@ even completely isolated txt_tokenz are ok.
 
 ---
 
+> an isolated quote is ok.
+
 ## 1.3 main topics and sub topics
 
-a single hash at the top will populate all text until 3 tildes end the topic.
+main topics and sub topics, defined by single hash or multiple hash.
 
-The main topics are numbered and subtopics numbered into _NUMZ_.
+markdown is nested, but we do not need (or want) nesting.
+because it is unnecessary. Instead we use hash to indicate start topic and 3 dashes to indicate end topic. aWORDZa. And EXISTZ. Or ACTZ.
 
-The hashes remain to distinguish type or importance, but they display flat.
-
-and do not need nesting, because they are dynamically_linked, not_nested.
+flat_no_nesting
 
 ### 1.4 flat structure of _NUMZ_
 
@@ -95,11 +113,11 @@ So hash it top of group, divided by triple_dash and triple_tilde. wow.
 
 ~~~
 
-### 1.10 END_OF_file
+## 1.9 END_OF_file
 
 do not have a sign for end_of_file, let it just close all the existing open tokens.
 
-# single hash starts a new topic
+# 2.0 single hash starts a new topic
 
 that are then
 
@@ -119,11 +137,11 @@ to describe other points
 
 ~~~
 
-## 1.11 With sub topic titles
+## 2.1 With sub topic titles
 
-### 1.12 and deeper points
+### 2.2 and deeper points
 
 
-# 2.0 A
-# 3.0 B
-# 4.0 C
+# 3.0 A
+# 4.0 B
+# 5.0 C

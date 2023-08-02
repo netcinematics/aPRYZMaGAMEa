@@ -57,15 +57,20 @@ X mint_token_factory()
 X add reduced /TOKEN_TEST/ file.md
 X add TOPICZ and SUBSETZ
 X MAINTOPIC and SUBTOPIC s
-
 X remove empty section top/bottom
-O finish SERIEZ, numz,
 
-O finish QUOTE, write_all_quotes. end_line.
+
+O finish QUOTE: write_all_quotes. end_line.
 
 O finish SIG, DATE, write_all.
 
+O finish SERIEZ: numz,
+
+O NUMZ on seriez, txt, and quotez
+
 O finish TXTZ separate repopulation as CARDZ. - all txtz that contain key. cross-reference-idx.
+
+O item drop off check.
 
 X add NUMZ
 X ENDZ_KEY

@@ -60,22 +60,25 @@ X MAINTOPIC and SUBTOPIC s
 X remove empty section top/bottom
 
 
-O finish QUOTE: write_all_quotes. end_line.
-
-O finish SIG, DATE, write_all.
-
-O finish SERIEZ: numz,
-
-O NUMZ on seriez, txt, and quotez
-
-O finish TXTZ separate repopulation as CARDZ. - all txtz that contain key. cross-reference-idx.
-
-O item drop off check.
-
+X finish QUOTE: write_all_quotes. end_line.
+X finish SIG, DATE, write_all.
+X finish SERIEZ: numz,
+X NUMZ on seriez, txt, and quotez
+X item drop off check.
 X add NUMZ
 X ENDZ_KEY
 X MIXCASE_KEY
 X UNIVERSAL_KEY
 X PRIME_KEY
-O META-LINKZ
 
+O finish TXTZ separate repopulation as KEY_CARDZ. 
+- all txtz that contain key. cross-reference-idx.
+
+X total_token_count
+O test across all test files
+O remove test mode
+O open up multiple files.
+
+X 4 star to triple_exclaim !!! key_conzept
+X inline YMD search, and push.
+X All key tokenz avoid SIG_ and YMD_

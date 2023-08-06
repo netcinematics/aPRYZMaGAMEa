@@ -20,11 +20,14 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
     const options = {
         method: 'GET',
         // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_0.json', //prod url
-        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_2.json', //prod url
+        // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_2.json', //prod url
+        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/omni_key_idx_1.json', //prod url
     }
     axios.request(options).then((response) => {
-        setTokenz_INDEX_DATA(response.data.token_index)
-        setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
+        // setTokenz_INDEX_DATA(response.data.token_index)
+        setTokenz_INDEX_DATA(response.data.omni_key_index)
+        // setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
+        setTokenz_CARD_COUNT("token_index "+response.data.omni_key_index.length)
     }).catch((error) => {
         console.error(error)
         setTokenz_CARD_COUNT("no data")

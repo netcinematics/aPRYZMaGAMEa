@@ -372,7 +372,7 @@
                 }
             }
             if(!duplicate){
-                debugger;
+                // debugger;
                 aToken = new Object(); 
                 aToken.key = RUNTIME_STATE.setz.all_key_tokenz[i];
                 aToken.type = 'OMNI_KEY' //token
@@ -656,7 +656,7 @@ function wrap_CARDZ_with_METADATA(){
     }; write_out_all_key_topicz();  
     
     let write_out_all_cardz = () => {
-        let production_path = `../LIBZ/CARDZ`
+        let production_path = `../CARDZ`
         // let read_data = [];
         // const readTGTFile = async () => {
         //     let data_path = `${RUNTIME_STATE.tgt_path}`
@@ -705,6 +705,18 @@ function wrap_CARDZ_with_METADATA(){
         });        
 
     }; write_out_all_cardz();     
+
+    let write_out_production_omni_key_index = ()=>{
+        // debugger;
+        let production_path = `../CARDZ`
+        let index_file_tgt = 'omni_key_idx_1.json' //PRODUCTION_PRODUCT-.
+        // fs.writeFile(production_path+"/"+card_file_tgt, JSON.stringify(RUNTIME_STATE.setz.all_card_tokenz), err => {
+        fs.writeFile(production_path+"/"+index_file_tgt, JSON.stringify(RUNTIME_STATE.setz.omni_key_idx), err => {
+            if (err) { console.error(err); } //dehydrate with JSON.parse()
+            // RUNTIME_STATE.manifest.output.push(tgt)
+            console.log(' - Written to file', production_path+'/'+index_file_tgt)
+        });
+    }; write_out_production_omni_key_index();
 
  }
 

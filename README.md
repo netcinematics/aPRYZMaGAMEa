@@ -409,12 +409,12 @@ O API MOCK_DATA, replace new dynamic content pipeline.
 O prod output: /src/meta_net/CARDZ/token_index_2.json
 O write all_key_tokenz to prod: token_index_2.json?
 
-O array WRAP
-{ "all_token_index" : [ 
-O file name CARDZ all_token_index_3.json
+X array WRAP
+X { "all_token_index" : [ changed to  - omni_key_index
+X file name CARDZ omni_key_idx_1.json from all_token_index_3.json
 O remove extra files in CARDZ
 
-O all KEY TOKENZ all_into token_index meta_data.
+O all OMNI KEY TOKENZ all_into token_index meta_data.
 
 O token_index to omni_key_index
 O add ymd and numz

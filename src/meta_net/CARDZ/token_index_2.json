@@ -1,6 +1,6 @@
 { "token_index" : [  
     { "key": "_aWORDZa_", "ymdz":["1_1_2020"], "type":"OMNI_KEY",
-      "txtz":["1.1.1", "2.2.2", "3.3.3"]
+      "keyz":["1.1.1", "2.2.2", "3.3.3"]
     },
             
     { "key": "Third.5", "timestamp":"1_1_2020", "txtz":[{"key":"short","txtz":["testtxt1"]},{"key":"long","txtz":["1...","2...","3..."]}], "imgz":"", "linkz":"", "state":{"key":"clue","txtz":["you get clue"]} },

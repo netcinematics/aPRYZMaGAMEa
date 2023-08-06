@@ -4,11 +4,16 @@
  * EXAMPLE SYNTAX:
  * path, type version datestamp
  * EXAMPLE USE:
- > node train_txt_tokenz_1.jz all all 0.0.0.0 YMD:2023,7,18
- > node train_txt_tokenz_1.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,18
- > node train_txt_tokenz_1.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,24
- > node AdvancedTokenizer_1.js z_SYNTAX_TEST all 0.0.0.0 
- > node AdvancedTokenizer_1.js TEST  //reads different hard coded test files.
+ > node train_txt_tokenz_2.jz all all 0.0.0.0 YMD:2023,7,18
+ > node train_txt_tokenz_2.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,18
+ > node train_txt_tokenz_2.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,24
+ > node AdvancedTokenizer_2.js z_SYNTAX_TEST all 0.0.0.0 
+
+// USAGE
+
+ > node AdvancedTokenizer_2.js TEST  //reads different hard coded test files.
+
+
  * ******************---*****************
  * OVERVIEW:
  * - read all md files, 
@@ -104,7 +109,8 @@
         all_quote_tokenz:[],  // build from greater_gator to carriage_return.
         all_key_topicz:[],  // build from !!! and ~~~ sections
         all_card_tokenz:[],  //RUNTIME_STATE.setz.all_card_tokenz
-        meta_card_tokenz:[],   //output production product
+        omni_card_tokenz:[],   //output production product
+        omni_key_idx:{}        // output production index.
         //all_subtxt_tokenz:[], // built from txt between triple_tildes
         //all_txt_tokenz:[],   // build from txt between triple_hyphens
         //all_error_tokenz:[]    //use this to try to catch parsing errors
@@ -355,14 +361,18 @@
     let key_token_alias_check = ()=>{ //remove duplicates with alias_check on all_key_tokenz.
         let keyCheck = {}, duplicate = false;
         for(var i=0; i<RUNTIME_STATE.setz.all_key_tokenz.length;i++){
+
             for (var j=0; j<RUNTIME_STATE.setz.all_keyz_alias.length;j++){
                 keyCheck = RUNTIME_STATE.setz.all_keyz_alias[j].key;
+                if(keyCheck.indexOf('SIG'>-1)){continue}
+                if(keyCheck.indexOf('YMD'>-1)){continue}
                 if(keyCheck===RUNTIME_STATE.setz.all_key_tokenz[i]){ //duplicate
                     console.log('exact match',keyCheck)   
                     duplicate = true; break;
                 }
             }
             if(!duplicate){
+                debugger;
                 aToken = new Object(); 
                 aToken.key = RUNTIME_STATE.setz.all_key_tokenz[i];
                 aToken.type = 'OMNI_KEY' //token
@@ -427,8 +437,10 @@
                                     numz:`${RUNTIME_STATE.idx.TOPIC_IDX}.${RUNTIME_STATE.idx.SUBTOPIC_IDX}.${++RUNTIME_STATE.idx.TXT_IDX}`
                                 }
                             }
-                       
-                            if(txt_slice){ aToken.txtz.push(...txt_slice) }
+                            //console.log(j,aToken.key) //shows topic_map. TODO page_index
+                            // debugger;
+                            if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
+                            else if(txt_slice.txt){ aToken.txtz.push(txt_slice) }
                             break;
                     
                         } 
@@ -507,10 +519,33 @@
      }; build_token_cardz();
  }
  
- function wrap_CARDZ_with_METADATA(){
+function wrap_KEY_ALIASES_with_METADATA(){
+    //omni array wrapper of alias keyz
+    RUNTIME_STATE.setz.omni_key_idx = {
+        omni_key_index:RUNTIME_STATE.setz.all_keyz_alias
+    }
+    // for( var i = 0; i < RUNTIME_STATE.setz.all_keyz_alias.length; i++){
+    //     //for each card, create a wrapped version.
+    //     RUNTIME_STATE.setz.omni_key_idx.push( {
+    //         key: RUNTIME_STATE.setz.all_card_tokenz[i].key,
+    //         type : 'TOKEN_CARDZ', //underscore as master_token_delimiter
+    //         txtz: RUNTIME_STATE.setz.all_card_tokenz[i].txtz,
+    //         numz: RUNTIME_STATE.setz.all_card_tokenz[i].numz,
+    //         tgt : RUNTIME_STATE.tgt_path,
+    //         ymdz : RUNTIME_STATE.ymdz,
+    //         input : "LIBZ",
+    //         output : "CARDZ",
+    //         version:'1.1.1.1',
+    //         engine : RUNTIME_STATE.manifest.engine,
+    //         srcmap : RUNTIME_STATE.manifest.srcmap,
+    //     } )
+    // } //end loop
+}
+
+function wrap_CARDZ_with_METADATA(){
     for( var i = 0; i < RUNTIME_STATE.setz.all_card_tokenz.length; i++){
         //for each card, create a wrapped version.
-        RUNTIME_STATE.setz.meta_card_tokenz.push( {
+        RUNTIME_STATE.setz.omni_card_tokenz.push( {
             key: RUNTIME_STATE.setz.all_card_tokenz[i].key,
             type : 'TOKEN_CARDZ', //underscore as master_token_delimiter
             txtz: RUNTIME_STATE.setz.all_card_tokenz[i].txtz,
@@ -557,27 +592,6 @@
     }; create_output_folder();
 
  
-    // let write_out_token_master = () => {
-    //      if(!RUNTIME_STATE || ! RUNTIME_STATE.meta_wrap_tokenz){return}
-    //      let tgt = "token_master_1.json"
-    //     //  fs.writeFile("../CARDZ/"+tgt, JSON.stringify(RUNTIME_STATE.meta_wrap_tokenz), err => {
-    //      fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.meta_wrap_tokenz), err => {
-    //          if (err) { console.error(err); } //dehydrate with JSON.parse()
-    //          RUNTIME_STATE.manifest.output.push(tgt)
-    //          console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
-    //      });
-    // }; write_out_token_master();
- 
-    // let write_out_token_map = () => {
-    //      if(!RUNTIME_STATE || !RUNTIME_STATE.token_map){return}
-    //      let tgt = "token_map_2.json"
-    //      fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.token_map), err => {
-    //          if (err) { console.error(err); } //dehydrate with JSON.parse()
-    //          RUNTIME_STATE.manifest.output.push(tgt)
-    //          console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
-    //      });
-    // }; write_out_token_map();
- 
     //-----------------------------------WRITE_OUT_SETZ---------
     // let write_out_all_key_tokenz = () => {
     //     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_key_tokenz){return}
@@ -589,15 +603,17 @@
     //     });
     // }; write_out_all_key_tokenz();
 
-    let write_out_all_keyz_alias = () => {
-        if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_keyz_alias){return}
-        let tgt = "all_key_tokenz_1.json"
-        fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_keyz_alias), err => {
+    let write_out_all_omni_keyz = () => {
+        wrap_KEY_ALIASES_with_METADATA()
+        if(!RUNTIME_STATE || !RUNTIME_STATE.setz.omni_key_idx){return}
+        let tgt = "omni_key_idx_1.json"
+        // let tgt = "all_key_tokenz_1.json"
+        fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.omni_key_idx), err => {
             if (err) { console.error(err); } //dehydrate with JSON.parse()
             RUNTIME_STATE.manifest.output.push(tgt)
             console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
         });
-    }; write_out_all_keyz_alias();
+    }; write_out_all_omni_keyz();
 
     let write_out_all_raw_tokenz = () => {
         if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_raw_tokenz){return}
@@ -653,7 +669,6 @@
         //     }
         // }; readTGTFile();
 
-        // meta_card_tokenz
 
         const create_output_folders = ()=>{
             try {
@@ -675,7 +690,7 @@
 
         if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_card_tokenz){return}
         let tgt = "CARDZ/cardz_1.json" //BACKUP-COPY
-        fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.meta_card_tokenz), err => {
+        fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.omni_card_tokenz), err => {
             if (err) { console.error(err); } //dehydrate with JSON.parse()
             RUNTIME_STATE.manifest.output.push(tgt)
             console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
@@ -683,7 +698,7 @@
 
         let card_file_tgt = 'cardz_1.json' //PRODUCTION_PRODUCT-.
         // fs.writeFile(production_path+"/"+card_file_tgt, JSON.stringify(RUNTIME_STATE.setz.all_card_tokenz), err => {
-        fs.writeFile(production_path+"/"+card_file_tgt, JSON.stringify(RUNTIME_STATE.setz.meta_card_tokenz), err => {
+        fs.writeFile(production_path+"/"+card_file_tgt, JSON.stringify(RUNTIME_STATE.setz.omni_card_tokenz), err => {
             if (err) { console.error(err); } //dehydrate with JSON.parse()
             RUNTIME_STATE.manifest.output.push(tgt)
             console.log(' - Written to file', production_path+'/'+card_file_tgt)
@@ -752,8 +767,8 @@
              RUNTIME_STATE.setz.all_markdown[0] = await readAllMarkdownFiles(`../LIBZ/`);
          } else { // TEST //todo switch default to all
             console.log('running in TEST MODE')
-            RUNTIME_STATE.tgt_path = './TOKEN_TESTS/a_QUOTE_TEST.md'
-            // RUNTIME_STATE.tgt_path = './TOKEN_TESTS/aWORDZa_2023_8_6.md'
+            RUNTIME_STATE.tgt_path = './TOKEN_TESTS/aWORDZa_2023_8_6.md'
+            // RUNTIME_STATE.tgt_path = './TOKEN_TESTS/a_QUOTE_TEST.md'
             // RUNTIME_STATE.tgt_path = './TOKEN_TESTS/a_SERIEZ_TEST.md'
             // RUNTIME_STATE.tgt_path = './TOKEN_TESTS/a_TOPIC_TEST.md'
             // RUNTIME_STATE.tgt_path = './TOKEN_TESTS/z_SYNTAX_TEST.md'

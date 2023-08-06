@@ -70,15 +70,36 @@ X ENDZ_KEY
 X MIXCASE_KEY
 X UNIVERSAL_KEY
 X PRIME_KEY
-
-O finish TXTZ separate repopulation as KEY_CARDZ. 
-- all txtz that contain key. cross-reference-idx.
-
 X total_token_count
-O test across all test files
-O remove test mode
-O open up multiple files.
-
 X 4 star to triple_exclaim !!! key_conzept
 X inline YMD search, and push.
 X All key tokenz avoid SIG_ and YMD_
+
+X finish TXTZ separate repopulation as KEY_CARDZ. 
+X all txtz that contain key. cross-reference-idx.
+
+X write txt_tgt to card.txtz, push numz
+X search for PRIME_KEYS for card header. origin
+
+
+
+X key aliases across key_types.
+X cardz lookup, key_conzeptz, 
+X confirm cardz hold all_quotez
+X write all txt hitz to cardz
+X remove duplicate keys
+
+
+O txt objects in txtz cardz, why? keyz as linkz on txt
+
+O test across all test files
+O remove test mode
+O open up multiple files.
+O write to file for all keys (read all keys)
+O show txt_tgt below with meta.linkz
+
+O random colors for keys
+
+
+//AXI:TOKEN_WEB_ARCHITECTURE.
+

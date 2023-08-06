@@ -24,6 +24,8 @@ here is a series of numbered points:
 
 2. The main topics are numbered and subtopics numbered into _NUMZ_.
 
+> a Quote randomly in a seriez.
+
 3. The hashes remain to distinguish type or importance, but they display flat.
 
 4. and do not need nesting, because they are dynamically_linked, not_nested.
@@ -32,7 +34,7 @@ and some other text.
 
 then whatever texts are inbetween become a text token. AllHumanzLook DearHumanz
 
-5. And pick it up again.
+5. non dropoff: picks up series again.
 
 ---
 
@@ -40,7 +42,7 @@ even completely isolated txt_tokenz are ok.
 
 ---
 
-> an isolated quote is ok.
+> an isolated_quote is ok? Non dropoff.
 
 ## 1.3 main topics and sub topics
 
@@ -49,7 +51,11 @@ main topics and sub topics, defined by single hash or multiple hash.
 markdown is nested, but we do not need (or want) nesting.
 because it is unnecessary. Instead we use hash to indicate start topic and 3 dashes to indicate end topic. aWORDZa. And EXISTZ. Or ACTZ.
 
-flat_no_nesting
+- flat_no_nesting
+- random bullet points
+- as conclusion
+
+and then more text.
 
 ### 1.4 flat structure of _NUMZ_
 
@@ -82,7 +88,7 @@ To have many sub topics , have a title with many triple dashes.
 - to make these
 - dynamic bullet point symbols
 
-
+> a 1.7 quote
 
 ---
 
@@ -141,6 +147,7 @@ to describe other points
 
 ### 2.2 and deeper points
 
+> a quote for 2.2
 
 # 3.0 A
 # 4.0 B

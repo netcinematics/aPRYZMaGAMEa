@@ -50,7 +50,7 @@
  ';'  endline //borrowed from javascript
  'aCamelCase' //borrowed from javascript and other programming languages, for enhanced_english aWORDZa.
  '~' endquote - to get multiline quotes. Means "send this prior quote to social media streams"
- * author: @spazefalcon (c) 2023 July
+ * author: @spazefalcon (c) 2023 July, August (all rights reserved) net cinematics llc.
  \********************************************************/
  // /TXTZ and /SCRIPTZ hidden by .gitignore 
  // USE /TXTZ as INPUTS for un-edited (non-delimited) stream of consciousness, documents of aWORDZa.
@@ -85,6 +85,7 @@
     },
     idx:{
         TXT_IDX:0,       //RUNTIME_STATE.idx.TXT_IDX
+        CARD_IDX:0,         //tracks output of cardz
         QUOTE_IDX:0,     //RUNTIME_STATE.idx.QUOTE_IDX
         TOPIC_IDX:0,     //RUNTIME_STATE.idx.TOPIC_IDX
         SERIEZ_IDX:0,    //RUNTIME_STATE.idx.SERIEZ_IDX
@@ -98,16 +99,19 @@
         all_markdown:[],  //built from many markdown files
         all_raw_tokenz:[], //built from space delimiter and return delimiters.
         all_key_tokenz:[], //built from primary and subkeys of universal_underscore_words
+        all_keyz_alias:[], //unique list of all keys with aliases.
         all_topic_tokenz:[], //built from hash title start through triple_hyphen
         all_quote_tokenz:[],  // build from greater_gator to carriage_return.
         all_key_topicz:[],  // build from !!! and ~~~ sections
+        all_card_tokenz:[],  //RUNTIME_STATE.setz.all_card_tokenz
+        meta_card_tokenz:[],   //output production product
         //all_subtxt_tokenz:[], // built from txt between triple_tildes
         //all_txt_tokenz:[],   // build from txt between triple_hyphens
         //all_error_tokenz:[]    //use this to try to catch parsing errors
      },
      ymdz : ['YMD_2020_1_1'], //format YMD split by underscore! original creation date.
      sigz : ['SIG_ENZO_2020_~:)'], //format symbol and year also by underscore     
-     token_map:{}, //used to visualize delimiterz
+    //  token_map:{}, //used to visualize delimiterz
  } 
  
  const readAllMarkdownFiles = async (dirname) => {
@@ -286,7 +290,7 @@
         return /\S/.test(str); //remove white space characters but keep end_lines
     });
     console.log(' - all_RAW_tokenz, length: ', RUNTIME_STATE.setz.all_raw_tokenz.length)
- 
+    //--------------------------------------------
     let delimit_KEY_tokenz = () => {  //delimit PRIME_KEYZ to key_idx.
          for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
             txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];
@@ -294,10 +298,9 @@
             if(txt_tgt.indexOf('SIG_')>-1||txt_tgt.indexOf('YMD_')>-1){continue;}
             else if (txt_tgt.indexOf('_') === 0){ //KEY_TOKEN found
                 aToken = new Object();
-                aToken.type = 'UNIVERSAL_KEY' //token
+                aToken.type = 'PRIME_KEY' //token
                 aToken.key = txt_tgt
                 RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
-                RUNTIME_STATE.token_map[i] = aToken.key //used to visualize delimiterz.
                 ++RUNTIME_STATE.manifest.total_key_count;
                 continue;
             } else if(txt_tgt.indexOf('_') > 0){ //SUBKEY_TOKEN found
@@ -305,16 +308,14 @@
                  aToken.type = 'SUB_KEY'  //token
                  aToken.key = txt_tgt
                  RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
-                 RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
                  ++RUNTIME_STATE.manifest.total_key_count;
                  continue;       
             } else if( txt_tgt.charAt(0)==='a' //aWORDZa match
                 && !!txt_tgt.charAt(1).match(/[A-Z]/) ){ 
                     aToken = new Object();
-                    aToken.type = 'PRIME_KEY' //token
+                    aToken.type = 'ALPHA_KEY' //token
                     aToken.key = txt_tgt
                     RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
-                    RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
                     ++RUNTIME_STATE.manifest.total_key_count;
                     continue;   
             } else if( (()=>{ //INLINE_MATCHING PATTERN (advanced conditions)
@@ -334,7 +335,6 @@
                 aToken.type = 'MIX_KEY' //token
                 aToken.key = txt_tgt
                 RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
-                RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
                 ++RUNTIME_STATE.manifest.total_key_count;
                 continue;   
             } 
@@ -344,14 +344,37 @@
                  aToken.type = 'ENDZ_KEY' //token
                  aToken.key = txt_tgt
                  RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
-                 RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
                  ++RUNTIME_STATE.manifest.total_key_count;
                  continue;  
           } 
         } //endLOOP
-     }; delimit_KEY_tokenz();
-     //--------------------------------------------
-     let delimit_all_topicz = ()=>{
+    }; delimit_KEY_tokenz();   
+    //--------------------------------------------
+    // for each key, compare to all other keys
+    // remove duplicates, selecting PRIME KEY
+    let key_token_alias_check = ()=>{ //remove duplicates with alias_check on all_key_tokenz.
+        let keyCheck = {}, duplicate = false;
+        for(var i=0; i<RUNTIME_STATE.setz.all_key_tokenz.length;i++){
+            for (var j=0; j<RUNTIME_STATE.setz.all_keyz_alias.length;j++){
+                keyCheck = RUNTIME_STATE.setz.all_keyz_alias[j].key;
+                if(keyCheck===RUNTIME_STATE.setz.all_key_tokenz[i]){ //duplicate
+                    console.log('exact match',keyCheck)   
+                    duplicate = true; break;
+                }
+            }
+            if(!duplicate){
+                aToken = new Object(); 
+                aToken.key = RUNTIME_STATE.setz.all_key_tokenz[i];
+                aToken.type = 'OMNI_KEY' //token
+                // aToken.key = txt_tgt                
+                RUNTIME_STATE.setz.all_keyz_alias.push(aToken)
+            } else {
+                console.log('duplicate key found',txt_tgt)
+            }
+        }
+    }; key_token_alias_check();   
+    //--------------------------------------    
+    let delimit_all_topicz = ()=>{
         for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
             txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];  
             if(txt_tgt.indexOf('#') === 0){ //TITLE_TOKEN found
@@ -364,13 +387,10 @@
                     aToken.ymdz = RUNTIME_STATE.ymdz;              
                     aToken.sigz = RUNTIME_STATE.sigz;              
                 } else { aToken.type = 'subtopic';   }   
-                //reset_IDX
                 RUNTIME_STATE.idx.QUOTE_IDX = 0;
-                RUNTIME_STATE.idx.TXT_IDX = 0; 
+                RUNTIME_STATE.idx.TXT_IDX = 0; //reset_IDX
                 aToken.key = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
                 aToken.txtz = [];
-                RUNTIME_STATE.token_map[i] = aToken.key; //used to visualize delimiterz.
-
                let j=0,k=0; // LOOKAHEAD-PATTERNZ (watchers) fns trigger to create tokenz.
                let lookahead_title_line = ()=>{
                    for(j = i+1; j < RUNTIME_STATE.setz.all_raw_tokenz.length; j++){ //SUB-TOKENZ
@@ -379,7 +399,7 @@
                            txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(i+1,j+1)
                            txt_slice = txt_slice.join(' ').replace(/[;]/g,'');
                            txt_slice = txt_slice.trim();
-                           aToken.txtz.push(txt_slice);
+                           aToken.title = txt_slice;
                            break;
                        } 
                    }
@@ -396,7 +416,6 @@
                             if(txt_slice.indexOf('>') > -1 
                               || txt_slice.join('').match(/[0-9]./) 
                               || txt_slice.join('').match(/!!!!|~~~/) ){
-                            // if(txt_slice.indexOf('>') > -1 || txt_slice.join('').match(/[0-9]./) ){
                                 txt_slice = delimit_txt_tokenz(); //CALLOUT-to-FACTORY.
                             } else {
                                 txt_slice = txt_slice.join(' ').replace(/[;#]/g,'');
@@ -409,7 +428,7 @@
                                 }
                             }
                        
-                            if(txt_slice){ aToken.txtz.push(txt_slice) }
+                            if(txt_slice){ aToken.txtz.push(...txt_slice) }
                             break;
                     
                         } 
@@ -422,68 +441,101 @@
             } 
         } //ENDLOOP
     }; delimit_all_topicz();
+    //------------------------------------------------------------------------
+
+    let generateAlias = (token)=>{
+        let alias = ['abc','123','def'];
+        // alias.push(token.)
+        return alias
+    }
 
     //------------------------------------------------------------------------
- 
-     let get_token_tgtz_in_delimited_txtz = () => { 
+     let build_token_cardz = () => { 
         // use all the keys, to search through all the topics and subtopics, and keytopicz
         //search for key instances for keymap of txtz
-         // RUNTIME_STATE.DOCZ_MARKDOWN_DATA = []; //todo add to runtime state
-         // RUNTIME_STATE.SUBTXTZ_MARKDOWN_DATA = [];
-         let txt_tgt = '' //reusable variable
-         RUNTIME_STATE.SUBTXTZ_TXT_DATA = {} //final KEYMAP result
- 
-         for(let i = 0; i< RUNTIME_STATE.json_txtz.length; i++){ //KEY-TOKENZ as TXT_TGTZ
-             if(RUNTIME_STATE.json_txtz && RUNTIME_STATE.json_txtz[i].key){
-                 txt_tgt = RUNTIME_STATE.json_txtz[i].key; //TODO Change to INDEX #?
-                 console.log(' - use clean tokenz to search for', txt_tgt)
- 
-             } else { continue }
- 
-             // console.log(' - search ',txt_tgt)
-             for(let j = 0; j< RUNTIME_STATE.SUBTXTZ_MARKDOWN_DATA.length; j++){ //Search subtxtz for tgt
-                 if(RUNTIME_STATE.SUBTXTZ_MARKDOWN_DATA[j].indexOf(txt_tgt)>-1){
-                     // txt_tgt = RUNTIME_STATE.json_txtz.key;
-                     console.log(' - found ',txt_tgt,'in subtxtz', j )
- 
-                     if(RUNTIME_STATE.SUBTXTZ_TXT_DATA[txt_tgt]){ //append to keymap
-                         RUNTIME_STATE.SUBTXTZ_TXT_DATA[txt_tgt].txtz.push(... RUNTIME_STATE.SUBTXTZ_MARKDOWN_DATA[j])
-                     } else { //create on keymap
-                         RUNTIME_STATE.SUBTXTZ_TXT_DATA[txt_tgt]={
-                             txtz:RUNTIME_STATE.SUBTXTZ_MARKDOWN_DATA[j] 
-                         }
-                     }
- 
-                 } else { continue }
-             } //end inner loop of subtexz
- 
- 
+        let key_tgt = '' //reusable variable
+        let txt_tgt = {}, subtopic_tgt = {}, topic_tgt = {}
+        // for(let i = 0; i< RUNTIME_STATE.setz.all_key_tokenz.length; i++){ //KEY-TOKENZ as TXT_TGTZ
+        for(let i = 0; i< RUNTIME_STATE.setz.all_keyz_alias.length; i++){ //KEY-TOKENZ as TXT_TGTZ
+            key_tgt = RUNTIME_STATE.setz.all_keyz_alias[i].key;
+            // key_tgt = RUNTIME_STATE.setz.all_key_tokenz[i];
+            console.log('3) SEARCH LIBZ: ', key_tgt)
+            for(let j = 0; j< RUNTIME_STATE.setz.all_topic_tokenz.length; j++){ //Search subtxtz for tgt
+                console.log('Searching, ',RUNTIME_STATE.setz.all_topic_tokenz[j].title)    
+                let check_token_for_tgt = ()=>{
+                    let token_state = {title:false,txtz:[]}
+                    if(RUNTIME_STATE.setz.all_topic_tokenz[j].title 
+                        && RUNTIME_STATE.setz.all_topic_tokenz[j].title.indexOf(key_tgt)>-1){
+                            console.log(' - found ',key_tgt,'in title' )
+                            token_state.title=true;
+                    }
+                    if(RUNTIME_STATE.setz.all_topic_tokenz[j].txtz){ 
+                        for(let k = 0; k < RUNTIME_STATE.setz.all_topic_tokenz[j].txtz.length; k++){
+                            if(RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k].txt.indexOf(key_tgt)>-1){
+                                console.log(' - found ',key_tgt,'in subtxtz' )
+                                txt_tgt = RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k].txt;
+                                token_state.txtz.push(txt_tgt);
+                            }
+                        }
+                    }
+                    if(token_state.title || token_state.txtz.length){
+                        aToken = new Object();
+                        aToken.type = 'card_token' //token
+                        aToken.key = key_tgt
+                        aToken.title = (token_state.title)? RUNTIME_STATE.setz.all_topic_tokenz[j].title:'';                        
+                        aToken.txtz = (token_state.txtz)?token_state.txtz:[];
+                        aToken.alias = [];
+                        aToken.alias.push(...generateAlias(aToken))
+                        aToken.numz = [];
+                        aToken.numz.push(RUNTIME_STATE.setz.all_topic_tokenz[j].numz);
+                        aToken.numz.push(RUNTIME_STATE.setz.all_topic_tokenz[j].numz+
+                          `.${++RUNTIME_STATE.idx.CARD_IDX}cardz`); 
+                        // aToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}`+
+                        // `.${RUNTIME_STATE.idx.SUBTOPIC_IDX}`+
+                        // `.${++RUNTIME_STATE.idx.CARD_IDX}cardz`;  
+                        RUNTIME_STATE.setz.all_card_tokenz.push(aToken);
+                    }
+                }; check_token_for_tgt();
+            } //end inner loop of subtexz
          } //end outer loop of key tokenz.
-         // console.log("sub txt populated",RUNTIME_STATE.SUBTXTZ_TXT_DATA[0].txt.length)
-     }; //get_token_tgtz_in_delimited_txtz();
- 
- 
+     }; build_token_cardz();
  }
  
- function wrap_METADATA(){
-     let meta_wrap_tokenz = {
-         tgt : RUNTIME_STATE.tgt_path,
-         type : '_', //underscore as master_token_delimiter
-         tokenz: [],
-         ymdz : RUNTIME_STATE.ymdz,
-         lookup : "LIBZ",
-         output : "CARDZ",
-         engine : RUNTIME_STATE.manifest.engine,
-         srcmap : RUNTIME_STATE.manifest.srcmap,
-     } 
-     return meta_wrap_tokenz
- }
+ function wrap_CARDZ_with_METADATA(){
+    for( var i = 0; i < RUNTIME_STATE.setz.all_card_tokenz.length; i++){
+        //for each card, create a wrapped version.
+        RUNTIME_STATE.setz.meta_card_tokenz.push( {
+            key: RUNTIME_STATE.setz.all_card_tokenz[i].key,
+            type : 'CARDZ', //underscore as master_token_delimiter
+            txtz: RUNTIME_STATE.setz.all_card_tokenz[i].txtz,
+            numz: RUNTIME_STATE.setz.all_card_tokenz[i].numz,
+            tgt : RUNTIME_STATE.tgt_path,
+            ymdz : RUNTIME_STATE.ymdz,
+            input : "LIBZ",
+            output : "CARDZ",
+            engine : RUNTIME_STATE.manifest.engine,
+            srcmap : RUNTIME_STATE.manifest.srcmap,
+        } )
+    } //end loop
+}
+
+//  function wrap_METADATA(){
+//      let meta_wrap_tokenz = {
+//          tgt : RUNTIME_STATE.tgt_path,
+//          type : '_', //underscore as master_token_delimiter
+//          tokenz: [],
+//          ymdz : RUNTIME_STATE.ymdz,
+//          lookup : "LIBZ",
+//          output : "CARDZ",
+//          engine : RUNTIME_STATE.manifest.engine,
+//          srcmap : RUNTIME_STATE.manifest.srcmap,
+//      } 
+//      return meta_wrap_tokenz
+//  }
  
  function writeOutTokenz(){
-
     let data_folder = 'YMD_'+RUNTIME_STATE.manifest.year+'_'+RUNTIME_STATE.manifest.month+'_'+RUNTIME_STATE.manifest.day
     RUNTIME_STATE.manifest.output.push('../SCRIPTZ/TOKEN_DATA/'+ data_folder) //artifacts of building cards.
-    // let BACKUP_PATH = '../SCRIPTZ/TOKEN_DATA/'+data_folder //artifacts of building cards.
     let PRODUCTION_PATH = '../CARDZ/' //output of building cards.
     console.log('5) WRITE File(s) out: ', RUNTIME_STATE.manifest.output[0])
 
@@ -498,37 +550,47 @@
     }; create_output_folder();
 
  
-    let write_out_token_master = () => {
-         if(!RUNTIME_STATE || ! RUNTIME_STATE.meta_wrap_tokenz){return}
-         let tgt = "token_master_1.json"
-        //  fs.writeFile("../CARDZ/"+tgt, JSON.stringify(RUNTIME_STATE.meta_wrap_tokenz), err => {
-         fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.meta_wrap_tokenz), err => {
-             if (err) { console.error(err); } //dehydrate with JSON.parse()
-             RUNTIME_STATE.manifest.output.push(tgt)
-             console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
-         });
-    }; write_out_token_master();
+    // let write_out_token_master = () => {
+    //      if(!RUNTIME_STATE || ! RUNTIME_STATE.meta_wrap_tokenz){return}
+    //      let tgt = "token_master_1.json"
+    //     //  fs.writeFile("../CARDZ/"+tgt, JSON.stringify(RUNTIME_STATE.meta_wrap_tokenz), err => {
+    //      fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.meta_wrap_tokenz), err => {
+    //          if (err) { console.error(err); } //dehydrate with JSON.parse()
+    //          RUNTIME_STATE.manifest.output.push(tgt)
+    //          console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
+    //      });
+    // }; write_out_token_master();
  
-    let write_out_token_map = () => {
-         if(!RUNTIME_STATE || !RUNTIME_STATE.token_map){return}
-         let tgt = "token_map_2.json"
-         fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.token_map), err => {
-             if (err) { console.error(err); } //dehydrate with JSON.parse()
-             RUNTIME_STATE.manifest.output.push(tgt)
-             console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
-         });
-    }; write_out_token_map();
+    // let write_out_token_map = () => {
+    //      if(!RUNTIME_STATE || !RUNTIME_STATE.token_map){return}
+    //      let tgt = "token_map_2.json"
+    //      fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.token_map), err => {
+    //          if (err) { console.error(err); } //dehydrate with JSON.parse()
+    //          RUNTIME_STATE.manifest.output.push(tgt)
+    //          console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
+    //      });
+    // }; write_out_token_map();
  
     //-----------------------------------WRITE_OUT_SETZ---------
-    let write_out_all_key_tokenz = () => {
-        if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_key_tokenz){return}
+    // let write_out_all_key_tokenz = () => {
+    //     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_key_tokenz){return}
+    //     let tgt = "all_key_tokenz_1.json"
+    //     fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_key_tokenz), err => {
+    //         if (err) { console.error(err); } //dehydrate with JSON.parse()
+    //         RUNTIME_STATE.manifest.output.push(tgt)
+    //         console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
+    //     });
+    // }; write_out_all_key_tokenz();
+
+    let write_out_all_keyz_alias = () => {
+        if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_keyz_alias){return}
         let tgt = "all_key_tokenz_1.json"
-        fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_key_tokenz), err => {
+        fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_keyz_alias), err => {
             if (err) { console.error(err); } //dehydrate with JSON.parse()
             RUNTIME_STATE.manifest.output.push(tgt)
             console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
         });
-    }; write_out_all_key_tokenz();
+    }; write_out_all_keyz_alias();
 
     let write_out_all_raw_tokenz = () => {
         if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_raw_tokenz){return}
@@ -571,37 +633,55 @@
     }; write_out_all_key_topicz();  
     
     let write_out_all_cardz = () => {
-        debugger;
-        
-        const readTGTFile = async () => {
-            let data_path = `${RUNTIME_STATE.tgt_path}`
-            console.log(' - tgt path',RUNTIME_STATE.tgt_path)
-            try {
-               RUNTIME_STATE.manifest.srcmap.push(RUNTIME_STATE.tgt_path);//for trace back
-               RUNTIME_STATE.setz.all_markdown.push( fs.readFileSync(RUNTIME_STATE.tgt_path, "utf-8") );
-            } catch (error) {
-                console.error("Error reading file:", error);
-            }
-        }; readTGTFile();
+        let production_path = `../LIBZ/CARDZ`
+        // let read_data = [];
+        // const readTGTFile = async () => {
+        //     let data_path = `${RUNTIME_STATE.tgt_path}`
+        //     console.log(' - tgt path',RUNTIME_STATE.tgt_path)
+        //     try {
+        //     //    RUNTIME_STATE.manifest.srcmap.push(RUNTIME_STATE.tgt_path);//for trace back
+        //        read_data.push( fs.readFileSync(data_path, "utf-8") );
+        //     } catch (error) {
+        //         console.error("Error reading file:", error);
+        //     }
+        // }; readTGTFile();
 
-        const create_output_folder = ()=>{
+        // meta_card_tokenz
+
+        const create_output_folders = ()=>{
             try {
-            if (!fs.existsSync(RUNTIME_STATE.manifest.output[0]+'/CARDZ')) {
-                fs.mkdirSync(RUNTIME_STATE.manifest.output[0]+'/CARDZ');
-            }
+                if (!fs.existsSync(RUNTIME_STATE.manifest.output[0]+'/CARDZ')) {
+                    fs.mkdirSync(RUNTIME_STATE.manifest.output[0]+'/CARDZ');
+                }
             } catch (err) {
             console.error("could not save backup",err);
             }
-        }; create_output_folder();
+            try {
+               
+                if (!fs.existsSync(production_path)) {
+                    fs.mkdirSync(production_path);
+                }
+            } catch (err) {
+            console.error("could not save backup",err);
+            }            
+        }; create_output_folders();
 
-
-        if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_raw_tokenz){return}
-        let tgt = "CARDZ/card_1.json"
-        fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_raw_tokenz), err => {
+        if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_card_tokenz){return}
+        let tgt = "CARDZ/cardz_1.json" //BACKUP-COPY
+        fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.meta_card_tokenz), err => {
             if (err) { console.error(err); } //dehydrate with JSON.parse()
             RUNTIME_STATE.manifest.output.push(tgt)
             console.log(' - Written to file',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
         });
+
+        let card_file_tgt = 'cardz_1.json' //PRODUCTION_PRODUCT-.
+        // fs.writeFile(production_path+"/"+card_file_tgt, JSON.stringify(RUNTIME_STATE.setz.all_card_tokenz), err => {
+        fs.writeFile(production_path+"/"+card_file_tgt, JSON.stringify(RUNTIME_STATE.setz.meta_card_tokenz), err => {
+            if (err) { console.error(err); } //dehydrate with JSON.parse()
+            RUNTIME_STATE.manifest.output.push(tgt)
+            console.log(' - Written to file', production_path+'/'+card_file_tgt)
+        });        
+
     }; write_out_all_cardz();     
 
  }
@@ -609,23 +689,22 @@
  function writeOutCounts(){
     console.log('TOKEN COUNTS:')
     console.log('key:',RUNTIME_STATE.manifest.total_key_count,
-      RUNTIME_STATE.setz.all_key_tokenz.length)
+      RUNTIME_STATE.setz.all_keyz_alias.length)
+    //   RUNTIME_STATE.setz.all_key_tokenz.length)
     console.log('key_topic:',RUNTIME_STATE.manifest.total_key_topic_count,
       RUNTIME_STATE.setz.all_key_topicz.length)
     console.log('quote:',RUNTIME_STATE.manifest.total_quote_count,
       RUNTIME_STATE.setz.all_quote_tokenz.length)      
     console.log('topic:',RUNTIME_STATE.manifest.total_topic_count,
       RUNTIME_STATE.setz.all_topic_tokenz.length)
+    console.log('cardz:',RUNTIME_STATE.setz.all_card_tokenz.length)
     console.log('subtopic:',RUNTIME_STATE.manifest.total_subtopic_count)
-    console.log('total_tokenz:', RUNTIME_STATE.setz.all_key_tokenz.length
+    // console.log('total_tokenz:', RUNTIME_STATE.setz.all_key_tokenz.length
+    console.log('total_tokenz:', RUNTIME_STATE.setz.all_keyz_alias.length
       +RUNTIME_STATE.setz.all_key_topicz.length
       +RUNTIME_STATE.setz.all_quote_tokenz.length
       +RUNTIME_STATE.setz.all_topic_tokenz.length
       +RUNTIME_STATE.manifest.total_subtopic_count);
-
-    
-    
-
  }
  
  const main = async () => {
@@ -678,8 +757,12 @@
          Advanced_Tokenizer()
  
          //3 Wrap Metadata
-         console.log('3) Wrap METADATA: ', RUNTIME_STATE.tgt_path)
-         RUNTIME_STATE.meta_wrap_tokenz = wrap_METADATA()
+        //  console.log('3) Wrap METADATA: ', RUNTIME_STATE.tgt_path)
+        //  RUNTIME_STATE.meta_wrap_tokenz = wrap_METADATA()
+
+         //3 Wrap CARDZ with Metadata
+         console.log('3) Wrap CARDZMETADATA: ', RUNTIME_STATE.tgt_path)
+         wrap_CARDZ_with_METADATA()
 
          //4 WRITE to FILE
          console.log('4) Write to file: ', RUNTIME_STATE.tgt_path)
@@ -700,8 +783,6 @@
   // X TOKENIZE to PARSE DELIMITERZ by TYPE and FILE
   // X source file as SRC, rename date to DATEZ VERZ SRCZ
   // X metadata section by tokenz abstraction
- 
- 
     // X loop clean_tokenz, over delimited_markdown. to build METATXTZ {}.
      // X by search for TGT_TXT in delimited_markdown.
      // X ask: does delimited_markdown contain tgt_txt in delimited_token.txt?
@@ -710,14 +791,11 @@
      // X if metatxtz (not TXT_KEY), then txt_key created in METATXTZ, and
      // X metatxtz.txt_key.txtz[], appended with each(delimited_markdown.txt)
      // X track 'parents'[], for later meta lookup, with NUMZ.
- 
   // X TXTZ 
- 
  //X BUILD_ARTIFACT Philosophy: each step creates readable output : keysrc
  //X _underscore as universal delimiter, of more data.
  //X exact names for input/output files. by key and datez as key_YMD_2020_10_01
  //X _YMD_dates on run output. not as parameter
- 
  //X LOOP all clean tokens
  //X build docz and subz as subtxts from --- and ~~~
  //X convert to TOKENZ with TXTZ by keys
@@ -732,18 +810,16 @@
  //X subtxt_tokenz = [] //##
  //X series_tokenz = {type:list,txtz[]}
  //X master_tokenz = FILE.md like aWORDZa_YMD_2020_10_01.json
- //O key_cardz, use JSON output, to COMPILE, KEY_CARDZ
- 
+ //X key_cardz, use JSON output, to COMPILE, KEY_CARDZ
  //X delimiter_map = {1:_aWORDZa_, 8:>}
- 
  //X replace as SETZ line 100 with line 90
  //X extend writeOut to write each to all_file.
  //X add continue to parser points
  //X add index listeners on end_point_delimiters.
  //X add total count arrays
- //O update manifest total count
+ //X update manifest total count
  //X push to error array, write out error array
  
- 
+ //O compile all_card_tokenz
  
  

@@ -397,9 +397,19 @@ X home button, replace up
 
 ## POPULATE TOKEN (training_script)
 
-O scriptz/TXT_TOKEN (default)
+X scriptz/TXT_TOKEN (default)
 
 X TRAIN_TXT_TOKENZ_1.js
 X open all files in LIBZ
 X TOKEN_KEYZ '~' - key_tokenz used as keyz. (standard tokenizer)
 X write json to CARDZ
+
+
+O API MOCK_DATA, replace new dynamic content pipeline.
+O prod output: /src/meta_net/CARDZ/token_index_2.json
+O write all_key_tokenz to prod: token_index_2.json?
+
+O WRAP all KEY TOKENZ into token_index meta_data.
+O add ymd and numz
+O add txtz
+O add GAME_STATE.

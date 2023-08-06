@@ -90,7 +90,9 @@ X write all txt hitz to cardz
 X remove duplicate keys
 
 
-O txt objects in txtz cardz, why? keyz as linkz on txt
+X txt objects in txtz cardz, why? keyz as linkz on txt
+O keyz and alias on {type:txt}
+O each token scans itself for keys and alias.
 
 O test across all test files
 O remove test mode
@@ -102,4 +104,21 @@ O random colors for keys
 
 
 //AXI:TOKEN_WEB_ARCHITECTURE.
+
+
+key4_to_key3 = 'actual to a, split by _, first capitals, join by blank'
+'actual to a, split by _, first capitals, join by blank'
+key3_to_key_4 = 'a becomes actual, split by capitals, join by _'
+'a becomes actual, split by capitals, join by _'
+key1_to_key2 = 'little-a-prefix-ascending to actual, lowercase token, postfix-a to act_of_'
+'little-a-prefix-ascending to actual, lowercase token, postfix-a to act_of_'
+key2_to_key1 = 'actual to little-a, token to uppercase first, act_of to postfix-a'
+'actual to little-a, token to uppercase first, act_of to postfix-a'
+let key4 = 'actual_something_cool_like_this'
+undefined
+let key3 = 'aSomethingCoolLikeThis'
+undefined
+let key2 = 'actual_act_of_wordz'
+undefined
+let key1 = 'aWORDZa'
 

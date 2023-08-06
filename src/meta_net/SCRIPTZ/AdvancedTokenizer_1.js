@@ -463,6 +463,7 @@
             for(let j = 0; j< RUNTIME_STATE.setz.all_topic_tokenz.length; j++){ //Search subtxtz for tgt
                 console.log('Searching, ',RUNTIME_STATE.setz.all_topic_tokenz[j].title)    
                 let check_token_for_tgt = ()=>{
+                    // let token_state = {title:false,txtz:false}
                     let token_state = {title:false,txtz:[]}
                     if(RUNTIME_STATE.setz.all_topic_tokenz[j].title 
                         && RUNTIME_STATE.setz.all_topic_tokenz[j].title.indexOf(key_tgt)>-1){
@@ -473,23 +474,28 @@
                         for(let k = 0; k < RUNTIME_STATE.setz.all_topic_tokenz[j].txtz.length; k++){
                             if(RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k].txt.indexOf(key_tgt)>-1){
                                 console.log(' - found ',key_tgt,'in subtxtz' )
-                                txt_tgt = RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k].txt;
+                                txt_tgt = RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k];
                                 token_state.txtz.push(txt_tgt);
+                                // token_state.txtz = true;
                             }
                         }
                     }
+                    // if(token_state.title || token_state.txtz){
                     if(token_state.title || token_state.txtz.length){
                         aToken = new Object();
                         aToken.type = 'card_token' //token
                         aToken.key = key_tgt
-                        aToken.title = (token_state.title)? RUNTIME_STATE.setz.all_topic_tokenz[j].title:'';                        
-                        aToken.txtz = (token_state.txtz)?token_state.txtz:[];
+                        aToken.title = (token_state.title)?RUNTIME_STATE.setz.all_topic_tokenz[j].title:'';                        
+                        aToken.txtz = (token_state.txtz.length)?token_state.txtz:[];
+                        // aToken.txtz = (token_state.txtz)?RUNTIME_STATE.setz.all_topic_tokenz[j].txtz:[];
                         aToken.alias = [];
                         aToken.alias.push(...generateAlias(aToken))
-                        aToken.numz = [];
-                        aToken.numz.push(RUNTIME_STATE.setz.all_topic_tokenz[j].numz);
-                        aToken.numz.push(RUNTIME_STATE.setz.all_topic_tokenz[j].numz+
-                          `.${++RUNTIME_STATE.idx.CARD_IDX}cardz`); 
+                        // aToken.numz = [];
+                        // aToken.numz.push(RUNTIME_STATE.setz.all_topic_tokenz[j].numz);
+                        aToken.numz = RUNTIME_STATE.setz.all_topic_tokenz[j].numz+
+                          `.${++RUNTIME_STATE.idx.CARD_IDX}cardz`; 
+                        // aToken.numz.push(RUNTIME_STATE.setz.all_topic_tokenz[j].numz+
+                        //   `.${++RUNTIME_STATE.idx.CARD_IDX}cardz`); 
                         // aToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}`+
                         // `.${RUNTIME_STATE.idx.SUBTOPIC_IDX}`+
                         // `.${++RUNTIME_STATE.idx.CARD_IDX}cardz`;  
@@ -506,13 +512,14 @@
         //for each card, create a wrapped version.
         RUNTIME_STATE.setz.meta_card_tokenz.push( {
             key: RUNTIME_STATE.setz.all_card_tokenz[i].key,
-            type : 'CARDZ', //underscore as master_token_delimiter
+            type : 'TOKEN_CARDZ', //underscore as master_token_delimiter
             txtz: RUNTIME_STATE.setz.all_card_tokenz[i].txtz,
             numz: RUNTIME_STATE.setz.all_card_tokenz[i].numz,
             tgt : RUNTIME_STATE.tgt_path,
             ymdz : RUNTIME_STATE.ymdz,
             input : "LIBZ",
             output : "CARDZ",
+            version:'1.1.1.1',
             engine : RUNTIME_STATE.manifest.engine,
             srcmap : RUNTIME_STATE.manifest.srcmap,
         } )

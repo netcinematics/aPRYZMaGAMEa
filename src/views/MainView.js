@@ -11,11 +11,14 @@ export default function MainView () {
     useEffect(() => { document.title = "aPRYZMaGAMEa";  }, []);
 
     return (<>
+    <div  style={{maxHeight:'78vh'
+            ,overflowY:'scroll'
+        }}>
         <header style={{borderRadius:'13px',fontSize:'xxx-large',marginBottom:'0.666em'}}>
         {/* <Zoom>Welcome!</Zoom> */}
-        Welcome!
+        Welcome!!
         </header>
-        <article style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'space-evenly',
+        <article style={{height:'90%',display:'flex',flexDirection:'column',justifyContent:'space-evenly',
             borderRadius:'10px', backgroundColor: 'rgb(22 35 62)',paddingTop:'2em'}}>
             <code>Artificial Intelligence Word Games.</code><br/>
             <p>AI_WORD_GAMEZ.</p>
@@ -71,6 +74,7 @@ export default function MainView () {
                 <br></br><br></br>Check out <strong>aPRYZMaGAMEa</strong>!
             </section>
         </article>
+        </div>
     </>)
 
 };

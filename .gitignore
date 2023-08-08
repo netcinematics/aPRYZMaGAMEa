@@ -1,6 +1,7 @@
 #CUSTOM
 env
 TXTZ
+TOKEN_DATA
 # Logs
 logs
 *.log

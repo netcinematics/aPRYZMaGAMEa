@@ -7,11 +7,13 @@
             [
                 {
                     "type": "SUB_TXT",
-                    "txt": "used to test how topics are tokenized. With description of parsing principles. "
+                    "txt": "used to test how topics are tokenized. With description of parsing principles. ",
+                    "numz": "1.0.1"
                 },
                 {
                     "type": "QUOTE_TXT",
-                    "txt": " > main line quote "
+                    "txt": " > main line quote ",
+                    "numz": "1.0.1"
                 }
             ]
         ],
@@ -25,15 +27,18 @@
             [
                 {
                     "type": "QUOTE_TXT",
-                    "txt": "> a key quote on the topic. "
+                    "txt": "> a key quote on the topic. ",
+                    "numz": "1.1.2"
                 },
                 {
                     "type": "SUB_TXT",
-                    "txt": " flat_no_nesting, end_line is semicolon, triple_dash and triple_tilde are examples. "
+                    "txt": " flat_no_nesting, end_line is semicolon, triple_dash and triple_tilde are examples. ",
+                    "numz": "1.1.2"
                 },
                 {
                     "type": "QUOTE_TXT",
-                    "txt": " > a second engaging quote "
+                    "txt": " > a second engaging quote ",
+                    "numz": "1.1.3"
                 }
             ]
         ],
@@ -47,40 +52,53 @@
             [
                 {
                     "type": "SUB_TXT",
-                    "txt": "here is a series of numbered points: "
+                    "txt": "here is a series of numbered points: ",
+                    "numz": "1.2.3"
                 },
                 {
                     "type": "SERIEZ_TXT",
                     "txt": " 1. a single hash at the top will populate all text until 3 tildes end the topic. ",
-                    "seriez": "1.,3 "
+                    "seriez": "1.",
+                    "numz": "1.2.1."
                 },
                 {
                     "type": "SERIEZ_TXT",
                     "txt": " 2. The main topics are numbered and subtopics numbered into _NUMZ_. ",
-                    "seriez": "2."
+                    "seriez": "2.",
+                    "numz": "1.2.2."
+                },
+                {
+                    "type": "QUOTE_TXT",
+                    "txt": " > a Quote randomly in a seriez. ",
+                    "numz": "1.2.4"
                 },
                 {
                     "type": "SERIEZ_TXT",
                     "txt": " 3. The hashes remain to distinguish type or importance, but they display flat. ",
-                    "seriez": "3."
+                    "seriez": "3.",
+                    "numz": "1.2.3."
                 },
                 {
                     "type": "SERIEZ_TXT",
                     "txt": " 4. and do not need nesting, because they are dynamically_linked, not_nested. ",
-                    "seriez": "4."
+                    "seriez": "4.",
+                    "numz": "1.2.4."
                 },
                 {
                     "type": "SUB_TXT",
-                    "txt": " and some other text. "
+                    "txt": " and some other text. ",
+                    "numz": "1.2.4"
                 },
                 {
                     "type": "SUB_TXT",
-                    "txt": " then whatever texts are inbetween become a text token. AllHumanzLook DearHumanz "
+                    "txt": " then whatever texts are inbetween become a text token. AllHumanzLook DearHumanz ",
+                    "numz": "1.2.5"
                 },
                 {
                     "type": "SERIEZ_TXT",
-                    "txt": " 5. And pick it up again. ",
-                    "seriez": "5."
+                    "txt": " 5. non dropoff: picks up series again. ",
+                    "seriez": "5.",
+                    "numz": "1.2.5."
                 }
             ]
         ],
@@ -94,20 +112,38 @@
             [
                 {
                     "type": "SUB_TXT",
-                    "txt": "main topics and sub topics, defined by single hash or multiple hash. "
+                    "txt": "main topics and sub topics, defined by single hash or multiple hash. ",
+                    "numz": "1.3.6"
                 },
                 {
                     "type": "SUB_TXT",
-                    "txt": " markdown is nested, but we do not need (or want) nesting. "
+                    "txt": " markdown is nested, but we do not need (or want) nesting. ",
+                    "numz": "1.3.7"
                 },
                 {
-                    "type": "SERIEZ_TXT",
+                    "type": "SUB_TXT",
                     "txt": " because it is unnecessary. Instead we use hash to indicate start topic and 3 dashes to indicate end topic. aWORDZa. And EXISTZ. Or ACTZ. ",
-                    "seriez": "3 "
+                    "numz": "1.3.8"
                 },
                 {
                     "type": "SUB_TXT",
-                    "txt": " flat_no_nesting "
+                    "txt": " - flat_no_nesting ",
+                    "numz": "1.3.9"
+                },
+                {
+                    "type": "SUB_TXT",
+                    "txt": " - random bullet points ",
+                    "numz": "1.3.10"
+                },
+                {
+                    "type": "SUB_TXT",
+                    "txt": " - as conclusion ",
+                    "numz": "1.3.11"
+                },
+                {
+                    "type": "SUB_TXT",
+                    "txt": " and then more text. ",
+                    "numz": "1.3.12"
                 }
             ]
         ],
@@ -119,7 +155,9 @@
         "txtz": [
             "1.4 flat structure of _NUMZ_",
             {
-                "txt": "Each entry is numbered by a unique system of NUMZ where a dynamic key is generated  between runs. Counting ALL TOKENZ sorted by key and subkey,  and using the length of each token array as sub topic counter - on push."
+                "type": "SOLO_TXT",
+                "txt": "Each entry is numbered by a unique system of NUMZ where a dynamic key is generated  between runs. Counting ALL TOKENZ sorted by key and subkey,  and using the length of each token array as sub topic counter - on push.",
+                "numz": "1.4.13."
             }
         ],
         "numz": "1.4"
@@ -130,7 +168,9 @@
         "txtz": [
             "1.5 NUMZ details",
             {
-                "txt": "NUMZ are strings of random dot delimited numbers. A random number of sequence by type given at mint time.  The randomness is where it is fed into the system. Otherwise it is generating a unique number - when combined with the mint_stamp."
+                "type": "SOLO_TXT",
+                "txt": "NUMZ are strings of random dot delimited numbers. A random number of sequence by type given at mint time.  The randomness is where it is fed into the system. Otherwise it is generating a unique number - when combined with the mint_stamp.",
+                "numz": "1.5.14."
             }
         ],
         "numz": "1.5"
@@ -141,7 +181,9 @@
         "txtz": [
             "1.6 _MINT_STAMP_ details",
             {
-                "txt": "the mint_stamp is a unique runtime key, generated on the day the program is run.  Which can be used to compare differences between run sets."
+                "type": "SOLO_TXT",
+                "txt": "the mint_stamp is a unique runtime key, generated on the day the program is run.  Which can be used to compare differences between run sets.",
+                "numz": "1.6.15."
             }
         ],
         "numz": "1.6"
@@ -154,34 +196,41 @@
             [
                 {
                     "type": "SUB_TXT",
-                    "txt": "To have many sub topics , have a title with many triple dashes. "
+                    "txt": "To have many sub topics , have a title with many triple dashes. ",
+                    "numz": "1.7.16"
                 },
                 {
                     "type": "SERIEZ_TXT",
                     "txt": " 1. numbers and bullet points should be ",
-                    "seriez": "1."
+                    "seriez": "1.",
+                    "numz": "1.7.1."
                 },
                 {
                     "type": "SERIEZ_TXT",
                     "txt": " 2. done manually. ",
-                    "seriez": "2."
+                    "seriez": "2.",
+                    "numz": "1.7.2."
                 },
                 {
                     "type": "SERIEZ_TXT",
                     "txt": " 3. for example bullet points ",
-                    "seriez": "3."
+                    "seriez": "3.",
+                    "numz": "1.7.3."
                 },
                 {
                     "type": "SUB_TXT",
-                    "txt": " - It would be cool "
+                    "txt": " - It would be cool ",
+                    "numz": "1.7.17"
                 },
                 {
                     "type": "SUB_TXT",
-                    "txt": " - to make these "
+                    "txt": " - to make these ",
+                    "numz": "1.7.18"
                 },
                 {
                     "type": "SUB_TXT",
-                    "txt": " - dynamic bullet point symbols "
+                    "txt": " - dynamic bullet point symbols ",
+                    "numz": "1.7.19"
                 }
             ]
         ],
@@ -193,7 +242,9 @@
         "txtz": [
             "1.8 ERROR HANDLING",
             {
-                "txt": "if a triple_hyphen end is not found the titles are combined  all the way up until triple_tilde  ~~~  This content is a subtxt  ~~~  A return from triple tilde  I wonder how this content will be formated  It is formatted as a quote. what in the world?  ~~~  beautiful either way - looks like triple_tilde is a comment out - into code (opposite world) lolz.  Or it seem better that triple_tilde be sub section identifier.  So hash it top of group, divided by triple_dash and triple_tilde. wow.  ~~~"
+                "type": "SOLO_TXT",
+                "txt": "if a triple_hyphen end is not found the titles are combined  all the way up until triple_tilde  ~~~  This content is a subtxt  ~~~  A return from triple tilde  I wonder how this content will be formated  It is formatted as a quote. what in the world?  ~~~  beautiful either way - looks like triple_tilde is a comment out - into code (opposite world) lolz.  Or it seem better that triple_tilde be sub section identifier.  So hash it top of group, divided by triple_dash and triple_tilde. wow.  ~~~",
+                "numz": "1.8.20."
             }
         ],
         "numz": "1.8"
@@ -204,7 +255,9 @@
         "txtz": [
             "1.9 END_OF_file",
             {
-                "txt": "do not have a sign for end_of_file, let it just close all the existing open tokens."
+                "type": "SOLO_TXT",
+                "txt": "do not have a sign for end_of_file, let it just close all the existing open tokens.",
+                "numz": "1.9.21."
             }
         ],
         "numz": "1.9"
@@ -215,7 +268,9 @@
         "txtz": [
             "2.0 single hash starts a new topic",
             {
-                "txt": "that are then"
+                "type": "SOLO_TXT",
+                "txt": "that are then",
+                "numz": "2.0.1."
             }
         ],
         "numz": "2.0"

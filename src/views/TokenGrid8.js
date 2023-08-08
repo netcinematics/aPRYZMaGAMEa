@@ -36,7 +36,10 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
 
 let TXTViewz =  ( {token} ) => { 
     let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
+    let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
+
     let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
+    let [localTXTz,setLocalTXTz] = useState([]) 
 
     let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
     let [tokenTXT_COUNT,setTokenTXTCOUNT] = useState(0)
@@ -51,11 +54,24 @@ let TXTViewz =  ( {token} ) => {
             // console.log("INIT details",token.title)
             setLocalDetails(token.details)  //todo remove
         }
+        if(token.txtz){ //remove
+            // console.log("INIT details",token.title)
+            setLocalTXTz(token.txtz)  
+        }
      }, [token])
 
-    function addUnlockTXTz(  ){
+    // function addUnlockTXTz(  ){
+    function addLocalTXTz (){
+        // debugger;
+    
         sonicTally.play()
-        getTokenTXTZ()
+
+        let newArr = [...localTXTz , extraTXTz]
+        setLocalTXTz(newArr)
+        setSelectedTXTz(newArr)
+
+
+        // getTokenTXTZ()
         // let newArr = [...localDetails , exampleDetail]
         // setLocalDetails(newArr)
         // setSelectedDetails(newArr)
@@ -66,6 +82,11 @@ let TXTViewz =  ( {token} ) => {
         if(token.title.indexOf('~')>-1){
             lookupTitle = token.title.replaceAll('~','')
         }
+
+        debugger;
+        console.log('load: src/meta_net/CARDZ/ ', lookupTitle+'.json')
+
+        
         const options = {
             method: 'GET',
             url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
@@ -136,9 +157,9 @@ let TXTViewz =  ( {token} ) => {
         {(token && token.state && token.state.txtz && token.state.txtz.length)?
             token.state.txtz[0] : 'unlocked' }
         <br></br>
-        {(token && token.timestamp)?token.timestamp:'no date'}
-        <br></br>
-        {(token && token.txtz)?
+        {/* {(token && token.timestamp)?token.timestamp:'no date'}
+        <br></br> */}
+        {/* {(token && token.txtz)?
             token.txtz.map( (item, idx)=> { //short description txt
                 return (item && item.key && item.key==="short")?item.txtz[0]:'';
             }):'no short description'
@@ -148,7 +169,7 @@ let TXTViewz =  ( {token} ) => {
             token.txtz.map( (item, idx)=> { //long description txt
                 return (item.key==="long")?item.txtz[0]:'';
             }):'no long description'
-        }
+        } */}
     </>)
     }
 
@@ -165,6 +186,7 @@ let TXTViewz =  ( {token} ) => {
             {tokenTXT_ARRAY.map( (item,idx)=>{
 
                 if(item.txt && item.txt.length){
+                    if(!item.txt.map){ return <div>{item.txt}!</div>}
                     return item.txt.map( (txtitem,txtidx)=>{
                         return (<p><h1>txtitem.key</h1>{txtidx}:{txtitem}</p>)
                     }) 
@@ -175,14 +197,20 @@ let TXTViewz =  ( {token} ) => {
     }
     return(
     <>
-        {displayTokenTXTArray()}
+        {/* {displayTokenTXTArray()} */}
         {dynamicDetailDisplay()}
         <hr></hr>
         <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button> 
         {/* //todo remove */}
-        <button style={{marginTop:'1em'}} onClick={()=>{ addUnlockTXTz()}}>unlock text</button>
+        <button style={{marginTop:'1em'}} onClick={()=>{ addLocalTXTz()}}>unlock text!</button>
+        {/* <button style={{marginTop:'1em'}} onClick={()=>{ addUnlockTXTz()}}>unlock text!</button> */}
+        {localTXTz.map((item,idx)=>{ return <div>{idx}</div>})}
         {localDetails.map((item,idx)=>{ return <div>{item.txt}</div>})}
-        {<article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
+        {<article style={{background:'skyblue',
+        // marginTop:'2em',
+        boxShadow:'inset -1px -2px 7px 0px blue',
+        margin:'0.444em',
+        borderRadius:'22px',fontSize:'12px',padding:'1em',
             }}>
                 
         {/* {(tokenTXT_ARRAY && tokenTXT_ARRAY.length)?
@@ -353,7 +381,7 @@ function TokenGrid (){
                 return <TokenCard token={token} idx={idx} setTokenViewfn={setTokenViewfn} key={'tokencard'+token.numz}/>
             }) 
             }
-            <footer style={{minHeight:'3em'}}></footer>
+            {/* <footer style={{minHeight:'3em'}}></footer> */}
          </div> 
          );
     }  
@@ -366,7 +394,8 @@ function TokenGrid (){
 let TokenCardz = ( {token} ) => {  
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
-        display:'flex',width:'100%',flexDirection:'column',marginRight:'1.444em',
+        display:'flex',width:'100%',flexDirection:'column',
+        // marginRight:'1.444em',
         height:'100%', flex:'1'
         }}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
@@ -378,7 +407,8 @@ let TokenCardz = ( {token} ) => {
             <button style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('right')}}>RIGHT <span style={{fontSize:'1.555em'}}>&#10532;</span></button>
         </header>
-        <article className="scrollBarV" style={{flex:1, color:'steelblue',
+        {/* <article className="scrollBarV" style={{flex:1, color:'steelblue', */}
+        <article style={{flex:1, color:'steelblue',
             boxShadow:'inset 0px 0px 10px 0px blue'}}>
             <hr></hr>
             <TXTViewz token={selectedToken} key={'txt.'+token.numz}/>
@@ -416,12 +446,21 @@ function setSelectedTXTz(newTXTz){
 
 return (
 <>
+<div style={{maxHeight:'77vh'}}>
 <h1>aPRYZMaGAMEa</h1>
-<main className='scrollBarH' style={{overflowY:'auto'}}>
-    <section className='mainframe scrollBarV' style={{display:'flex',
+<div className='scrollBarV' style={{maxHeight:'72vh'}} >
+<div className='scrollBarH' style={{maxHeight:'70vh'}} >
+<main  style={{display:'flex'
+// ,paddingRight:'1em'
+}}>
+    <section className='mainframe' style={{display:'flex',
     boxShadow:'0px 1px 14px 1px purple',paddingBottom:'1em',
-    marginTop:'0.444em',paddingLeft:'1.444em',paddingRight:'1.444em',flex:1,
-    marginRight:'1em',marginLeft:'1em'} }>
+    marginTop:'0.444em',
+    // paddingLeft:'1.444em',paddingRight:'1.444em',
+    // marginRight:'1em',marginLeft:'1em',
+    // marginRight:'1em',
+    flex:1,
+    borderRadius:'13px',height:'90%'} }>
         { (viewState==='overview') ? //rename token_grid
             <TokenGrid/>
         : (viewState==='cardview') ? //token_cardz
@@ -430,9 +469,12 @@ return (
         }
     </section>
         </main>
+        </div>
+        </div>
         <footer style={{marginTop:'2em',fontSize:'smaller'}}>
           WORD_GAME : {tokenz_CARD_COUNT}
         </footer>
+        </div>
     </>
 )
 

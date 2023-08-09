@@ -17,9 +17,11 @@ function App() {
     <div className="App" style={{display:'flex',flexDirection:'column',backgroundColor: 'black',
       // maxWidth:'55em',
       
-      margin:'0 auto',padding:'0.444em',borderRadius:'15px'}}>
+      // margin:'0 auto',
+      padding:'0.444em',borderRadius:'15px'}}>
     <div>
-      <main className="AppMain" style={{color:'skyblue', paddingTop:'1.5em',
+      <main className="AppMain" style={{color:'skyblue', 
+      // paddingTop:'0.222em',
         borderRadius:'13px',height:'90%', 
         display:'flex',flexDirection:'column'
         ,overflowY:'hidden'
@@ -40,7 +42,7 @@ function App() {
       }
       </main>
       </div>
-      <nav style={{marginTop:'1em'}}>
+      <nav style={{marginTop:'0.5em'}}>
         <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px purple'}}
            onClick={Click_APP}>MAIN</button>
         {/* <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px yellow'}}
@@ -48,8 +50,8 @@ function App() {
         <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
            onClick={Click_APP}>aPRYZMaGAMEa</button>
       </nav>
-      <section style={{color:'steelblue',fontSize:'x-small',marginTop:'2em'}}>
-        MIT - work in progress by spazefalcon  - &copy; 2023
+      <section style={{color:'steelblue',fontSize:'x-small',marginTop:'1em'}}>
+        MIT - work in progress by envolveren  - &copy; 2023
       </section>      
    </div>
   );

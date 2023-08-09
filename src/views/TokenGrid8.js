@@ -61,10 +61,10 @@ function format_INDEX_DATA(server_data){
 }
 
 let TXTViewz =  ( {token} ) => { 
-    let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
+    // let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
     let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
 
-    let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
+    // let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
     let [localTXTz,setLocalTXTz] = useState([]) 
 
     let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
@@ -76,12 +76,11 @@ let TXTViewz =  ( {token} ) => {
             // console.log("INIT TXTz",token.title) 
             setTokenTXTARRAY(token.txtz) 
         }
-        if(token.details){ //remove
-            // console.log("INIT details",token.title)
-            setLocalDetails(token.details)  //todo remove
-        }
+        // if(token.details){ //remove
+        //     // console.log("INIT details",token.title)
+        //     setLocalDetails(token.details)  //todo remove
+        // }
         if(token.txtz){ //remove
-            // console.log("INIT details",token.title)
             setLocalTXTz(token.txtz)  
         }
      }, [token])
@@ -136,14 +135,14 @@ let TXTViewz =  ( {token} ) => {
 
     }
 
-    function addLocalDetails( ){
-        sonicTally.play()
-        //TODO REMOVE
-        let newArr = [...localDetails , exampleDetail]
-        setLocalDetails(newArr)
-        setSelectedDetails(newArr)
-        // getTokenDETAILS(token)
-    }
+    // function addLocalDetails( ){
+    //     sonicTally.play()
+    //     //TODO REMOVE
+    //     let newArr = [...localDetails , exampleDetail]
+    //     setLocalDetails(newArr)
+    //     setSelectedDetails(newArr)
+    //     // getTokenDETAILS(token)
+    // }
     // function getTokenDETAILS(token){
     //     if(!token || !token.title){ return }
     //     let lookupTitle = token.title;
@@ -175,7 +174,7 @@ let TXTViewz =  ( {token} ) => {
         // getDynamicTokenz(title)
         //load page view with new selected token
     }
-    function dynamicDetailDisplay(){
+    function dynamicTitleDisplay(){
     return(
         <>
         <h1 className='pageTitle' style={{cursor:"pointer"}} onClick={ ()=>dynamicLink(token)}>
@@ -224,15 +223,21 @@ let TXTViewz =  ( {token} ) => {
     }
     return(
     <>
+        {dynamicTitleDisplay()}
         {/* {displayTokenTXTArray()} */}
-        {dynamicDetailDisplay()}
         <hr></hr>
-        <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button> 
-        {/* //todo remove */}
+
+
+        {/* <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button>  */}
         <button style={{marginTop:'1em'}} onClick={()=>{ addLocalTXTz()}}>unlock text!</button>
-        {/* <button style={{marginTop:'1em'}} onClick={()=>{ addUnlockTXTz()}}>unlock text!</button> */}
-        {localTXTz.map((item,idx)=>{ return <div>{idx}</div>})}
-        {localDetails.map((item,idx)=>{ return <div>{item.txt}</div>})}
+        <hr></hr>
+
+        {localTXTz.map((item,idx)=>{ 
+            return <div>Key: {item.key}, <br/> Title: {item.title}, <br/>
+             {item.txt} <hr></hr>{idx}</div>})}
+        {/* {localDetails.map((item,idx)=>{ return <div>{item.txt}</div>})} */}
+
+
         {<article style={{background:'skyblue',
         // marginTop:'2em',
         boxShadow:'inset -1px -2px 7px 0px blue',
@@ -240,7 +245,7 @@ let TXTViewz =  ( {token} ) => {
         borderRadius:'22px',fontSize:'12px',padding:'1em',
             }}>
                 
-        {(tokenTXT_ARRAY && tokenTXT_ARRAY.length)?
+        {/* {(tokenTXT_ARRAY && tokenTXT_ARRAY.length)?
             tokenTXT_ARRAY.map( (item, token_idx)=> { //txt_tokenz
                 return (
                     <>
@@ -259,17 +264,18 @@ let TXTViewz =  ( {token} ) => {
                 )
             })
             :'no tokenz'
-        }
+        } */}
         COUNT: {tokenTXT_INDEX} of {tokenTXT_COUNT}
         &nbsp; 
         
         <hr></hr>
+         &#127984;   &#128161; &#127775; &#9889;
+        <hr></hr>
         &#8987; &#8986; &#9200; &#9201; &#9203; &#9875;
         <hr></hr> 
-{/*          
-        &#9935; &#10035;  &#10036;  &#10050;  &#10055;  &#10052;
+        {/* &#9935; &#10035;  &#10036;  &#10050;  &#10055;  &#10052;
         <hr></hr>
-        &#10083;  &#11088;  &#11093;  &#12336; &#127760;
+        &#10083;  &#11088;  &#11093;  &#12336; &#127760; &#9889;
 
         <hr></hr>
         &#127775; &#127879; &#127880;  &#127881; &#127919;
@@ -288,6 +294,7 @@ let TXTViewz =  ( {token} ) => {
         <hr></hr>
         &#x1f512; &#128275; &#128272;  	
         &#11022; 	&#11023; 	&#11024; 	&#11025;
+        <hr></hr>
         &#128161;    &#128367;   &#128273; &#10024;	 
         &#10042; 	&#10059; 	&#10046; 	&#10050;
         &#10051;  	&#10036; 	&#10019; 	&#10023;
@@ -300,7 +307,7 @@ let TXTViewz =  ( {token} ) => {
         <hr></hr>
         &#10056;	 	&#10059;		&#10070;	
         &#10083;		&#10146;		&#10164;	
-        &#10169;		&#9889;	  
+        &#10169;			  
         <hr></hr>
          	&#9967;	   	&#9965;	
              &#9734;  &#9733;
@@ -320,7 +327,7 @@ let TXTViewz =  ( {token} ) => {
           	&#128009;  	&#127911; 
 
               &#10549; 	&#10548; 	
-              <hr></hr> */}
+              <hr></hr>  */}
               {/* &#10531; 	&#10532; 	&#10533; &#10534;
               <hr></hr>
               &#10556; 	&#10555; 	&#10554; 	&#10552; */}
@@ -373,7 +380,8 @@ function setCardViewContent(direction){
         if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
     } else if (direction==='extra'){
         console.log('extra') //todo undo home override...
-        // addLocalDetails( )
+        // addLocalDetails( ) //todo load more txt.
+        // addLocalTXTz()
     }
 }
 
@@ -458,11 +466,11 @@ function setTokenViewfn(selectedView,token){ //update app, show view
     setSelectedTokenObj(token);
 }
 
-function setSelectedDetails(newDetails){
-    let newObj = selectedToken
-    newObj.details = newDetails
-    setSelectedTokenObj(newObj);
-}
+// function setSelectedDetails(newDetails){
+//     let newObj = selectedToken
+//     newObj.details = newDetails
+//     setSelectedTokenObj(newObj);
+// }
 function setSelectedTXTz(newTXTz){
     let newObj = selectedToken
     newObj.txtz = newTXTz
@@ -471,21 +479,26 @@ function setSelectedTXTz(newTXTz){
 
 return (
 <>
-<div style={{maxHeight:'77vh'}}>
+<div style={{
+    // maxHeight:'77vh'
+    }}>
 <h1>aPRYZMaGAMEa</h1>
 <div className='scrollBarV' style={{maxHeight:'72vh'}} >
 <div className='scrollBarH' style={{maxHeight:'70vh'}} >
-<main  style={{display:'flex'
+<main className='cardMain' style={{display:'flex'
 // ,paddingRight:'1em'
 }}>
     <section className='mainframe' style={{display:'flex',
-    boxShadow:'0px 1px 14px 1px purple',paddingBottom:'1em',
+    boxShadow:'0px 1px 14px 1px purple',
+    // padding:'1em',
     marginTop:'0.444em',
     // paddingLeft:'1.444em',paddingRight:'1.444em',
     // marginRight:'1em',marginLeft:'1em',
     // marginRight:'1em',
     flex:1,
-    borderRadius:'13px',height:'90%'} }>
+    borderRadius:'13px'
+    // ,height:'90%'
+    } }>
         { (!tokenz_CARD_COUNT)?
             <div style={{width:'100%',margin:'44%',marginLeft:'40%'}}>loading...</div>
           :'' 
@@ -501,7 +514,7 @@ return (
         </main>
         </div>
         </div>
-        <footer style={{marginTop:'2em',fontSize:'smaller'}}>
+        <footer style={{marginTop:'1em',fontSize:'smaller'}}>
           WORD_GAME : {tokenz_CARD_COUNT}
         </footer>
         </div>

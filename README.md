@@ -165,6 +165,11 @@ doomscrolling
 catastrophic-damage
 sea-level-rise
 superstorm
+glacial-break
+cancel-culture
+anti-vaxxers
+fake-news
+
 
 
 ### aWORDZa -  DESIGN_PRINCIPLES
@@ -429,7 +434,20 @@ X Mobile version padding margin remove.
 X 1 row icons
 
 O revisit aliases/duplicates.
-O ah-word-ah-GAHM-eee
+O non hyphen ah-word-ah-GAHM-eee
 
 O progress tab
 O ICONZ & GLYPHZ: icons, hover, click, represent topics.
+O add back ! and clue ? and lock state.
+  - by taking out things not unlocked.
+O use check marks to show open or locked
+O batch load, items into
+   completed, or extra level.
+
+O  sonics cc0 history.
+
+O padding top, top menu
+O padding margin in card index.
+O list of accomplishments.
+O word puzzles. 
+O letter selector, until word is correct - locks in. then share on social media.

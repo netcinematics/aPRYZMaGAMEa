@@ -320,8 +320,8 @@ X - meta_net/meta_net_schema.js
 X - clean up libz files...
 X - get files from dashboard_server put into libz/
 X - dynamic load by token click
-O - scriptz create INDEX.
-O - scripts create cards.
+X - scriptz create INDEX.
+X - scripts create cards.
 O - scripts create token_netz by token_keyz (linkz with numz)
 O - INDEX TOKENZ have 1 txt, and btn adds TXTs from TXT JSON file with ARRAY, by index.
 O - the first unlock TXT loads the ARRAY, then subsequent unlockbtn reveals each section.
@@ -332,13 +332,13 @@ X a2) parse by `---` section end.
 X a) parse by empty line `\r`
 X a0) `~...~` LINKZ, KEYZ, MAPZ, tilde words, turn into links, for INDEX
 X a1) `_` universal_underscore WORDZ.
-O c) `ACTZ` : WORDZ begin and end in `a`. 
+X c) `ACTZ` : WORDZ begin and end in `a`. 
 X d1) QUOTEZ `>>>` multiline, end by ~
-O g) `MixedCase_` : `lowerUpper_syntax` 2nd letter, (simplified)
-O h) `ascendingCase` : 1 of each `lowerUpper_syntax`.
-O h) `trailing-z` : any word that ends in z
-O h) `SERIEZ` : subtxtz by number. (use exact_position numbering from array. 1.0)
-O h) 'SUBTXTZ' : txtz that rollup into SERIEZ or TOPIC
+X g) `MixedCase_` : `lowerUpper_syntax` 2nd letter, (simplified)
+X h) `ascendingCase` : 1 of each `lowerUpper_syntax`.
+X h) `trailing-z` : any word that ends in z
+X h) `SERIEZ` : subtxtz by number. (use exact_position numbering from array. 1.0)
+X h) 'SUBTXTZ' : txtz that rollup into SERIEZ or TOPIC
 
 X d) CARDZ are like content FILTER.
 X e) TXTZ are like content SORT.
@@ -354,7 +354,7 @@ O - scriptz/meta_netz_linkz
 X - npm run scriptz
 X - scriptz to read all libz, and write versioned_tokenz.
 O - Error, not found.
-O - unlock tokenz for community, with reference.
+X - unlock tokenz for community, with reference.
 
 1) NODEJS LOOPS
 X - open md file, or txt file, or html file
@@ -368,8 +368,8 @@ O - unlock tokenz
 - X key is KEY for TOKENZ "training"
 
 3) NODEJS SCRIPTS for PARSE_PIPELINE
-- O advanced_parse_tokenz () 
-- O advanced_index_tokenz ()
+- X advanced_parse_tokenz () 
+- X advanced_index_tokenz ()
 - alpha_tokenz ()
 - prefix_tokenz ()
 - postfix_tokenz ()
@@ -405,18 +405,31 @@ X TOKEN_KEYZ '~' - key_tokenz used as keyz. (standard tokenizer)
 X write json to CARDZ
 
 
-O API MOCK_DATA, replace new dynamic content pipeline.
-O prod output: /src/meta_net/CARDZ/token_index_2.json
-O write all_key_tokenz to prod: token_index_2.json?
+X API MOCK_DATA, replace new dynamic content pipeline.
+X prod output: /src/meta_net/CARDZ/token_index_2.json
+X write all_key_tokenz to prod: token_index_2.json?
 
 X array WRAP
 X { "all_token_index" : [ changed to  - omni_key_index
 X file name CARDZ omni_key_idx_1.json from all_token_index_3.json
 O remove extra files in CARDZ
+O remove extra css files.
 
-O all OMNI KEY TOKENZ all_into token_index meta_data.
+X all OMNI KEY TOKENZ all_into token_index meta_data.
 
-O token_index to omni_key_index
+X import load index?
+X loading txt delay test.
+X token_index to omni_key_index
 O add ymd and numz
 O add txtz
 O add GAME_STATE.
+
+X loading indicator on main index.
+X Mobile version padding margin remove.
+X 1 row icons
+
+O revisit aliases/duplicates.
+O ah-word-ah-GAHM-eee
+
+O progress tab
+O ICONZ & GLYPHZ: icons, hover, click, represent topics.

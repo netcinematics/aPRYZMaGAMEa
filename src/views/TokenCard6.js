@@ -2,10 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxWoop1.mp3")
-let btnKey = 0;
 function TokenCard ( { token, setTokenViewfn } ) {
     useEffect(() => { 
-        document.key = (token && token.key)?token.key:'';  //todo: double check this
+        document.key = (token && token.key)?token.key:'';  //title on html tab
         // token.numz = humanIDX.toString()+'.'+idx;       //apply dynamic_numz
     }, [token]);
     // hovered is why token frame is a sub component.
@@ -57,9 +56,13 @@ function TokenCard ( { token, setTokenViewfn } ) {
                 :
                 <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
                     borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
-                    color:'#2374b7',
-                    alignItems:'flex-end',fontSize:(token.key.length>10)?'small':'large',paddingBottom:'0.222em'}}>
-                    {token.key}
+                    color:'#2374b7',alignItems:'flex-end',
+                    whiteSpace:'pre-wrap',overflowWrap:'break-word',
+                    fontSize: (token.key.length>20)
+                       ? 'x-small' : (token.key.length>10)
+                       ?'small':'large'
+                    ,padding:'2%'}}>
+                    { (token.key && token.displayKey)? token.displayKey : token.key }
                 </section>            
             }
             

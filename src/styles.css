@@ -112,7 +112,7 @@
     padding: 0.555em;
   }
 
-  /* mobile styles here */
+  /* mobile styles here ----------------------------------------- */
   @media only screen and (min-width: 350px) {
     .cardTileBtn{ min-width: 15em; flex: 1 1 0; }
   }
@@ -133,11 +133,25 @@
   }
 
 
+  .AppMain{margin:1.em}
+  .pageTitle{font-size:1.555em}
+  /* Generic Mobile styles here*/
+  @media only screen and (max-width: 500px) {
+    body{ margin:4px;}
+    .App{padding:0;}
+    .AppMain{margin:0.222em}
+    .pageTitle{font-size:0.888em}
+  }
+
+  /* end mobile styles  ----------------------------------------- */
+
   .btnHover{
     border: 2px solid skyblue !important;
     box-shadow: #05f68e 0px 0px 6px 1px !important;
    }
 
+   .btnLeft{  box-shadow: -1px 1px 1px black; }
+   .btnRight{  box-shadow: 2px 1px 1px black; }
 
 /*  custom scroll bar */
 /* .scrollBar2 {height:97%; overflow-x:hidden; background:#010111; border: 1px steelblue solid; border-radius:13px; padding:0.5em; } */

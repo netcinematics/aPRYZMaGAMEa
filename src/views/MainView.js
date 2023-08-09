@@ -11,8 +11,8 @@ export default function MainView () {
     useEffect(() => { document.title = "aPRYZMaGAMEa";  }, []);
 
     return (<>
-    <div  style={{maxHeight:'78vh'
-            ,overflowY:'scroll'
+    <div className="scrollBarV" style={{maxHeight:'78vh'
+            // ,overflowY:'scroll'
         }}>
         <header style={{borderRadius:'13px',fontSize:'xxx-large',marginBottom:'0.666em'}}>
         {/* <Zoom>Welcome!</Zoom> */}
@@ -49,22 +49,14 @@ export default function MainView () {
                 <ol style={{margin:'1em auto',textAlign:'left'}}>
             {/* <Fade cascade  damping={0.444} delay={1000} duration={4000}>*/}
                     <li>Ai NLP in JavaScript, ReactJS, NodeJS</li>
-                    <li>Ai Enhanced_English</li>
-                    <li>Ai Plasticity Generator</li>
-                    <li>Ai Tokenz of non-linear meta_conceptz</li>
-                    <li>Audio - Visual gamifications.</li>
+                    <li>Enhanced_English</li>
+                    <li>forever on GitHub</li>
             {/*</Fade> */}
                 </ol>
             </section>
             <code><h3>instructions</h3>
-            generate json tokenz by:
-            <ol>
-            <li> > cd src/meta_net/SCRIPTZ </li>
-            <li> > node train_txt_tokenz_1 </li>
-            <li>  example usage PARAMETERS: </li>
-            <li> > node train_txt_tokenz_1.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,18   </li>
-            
-            </ol>
+            generated json tokenz:
+            node AdvancedTokenizer_2.js TEST
             </code>
 
             <section style={{marginBottom:'2em',fontSize:'medium',padding:'0 2em'}}>

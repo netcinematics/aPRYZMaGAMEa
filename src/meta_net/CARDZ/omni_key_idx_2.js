@@ -1,3 +1,4 @@
+export default
 {
     "omni_key_index": [
         {

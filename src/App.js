@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import "./styles.css";  //put all new styles in here.
 import MainView from './views/MainView';
 import TokenGridFrame from './views/TokenGrid8';
@@ -19,8 +19,8 @@ function App() {
       
       margin:'0 auto',padding:'0.444em',borderRadius:'15px'}}>
     <div>
-      <main style={{color:'skyblue', paddingTop:'1.5em',
-        borderRadius:'13px',margin:'1em',height:'90%', 
+      <main className="AppMain" style={{color:'skyblue', paddingTop:'1.5em',
+        borderRadius:'13px',height:'90%', 
         display:'flex',flexDirection:'column'
         ,overflowY:'hidden'
         }}>

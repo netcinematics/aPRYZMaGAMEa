@@ -60,16 +60,14 @@ function format_INDEX_DATA(server_data){
     return formatted_data;
 }
 
-// let TXTViewz =  ( {token, tokenAddFn} ) => { 
 // let TXTViewz =  ( {token, loadTXTidx} ) => { 
 let TXTViewz =  ( {token} ) => { 
-    // let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
-    // let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
 
     // let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
     let [loadTXTidx,setLoadTXTidx] = useState(0) 
     let [localTXTz,setLocalTXTz] = useState([]) 
 
+    //todo remove
     let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
     let [tokenTXT_COUNT,setTokenTXTCOUNT] = useState(0)
     let [tokenTXT_ARRAY,setTokenTXTARRAY] = useState([])
@@ -106,7 +104,7 @@ let TXTViewz =  ( {token} ) => {
         }
      }, [token])
 
-     let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
+    //  let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
 
     // function loadTXTbyIDX() {
     //     sonicTally.play()
@@ -133,10 +131,10 @@ let TXTViewz =  ( {token} ) => {
             setLoadTXTidx(loadTXTidx+1)
             return;
         }
-        let newArr = [...localTXTz , extraTXTz]
-        setLocalTXTz(newArr)
-        // setSelectedTXTz(newArr)
-        setSelectedTXTz(newArr,loadTXTidx+1) //save between card viewz
+        // let newArr = [...localTXTz , extraTXTz]
+        // setLocalTXTz(newArr)
+        // setSelectedTXTz(newArr,loadTXTidx+1) //save between card viewz
+        setSelectedTXTz([...localTXTz],loadTXTidx+1) //save between card viewz
         setLoadTXTidx(loadTXTidx+1)
 
         // getTokenTXTZ()
@@ -148,103 +146,35 @@ let TXTViewz =  ( {token} ) => {
 
 
     function load_all_TXTZ(){ //call api to load card data.
-        debugger;
-        if(!token || !token.title){ return }
-        let lookupTitle = token.title;
-        if(token.title.indexOf('~')>-1){
-            lookupTitle = token.title.replaceAll('~','')
-        }
-
-        debugger;
+        if(!token){ return }
+        let lookupTitle = token.key;
+            lookupTitle = lookupTitle.replaceAll('~','')
+            lookupTitle = lookupTitle.replaceAll('_','')
+            lookupTitle = lookupTitle.replaceAll('.','')
+            lookupTitle = lookupTitle.toLowerCase()
+        let tokenBatch = 1;
+        lookupTitle = `card_${lookupTitle}_${tokenBatch}`;
         console.log('load: src/meta_net/CARDZ/ ', lookupTitle+'.json')
-
-        
         const options = {
             method: 'GET',
             url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
         }
         axios.request(options).then((response) => {
             // debugger;
-            setTokenTXTINDEX(tokenTXT_INDEX+1)
-            setTokenTXTCOUNT(response.data.token.txtz.length)
-            // setTokenTXTARRAY(response.data.token.txtz)
-            let newArr = [ ...token.txtz , response.data.token.txtz[tokenTXT_INDEX]]
-            setTokenTXTARRAY(newArr)
-            setSelectedTXTz(newArr)   //TODO bring back.
-            // let newArr = [...localDetails , exampleDetail]
-            // setLocalDetails(newArr)
-            // setSelectedDetails(newArr)
+            let card_data = response.data
+            let newTXTData = [...card_data.txtz]
+            // let newTXTData = [...localTXTz , extraTXTz]
+            setLocalTXTz(newTXTData)
+            setSelectedTXTz(newTXTData,loadTXTidx+1) //save between card viewz
 
         }).catch((error) => {
             console.error('oops',error)
-            // setTokenTXTCOUNT("no data")
+            let newTXTData = [...localTXTz , {key:'no data',type:'error',txt:'no data',title:'no data'}]
+            setLocalTXTz(newTXTData)
+            setSelectedTXTz(newTXTData,loadTXTidx+1) //save between card viewz
         })   
 
     }
-
-    // function getTokenTXTZ(){
-    //     if(!token || !token.title){ return }
-    //     let lookupTitle = token.title;
-    //     if(token.title.indexOf('~')>-1){
-    //         lookupTitle = token.title.replaceAll('~','')
-    //     }
-
-    //     debugger;
-    //     console.log('load: src/meta_net/CARDZ/ ', lookupTitle+'.json')
-
-        
-    //     const options = {
-    //         method: 'GET',
-    //         url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
-    //     }
-    //     axios.request(options).then((response) => {
-    //         // debugger;
-    //         setTokenTXTINDEX(tokenTXT_INDEX+1)
-    //         setTokenTXTCOUNT(response.data.token.txtz.length)
-    //         // setTokenTXTARRAY(response.data.token.txtz)
-    //         let newArr = [ ...token.txtz , response.data.token.txtz[tokenTXT_INDEX]]
-    //         setTokenTXTARRAY(newArr)
-    //         setSelectedTXTz(newArr)   //TODO bring back.
-    //         // let newArr = [...localDetails , exampleDetail]
-    //         // setLocalDetails(newArr)
-    //         // setSelectedDetails(newArr)
-
-    //     }).catch((error) => {
-    //         console.error('oops',error)
-    //         // setTokenTXTCOUNT("no data")
-    //     })   
-
-    // }
-
-    // function addLocalDetails( ){
-    //     sonicTally.play()
-    //     //TODO REMOVE
-    //     let newArr = [...localDetails , exampleDetail]
-    //     setLocalDetails(newArr)
-    //     setSelectedDetails(newArr)
-    //     // getTokenDETAILS(token)
-    // }
-    // function getTokenDETAILS(token){
-    //     if(!token || !token.title){ return }
-    //     let lookupTitle = token.title;
-    //     if(token.title.indexOf('~')>-1){
-    //         lookupTitle = token.title.replaceAll('~','')
-    //     }
-    //     const options = {
-    //         method: 'GET',
-    //         url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
-    //         // url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/aWORDZa.json`
-    //     }
-    //     axios.request(options).then((response) => {
-    //         debugger;
-    //         setTokenTXTINDEX(tokenTXT_INDEX+1)
-    //         setTokenTXTCOUNT(response.data.token.txtz.length)
-    //         setTokenTXTARRAY(response.data.token.txtz)
-    //     }).catch((error) => {
-    //         console.error('oops',error)
-    //         setTokenTXTCOUNT("no data")
-    //     })    
-    // }
 
     function dynamicLink(token){
         if(!token || !token.key) return;
@@ -311,18 +241,23 @@ let TXTViewz =  ( {token} ) => {
         { (loadTXTidx===0)
             ?<span style={{fontSize:'x-small'}}>chooze_to_look...</span>
             :(localTXTz.length===0 && loadTXTidx===1)?'loading...'
+            :(localTXTz.length===0 && loadTXTidx>1)?'no data'
             :''}
         <section className='scrollBarDoc' style={{maxHeight:'20em',minHeight:'20em',
                 padding:'3%'}}>
             {localTXTz.map((item,idx)=>{ 
-                // if (loadTXTidx>idx+1)return ''
+                // debugger;
+                if (idx+1 > loadTXTidx)return ''
                 return <div>Key: {item.key}, <br/> Title: {item.title}, <br/>
                 {item.txt} <hr></hr>{idx}</div>
             })}
 
                 <hr></hr>
-  <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
-                onClick={()=>{ addLocalTXTz()}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button>
+  <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',
+    border:'1px solid steelblue',fontSize:'0.666em',
+    boxShadow:'0px 0px 14px 0px gold',
+    paddingBottom:'0.444em'}} 
+    onClick={()=>{ addLocalTXTz()}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button>
 
                 {/* <div><button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
                 onClick={()=>{ addLocalTXTz()}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button></div> */}
@@ -495,7 +430,6 @@ let TokenCardz = ( {token} ) => {
 
 
     function setCardViewContent(direction){
-        // if(direction==='home' || direction==='extra'){
         if(direction==='home'){
             sonicSonar.play();
             setViewState('overview')
@@ -536,30 +470,7 @@ let TokenCardz = ( {token} ) => {
             let nextToken = lookUpNUMZToken(tgt);
             if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
         } else if (direction==='extra'){
-            // console.log('extra') //todo undo home override...
-            // addLocalDetails( ) //todo load more txt.
-
-            //parent
-            // const [refresh, doRefresh] = useState(0);
-            // <Button onClick={() => doRefresh(prev => prev + 1)} />
-
-
             // reloadTXT(prev => prev + 1)
-
-
-            // <Children refresh={refresh} />
-    
-            // Children:
-
-            // useEffect(() => {
-            //     performRefresh(); //children function of interest
-            //   }, [props.refresh]);
-
-            // addLocalTXTz()
-            // debugger;
-            // if(tokenViewAddfn){tokenViewAddfn()}
-    
-    
         }
     }
 

@@ -60,9 +60,10 @@ function format_INDEX_DATA(server_data){
     return formatted_data;
 }
 
-let TXTViewz =  ( {token} ) => { 
+// let TXTViewz =  ( {token, tokenAddFn} ) => { 
+let TXTViewz =  ( {token, loadTXTidx} ) => { 
     // let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
-    let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
+    // let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
 
     // let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
     let [localTXTz,setLocalTXTz] = useState([]) 
@@ -72,10 +73,19 @@ let TXTViewz =  ( {token} ) => {
     let [tokenTXT_ARRAY,setTokenTXTARRAY] = useState([])
 
     useEffect(() => {
+        console.log('loading',loadTXTidx) 
+        //performloadTXTidx(); //children function of interest
+        // if(!loadTXTidx){loadTXTbyIDX()}
+    }, [loadTXTidx]);
+
+
+    useEffect(() => {
         if(token.txtz){
             // console.log("INIT TXTz",token.title) 
             setTokenTXTARRAY(token.txtz) 
         }
+
+        // tokenAddFn(addLocalTXTz)
         // if(token.details){ //remove
         //     // console.log("INIT details",token.title)
         //     setLocalDetails(token.details)  //todo remove
@@ -85,7 +95,22 @@ let TXTViewz =  ( {token} ) => {
         }
      }, [token])
 
+     let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
+
+    function loadTXTbyIDX() {
+        sonicTally.play()
+        let txtSET = [];
+        for(var i=0; i<loadTXTidx;i++){
+            extraTXTz.key += i;
+            txtSET = [...localTXTz , extraTXTz]
+        }
+
+        setLocalTXTz(txtSET)
+        setSelectedTXTz(txtSET)
+
+    }
     // function addUnlockTXTz(  ){
+
     function addLocalTXTz (){
         // debugger;
     
@@ -100,7 +125,9 @@ let TXTViewz =  ( {token} ) => {
         // let newArr = [...localDetails , exampleDetail]
         // setLocalDetails(newArr)
         // setSelectedDetails(newArr)
-    }
+    };
+
+
     function getTokenTXTZ(){
         if(!token || !token.title){ return }
         let lookupTitle = token.title;
@@ -223,28 +250,48 @@ let TXTViewz =  ( {token} ) => {
     }
     return(
     <>
+    <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
+                onClick={()=>{ addLocalTXTz()}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button>
         {dynamicTitleDisplay()}
         {/* {displayTokenTXTArray()} */}
         <hr></hr>
 
+        <section className='scrollBarDoc' style={{maxHeight:'20em',minHeight:'20em',
+                padding:'3%'}}>
+            {localTXTz.map((item,idx)=>{ 
+                return <div>Key: {item.key}, <br/> Title: {item.title}, <br/>
+                {item.txt} <hr></hr>{idx}</div>
+            })}
 
+                <hr></hr>
+                {/* <div><button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
+                onClick={()=>{ addLocalTXTz()}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button></div> */}
+                <article style={{background:'skyblue',
+                    // marginTop:'2em',
+                    boxShadow:'inset -1px -2px 7px 0px blue',
+                    margin:'0.444em',
+                    borderRadius:'22px',fontSize:'12px',padding:'1em', }}>
+                        
+                    COUNT: {tokenTXT_INDEX} of {tokenTXT_COUNT}
+                    &nbsp; 
+                    
+                    <hr></hr>
+                    &#127984;   &#128161; &#127775; &#9889;
+                    <hr></hr>
+                    &#8987; &#8986; &#9200; &#9201; &#9203; &#9875;
+                    <hr></hr> 
+
+                </article> 
+
+        </section>
         {/* <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button>  */}
+        {/* <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
+                onClick={()=>{ addLocalTXTz()}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button> */}
         <button style={{marginTop:'1em'}} onClick={()=>{ addLocalTXTz()}}>unlock text!</button>
-        <hr></hr>
 
-        {localTXTz.map((item,idx)=>{ 
-            return <div>Key: {item.key}, <br/> Title: {item.title}, <br/>
-             {item.txt} <hr></hr>{idx}</div>})}
         {/* {localDetails.map((item,idx)=>{ return <div>{item.txt}</div>})} */}
 
 
-        {<article style={{background:'skyblue',
-        // marginTop:'2em',
-        boxShadow:'inset -1px -2px 7px 0px blue',
-        margin:'0.444em',
-        borderRadius:'22px',fontSize:'12px',padding:'1em',
-            }}>
-                
         {/* {(tokenTXT_ARRAY && tokenTXT_ARRAY.length)?
             tokenTXT_ARRAY.map( (item, token_idx)=> { //txt_tokenz
                 return (
@@ -265,125 +312,77 @@ let TXTViewz =  ( {token} ) => {
             })
             :'no tokenz'
         } */}
-        COUNT: {tokenTXT_INDEX} of {tokenTXT_COUNT}
-        &nbsp; 
-        
-        <hr></hr>
-         &#127984;   &#128161; &#127775; &#9889;
-        <hr></hr>
-        &#8987; &#8986; &#9200; &#9201; &#9203; &#9875;
-        <hr></hr> 
-        {/* &#9935; &#10035;  &#10036;  &#10050;  &#10055;  &#10052;
-        <hr></hr>
-        &#10083;  &#11088;  &#11093;  &#12336; &#127760; &#9889;
 
-        <hr></hr>
-        &#127775; &#127879; &#127880;  &#127881; &#127919;
-        <hr></hr>
-        &#127925; &#127922; &#127942; &#127968; &#127984;
-        <hr></hr>
-        &#128064; &#128126; &#128160; &#128172; &#128173;
-        <hr></hr>
-        &#128206; &#128218; &#128211; &#128209; &#128225;
-        <hr></hr>
-        &#128263; &#128269; &#128270; &#128293; &#128301;  
-        <hr></hr>
-        &#128300; &#128640; &#128683; &#129322;
-        <hr></hr>
-        &#129412; &#129413; 
-        <hr></hr>
-        &#x1f512; &#128275; &#128272;  	
-        &#11022; 	&#11023; 	&#11024; 	&#11025;
-        <hr></hr>
-        &#128161;    &#128367;   &#128273; &#10024;	 
-        &#10042; 	&#10059; 	&#10046; 	&#10050;
-        &#10051;  	&#10036; 	&#10019; 	&#10023;
-        <hr></hr>
-        &#10170; 	&#10041; &#10034;
-        <hr></hr>
-        &#10026;	 	&#10029;	 	&#10031;	
-        &#10037;	 	&#10042;	 	&#10041;	
-        &#10045;		&#10050;	 	&#10055;	
-        <hr></hr>
-        &#10056;	 	&#10059;		&#10070;	
-        &#10083;		&#10146;		&#10164;	
-        &#10169;			  
-        <hr></hr>
-         	&#9967;	   	&#9965;	
-             &#9734;  &#9733;
-        <hr></hr>
-        &#127775; &#128142; 	&#128077; &#128078; &#128079; 	&#128128; &#128123;
-        &#128165; &#128151;  &#128261;  &#128295; 	&#10035; 	&#10020; 	&#10084;
-        <hr></hr>
-        &#128270;  &#128264; 	&#128265;  	&#128266;   	&#128420;
-         &#128279;
-        <hr></hr>
-        &#128280;  	&#128293;  &#128163; &#128171; 	&#128064; 	&#128045; 	&#128047;
-        <hr></hr>
-        &#128058; &#128059; 	&#127993; &#128028; &#128025; &#128013; 	&#128035;
-        <hr></hr>
-        &#127916; 	&#127942;
 
-          	&#128009;  	&#127911; 
-
-              &#10549; 	&#10548; 	
-              <hr></hr>  */}
-              {/* &#10531; 	&#10532; 	&#10533; &#10534;
-              <hr></hr>
-              &#10556; 	&#10555; 	&#10554; 	&#10552; */}
-
-        </article> }
     </>
     )
 }
  
 
-function setCardViewContent(direction){
-    if(direction==='home' || direction==='extra'){
-        sonicSonar.play();
-        setViewState('overview')
-    } else if  (direction==='up'){ 
-        let tgt = '', offsetRight = 1, offsetVert = 1;
-        let numz = selectedToken.numz.split('.');
-        offsetRight = numz[0];
-        offsetVert = --numz[1]
-        if(offsetVert <= 0 ){ offsetVert = tokenz_COLUMN_LENGTH; } //reset default
-        tgt = offsetRight+'.'+offsetVert;
-        let nextToken = lookUpNUMZToken(tgt);
-        if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.        
-    } else if  (direction==='right'){ //look at numz, calculate offset, apply offset, look up numz, if found load, not loop default.
-        let tgt = '', offsetRight = 1, offsetVert = 1;
-        let numz = selectedToken.numz.split('.');
-        offsetRight = ++numz[0];
-        offsetVert = numz[1]
-        if(offsetRight > tokenz_COLUMN_COUNT){ offsetRight = 1; } //reset default
-        tgt = offsetRight+'.'+offsetVert;
-        let nextToken = lookUpNUMZToken(tgt);
-        if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
-    } else if (direction==='left'){
-        let tgt = '', offsetRight = 1, offsetVert = 1;
-        let numz = selectedToken.numz.split('.');
-        offsetRight = --numz[0];
-        offsetVert = numz[1]
-        if(offsetRight <= 0 ){ offsetRight = tokenz_COLUMN_COUNT; } //reset default
-        tgt = offsetRight+'.'+offsetVert;
-        let nextToken = lookUpNUMZToken(tgt);
-        if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
-    } else if (direction==='down'){
-        let tgt = '', offsetRight = 1, offsetVert = 1;
-        let numz = selectedToken.numz.split('.');
-        offsetRight = numz[0];
-        offsetVert = ++numz[1]
-        if(offsetVert > tokenz_COLUMN_LENGTH ){ offsetVert = 1; } //reset default
-        tgt = offsetRight+'.'+offsetVert;
-        let nextToken = lookUpNUMZToken(tgt);
-        if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
-    } else if (direction==='extra'){
-        console.log('extra') //todo undo home override...
-        // addLocalDetails( ) //todo load more txt.
-        // addLocalTXTz()
-    }
-}
+        // {/* <article> &#9935; &#10035;  &#10036;  &#10050;  &#10055;  &#10052;
+        // <hr></hr>
+        // &#10083;  &#11088;  &#11093;  &#12336; &#127760; &#9889;
+
+        // <hr></hr>
+        // &#127775; &#127879; &#127880;  &#127881; &#127919;
+        // <hr></hr>
+        // &#127925; &#127922; &#127942; &#127968; &#127984;
+        // <hr></hr>
+        // &#128064; &#128126; &#128160; &#128172; &#128173;
+        // <hr></hr>
+        // &#128206; &#128218; &#128211; &#128209; &#128225;
+        // <hr></hr>
+        // &#128263; &#128269; &#128270; &#128293; &#128301;  
+        // <hr></hr>
+        // &#128300; &#128640; &#128683; &#129322;
+        // <hr></hr>
+        // &#129412; &#129413; 
+        // <hr></hr>
+        // &#x1f512; &#128275; &#128272;  	
+        // &#11022; 	&#11023; 	&#11024; 	&#11025;
+        // <hr></hr>
+        // &#128161;    &#128367;   &#128273; &#10024;	 
+        // &#10042; 	&#10059; 	&#10046; 	&#10050;
+        // &#10051;  	&#10036; 	&#10019; 	&#10023;
+        // <hr></hr>
+        // &#10170; 	&#10041; &#10034;
+        // <hr></hr>
+        // &#10026;	 	&#10029;	 	&#10031;	
+        // &#10037;	 	&#10042;	 	&#10041;	
+        // &#10045;		&#10050;	 	&#10055;	
+        // <hr></hr>
+        // &#10056;	 	&#10059;		&#10070;	
+        // &#10083;		&#10146;		&#10164;	
+        // &#10169;			  
+        // <hr></hr>
+        //  	&#9967;	   	&#9965;	
+        //      &#9734;  &#9733;
+        // <hr></hr>
+        // &#127775; &#128142; 	&#128077; &#128078; &#128079; 	&#128128; &#128123;
+        // &#128165; &#128151;  &#128261;  &#128295; 	&#10035; 	&#10020; 	&#10084;
+        // <hr></hr>
+        // &#128270;  &#128264; 	&#128265;  	&#128266;   	&#128420;
+        //  &#128279;
+        // <hr></hr>
+        // &#128280;  	&#128293;  &#128163; &#128171; 	&#128064; 	&#128045; 	&#128047;
+        // <hr></hr>
+        // &#128058; &#128059; 	&#127993; &#128028; &#128025; &#128013; 	&#128035;
+        // <hr></hr>
+        // &#127916; 	&#127942;
+
+        //   	&#128009;  	&#127911; 
+
+        //       &#10549; 	&#10548; 	
+        //       <hr></hr> 
+        // </article>      
+        // */}
+
+
+        //       {/* &#10531; 	&#10532; 	&#10533; &#10534;
+        //       <hr></hr>
+        //       &#10556; 	&#10555; 	&#10554; 	&#10552; 
+        //     */}
+
 
 function lookUpNUMZToken(tgt){
     console.log('Lookup:',tgt)
@@ -424,36 +423,125 @@ function TokenGrid (){
     return(tokenCOLUMNS)
 }
 
-let TokenCardz = ( {token} ) => {  
+let TokenCardz = ( {token} ) => {
+    // let tokenViewAddfn = null;
+    // function initTokenfn(handleToViewfn){
+    //     console.log('parent')
+    //     tokenViewAddfn = handleToViewfn
+    // }
+
+    const [loadTXTidx, reloadTXT] = useState(0);
+
+
+    function setCardViewContent(direction){
+        // if(direction==='home' || direction==='extra'){
+        if(direction==='home'){
+            sonicSonar.play();
+            setViewState('overview')
+        } else if  (direction==='up'){ 
+            let tgt = '', offsetRight = 1, offsetVert = 1;
+            let numz = selectedToken.numz.split('.');
+            offsetRight = numz[0];
+            offsetVert = --numz[1]
+            if(offsetVert <= 0 ){ offsetVert = tokenz_COLUMN_LENGTH; } //reset default
+            tgt = offsetRight+'.'+offsetVert;
+            let nextToken = lookUpNUMZToken(tgt);
+            if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.        
+        } else if  (direction==='right'){ //look at numz, calculate offset, apply offset, look up numz, if found load, not loop default.
+            let tgt = '', offsetRight = 1, offsetVert = 1;
+            let numz = selectedToken.numz.split('.');
+            offsetRight = ++numz[0];
+            offsetVert = numz[1]
+            if(offsetRight > tokenz_COLUMN_COUNT){ offsetRight = 1; } //reset default
+            tgt = offsetRight+'.'+offsetVert;
+            let nextToken = lookUpNUMZToken(tgt);
+            if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
+        } else if (direction==='left'){
+            let tgt = '', offsetRight = 1, offsetVert = 1;
+            let numz = selectedToken.numz.split('.');
+            offsetRight = --numz[0];
+            offsetVert = numz[1]
+            if(offsetRight <= 0 ){ offsetRight = tokenz_COLUMN_COUNT; } //reset default
+            tgt = offsetRight+'.'+offsetVert;
+            let nextToken = lookUpNUMZToken(tgt);
+            if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
+        } else if (direction==='down'){
+            let tgt = '', offsetRight = 1, offsetVert = 1;
+            let numz = selectedToken.numz.split('.');
+            offsetRight = numz[0];
+            offsetVert = ++numz[1]
+            if(offsetVert > tokenz_COLUMN_LENGTH ){ offsetVert = 1; } //reset default
+            tgt = offsetRight+'.'+offsetVert;
+            let nextToken = lookUpNUMZToken(tgt);
+            if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
+        } else if (direction==='extra'){
+            // console.log('extra') //todo undo home override...
+            // addLocalDetails( ) //todo load more txt.
+
+            //parent
+            // const [refresh, doRefresh] = useState(0);
+            // <Button onClick={() => doRefresh(prev => prev + 1)} />
+            reloadTXT(prev => prev + 1)
+            // <Children refresh={refresh} />
+    
+            // Children:
+
+            // useEffect(() => {
+            //     performRefresh(); //children function of interest
+            //   }, [props.refresh]);
+
+            // addLocalTXTz()
+            // debugger;
+            // if(tokenViewAddfn){tokenViewAddfn()}
+    
+    
+        }
+    }
+
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
         display:'flex',width:'100%',flexDirection:'column',
         // marginRight:'1.444em',
-        height:'100%', flex:'1'
+        height:'60vh', 
+        // flex:'1'
         }}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
+            background:'#8db7dc',
+            borderRadius:'6px',
+            border:'1px solid #3540a0',
             padding:'0.666em'}}>
             <button className='btnLeft' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('up')}}><span style={{fontSize:'1.555em'}}>&#10531;</span>&nbsp;UP</button>
             <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
                 onClick={ ()=>{setCardViewContent('home')}}><span style={{fontSize:'1.555em'}}>&#127968;</span>&nbsp;</button>
+
             <button className='btnRight' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
-                onClick={ ()=>{setCardViewContent('right')}}>RIGHT <span style={{fontSize:'1.555em'}}>&#10532;</span></button>
+                onClick={ ()=>{setCardViewContent('down')}}>DOWN <span style={{fontSize:'1.555em'}}>&#10533;</span></button>
         </header>
         {/* <article className="scrollBarV" style={{flex:1, color:'steelblue', */}
-        <article style={{flex:1, color:'steelblue',
-            boxShadow:'inset 0px 0px 10px 0px blue'}}>
+        <article style={{
+            // flex:1, 
+            color:'steelblue',
+            boxShadow:'inset 0px 0px 10px 0px blue',
+            maxHeight:'48vh'
+            }}>
             <hr></hr>
-            <TXTViewz token={selectedToken} key={'txt.'+token.numz}/>
+            <TXTViewz loadTXTidx={loadTXTidx} token={selectedToken} key={'txt.'+token.numz}/>
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
-            padding:'0.666em'}}>
+            padding:'0.666em',
+            background:'#8db7dc',
+            borderRadius:'6px',
+            border:'1px solid #3540a0'
+            }}>
             <button className='btnLeft' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('left')}}><span style={{fontSize:'1.555em'}}>&#10534;</span>&nbsp;LEFT</button>
             <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
                 onClick={ ()=>{setCardViewContent('extra')}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button>
             <button className='btnRight' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
-                onClick={ ()=>{setCardViewContent('down')}}>DOWN <span style={{fontSize:'1.555em'}}>&#10533;</span></button>
+                onClick={ ()=>{setCardViewContent('right')}}>RIGHT <span style={{fontSize:'1.555em'}}>&#10532;</span></button>
+
+
         </footer>
     </main>
     </>)
@@ -471,6 +559,8 @@ function setTokenViewfn(selectedView,token){ //update app, show view
 //     newObj.details = newDetails
 //     setSelectedTokenObj(newObj);
 // }
+
+//todo maybe not necessary
 function setSelectedTXTz(newTXTz){
     let newObj = selectedToken
     newObj.txtz = newTXTz
@@ -483,8 +573,10 @@ return (
     // maxHeight:'77vh'
     }}>
 <h1>aPRYZMaGAMEa</h1>
-<div className='scrollBarV' style={{maxHeight:'72vh'}} >
-<div className='scrollBarH' style={{maxHeight:'70vh'}} >
+<div className='scrollBarV' style={{maxHeight:'74vh'}} >
+<div className='scrollBarH' style={{
+    maxHeight:'70vh'
+    }} >
 <main className='cardMain' style={{display:'flex'
 // ,paddingRight:'1em'
 }}>

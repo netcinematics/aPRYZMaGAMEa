@@ -451,3 +451,8 @@ O padding margin in card index.
 O list of accomplishments.
 O word puzzles. 
 O letter selector, until word is correct - locks in. then share on social media.
+
+O ai gamifications - 
+O random-timed-awards (icons as award for number_triggers)
+O batch cardz at 44 
+X batch txtz at 100?

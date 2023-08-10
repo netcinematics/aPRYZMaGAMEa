@@ -1,9 +1,10 @@
 # `~aWORDZa~`
 
-Is a three things combined, in a simple way, for great results.
+Three things, combined in a simple way, for great results!
 
-1) aWORDZa is a self-generative & self-descriptive txt_engine,
-2) a system_of_wordz_for_all_conceptz, with shortest_words & fewest_letters
+aWORDZa is a self-generative txt_engine to describe actual_reality.
+1) a system_of_wordz_for_all_conceptz, 
+2) with shortest_words & fewest_letters
 3) maximum_clarity & minimum_confuzion
 4) a linquistic plasticity mechanism
 5) in the form of aWORDaGAMEa

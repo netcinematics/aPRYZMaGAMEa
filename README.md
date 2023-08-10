@@ -456,3 +456,10 @@ O ai gamifications -
 O random-timed-awards (icons as award for number_triggers)
 O batch cardz at 44 
 X batch txtz at 100?
+
+O 1st txt load call for card of txtz. then show by index
+O auto scroll on txt click
+
+O CARDZ/card1.json to CARDZ/card_awordza_1.json
+
+O dynamically generate card_awrodza_1.json

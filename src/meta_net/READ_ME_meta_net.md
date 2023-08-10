@@ -122,3 +122,15 @@ let key2 = 'actual_act_of_wordz'
 undefined
 let key1 = 'aWORDZa'
 
+//NOTE new SYNTAX _:  _.
+
+can be used for
+
+meanz_: some description txt. _;
+
+exactlyWhere_: _;
+
+sig_: enzo ~:) _;
+ymd_: 2023_8_10
+
+

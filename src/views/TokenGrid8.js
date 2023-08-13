@@ -60,9 +60,11 @@ function format_INDEX_DATA(server_data){
     return formatted_data;
 }
 
-let TXTViewz =  ( {token, reloadTXTidx} ) => { 
+let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { 
+// let TXTViewz =  ( {token, reloadTXTidx} ) => { 
 // let TXTViewz =  ( {token} ) => { 
     const autoScrollDown = useRef(null);
+    const autoScrollEnd = useRef(null);
     
     // let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
     let [loadTXTidx,setLoadTXTidx] = useState(0) 
@@ -78,7 +80,9 @@ let TXTViewz =  ( {token, reloadTXTidx} ) => {
         console.log('load from outside idx change',reloadTXTidx) 
         if(reloadTXTidx>0){
             addLocalTXTz();
+            // setShowEyes(1)
         }
+        
     //     console.log('txtz',localTXTz.length) 
     //     //performloadTXTidx(); //children function of interest
     //     if(loadTXTidx===0){ //avoid initial load
@@ -92,6 +96,7 @@ let TXTViewz =  ( {token, reloadTXTidx} ) => {
         console.log("INIT TXTz",token.title) 
         if(token.txtz){
             setTokenTXTARRAY(token.txtz) 
+            setShowEyes(1)
         }
 
         // tokenAddFn(addLocalTXTz)
@@ -141,26 +146,23 @@ let TXTViewz =  ( {token, reloadTXTidx} ) => {
 
     function addLocalTXTz (){ //load from inner button
         // debugger;
-        if(localTXTz.length && loadTXTidx>=localTXTz.length)return;
+        if(localTXTz.length && loadTXTidx>=localTXTz.length){
+            autoScrollEnd.current.scrollIntoView({ behavior: "smooth" });
+            return;
+        }
         sonicTally.play()
         if(loadTXTidx===0){
             load_all_TXTZ();
             setLoadTXTidx(loadTXTidx+1)
-            
+            setShowEyes(1)
             // autoScrollDown.current.scrollIntoView({ behavior: "smooth" });
             return;
         }
-        // let newArr = [...localTXTz , extraTXTz]
-        // setLocalTXTz(newArr)
-        // setSelectedTXTz(newArr,loadTXTidx+1) //save between card viewz
-        setSelectedTXTz([...localTXTz],loadTXTidx+1) //save between card viewz
+
+        setSelectedTXTz([...localTXTz],loadTXTidx+1) //reloads between card viewz
         setLoadTXTidx(loadTXTidx+1)
         autoScrollDown.current.scrollIntoView({ behavior: "smooth" });
 
-        // getTokenTXTZ()
-        // let newArr = [...localDetails , exampleDetail]
-        // setLocalDetails(newArr)
-        // setSelectedDetails(newArr)
     };
 
 
@@ -217,9 +219,9 @@ let TXTViewz =  ( {token, reloadTXTidx} ) => {
         }</h1> */}
             <section style={{padding:'0 1em'}}>
                 <header style={{display:'flex',justifyContent:'space-between'}}>
-                    <aside className='txtItem'>numz: {token.title}</aside>
+                    <aside style={{fontSize:'xx-small'}}>numz</aside>
                     <span>&nbsp;</span> 
-                    <aside className='txtItem'>title: {token.title}</aside> 
+                    <aside style={{fontSize:'xx-small'}}>title</aside> 
                 </header>
                     
 
@@ -233,10 +235,10 @@ let TXTViewz =  ( {token, reloadTXTidx} ) => {
 
 
                 <footer style={{display:'flex',justifyContent:'space-between'}}>
-                    <aside className='txtItem'>type: {token.key}</aside>
-                    <aside className='txtItem'>date: {token.key}</aside>
+                    <aside style={{fontSize:'xx-small'}}>date</aside>
+                    <aside style={{fontSize:'xx-small'}}>type</aside>
                 </footer>
-                <hr></hr>
+                {/* <hr></hr> */}
 
             </section>
 
@@ -289,7 +291,7 @@ let TXTViewz =  ( {token, reloadTXTidx} ) => {
   
         {dynamicTitleDisplay()}
         {/* {displayTokenTXTArray()} */}
-        <hr></hr>
+        <hr style={{marginBottom:'1em'}}></hr>
         { (loadTXTidx===0)
             ?<span style={{fontSize:'x-small'}}>
                 chooze_to_look...</span>
@@ -308,25 +310,22 @@ let TXTViewz =  ( {token, reloadTXTidx} ) => {
           </>
     :''}  
         <section className='scrollBarDoc' style={{
-            maxHeight:'18em',
-            // minHeight:'20em',
-                padding:'0 3%'}}>
+            maxHeight:'18em', padding:'0 3%'}}>
             {localTXTz.map((item,idx)=>{ 
-                // debugger;
                 if (idx+1 > loadTXTidx)return ''
-                return <section className='txtItems'>
+                return <section style={{padding:'0 0.444em'}}>
                 <header style={{display:'flex',justifyContent:'space-between'}}>
-                    <aside className='txtItem'>numz: {item.title}</aside>
+                    <aside style={{fontSize:'small'}}>{item.numz}</aside>
                     <span>&nbsp;</span> 
-                    <aside className='txtItem'>title: {item.title}</aside> 
+                    <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
                 </header>
                     
 
                 <article className='txtItemTXT' style={{padding:'1em'}}>{item.txt}</article>
 
                 <footer style={{display:'flex',justifyContent:'space-between'}}>
-                    <aside className='txtItem'>type: {item.key}</aside>
-                    <aside className='txtItem'>date: {item.key}</aside>
+                    <aside style={{fontSize:'xx-small'}}>{item.ymd}</aside>
+                    <aside style={{fontSize:'xx-small'}}>{item.type}</aside>
                 </footer>
                 <hr></hr>
 
@@ -358,6 +357,7 @@ let TXTViewz =  ( {token, reloadTXTidx} ) => {
 
                 </article> 
 
+        <div ref={autoScrollEnd} style={{height:'1em'}}/>
         </section>
         {/* <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button>  */}
         {/* <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
@@ -504,9 +504,15 @@ let TokenCardz = ( {token} ) => {
     //     console.log('parent')
     //     tokenViewAddfn = handleToViewfn
     // }
-
+    
+    const [showEyes, setShowEyes] = useState(0);
     const [reloadTXTidx, reloadTXT] = useState(0);
 
+
+
+    // useEffect(() => { 
+    //     if(reloadTXTidx){showEyes(1)}
+    // }, []);
 
     function setCardViewContent(direction){
         if(direction==='home'){
@@ -596,8 +602,9 @@ let TokenCardz = ( {token} ) => {
             boxShadow:'inset 0px 0px 10px 0px #0a0a79',
             maxHeight:'53vh',
             }}>
-            <hr></hr>
-            <TXTViewz reloadTXTidx={reloadTXTidx} token={selectedToken} key={'txt.'+token.numz}/>
+            <hr style={{marginBottom:'0.555em'}}></hr>
+            <TXTViewz setShowEyes={setShowEyes} reloadTXTidx={reloadTXTidx} token={selectedToken} key={'txt.'+token.numz}/>
+            {/* <TXTViewz reloadTXTidx={reloadTXTidx} token={selectedToken} key={'txt.'+token.numz}/> */}
             {/* <TXTViewz token={selectedToken} key={'txt.'+token.numz}/> */}
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
@@ -609,7 +616,8 @@ let TokenCardz = ( {token} ) => {
             <button className='btnLeft' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('left')}}><span style={{fontSize:'1.555em'}}>&#10534;</span>&nbsp;LEFT</button>
 
-            {(selectedToken)?
+            {/* {(selectedToken)? */}
+            {(showEyes)?
             // <>                
             // num {selectedToken.loadTXTidx}
             <button style={{width:'4em',cursor:'pointer',
@@ -617,7 +625,9 @@ let TokenCardz = ( {token} ) => {
                 borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
                 onClick={ ()=>{setCardViewContent('extra')}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button>
                 // </>
-            :<div style={{color:'black'}}>num {selectedToken.loadTXTidx}</div>}
+            : ''
+            // <div style={{color:'black'}}>num {selectedToken.loadTXTidx}</div>
+            }
 
             <button className='btnRight' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('right')}}>RIGHT <span style={{fontSize:'1.555em'}}>&#10532;</span></button>

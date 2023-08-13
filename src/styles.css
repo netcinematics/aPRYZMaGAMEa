@@ -135,7 +135,7 @@
 
  /* PC */
   .AppMain{margin: 0.222em 2.222em 0.222em 2.222em;}
-  .pageTitle{font-size:1.555em; margin:1em;}
+  .pageTitle{font-size:1.555em; margin: 0 1em;}
   .App{min-height:96vh;}
   .mainBorder{ padding: 5% 10%; margin-top:1em;}
   .mainframe{ padding: 1em;}
@@ -226,6 +226,3 @@ body {
   overflow-y:hidden;
 }
 
-.txtItem{
-  font-size:x-small;
-}

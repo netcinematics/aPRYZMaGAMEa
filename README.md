@@ -172,6 +172,7 @@ fake-news
 
 
 
+
 ### aWORDZa -  DESIGN_PRINCIPLES
 
 Uses short, self-descriptive naming-convention, 
@@ -463,3 +464,5 @@ O auto scroll on txt click
 O CARDZ/card1.json to CARDZ/card_awordza_1.json
 
 O dynamically generate card_awrodza_1.json
+
+O found 1 of 44 : batch 1

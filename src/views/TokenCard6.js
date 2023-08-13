@@ -15,7 +15,7 @@ function TokenCard ( { token, setTokenViewfn } ) {
     function onTokenCardClick(  ){ 
         console.log("Token Click:",token.key)
         sonicWoop.play()
-        setTokenViewfn("cardview",token);
+        setTokenViewfn("pageview",token);
     }
 
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',

@@ -11,11 +11,12 @@ export default function MainView () {
     useEffect(() => { document.title = "aPRYZMaGAMEa";  }, []);
 
     return (<>
-    <div className="scrollBarV mainBorder" style={{maxHeight:'78vh'
+    <div className="scrollBarV mainBorder" style={{maxHeight:'82vh'
             // ,overflowY:'scroll'
             
         }}>
-        <header style={{borderRadius:'13px',fontSize:'xxx-large',marginBottom:'0.666em'}}>
+        <header style={{borderRadius:'13px',fontSize:'xxx-large',
+        marginBottom:'0.666em'}}>
         {/* <Zoom>Welcome!</Zoom> */}
         Welcome!!
         </header>

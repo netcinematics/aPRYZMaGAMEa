@@ -113,6 +113,7 @@
     padding: 0.555em;
   }
 
+  
   /* mobile styles here ----------------------------------------- */
   @media only screen and (min-width: 350px) {
     .cardTileBtn{ min-width: 15em; flex: 1 1 0; }
@@ -141,6 +142,9 @@
   .mainframe{ padding: 1em;}
   .cardMain{padding: 2em;display:flex;align-items:center;}
   .iconNav{font-size:1em;cursor:pointer;user-select:none;}
+  .pageHeader{padding:0 3em;}
+  .txtItemTXT{padding:0 6em;}
+  .scrollBarPage{padding:0 6%;}
   /* Generic Mobile styles here*/
   @media only screen and (max-width: 800px) { /* TABLET */
     body{ margin:8px; background-color: #04223c;}
@@ -150,6 +154,9 @@
     .mainBorder{ padding: 4% 8% }
     .mainframe{ padding: 0.888em;}
     .cardMain{padding: 1em;}
+    .pageHeader{padding:0 2em;}
+    .txtItemTXT{padding:0 4em;}
+    .scrollBarPage{padding:0 4%;}
   }  
   @media only screen and (max-width: 500px) { /* PHONE */
     body{ margin:4px;  background-color: #07589f;}
@@ -159,6 +166,9 @@
     .mainBorder{ padding: 2% 3% }
     .mainframe{ padding: 0.444em;}
     .cardMain{padding: 0.444em;}
+    .pageHeader{padding:0 1em;}
+    .txtItemTXT{padding:0 3em;}
+    .scrollBarPage{padding:0 3%;}
   }
 
   /* end mobile styles  ----------------------------------------- */

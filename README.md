@@ -418,16 +418,16 @@ X write all_key_tokenz to prod: token_index_2.json?
 X array WRAP
 X { "all_token_index" : [ changed to  - omni_key_index
 X file name CARDZ omni_key_idx_1.json from all_token_index_3.json
-O remove extra files in CARDZ
-O remove extra css files.
+O remove extra files in CARDZ to bak
+X remove extra css files.
 
 X all OMNI KEY TOKENZ all_into token_index meta_data.
 
 X import load index?
 X loading txt delay test.
 X token_index to omni_key_index
-O add ymd and numz
-O add txtz
+X add ymd and numz
+X add txtz
 O add GAME_STATE.
 
 X loading indicator on main index.
@@ -447,8 +447,8 @@ O batch load, items into
 
 O  sonics cc0 history.
 
-O padding top, top menu
-O padding margin in card index.
+X padding top, top menu
+X padding margin in card index.
 O list of accomplishments.
 O word puzzles. 
 O letter selector, until word is correct - locks in. then share on social media.
@@ -458,11 +458,42 @@ O random-timed-awards (icons as award for number_triggers)
 O batch cardz at 44 
 X batch txtz at 100?
 
-O 1st txt load call for card of txtz. then show by index
-O auto scroll on txt click
+X 1st txt load call for card of txtz. then show by index
+X auto scroll on txt click
 
-O CARDZ/card1.json to CARDZ/card_awordza_1.json
+X CARDZ/card1.json to CARDZ/card_awordza_1.json
 
 O dynamically generate card_awrodza_1.json
 
 O found 1 of 44 : batch 1
+
+O add DYNAMIC_TOKENZ syntax _: and _|
+O - meanz_:
+O - alias_:
+O - exactly_:
+O - ItSeems_:
+O - Observably_:
+O - AnyoneCanSee_:
+O - Principz_:
+O - Paradox_:
+O - CommonFlaw_:
+O - Lawz_:
+O add line breaks
+
+// start here
+O new versions / code clean up.
+O more data (retrace)
+O open up the data pipes.
+O expand input 
+O expand output
+
+O reduce index look up to prime keys (exclude sub keys)
+O render current all_keys to new page
+O render prime_keys batched as cards.
+O prime_keys _this_ is how to specify CARD.
+O each card can have alias_: a b c d _|
+
+O write syntax introduction as docs.
+O render quote
+O render series
+O render titles.

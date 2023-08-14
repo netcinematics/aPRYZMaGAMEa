@@ -1,7 +1,7 @@
 // import './App.css';
 import "./styles.css";  //put all new styles in here.
 import MainView from './views/MainView';
-import TokenGridFrame from './views/TokenGrid8';
+import TokenGridFrame from './views/TokenGrid9';
 import { useState } from 'react';
 
 /*****-SONICZ-****** load from raw to avoid deploy path errors */

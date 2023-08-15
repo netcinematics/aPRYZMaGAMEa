@@ -14,7 +14,7 @@
   }
   
   h1 {
-    margin-top: 0;
+    /* margin-top: 0; */
     font-size: 22px;
   }
   
@@ -134,41 +134,66 @@
     .cardTileBtn{ width:18vw; height:18vw }  
   }
 
+  .selectedAppHalo {
+    border: 1px solid green;
+    border-radius: 100%;
+    padding: 0.222em;
+    box-shadow: inset 1px 1px 10px 0px #209320;    
+  }
+
+  .txtBox1{
+    border: solid 1px steelblue;
+    border-radius: 20px;
+    margin: 1em 8%;
+    padding: 1em 0;
+    box-shadow: 0px 6px 10px 0px #1c2296;   
+    text-align: left;
+    padding-left: 10%; 
+  }
+
  /* PC */
-  .AppMain{margin: 0.222em 2.222em 0.222em 2.222em;}
-  .pageTitle{font-size:1.555em; margin: 0 1em;}
   .App{min-height:96vh;}
+  .AppMain{margin: 0.222em 2.222em 0.222em 2.222em;}
+  .appTitle{margin:1em 0}
+  .pageTitle{font-size:1.555em; margin: 0 1em;}
   .mainBorder{ padding: 5% 10%; margin-top:1em;}
   .mainframe{ padding: 1em;}
   .cardMain{padding: 2em;display:flex;align-items:center;}
-  .iconNav{font-size:1em;cursor:pointer;user-select:none;}
+  .iconNav{font-size:1em;cursor:pointer;user-select:none;margin-top:0.888em}
   .pageHeader{padding:0 3em;}
-  .txtItemTXT{padding:0 6em;}
+  .itemTXTZ{padding:0 6em;}
+  .seriezItem{font-size:1.444em;}
   .scrollBarPage{padding:0 6%;}
   /* Generic Mobile styles here*/
   @media only screen and (max-width: 800px) { /* TABLET */
     body{ margin:8px; background-color: #04223c;}
     .App{padding:2px;}
     .AppMain{margin: 0.222em 1.222em 0.222em 1.222em;}
+    .appTitle{margin:0.888em 0 0 0}    
     .pageTitle{font-size:1.888em}
     .mainBorder{ padding: 4% 8% }
     .mainframe{ padding: 0.888em;}
     .cardMain{padding: 1em;}
+    .iconNav{margin-top:0.333em}
     .pageHeader{padding:0 2em;}
-    .txtItemTXT{padding:0 4em;}
+    .itemTXTZ{padding:0 4em;}
     .scrollBarPage{padding:0 4%;}
+    .seriezItem{font-size:1.2em;}
   }  
   @media only screen and (max-width: 500px) { /* PHONE */
     body{ margin:4px;  background-color: #07589f;}
     .App{padding:0;}
     .AppMain{margin: 0.222em 0.444em 0.222em 0.444em;}
+    .appTitle{margin:0.666em 0 0 0}  
     .pageTitle{font-size:0.888em}
     .mainBorder{ padding: 2% 3% }
-    .mainframe{ padding: 0.444em;}
+    .mainframe{ padding: 0.444em;max-width: 100%;}
     .cardMain{padding: 0.444em;}
+    .iconNav{margin-top:0.111em}    
     .pageHeader{padding:0 1em;}
-    .txtItemTXT{padding:0 3em;}
+    .itemTXTZ{padding:0 3em;}
     .scrollBarPage{padding:0 3%;}
+    .seriezItem{font-size:1em;}
   }
 
   /* end mobile styles  ----------------------------------------- */
@@ -210,7 +235,7 @@ hr{
   box-shadow: rgb(61 182 232) 1px 3px 2px 0px;
   border: 1px solid steelblue;
   border-radius: 100%;
-  margin: 1em auto 2em;
+  margin: 1.888em auto;
 }
 
 ::marker {

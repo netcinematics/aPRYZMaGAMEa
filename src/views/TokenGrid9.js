@@ -321,16 +321,37 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
                 </header>
                     
 
-                <article className='txtItemTXT' style={
+                <article className='itemTXTZ' style={
                     (item.type==='quote')
                     ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
                     ,fontStyle:'italic'}
-                    :(item.type==='series')
-                    ?{fontSize:'1.444em',fontFamily:'monospace'}
+                    :(item.type==='seriez')
+                    ?{fontSize:'0.888em',fontFamily:'monospace'}
                     :{fontSize:'1em'}
-                }>{item.txt}</article>
+                  }>
+                  {(item.type==='txtz' && item.txtz.length)
+                    ? item.txtz.map( (item,idx)=>{
+                        return <section className='txtzItem' style={
+                            (item.txt.indexOf('-')>-1)
+                            ?{textAlign:'justify',margin:'0em',color:'#5279f5'}
+                            :{textAlign:'justify',
+                              margin:'1.444em 0em',color:'#8461cc'}
+                        }>{item.txt}</section>;
+                    } )
+                    :(item.type==='seriez' && item.txtz.length)
+                    ? item.txtz.map( (item,idx)=>{
+                        return <section className='seriezItem' style={
+                            (item.txt.indexOf('-')>-1)
+                            ?{textAlign:'justify',margin:'0em',color:'#5279f5'}
+                            :{textAlign:'justify',
+                              margin:'1.444em 0em',color:'#8461cc'}
+                        }>{item.txt}</section>;
+                    } )
+                    : item.txt }
+                </article>
 
-                <footer style={{display:'flex',justifyContent:'space-between'}}>
+                <footer style={{display:'flex',justifyContent:'space-between',
+                    marginTop:'1.666em'}}>
                     <aside style={{fontSize:'xx-small'}}>{item.ymd}</aside>
                     <aside style={{fontSize:'xx-small'}}>{item.type}</aside>
                 </footer>
@@ -475,7 +496,7 @@ function lookUpNUMZToken(tgt){
     }
 }
  
-function TokenGrid (){ 
+function CardView (){ 
     let COLNUM=6; //column length, must be dependent on layout, per device.
     let colmz = [];
     let colm  = [];
@@ -673,15 +694,7 @@ function setSelectedTXTz(newTXTz,loadTXTidx){
 
 return (
 <>
-{/* <nav className='iconNav' style={{display:'flex',
-    justifyContent:'space-between'}}>
-        <span onClick={(e)=>{clickNav('home')}}>&#127984;</span>
-        <span onClick={(e)=>{clickNav('game')}}>&#9889;</span>
-        <span onClick={(e)=>{clickNav('stats')}}>&#127775;</span> 
-        <span onClick={(e)=>{clickNav('rules')}}>&#128161;</span>
- 
 
-</nav> */}
 <article style={{
     // maxHeight:'77vh'
     flex:'1',
@@ -693,13 +706,15 @@ return (
     }}>
 
 {/* <section> */}
-<h1>aPRYZMaGAMEa</h1>
+<h1 className="appTitle">aPRYZMaGAMEa</h1>
 <div className='scrollBarV' style={{maxHeight:'83vh',minWidth:'98%'}} >
 <div className='scrollBarH' style={{
     maxHeight:'83vh'
     }} >
 <main className='cardMain' style={{display:'flex'
-    // justifyContent:'center'
+// ,minWidth:'98%'
+// ,paddingRight:'3em'
+    // ,justifyContent:'center'
 }}>
     <section className='mainframe' style={{display:'flex',
     boxShadow:'0px 1px 14px 1px purple',
@@ -707,11 +722,12 @@ return (
     marginTop:'0.444em',
     // paddingLeft:'1.444em',paddingRight:'1.444em',
     // marginRight:'1em',marginLeft:'1em',
-    // marginRight:'1em',
-    flex:1,
+    // marginRight:'1em'
+    // marginRight:'3em',
+    flex:'1 1 auto',
     borderRadius:'13px',
-    maxHeight:'75vh',
-    width:'100%'
+    // maxHeight:'75vh',
+    // width:'100%'
     } }>
         { (!tokenz_CARD_COUNT)?
             <div style={{width:'100%',margin:'44%',marginLeft:'40%'}}>loading...</div>
@@ -719,12 +735,13 @@ return (
         }
 
         { (viewState==='overview') ? 
-            <TokenGrid/>
+            <CardView/>
         : (viewState==='pageview') ? //todo pageview?
            <TokenCardz token={selectedToken}/>
-        : <TokenGrid/>
+        : <CardView/>
         }
     </section>
+    <div style={{}}>&nbsp;&nbsp;&nbsp;&nbsp;</div>
         </main>
         </div>
         </div>

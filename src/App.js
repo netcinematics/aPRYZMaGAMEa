@@ -1,6 +1,8 @@
 // import './App.css';
 import "./styles.css";  //put all new styles in here.
 import MainView from './views/MainView';
+import StatsView from './views/StatsView';
+import RulesView from './views/RulesView';
 import TokenGridFrame from './views/TokenGrid9';
 import { useState } from 'react';
 
@@ -34,10 +36,11 @@ function App() {
         }}>
           <nav className='iconNav' style={{display:'flex',
     justifyContent:'space-between'}}>
-        <span onClick={(e)=>{clickNav('home')}}>&#127984;</span>
-        <span onClick={(e)=>{clickNav('game')}}>&#9889;</span>
-        <span onClick={(e)=>{clickNav('stats')}}>&#127775;</span> 
-        <span onClick={(e)=>{clickNav('rules')}}>&#128161;</span>
+      {/* appIDX */}
+        <span className={(appIDX==='home')?'selectedAppHalo':''} onClick={(e)=>{clickNav('home')}}>&#127984;</span>
+        <span className={(appIDX==='game')?'selectedAppHalo':''} onClick={(e)=>{clickNav('game')}}>&#9889;</span>
+        <span className={(appIDX==='stats')?'selectedAppHalo':''} onClick={(e)=>{clickNav('stats')}}>&#127775;</span> 
+        <span className={(appIDX==='rules')?'selectedAppHalo':''} onClick={(e)=>{clickNav('rules')}}>&#128161;</span>
          </nav>
 
       {         
@@ -50,10 +53,10 @@ function App() {
             return <MainView/>;
           } else if (appIDX === 'stats'){
             sonicSonar.play();
-            return <MainView/>;            
+            return <StatsView/>;            
           } else if (appIDX === 'rules'){
             sonicSonar.play();
-            return <MainView/>;
+            return <RulesView/>;
           }
           
           // else {

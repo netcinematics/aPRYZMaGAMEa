@@ -1,14 +1,80 @@
 import Typewriter from "typewriter-effect";
 // import Zoom from 'react-reveal/Zoom';
 // import Fade from 'react-reveal/Fade';
+import { useState, useEffect } from 'react';
+import axios from 'axios'
 
 // import SocialPhrases_2 from '../data/SocialPhrases_2.js'
-import { useEffect } from "react";
+// import { useEffect } from "react";
 // import {useEffect, useState} from 'react'
 import "../styles.css";
 
-export default function MainView () {
+
+export default function RuleView () {
     useEffect(() => { document.title = "aPRYZMaGAMEa";  }, []);
+
+    let [tokenz_INDEX_DATA, setTokenz_INDEX_DATA] = useState([]);
+    useEffect(() => { getTokenzINDEX() }, [setTokenz_INDEX_DATA]); 
+    function getTokenzINDEX(){ //SHOW MAIN CARDS.
+        const options = {
+            method: 'GET',
+            // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_0.json', //prod url
+            // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_2.json', //prod url
+            url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/omni_key_idx_1.json', //prod url
+        }
+        axios.request(options).then((response) => {
+            // setTokenz_INDEX_DATA(response.data.token_index)
+    
+            
+    
+            setTokenz_INDEX_DATA(response.data.omni_key_index)
+            // setTokenz_INDEX_DATA(response.data.omni_key_index)
+            // setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
+            // setTokenz_CARD_COUNT("token_index "+response.data.omni_key_index.length)
+        }).catch((error) => {
+            console.error(error)
+            // setTokenz_CARD_COUNT("no data")
+        })    
+    }
+
+
+    function ListView (){ 
+        let COLNUM=6; //column length, must be dependent on layout, per device.
+        let colmz = [];
+        let colm  = [];
+        let humanIDX = 0; //column header
+        let tokenCOLUMNS = [];
+        for(let i=0; i < tokenz_INDEX_DATA.length; i += COLNUM){
+            colm = tokenz_INDEX_DATA.slice(i, i+COLNUM);
+            colmz.push(colm);
+            ++humanIDX;
+             tokenCOLUMNS.push( 
+             <div  key={'col_'+i} style={{display:'flex',flexDirection:'column',
+               flex:'1 1 0',borderLeft:'1px solid purple',
+               borderRadius:'13px',margin:'1em'}}>
+                <header style={{minHeight:'2em'}}></header>
+                <header>{humanIDX}</header>
+                { 
+                colm.map( (token,idx) => { 
+                    token.numz = humanIDX.toString()+'.'+(idx+1).toString();       //apply dynamic_numz
+                    return <section style={{
+                        textAlign:'left',
+                        marginLeft:'1em',
+                        padding:'0.666em 0'
+                        }}>
+                        {token.title} {token.numz} {token.key}</section>
+                    // return <Token token={token}/>
+                }) 
+                }
+                {/* <footer style={{minHeight:'3em'}}></footer> */}
+             </div> 
+             );
+        }  
+        // setTokenz_COLUMN_COUNT(humanIDX)  
+        // setTokenz_COLUMN_LENGTH(COLNUM)  
+    
+        return(tokenCOLUMNS)
+    }
 
     return (<>
     <div className="scrollBarV mainBorder" style={{maxHeight:'82vh'
@@ -18,12 +84,13 @@ export default function MainView () {
         <header style={{borderRadius:'13px',fontSize:'xxx-large',
         marginBottom:'0.666em'}}>
         {/* <Zoom>Welcome!</Zoom> */}
-        Welcome!
+        Guide~View
         </header>
         <article style={{height:'90%',display:'flex',flexDirection:'column',justifyContent:'space-evenly',
             borderRadius:'10px', backgroundColor: 'rgb(22 35 62)',paddingTop:'2em'}}>
             <code>Artificial Intelligence Word Games.</code><br/>
             <p>AI_WORD_GAMEZ.</p>
+            <ListView/>
             <pre><i>u wanna try?</i></pre>
             <hr style={{width:'88%',height:'6px',boxShadow:'-3px 15px 7px 0px #180018',
                 border:'1px solid skyblue',borderRadius:'100%',margin:'1em auto',

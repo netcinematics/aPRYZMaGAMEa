@@ -3,8 +3,8 @@
   "txtz":[
     {
         "title":"intro aWordza",
-        "type": "SOLO_TXT",
-        "txt": "aWordza is a software tool, to generatively_articulate_metadata. With a practice to generate_better_words, and concepts_underneath_words, for metadata abstraction comparison. As a NATURAL LANGUAGE PROCESSING engine from ARTIFICIAL INTELLIGENCE.",
+        "type": "txtz",
+        "txtz": ["aWordza is a software tool, to generatively_articulate_metadata. "," With a practice to generate_better_words, and concepts_underneath_words, "," for meta_abstraction.","As a NATURAL LANGUAGE PROCESSING engine of NLP/_Ai."],
         "numz": "1.1.1",
         "ymd":"2023_8_12"
     },

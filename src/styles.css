@@ -151,6 +151,18 @@
     padding-left: 10%; 
   }
 
+  .txtBox2{
+    font-size: 1em;
+    margin: 0.222em 4%;
+    padding: 0 1em 0 8%;
+    color: steelblue;
+    border: solid 1px steelblue;
+    border-radius: 20px;
+    box-shadow: inset 0px -1px 5px 0px #1c2296;
+    text-align: left;
+    
+  }
+
  /* PC */
   .App{min-height:96vh;}
   .AppMain{margin: 0.222em 2.222em 0.222em 2.222em;}

@@ -5,7 +5,7 @@
         "title":"intro aWordza",
         "type": "txtz",
         "txtz": ["aWordza is a software tool,","to add CONTEXT metadata to song-lyrics.",
-        "With gamification of concepts_underneath_wordz,","and aBetterWordza.",
+        "With gamification of","- concepts_underneath_wordz and,","- aBetterWordza.",
         "For improved metadata context in Ai/NLP."],
         "numz": "1.1.1",
         "ymd":"2023_8_12"

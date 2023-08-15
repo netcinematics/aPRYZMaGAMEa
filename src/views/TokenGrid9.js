@@ -321,7 +321,7 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
                 </header>
                     
 
-                <article className={(item.type==='txtz')?'txtBox1':'itemTXTZ'} style={
+                <article className={(item.type==='txtz')?'txtBox2':'itemTXTZ'} style={
                     (item.type==='quote')
                     ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
                     ,fontStyle:'italic'}
@@ -332,17 +332,16 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
                   {(item.type==='txtz' && item.txtz.length)
                     ? item.txtz.map( (item,idx)=>{
                         return <section className='txtzItem' style={
-                            (item.indexOf('-')>-1)
-                            ?{textAlign:'justify',margin:'0em',color:'#5279f5'}
-                            :{textAlign:'justify',fontStyle:'italic',
-                              margin:'1.444em 0em',color:'#8461cc'}
+                            (item.split(" ").filter( item => item )[0]==='-') //special_hyphen
+                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
+                            :{margin:'1.444em 0em'}
                         }>{item}</section>;
                     } )
                     :(item.type==='seriez' && item.txtz.length)
                     ? item.txtz.map( (item,idx)=>{
                         return <section className='seriezItem' style={
-                            (item.txt.indexOf('-')>-1)
-                            ?{textAlign:'justify',margin:'0em',color:'#5279f5'}
+                            (item.txt.split(" ").filter( item => item )[0]==='-') //special_hyphen
+                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
                             :{textAlign:'justify',margin:'1.444em 0em',color:'#8461cc'}
                         }>{item.txt}</section>;
                     } )

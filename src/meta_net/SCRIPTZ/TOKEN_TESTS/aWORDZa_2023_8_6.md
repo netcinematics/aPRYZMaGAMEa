@@ -1,65 +1,88 @@
 # _aWORDZa_
 
-meanz: actual_actz_of_wordz. 
-
-pronounced: ah-words-ah
-
-And the z_miss_spelling meanz: 'clarified', 'articulated', or remarkable.
-
-
----
-
-SIG_ENZO_~:)
-YMD_2023_8_6
+alias_: actual_act_of_wordz, awordz, wordz, awordza.
+meanz_: actual_actz_of_wordz.
+pronounced_: ah-words-ah.
+goalz_: ai_mapz_to_axi
 
 ---
 
 ## What is aWORDZa?
 
-aWordza is a software tool, to generatively_articulate_metadata. With a practice to generate_better_words, and concepts_underneath_words, for metadata abstraction comparison. As a NATURAL LANGUAGE PROCESSING engine from ARTIFICIAL INTELLIGENCE.
+aWordza is a ontology and taxonomy generator. Set as a WORD_GAME, to solve the ai problem of generating articulated context_metadata for large language models. It takes a unique design approach, with innovative design principles - for amazing results.
 
-### aWORDaGAME
+In this third iteration of the Tokenizer Engine, the goal is to generate_better_words, and concepts_underneath_words, from a newly defined SYNTAX and NAMING CONVENTION, to most effectively maxmimize_contextual_clarity. For metadata_abstraction_comparison. 
 
-pronounced: ah-word-ah-GAHM-eee, like oragami.
+And for future lexical NATURAL LANGUAGE PROCESSING engines in AI. Originally designed to rhyme song lyrics, then given new syntax, to be a taxonomy and ontology - and then on to something else. aWORDza_to_aSYMBOLza. All the information is here (somewhere). Enjoy. ~:)
 
-meanz: actual word oragami.
+### _aWORDaGAMEa_
 
+pronounced_: ah-word-ah-GAHM-eee, like oragami.
 
-## How to play aWORDZa?
+meanz_: actual word oragami.
 
-Start by exploring in any direction. Literally, any word you aCHOOZE is a_good_start.
+aliaz_: aWORDaGAME, word_game, actual_word_game, actual_act_of_word_games, awordagamea.
 
-> you actually_chooze_to_seek_awordza.
+~~~
 
-This concept, is called aSEEKa, which meanz: actual_actz_of_seeking. And can be further articulated as aSEEKaWORDZa, meanz: actual_actz_of_seeking_articulated_wordz
+aWORDaGAME_Challenge meanz_: convert wordz to more accurately describe actual_reality, in as few characters as possible.
 
-> We all choose to seek something. We_all_aChoozeaSeeka.
+~~~
 
-Begin listening to all words, and transform them into WORDZ in your mind.
+## How to play aWORDaGAMEa?
+
+Start by exploring in any direction. Literally, any_viewz_you_aCHOOZE is a_good_start.
+Pick any of the wordz, and start pulling on that thread... called seeking. 
+
+Basically, you start by start_seeking_clues.
+
+> actually_chooze_to_seek_awordza.
+
+This prime_concept, is called _aSEEKa_, which meanz: actual_actz_of_seeking. And can be further described as _aSEEKaWORDZa_, meanz: actual_actz_of_seeking_articulated_wordz.
+
+> We_all_choose_to_seek_some_things. 
+
+1. So we start, at whatever it is, that you_chooze_to_seek!
+
+We_all_aChoozeaSeeka.
+
+---
+
+2. Then, use all wordz possible, around your focus, to construct _aVIEWZa_.
+
+Begin listening to all words, and transform them into CONZEPTZ_beneath_WORDZ.
 
 > seek concepts that you have never thought before.
 
-And then the advanced version of the game is to
+~~~
 
-> Seek_conceptz_no_human_mind_has_ever_thought_before.
+With the advanced version of aWORDaGAMEa to_: Seek_conceptz_no_human_mind_has_ever_thought_before.
 
-Or in short, _aSeekaConceptzaBeyondUs_
+~~~
+
+_aSEEKa_ alias_: aSeeka_Conceptas_BeyondUs
 
 > Look_into_questions_that_all_human_minds_overlook.
 
-And that's how it works!
+3. Practice_Actual_Focus
 
-## INTRO to aWORDZa
+4. then aPRYZMaGAMEa, and aSYMBOLza.
+
+That's the high level overview! 
+
+> aWORDZa is an ai wordgame, first used to rhyme song lyrics.
+
+## INTO aWORDZa
 
 aWordza helps apply words to concepts, in a general way. 
 
-Any mind can Look_for_missing_words, or look_for_concepts_actually_beyond_us. 
-We just have to practice_focus. We just have to chooze. We just have to play a game of combining words together - until they best_reflect_actual_reality.
-If we_chooze_to_look, anyone_can_see - extra_conceptz_exist_in_all_directions.
+It has many principles to most simply, structure vast arrays of text with topics.
 
-> aWORDZa is a systematic method of linguistics, to automatically name and organize, all concepts that could possibly exist, for_all_time.
+Here are a few principles.
 
-As an engine that can accellerate in the direction of separating clarification from confuzion and actual_extra_intelligence, by defining exactly, a_nature_of_misinformation.
+### Principle_of_fewest_letters_and_words
+
+> The goal is to maximize concept articulation, with the fewest characters possible.
 
 ### Example Gameplay:
 
@@ -84,15 +107,19 @@ It is tremendously fulfilling to experience.
 
 ### How does is work?
 
-aWordza has a simplified_language_syntax, compared to English. It is more flexible, and more robust, to combine words together. There are many DESIGN_PRINCIPLES applied elegantly, to try ENHANCE_HUMAN_LANGUAGE to maximum level using tools. 
+aWordza uses a simplified_language_syntax, called _Enhanced_English_. It is more flexible, and robust, to combine words together, and articulate_conceptz_exactly. Major aspects were improved, as syntax and naming convention, to reduce the complexities into simplicities.
 
-- From a technical standpoint, aWORDZa is just a loop over all words, and then a system for describing them exactly. 
+Future wordz, will detail the many design principles applied elegantly, to try ENHANCE_HUMAN_LANGUAGE to maximum level using tools. 
+
+- From a technical standpoint, aWORDZa is just a loop over all words, and then a system for describing them exactly in metadata. 
 
 - From a design standpoint - it is a_GAME_of_WORDZ. 
 
 Following the SIMPLIFIED_LANGUAGE_SYNTAX (naming-convention) - a_WORD_GAME of playing aWORDaGAMEa through aPRYZMaWORDZa.
 
-Where the PRIME_GOAL is clearest_reflection_of_actual_reality.
+> Where a goal is to fold_wordz_like_oragami, until we randomly arrive at, a_clearer_reflection_of_actual_reality.
+
+conzeptz_await_us, and aWORDZa folds them into existence before us, as a game.
 
 ---
 
@@ -116,6 +143,8 @@ The PRIME_GOAL is to:
 
 ## PRINCIPLES_of_aWORDZa
 
+principz_:
+
 1. **a_self_descriptiveness**, means: All META-DATA needs to be all_human_self_descriptive. Where, all_human_mind should be able to read wordz and understand simultaneously max degree, with minimum aConfuzion.
 
 2. **a_syntax_conciseness**, meanz: all META-DATA needs to be human_concise_syntax meanz: short and brief, while also exact and specific.
@@ -134,17 +163,17 @@ Overall, the game is to identify - the clearest possible articulations - of actu
 The SLS (simplified_language_syntax), reduces the complexity_of_english.
 With remarkably few characters!
 
-1. **UNIVERSAL_UNDERSCORE**, meanz: a single character to define all metadata. Underscore wrapped words meanz: _PRIME_KEY_. Underscores internally, are called sub_key. 
+1. UNIVERSAL_UNDERSCORE, meanz: a single character to define all metadata. Underscore wrapped words meanz: PRIME_KEY. Underscores internally, are called sub_key. 
 
-GOALZ: most_human_readable and most_human_memorable, and most_human_usable.
+GOALZ_: most_human_readable and most_human_memorable, and most_human_usable!!!
 
-2. **ALPHA_KEYZ**, are in the format of aWORDZa.
+2. ALPHA_KEYZ, are in the camel-case format of aWORDZa.
 
-Wrapped inbetween two little-a's. The little_a_prefix, meanz: 'actual' giving a way to articulate wordz specific to actual_reality. Like,  _ActuReality_, meanz: actual_reality.
+Wrapped inbetween two little-a's. The little_a_prefix, meanz: 'actual' giving a way to articulate wordz specific to actual_reality. Like,  ActuReality, meanz: actual_reality.
 
 > Apart from aDisActualReality exists aEnActualReality
 
-3. **ACTZ** is the little_a_postfix. Like a NOUN, it defines all_human_actions
+3. ACTZ is the little_a_postfix. Like a NOUN, it defines all_human_actions
 
 4. **z-miss-spelling**, meanz: enhanced, articulated, or remarkable. And its primary purpose is to reliably make common_words_unique, for ability to define exactness again.
 
@@ -154,4 +183,7 @@ Wrapped inbetween two little-a's. The little_a_prefix, meanz: 'actual' giving a 
 
 Give it a try. Chooze to study aWORDZa. Start combining wordz. And experience JOY in the discovery of all_that_exists. Beyond_your_mind, and beyond_all_human_mind. Use aWORDaGAMEa to define many viewz, and experience the thrill_of_discovery, as words become WORDZ and concepts generatively_reflect_actureality.
 
-nJoy, SIG_ENZO~:)
+nJoy!!!
+SIG_ENZO_~:)
+YMD_2023_8_6
+~0~ THE_ENDZ!!!

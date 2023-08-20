@@ -160,7 +160,6 @@
     border-radius: 20px;
     box-shadow: inset 0px -1px 5px 0px #1c2296;
     text-align: left;
-    
   }
 
  /* PC */
@@ -175,6 +174,7 @@
   .pageHeader{padding:0 3em;}
   .itemTXTZ{padding:0 6em;}
   .seriezItem{font-size:1.444em;}
+  .txtzItem{font-size:1.222em;}
   .scrollBarPage{padding:0 6%;}
   /* Generic Mobile styles here*/
   @media only screen and (max-width: 800px) { /* TABLET */
@@ -191,6 +191,8 @@
     .itemTXTZ{padding:0 4em;}
     .scrollBarPage{padding:0 4%;}
     .seriezItem{font-size:1.2em;}
+    .txzItem{font-size:1.111em;}
+    .txtBox2{margin:0.111em 2%;}
   }  
   @media only screen and (max-width: 500px) { /* PHONE */
     body{ margin:4px;  background-color: #07589f;}
@@ -206,6 +208,8 @@
     .itemTXTZ{padding:0 3em;}
     .scrollBarPage{padding:0 3%;}
     .seriezItem{font-size:1em;}
+    .txtzItem{font-size:1em;}
+    .txtBox2{margin:0 1%;}
   }
 
   /* end mobile styles  ----------------------------------------- */

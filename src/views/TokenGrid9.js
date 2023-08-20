@@ -333,7 +333,8 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
                     ? item.txtz.map( (item,idx)=>{
                         return <section className='txtzItem' style={
                             (item.split(" ").filter( item => item )[0]==='-') //special_hyphen
-                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
+                            ?{margin:'0em',color:'#50718c',fontStyle:'italic'
+                            ,padding:'0.444em 0 0.444em 0.444em'}
                             :{margin:'1.444em 0em'}
                         }>{item}</section>;
                     } )

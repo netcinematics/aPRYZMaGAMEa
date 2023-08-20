@@ -98,7 +98,7 @@ export default function RuleView () {
 
             {/* <Fade delay={1e3} cascade damping={1e-1}> */}
             <div className="sub">
-                <Typewriter style={{fontSize:'x-large',paddingTop:'1em'}}
+                {/* <Typewriter style={{fontSize:'x-large',paddingTop:'1em'}}
                     options={{
                     strings: ["a WORKSPACE for Ai CONCEPTS!", 
                             "NLP and LLMs in JavaScript,",
@@ -110,7 +110,8 @@ export default function RuleView () {
                     delay: 100,
                     changeDeleteSpeed:4444
                     }}
-                />
+                /> */}
+               
             </div>
             <hr style={{width:'88%',height:'6px',boxShadow:'-3px 15px 7px 0px #180018',
                 border:'1px solid skyblue',borderRadius:'100%',margin:'1em auto',marginTop:'2em'}}></hr>

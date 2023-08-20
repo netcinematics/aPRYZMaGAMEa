@@ -102,35 +102,26 @@ O show txt_tgt below with meta.linkz
 
 O random colors for keys
 
+O convert topics into card_awordza_2.json
+X reduce omni to prime keys only
+O create cards for prime keys
+O use alias attribute to define aliases (statically)
+O write to cards with alias lookup.
+O txt format per cards.
 
-//AXI:TOKEN_WEB_ARCHITECTURE.
+O add in special_operator functionality
+O add in alias_: line-check, functionality.
+O push to aliaz_: array.
+O push to numz array.
+O fix  create_token_cardz
+O first prime item empty.
+
+O remove dupe aseeka in prime_key_idx
+O remove ** and () in topics
+
+O ~0~ THE_END
 
 
-key4_to_key3 = 'actual to a, split by _, first capitals, join by blank'
-'actual to a, split by _, first capitals, join by blank'
-key3_to_key_4 = 'a becomes actual, split by capitals, join by _'
-'a becomes actual, split by capitals, join by _'
-key1_to_key2 = 'little-a-prefix-ascending to actual, lowercase token, postfix-a to act_of_'
-'little-a-prefix-ascending to actual, lowercase token, postfix-a to act_of_'
-key2_to_key1 = 'actual to little-a, token to uppercase first, act_of to postfix-a'
-'actual to little-a, token to uppercase first, act_of to postfix-a'
-let key4 = 'actual_something_cool_like_this'
-undefined
-let key3 = 'aSomethingCoolLikeThis'
-undefined
-let key2 = 'actual_act_of_wordz'
-undefined
-let key1 = 'aWORDZa'
 
-//NOTE new SYNTAX _:  _.
-
-can be used for
-
-meanz_: some description txt. _;
-
-exactlyWhere_: _;
-
-sig_: enzo ~:) _;
-ymd_: 2023_8_10
 
 

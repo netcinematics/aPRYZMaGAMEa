@@ -1,0 +1,53 @@
+{
+    "type": "prime_key_card",
+    "key": "_aSEEKa_",
+    "txtz": [
+        {
+            "type": "prime_card_token",
+            "key": "_aSEEKa_",
+            "keyz": [
+                "_aSEEKa_",
+                "_aSEEKa_",
+                "_aSEEKa_"
+            ],
+            "title": "",
+            "txtz": [
+                {
+                    "type": "sub_txt",
+                    "txt": " This prime_concept, is called _aSEEKa_, which meanz: actual_actz_of_seeking. And can be further described as _aSEEKaWORDZa_, meanz: actual_actz_of_seeking_articulated_wordz. ",
+                    "numz": "1.3.sub:4"
+                },
+                {
+                    "type": "sub_txt",
+                    "txt": " We_all_aChoozeaSeeka. ",
+                    "numz": "1.3.sub:5"
+                },
+                {
+                    "type": "sub_txt",
+                    "txt": " _aSEEKa_ alias_: aSeeka_Conceptas_BeyondUs ",
+                    "numz": "1.3.sub:8"
+                }
+            ],
+            "aliaz": [
+                "aseeka_conceptas_beyondus"
+            ],
+            "topicz": "subtxt",
+            "ymdz": [],
+            "numz": "1.3.20:cardz"
+        }
+    ],
+    "tgt_path": "./TOKEN_TESTS/aWORDZa_2023_8_6.md",
+    "ymdz": [
+        [
+            "YMD_2020_1_1",
+            "YMD_2023_8_21"
+        ]
+    ],
+    "input": "LIBZ",
+    "output": "CARDZ",
+    "version": "444",
+    "engine": "C:\\PROJECTS\\CRYPTO\\aPRYZMaGAMEa\\src\\meta_net\\SCRIPTZ\\AdvancedTokenizer_3.js",
+    "srcmap": [
+        "./TOKEN_TESTS/aWORDZa_2023_8_6.md"
+    ]
+}

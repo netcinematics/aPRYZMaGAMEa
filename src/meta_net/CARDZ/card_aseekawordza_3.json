@@ -1,0 +1,21 @@
+[
+    {
+        "type": "prime_card_token",
+        "key": "_aSEEKaWORDZa_",
+        "keyz": [
+            "_aSEEKaWORDZa_"
+        ],
+        "title": "",
+        "txtz": [
+            {
+                "type": "sub_txt",
+                "txt": " This prime_concept, is called _aSEEKa_, which meanz: actual_actz_of_seeking. And can be further described as _aSEEKaWORDZa_, meanz: actual_actz_of_seeking_articulated_wordz. ",
+                "numz": "1.3.sub:4"
+            }
+        ],
+        "aliaz": [],
+        "topicz": "subtxt",
+        "ymdz": [],
+        "numz": "1.3.21:cardz"
+    }
+]

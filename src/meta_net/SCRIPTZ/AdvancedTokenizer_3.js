@@ -932,32 +932,6 @@
  } //END advanced tokenizer
  //---------------------------------------------------------
  /********************************************************\
-  DATA_WRAPPERZ : PURPOSE : 
-  DATA--TRANSLATION
-  \*******************************************************/
-// function wrap_KEY_ALIASES_with_METADATA(){ //SPECIFY CONTENT PAYLOAD
-//     RUNTIME_STATE.setz.old_omni_key_idx_obj = { //OBJECT-ARRAY-WRAPPER.
-//         "omni_key_index":RUNTIME_STATE.setz.all_omni_keyz
-//     }
-// }
-//todo inline all wrappers.
-
-
-//  function wrap_METADATA(){
-//      let meta_wrap_tokenz = {
-//          tgt : RUNTIME_STATE.tgt_path,
-//          type : '_', //underscore as master_token_delimiter
-//          tokenz: [],
-//          ymdz : RUNTIME_STATE.ymdz,
-//          lookup : "LIBZ",
-//          output : "CARDZ",
-//          engine : RUNTIME_STATE.manifest.engine,
-//          srcmap : RUNTIME_STATE.manifest.srcmap,
-//      } 
-//      return meta_wrap_tokenz
-//  }
- 
-/***********END - DATA-WRAPPERZ*****************/
 //--------------------------------------------
 
 /***********************************************
@@ -1029,9 +1003,6 @@
             console.log(' - Written to file: ',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
         });
     }; write_out_DEV_omni_keyz();
- 
-    //TODO write_out_DEV_files = ()
-    //TODO write_out_PRODUCTION_files = ()
 
     let write_out_all_topic_tokenz = () => {
         if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_topic_tokenz){return}
@@ -1098,7 +1069,7 @@
         }; create_output_folders();
 
 
-        debugger;
+        // debugger;
         /***********************************************\
          * WRITE OUT DYNAMIC CARDZ with TOKENZ.
         //load card txtz with all reference to key.
@@ -1161,8 +1132,216 @@
     //     });
     // }; write_out_production_prime_key_index();
 
- }
-
+ } //END WRITEOutTOKENZ
+ //--------------------------------------------
+ //TODO add refactored output here, with grouping of DEV and PROD sub fnz.
+ //--------------------------------------------
+ let writeOutAllFilez = ()=> {//-----------------------------------
+    // debugger;
+        const create_DEV_output_folder = ()=>{ //backup files.
+            let data_folder = 'YMD_'+RUNTIME_STATE.manifest.year+'_'+RUNTIME_STATE.manifest.month+'_'+RUNTIME_STATE.manifest.day
+            RUNTIME_STATE.manifest.output.push('../SCRIPTZ/TOKEN_DATA/'+ data_folder) //artifacts of building cards.
+            console.log('3) WRITE DEV File(s) to: ', RUNTIME_STATE.manifest.output[0]) //DEV PATH
+            try { //DEV PATH
+            if (!fs.existsSync(RUNTIME_STATE.manifest.output[0])) {
+                fs.mkdirSync(RUNTIME_STATE.manifest.output[0]);
+            }
+            } catch (err) {
+            console.error("could not save backup",err);
+            }//----------------------------------------------------
+        }; create_DEV_output_folder();
+        const create_PROD_output_folders = ()=>{           
+            let production_folder_idxz = `../IDXZ`
+            RUNTIME_STATE.manifest.output.push(production_folder_idxz) //artifacts of building cards.
+            console.log('3) WRITE PROD IDX(z) to: ', RUNTIME_STATE.manifest.output[1]) //PROD IDX_PATH
+            try {
+                if (!fs.existsSync(RUNTIME_STATE.manifest.output[1])) {
+                    fs.mkdirSync(RUNTIME_STATE.manifest.output[1]);
+                }
+            } catch (err) {
+            console.error("could not save output",err);
+            }   //-----------------------------------------------       
+            let production_folder_topicz = `../TOPICZ`
+            RUNTIME_STATE.manifest.output.push(production_folder_topicz) //artifacts of building topics.
+            console.log('3) WRITE PROD TOPIC(z) to: ', RUNTIME_STATE.manifest.output[2]) //PROD TOPICZ_PATH
+            try {
+                if (!fs.existsSync(RUNTIME_STATE.manifest.output[2])) {
+                    fs.mkdirSync(RUNTIME_STATE.manifest.output[2]);
+                }
+            } catch (err) {
+            console.error("could not save output",err);
+            }  //---------------------------------------------------             
+            let production_folder_cardz = `../CARDZ`
+            RUNTIME_STATE.manifest.output.push(production_folder_cardz) //artifacts of building cards.
+            console.log('3) WRITE PROD CARD(z) to: ', RUNTIME_STATE.manifest.output[3]) //PROD CARDZ_PATH
+            try {
+                if (!fs.existsSync(RUNTIME_STATE.manifest.output[3])) {
+                    fs.mkdirSync(RUNTIME_STATE.manifest.output[3]);
+                }
+            } catch (err) {
+            console.error("could not save output",err);
+            } //------------------------------------------------              
+        }; create_PROD_output_folders();
+        //---------------------------------- END CREATE FOLDERS.
+        //---------------------------------- BEGIN WRITE OUT DATA
+        let writeOutIDXz = ()=> {
+            let writeIDXZ_DEV = ()=>{ //-------------------------output 1 : DEV IDX : prime & omni.
+                let write_out_DEV_prime_key_index = ()=>{
+                    let tgt = 'prime_key_idx_3.json' //PRODUCTION_PRODUCT-.
+                    fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify({"prime_key_idx":RUNTIME_STATE.setz.prime_key_idx}), err => {
+                        if (err) { console.error(err); } 
+                        console.log(' - Written to DEV', RUNTIME_STATE.manifest.output[0]+"/"+tgt)
+                    });
+                }; write_out_DEV_prime_key_index();
+                //----------------------------------------------------------
+                let write_out_DEV_omni_keyz = () => { //FILE-OUTPUT: OMNI_KEY_INDEX
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.omni_key_idx){return}
+                    let tgt = "omni_key_idx_3.json"
+                    fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify({"omni_key_idx":RUNTIME_STATE.setz.omni_key_idx}), err => {
+                        if (err) { console.error(err); } 
+                        RUNTIME_STATE.manifest.output.push(tgt)
+                        console.log(' - Written to DEV: ',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
+                    });
+                }; write_out_DEV_omni_keyz();
+            }; writeIDXZ_DEV();
+            //----------------------------------------------------------------
+            let writeIDXZ_PROD = ()=>{                       //***************output 2 : PROD IDX
+                let write_out_PROD_prime_key_index = ()=>{
+                    let tgt = 'prime_key_idx_3.json' //PRODUCTION_PRODUCT-.
+                    fs.writeFile(RUNTIME_STATE.manifest.output[1]+"/"+tgt, JSON.stringify({"prime_key_idx":RUNTIME_STATE.setz.prime_key_idx}), err => {
+                        if (err) { console.error(err); } //dehydrate with JSON.parse()
+                        console.log(' - Written to PROD', RUNTIME_STATE.manifest.output[1]+"/"+tgt)
+                    });
+                }; write_out_PROD_prime_key_index();
+                //----------------------------------------------------------
+                let write_out_PROD_omni_keyz = () => { //FILE-OUTPUT: OMNI_KEY_INDEX
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.omni_key_idx){return}
+                    let tgt = "omni_key_idx_3.json"
+                    fs.writeFile(RUNTIME_STATE.manifest.output[1]+"/"+tgt, JSON.stringify({"omni_key_idx":RUNTIME_STATE.setz.omni_key_idx}), err => {
+                        if (err) { console.error(err); } //dehydrate with JSON.parse()
+                        RUNTIME_STATE.manifest.output.push(tgt)
+                        console.log(' - Written to PROD: ',RUNTIME_STATE.manifest.output[1]+'/'+tgt)
+                    });
+                }; write_out_PROD_omni_keyz();
+            }; writeIDXZ_PROD();
+        }; writeOutIDXz();
+        //------------------------------------------------------
+        let writeOutTOPICz = ()=> {
+            let writeTOPICZ_DEV = ()=>{//---------------------------------output 3 : DEV TOPICZ
+                let write_out_all_topic_tokenz_dev = () => {
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_topic_tokenz){return}
+                    let tgt = "all_topic_tokenz_3.json"
+                    fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_topic_tokenz), err => {
+                        if (err) { console.error(err); } //dehydrate with JSON.parse()
+                        RUNTIME_STATE.manifest.output.push(tgt)
+                        console.log(' - Written to DEV',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
+                    });
+                }; write_out_all_topic_tokenz_dev();    
+                //------------------------------------------------------
+                let write_out_all_quote_tokenz_dev = () => {
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_quote_tokenz){return}
+                    let tgt = "all_quote_tokenz_3.json"
+                    fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_quote_tokenz), err => {
+                        if (err) { console.error(err); } //dehydrate with JSON.parse()
+                        RUNTIME_STATE.manifest.output.push(tgt)
+                        console.log(' - Written to DEV',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
+                    });
+                }; write_out_all_quote_tokenz_dev();    
+                //-------------------------------------------------------------------
+                let write_out_all_star_topicz_dev = () => {
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_star_topicz){return}
+                    let tgt = "all_star_topicz_3.json"
+                    fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_star_topicz), err => {
+                        if (err) { console.error(err); } //dehydrate with JSON.parse()
+                        RUNTIME_STATE.manifest.output.push(tgt)
+                        console.log(' - Written to DEV',RUNTIME_STATE.manifest.output[0]+'/'+tgt)
+                    });
+                }; write_out_all_star_topicz_dev();  
+            }; writeTOPICZ_DEV();
+            //------------------------------------------------------------            
+            let writeTOPICZ_PROD = ()=>{  //--------------------------------output 4 : PROD TOPICZ
+                let write_out_all_topic_tokenz_prod = () => {
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_topic_tokenz){return}
+                    let tgt = "all_topic_tokenz_3.json"
+                    fs.writeFile(RUNTIME_STATE.manifest.output[2]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_topic_tokenz), err => {
+                        if (err) { console.error(err); } //dehydrate with JSON.parse()
+                        RUNTIME_STATE.manifest.output.push(tgt)
+                        console.log(' - Written to PROD',RUNTIME_STATE.manifest.output[2]+'/'+tgt)
+                    });
+                }; write_out_all_topic_tokenz_prod();    
+                //------------------------------------------------------
+                let write_out_all_quote_tokenz_prod = () => {
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_quote_tokenz){return}
+                    let tgt = "all_quote_tokenz_3.json"
+                    fs.writeFile(RUNTIME_STATE.manifest.output[2]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_quote_tokenz), err => {
+                        if (err) { console.error(err); } //dehydrate with JSON.parse()
+                        RUNTIME_STATE.manifest.output.push(tgt)
+                        console.log(' - Written to PROD',RUNTIME_STATE.manifest.output[2]+'/'+tgt)
+                    });
+                }; write_out_all_quote_tokenz_prod();    
+                //-------------------------------------------------------------------
+                let write_out_all_star_topicz_prod = () => {
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_star_topicz){return}
+                    let tgt = "all_star_topicz_3.json"
+                    fs.writeFile(RUNTIME_STATE.manifest.output[2]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_star_topicz), err => {
+                        if (err) { console.error(err); } //dehydrate with JSON.parse()
+                        RUNTIME_STATE.manifest.output.push(tgt)
+                        console.log(' - Written to PROD',RUNTIME_STATE.manifest.output[2]+'/'+tgt)
+                    });
+                }; write_out_all_star_topicz_prod();  
+            }; writeTOPICZ_PROD();
+        }; writeOutTOPICz();
+        //-----------------------------------------------------------
+        let writeOutCARDz = ()=> {
+            let writeCARDZ_DEV = ()=>{ //***************************output 5 : DEV CARDZ
+                let write_out_DEV_key_cardz = () => {
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.prime_card_filez){return}
+                    let card_file_tgt = ''; let card_data = {}; 
+                    for(var i = 0; i<RUNTIME_STATE.setz.prime_card_filez.length;i++){
+                        if(!RUNTIME_STATE.setz.prime_card_filez[i].key){continue}
+                        card_file_tgt = RUNTIME_STATE.setz.prime_card_filez[i].key.toLowerCase();
+                        card_file_tgt = `card${card_file_tgt}3.json`//prime key wrapped in _
+                        card_data = RUNTIME_STATE.setz.prime_card_filez[i]; //get data payload
+                        if(card_data){
+                            console.log(' - Written to dynamic file:', RUNTIME_STATE.manifest.output[0]+'/'+card_file_tgt)
+                            fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+card_file_tgt, JSON.stringify(card_data), err => {
+                                if (err) { console.error(err); } //dehydrate with JSON.parse()
+                                RUNTIME_STATE.manifest.output.push(card_file_tgt)                   
+                            });  
+                        }
+                    }
+                }; write_out_DEV_key_cardz();    
+            }; writeCARDZ_DEV();
+            //------------------------------------
+            let writeCARDZ_PROD = ()=>{  //**************************output6 : PROD CARDZ
+                let write_out_prod_key_cardz = () => {
+                    /***********************************************\
+                     * WRITE OUT DYNAMIC CARDZ with TOKENZ.
+                    //load card txtz with all reference to key.
+                    \***********************************************/
+                    if(!RUNTIME_STATE || !RUNTIME_STATE.setz.prime_card_filez){return}
+                    let card_file_tgt = ''; let card_data = {}; //PRODUCTION_PRODUCT-.
+                    for(var i = 0; i<RUNTIME_STATE.setz.prime_card_filez.length;i++){
+                        if(!RUNTIME_STATE.setz.prime_card_filez[i].key){continue}
+                        card_file_tgt = RUNTIME_STATE.setz.prime_card_filez[i].key.toLowerCase();
+                        card_file_tgt = `card${card_file_tgt}3.json`//prime key wrapped in _
+                        card_data = RUNTIME_STATE.setz.prime_card_filez[i]; //get data payload
+                        if(card_data){
+                            console.log(' - Written to dynamic file:', RUNTIME_STATE.manifest.output[3]+'/'+card_file_tgt)
+                            fs.writeFile(RUNTIME_STATE.manifest.output[3]+"/"+card_file_tgt, JSON.stringify(card_data), err => {
+                                if (err) { console.error(err); } //dehydrate with JSON.parse()
+                                RUNTIME_STATE.manifest.output.push(card_file_tgt)                   
+                            });  
+                        }
+                    }
+                }; write_out_prod_key_cardz();     
+            }; writeCARDZ_PROD();
+        }; writeOutCARDz();
+    }; //writeOutAllFilez();
+     /**********************************************\
+      * WriteOutCounts : PURPOSE :
+      * analytic coverage of ecosystem (historic)
+    \***********************************************/
  function writeOutCounts(){
     console.log('TOKEN COUNTS:')
     console.log('key:',RUNTIME_STATE.manifest.total_key_count,
@@ -1183,7 +1362,11 @@
       +RUNTIME_STATE.setz.all_topic_tokenz.length
       +RUNTIME_STATE.manifest.total_subtopic_count);
  }
- 
+ /**********************************************\
+  * MAIN : PURPOSE :
+  * Process Abstraction, for metadata layer.
+  * and multi file, aWordzaFactory scaling. //TODO
+\***********************************************/
  const main = async () => {
      console.log('START~aWORDZa~TOKENIZER!!!')
      console.log("USAGE: node AdvancedTokenizer_1 TGT_PATH TYPE" )
@@ -1244,12 +1427,15 @@
          //wrap_CARDZ_with_METADATA()
 
          //4 WRITE to FILE
-         console.log('4) Read from file: ', RUNTIME_STATE.tgt_path)
-         writeOutTokenz(); 
-
+        //  console.log('4) Read from file: ', RUNTIME_STATE.tgt_path)
+        //  writeOutTokenz(); //todo remove 
+         writeOutAllFilez();
+        //  writeOutIDXz(); 
+        //  writeOutTOPICz();
+        //  writeOutCARDz();
          //5 WRITE out analytic counts.
          writeOutCounts();
- 
+         //THE_0_END && _0_ //todo aSYMBOLZa _*_ aSPARKa sig_: enzo~:)
      }; MAIN_PROCESS();
  };
  main();

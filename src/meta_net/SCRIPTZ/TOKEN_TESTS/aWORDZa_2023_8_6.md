@@ -1,19 +1,18 @@
 # _aWORDZa_
 
-alias_: actual_act_of_wordz, awordz, wordz, awordza.
 meanz_: actual_actz_of_wordz.
+alias_: actual_act_of_wordz, awordz, wordz, awordza.
+
 pronounced_: ah-words-ah.
-goalz_: ai_mapz_to_axi
+goalz_: ai_mapz_to_asymbolza and ai_mapz_to_axi.
 
 ---
 
 ## What is aWORDZa?
 
-aWordza is a ontology and taxonomy generator. Set as a WORD_GAME, to solve the ai problem of generating articulated context_metadata for large language models. It takes a unique design approach, with innovative design principles - for amazing results.
+aWordza is a WORD_GAME, designed to solve the ai problem of GENERATING articulated_context_metadata for large language models.
 
-In this third iteration of the Tokenizer Engine, the goal is to generate_better_words, and concepts_underneath_words, from a newly defined SYNTAX and NAMING CONVENTION, to most effectively maxmimize_contextual_clarity. For metadata_abstraction_comparison. 
-
-And for future lexical NATURAL LANGUAGE PROCESSING engines in AI. Originally designed to rhyme song lyrics, then given new syntax, to be a taxonomy and ontology - and then on to something else. aWORDza_to_aSYMBOLza. All the information is here (somewhere). Enjoy. ~:)
+goalz_: to generate_better_words, and concepts_underneath_words, with a new and improved SYNTAX and NAMING CONVENTION, for a unique and reliable source of ai training.
 
 ### _aWORDaGAMEa_
 

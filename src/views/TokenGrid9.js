@@ -34,14 +34,12 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
     }
     axios.request(options).then((response) => {
         // setTokenz_INDEX_DATA(response.data.token_index)
-
         
-
         // setTokenz_INDEX_DATA(format_INDEX_DATA(response.data.omni_key_index))
-        setTokenz_INDEX_DATA(format_INDEX_DATA(response.data.prime_key_index))
+        setTokenz_INDEX_DATA(format_INDEX_DATA(response.data.prime_key_idx))
         // setTokenz_INDEX_DATA(response.data.omni_key_index)
         // setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
-        setTokenz_CARD_COUNT("token_index "+response.data.prime_key_index.length)
+        setTokenz_CARD_COUNT("token_index "+response.data.prime_key_idx.length)
         // setTokenz_CARD_COUNT("token_index "+response.data.omni_key_index.length)
     }).catch((error) => {
         console.error(error)
@@ -49,15 +47,18 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
     })    
 }
 
-function format_INDEX_DATA(server_data){
+function format_INDEX_DATA(server_data){ //from str into token
     let formatted_data = []
     // let output = '';
     formatted_data = server_data.map( (item, idx)=>{
-         if(item.key && item.key.length>10){
-            //add underscore in front of any capital letter.
-            // output = item.key.replace(/([A-Z])/g, '_$1');
-            item.displayKey = item.key.replaceAll('_','_ ')
-         }
+        if(item && item.length>10){
+            item = {key:item}
+           //add underscore in front of any capital letter.
+           // output = item.key.replace(/([A-Z])/g, '_$1');
+           item.displayKey = item.key.replaceAll('_','_ ')
+        } else {
+            item = {key:item}
+        }
          return item;
     }  )
     return formatted_data;
@@ -77,6 +78,7 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
     let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
     let [tokenTXT_COUNT,setTokenTXTCOUNT] = useState(0)
     let [tokenTXT_ARRAY,setTokenTXTARRAY] = useState([])
+    let [tokenTXT_ARTICLES,setArticleDisplay] = useState([])
 
     useEffect(() => { //load txtz from outside page component.
     // useEffect(() => { //load txtz from outside page component.
@@ -102,6 +104,7 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
             setShowEyes(1)
         }
 
+        dynamicArticleDisplay();
         // tokenAddFn(addLocalTXTz)
         // if(token.details){ //remove
         //     // console.log("INIT details",token.title)
@@ -148,7 +151,6 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
     // function addUnlockTXTz(  ){
 
     function addLocalTXTz (){ //load from inner button
-        // debugger;
         if(localTXTz.length && loadTXTidx>=localTXTz.length){
             autoScrollEnd.current.scrollIntoView({ behavior: "smooth" });
             return;
@@ -177,13 +179,13 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
             lookupTitle = lookupTitle.replaceAll('_','')
             lookupTitle = lookupTitle.replaceAll('.','')
             lookupTitle = lookupTitle.toLowerCase()
-        let tokenBatch = 1;
+        let tokenBatch = 3;
         lookupTitle = `card_${lookupTitle}_${tokenBatch}`;
         console.log('load: src/meta_net/CARDZ/ ', lookupTitle+'.json')
         const options = {
             method: 'GET',
             // url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
-            url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/card_${lookupTitle}_3.json`
+            url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
         }
         axios.request(options).then((response) => {
             // debugger;
@@ -290,13 +292,97 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
             })}             */}
             </>)        
     }
+
+
+    function dynamicArticleDisplay() {
+
+        console.log('populate dynamic article', )
+        let displayResult = [1,2,3,4]
+
+debugger;
+        displayResult = localTXTz.map((item,idx)=>{ 
+                console.log('hidden',item.title)
+                if (idx+1 > loadTXTidx){ return '' }
+                console.log('TESTAA',item.title, item.type)
+                debugger;
+
+                return <section className='scrollBarPage' style={{}}>
+                <header style={{display:'flex',justifyContent:'space-between'}}>
+                    <aside style={{fontSize:'small'}}>{item.numz}</aside>
+                    <span>&nbsp;</span> 
+                    <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
+                </header> 
+                <article className={(item.type==='prime_card_token')?'txtBox2':'itemTXTZ'} style={
+                    (item.type==='quotez_txt')
+                    ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
+                    ,fontStyle:'italic'}
+                    :(item.type==='seriez_txt')
+                    ?{fontSize:'0.888em',fontFamily:'monospace'}
+                    :{fontSize:'1em'}
+                  }>
+                  {
+                    (item.type==='seriez_txt' && item.txtz.length)
+                    // :(item.type==='seriez' && item.txtz.length)
+                    ? item.txtz.map( (txtitem,idx)=>{
+                        debugger;
+                        console.log('TESTCC',txtitem.type)
+
+                        return <section className='seriezItem' style={
+                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
+                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
+                            :{textAlign:'justify',margin:'1.444em 0em',color:'#8461cc'}
+                        }>{txtitem.txt}</section>;
+                      })
+                    :  (item.txtz.length) //default txtbox
+                    ? item.txtz.map( (txtitem,idx)=>{
+                        console.log('TESTBC',txtitem.type)
+
+                        return <section className='txtzItem' style={
+                            // (item.split(" ").filter( item => item )[0]==='-') //special_hyphen
+                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
+                            ?{margin:'0em',color:'#50718c',fontStyle:'italic'
+                            ,padding:'0.444em 0 0.444em 0.444em'}
+                            :{margin:'1.444em 0em'}
+                        }>{txtitem.txt}</section>;
+                        // }>{item}</section>;
+                    } )
+                    : item.txt }
+
+                </article>
+
+                <footer style={{display:'flex',justifyContent:'space-between',
+                    marginTop:'1.666em'}}>
+                    <aside style={{fontSize:'xx-small'}}>{item.ymd}</aside>
+                    <aside style={{fontSize:'xx-small'}}>{item.type}</aside>
+                </footer>
+                <hr></hr>
+
+                </section>
+                // return <div>Key: {item.key}, <br/> Title: {item.title}, <br/>
+                // {item.txt} <hr></hr>{idx}</div>
+            })
+
+
+
+
+        setArticleDisplay(displayResult)
+        // return(
+        // <><span className='yoyo'>{token.title}</span>
+        // </>)
+    }
+
     return(
     <>
   
         {dynamicTitleDisplay()}
+        {/* {dynamicArticleDisplay()} */}
         {/* {displayTokenTXTArray()} */}
         <hr style={{marginBottom:'1em'}}></hr>
+        {/* {()=>{
+            return <div>youyoyo</div>
+        }} */}
         { (loadTXTidx===0)
+        // { (loadTXTidx===0)
             ?<span style={{fontSize:'x-small'}}>
                 chooze_to_look...</span>
             :(localTXTz.length===0 && loadTXTidx===1)?'loading...'
@@ -315,42 +401,64 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
     :''}  
         <section className='scrollBarDoc' style={{ padding:'0 3%',
             maxHeight:'18em'}}>
-            {localTXTz.map((item,idx)=>{ 
+
+            {/* {tokenTXT_ARTICLES} */}
+
+            {
+            localTXTz.map((item,idx)=>{ 
+                console.log('hidden',item.title)
                 if (idx+1 > loadTXTidx){ return '' }
+                console.log('TESTAA',item.title, item.type)
+                debugger;
                 return <section className='scrollBarPage' style={{}}>
                 <header style={{display:'flex',justifyContent:'space-between'}}>
                     <aside style={{fontSize:'small'}}>{item.numz}</aside>
                     <span>&nbsp;</span> 
                     <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
-                </header>
+                </header> 
                     
+                {/* todo move to dynamic article */}
 
-                <article className={(item.type==='txtz')?'txtBox2':'itemTXTZ'} style={
-                    (item.type==='quote')
+                {/* <article className={(item.type==='txtz')?'txtBox2':'itemTXTZ'} style={ */}
+                <article className={(item.type==='prime_card_token')?'txtBox2':'itemTXTZ'} style={
+                    (item.type==='quotez')
                     ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
                     ,fontStyle:'italic'}
                     :(item.type==='seriez')
                     ?{fontSize:'0.888em',fontFamily:'monospace'}
                     :{fontSize:'1em'}
                   }>
-                  {(item.type==='txtz' && item.txtz.length)
-                    ? item.txtz.map( (item,idx)=>{
+                  {/* {(item.type==='txtz' && item.txtz.length) */}
+                  {
+                        // populateDynamicArticles()
+                //   (item.type==='prime_card_token' && item.txtz.length)
+                    (item.type==='seriez_txt' && item.txtz.length)
+                    // :(item.type==='seriez' && item.txtz.length)
+                    ? item.txtz.map( (txtitem,idx)=>{
+                        debugger;
+                        console.log('TESTCC',txtitem.type)
+
+                        return <section className='seriezItem' style={
+                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
+                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
+                            :{textAlign:'justify',margin:'1.444em 0em',color:'#8461cc'}
+                        }>{txtitem.txt}</section>;
+                      })
+                    :  (item.txtz.length) //default txtbox
+                    ? item.txtz.map( (txtitem,idx)=>{
+                        console.log('TESTBC',txtitem.type)
+
                         return <section className='txtzItem' style={
-                            (item.split(" ").filter( item => item )[0]==='-') //special_hyphen
+                            // (item.split(" ").filter( item => item )[0]==='-') //special_hyphen
+                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
                             ?{margin:'0em',color:'#50718c',fontStyle:'italic'
                             ,padding:'0.444em 0 0.444em 0.444em'}
                             :{margin:'1.444em 0em'}
-                        }>{item}</section>;
-                    } )
-                    :(item.type==='seriez' && item.txtz.length)
-                    ? item.txtz.map( (item,idx)=>{
-                        return <section className='seriezItem' style={
-                            (item.txt.split(" ").filter( item => item )[0]==='-') //special_hyphen
-                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
-                            :{textAlign:'justify',margin:'1.444em 0em',color:'#8461cc'}
-                        }>{item.txt}</section>;
+                        }>{txtitem.txt}</section>;
+                        // }>{item}</section>;
                     } )
                     : item.txt }
+
                 </article>
 
                 <footer style={{display:'flex',justifyContent:'space-between',
@@ -363,7 +471,8 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
                 </section>
                 // return <div>Key: {item.key}, <br/> Title: {item.title}, <br/>
                 // {item.txt} <hr></hr>{idx}</div>
-            })}
+            })
+            }
 
                
 

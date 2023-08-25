@@ -25,10 +25,8 @@ export default function RuleView () {
         }
         axios.request(options).then((response) => {
             // setTokenz_INDEX_DATA(response.data.token_index)
-    
             
-    
-            setTokenz_INDEX_DATA(response.data.omni_key_index)
+            setTokenz_INDEX_DATA(response.data.omni_key_idx)
             // setTokenz_INDEX_DATA(response.data.omni_key_index)
             // setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
             // setTokenz_CARD_COUNT("token_index "+response.data.omni_key_index.length)
@@ -57,6 +55,7 @@ export default function RuleView () {
                 <header>{humanIDX}</header>
                 { 
                 colm.map( (token,idx) => { 
+                    token = {key:token}
                     token.numz = humanIDX.toString()+'.'+(idx+1).toString();       //apply dynamic_numz
                     return <section style={{
                         textAlign:'left',

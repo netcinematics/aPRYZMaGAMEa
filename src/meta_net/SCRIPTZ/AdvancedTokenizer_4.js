@@ -4,14 +4,14 @@
  * EXAMPLE SYNTAX:
  * path, type version datestamp
  * EXAMPLE USE:
- > node train_txt_tokenz_3.jz all all 0.0.0.0 YMD:2023,7,18
- > node train_txt_tokenz_3.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,18
- > node train_txt_tokenz_3.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,24
- > node AdvancedTokenizer_3.js z_SYNTAX_TEST all 0.0.0.0 
+ > node train_txt_tokenz_4.jz all all 0.0.0.0 YMD:2023,7,18
+ > node train_txt_tokenz_4.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,18
+ > node train_txt_tokenz_4.js z_SYNTAX_TEST all 0.0.0.0 YMD:2023,7,24
+ > node AdvancedTokenizer_4.js z_SYNTAX_TEST all 0.0.0.0 
 
 // USAGE
 
- > node AdvancedTokenizer_3.js TEST  //reads different hard coded test files.
+ > node AdvancedTokenizer_4.js TEST  //reads different hard coded test files.
 
 
  * ******************---*****************
@@ -74,7 +74,7 @@
  let RUNTIME_STATE = { //init defaults, then override
      tgt_path : 'all', //or 'test'
      search_type : '_', //or keys
-     verz : '0.3.3.3',
+     verz : '0.4.4.4',
     manifest:{
         output: [], 
         srcmap: [],
@@ -137,7 +137,6 @@
              return readFile(dirname + filename, 'utf-8');
          });
          const response = await Promise.all(files_promise);
-         // console.log("3) ALL FILES TXT: ",{ response })
          return response
          // return filenames.reduce((accumulator, filename, currentIndex) => {
          //     const content = response[currentIndex];
@@ -189,13 +188,32 @@
     \********************************************************/    
     let cleanMarkdown = () => {  //Local-Behavior_fns
     // cleanMarkdown: single space, line delimited by ;
+        /*****************************************************
+         * ORIGINAL Linebreak system, super-simplified.
         //linebreaks to semicolons and spaces, and collapse special characters to syntax
-        RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[\r\n\r\n]+/g,";");
-        RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[\r\n]+/g,";");
-        RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[;;;]+/g,";");
-        RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[;;]+/g,";");
+         */
+        //linebreaks to semicolons and spaces, and collapse special characters to syntax
+        // RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[\r\n\r\n]+/g,";");
+        // RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[\r\n]+/g,";");
+        // RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[;;;]+/g,";");
+        // RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[;;]+/g,";");
+        // RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[   ]+/g," ");
+        // RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[  ]+/g," ");
+        /*****************************************************
+         * ADVANCED Linebreak system, super-exact.
+         * // use ; for line-breaks, and ;; for paragraph new lines.
+         * // with this super elegant, single line of code .replace(/(\r\n)/g,";")
+         * // reduces to single and double: ; ;;.
+         */
+        // debugger;
+        RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/(\r\n)/g,";");
         RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[   ]+/g," ");
         RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[  ]+/g," ");
+
+
+
+
+
         //  RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[---]+/g,";");
         //  RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[;]+/g,"\r\n");
         //  RUNTIME_STATE.setz.all_markdown[0] = RUNTIME_STATE.setz.all_markdown[0].replace(/[;]+/g,"---");
@@ -215,10 +233,12 @@
     \********************************************************/
     let split_input_data_into_tokenz = () => {
         //IMPORTANT: Advanced DOUBLE_SPLIT, by new_line ; and then spaces.
-        RUNTIME_STATE.setz.all_raw_tokenz = RUNTIME_STATE.setz.all_markdown[0].split(/(;|\s)/) //split and capture line_ends
+        // RUNTIME_STATE.setz.all_raw_tokenz = RUNTIME_STATE.setz.all_markdown[0].split(/(;|\s)/) //split and capture line_ends
+        //IMPORTANT: ADVANCED TRIPLE_SPLIT, by paragraph, new line, and then space!
+        RUNTIME_STATE.setz.all_raw_tokenz = RUNTIME_STATE.setz.all_markdown[0].split(/(;;|\s|;)/)//split and capture line_ends
         RUNTIME_STATE.setz.all_raw_tokenz = RUNTIME_STATE.setz.all_raw_tokenz.filter(function(str) {
-            return /\S/.test(str); //remove white space characters but keep end_lines
-        });
+            return /\S/.test(str); 
+        }); //remove white spaces, keep end_lines as ; and paragraphs as ;;
         console.log(' - all_RAW_tokenz, length: ', RUNTIME_STATE.setz.all_raw_tokenz.length)
 
     }; split_input_data_into_tokenz();
@@ -578,24 +598,53 @@
                                  * like a SERIEZ, STARZ and QUOTEZ FACTORY.
                                 \******************************************/
                             } else //END FACTORY for QUOTE, SERIES, STARZ
-                            { //SOLO-------------------------------------------FOUND: SOLO_TXT
-                                debugger
-                                txt_slice = txt_slice.join(' ').replace(/[;#]/g,'');
-                                txt_slice = txt_slice.replace('---','')//CLEAN_TOKENZ
-                                txt_slice = txt_slice.trim();
-                                debugger;
-                                if(txt_slice) txt_slice = {
+                            { //SOLO_TXT--------------------------------------FOUND: SOLO_TXT
+                                subtxt_line = [];
+                                // if(txt_slice.indexOf(';;')>=-1){ //IMPORTANT: BREAKUP_SUB_TXTZ
+                                if(false){
+                                    debugger 
+                                    txt_slice = txt_slice.join(' ').split(/;;/)
+                                    for(let idx = 0; idx < txt_slice.length; idx++){
+                                        // txt_slice = {
+                                        //     type:'solo_sub_txt',
+                                        //     txt:txt_slice[idx],
+                                        //     numz:`${RUNTIME_STATE.idx.TOPIC_IDX}:${RUNTIME_STATE.idx.SUBTOPIC_IDX}:${++RUNTIME_STATE.idx.TXT_IDX}`
+                                        // }
+                                        subtxt_line.push( {
+                                            type:'solo_sub_txt',
+                                            txt:txt_slice[idx],
+                                            numz:`${RUNTIME_STATE.idx.TOPIC_IDX}:${RUNTIME_STATE.idx.SUBTOPIC_IDX}:${++RUNTIME_STATE.idx.TXT_IDX}`
+                                        })
+                                    }
+                                }else{
+                                    // txt_slice = txt_slice.join(' ').replace(/[;#]/g,'');
+                                    txt_slice = txt_slice.join(' ').replace(/[#]/g,'');
+                                    txt_slice = txt_slice.replace('---','')//CLEAN_TOKENZ
+                                    txt_slice = txt_slice.trim();
+                                }
+                                // // txt_slice = txt_slice.join(' ').replace(/[;#]/g,'');
+                                // txt_slice = txt_slice.join(' ').replace(/[#]/g,'');
+                                // txt_slice = txt_slice.replace('---','')//CLEAN_TOKENZ
+                                // txt_slice = txt_slice.trim();
+                                // debugger;
+                                if(txt_slice) txt_slice = { //todo is this necessary?
                                     type:'solo_txt',
                                     txt:txt_slice,
                                     numz:`${RUNTIME_STATE.idx.TOPIC_IDX}:${RUNTIME_STATE.idx.SUBTOPIC_IDX}:${++RUNTIME_STATE.idx.TXT_IDX}`
                                 }
-                            }
+                            } //END IF TOKEN.
                             // debugger;
                             // let load_Token_TXTZ = ()=>{
-                                if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
+                            //     // if(subtxt_line.length){aToken.txtz.push(...subtxt_line)}
+                                if(false){aToken.txtz.push(...subtxt_line)}
+                                else if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
                                 else if(txt_slice.txt){ aToken.txtz.push(txt_slice) }
-                                break; //TODO remove?
                             // }; load_Token_TXTZ();
+                            // // let load_Token_TXTZ = ()=>{
+                            //     if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
+                            //     else if(txt_slice.txt){ aToken.txtz.push(txt_slice) }
+                                break; //TODO remove?
+                            // // }; load_Token_TXTZ();
                             /******************************************\
                             * POPULATES : aToken.txtz
                             * both types: txtz or txt. Then brea
@@ -733,6 +782,7 @@
                         if(RUNTIME_STATE.setz.all_topic_tokenz[j].txtz){ 
                             for(let k = 0; k < RUNTIME_STATE.setz.all_topic_tokenz[j].txtz.length; k++){
                                 search_topic_txt = RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k].txt;
+                                if(!search_topic_txt){debugger;}
                                 search_topic_txt = search_topic_txt.toLowerCase();
                                 console.log('search3',search_topic_txt);
                                 //TODO: if maintitle alias check also //if main_title_prime_key put all references in title txt.
@@ -1190,7 +1240,7 @@
         let writeOutIDXz = ()=> {
             let writeIDXZ_DEV = ()=>{ //-------------------------output 1 : DEV IDX : prime & omni.
                 let write_out_DEV_prime_key_index = ()=>{
-                    let tgt = 'prime_key_idx_3.json' //PRODUCTION_PRODUCT-.
+                    let tgt = 'prime_key_idx_4.json' //PRODUCTION_PRODUCT-.
                     fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify({"prime_key_idx":RUNTIME_STATE.setz.prime_key_idx}), err => {
                         if (err) { console.error(err); } 
                         console.log(' - Written to DEV', RUNTIME_STATE.manifest.output[0]+"/"+tgt)
@@ -1199,7 +1249,7 @@
                 //----------------------------------------------------------
                 let write_out_DEV_omni_keyz = () => { //FILE-OUTPUT: OMNI_KEY_INDEX
                     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.omni_key_idx){return}
-                    let tgt = "omni_key_idx_3.json"
+                    let tgt = "omni_key_idx_4.json"
                     fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify({"omni_key_idx":RUNTIME_STATE.setz.omni_key_idx}), err => {
                         if (err) { console.error(err); } 
                         RUNTIME_STATE.manifest.output.push(tgt)
@@ -1210,7 +1260,7 @@
             //----------------------------------------------------------------
             let writeIDXZ_PROD = ()=>{                       //***************output 2 : PROD IDX
                 let write_out_PROD_prime_key_index = ()=>{
-                    let tgt = 'prime_key_idx_3.json' //PRODUCTION_PRODUCT-.
+                    let tgt = 'prime_key_idx_4.json' //PRODUCTION_PRODUCT-.
                     fs.writeFile(RUNTIME_STATE.manifest.output[1]+"/"+tgt, JSON.stringify({"prime_key_idx":RUNTIME_STATE.setz.prime_key_idx}), err => {
                         if (err) { console.error(err); } //dehydrate with JSON.parse()
                         console.log(' - Written to PROD', RUNTIME_STATE.manifest.output[1]+"/"+tgt)
@@ -1219,7 +1269,7 @@
                 //----------------------------------------------------------
                 let write_out_PROD_omni_keyz = () => { //FILE-OUTPUT: OMNI_KEY_INDEX
                     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.omni_key_idx){return}
-                    let tgt = "omni_key_idx_3.json"
+                    let tgt = "omni_key_idx_4.json"
                     fs.writeFile(RUNTIME_STATE.manifest.output[1]+"/"+tgt, JSON.stringify({"omni_key_idx":RUNTIME_STATE.setz.omni_key_idx}), err => {
                         if (err) { console.error(err); } //dehydrate with JSON.parse()
                         RUNTIME_STATE.manifest.output.push(tgt)
@@ -1230,10 +1280,10 @@
         }; writeOutIDXz();
         //------------------------------------------------------
         let writeOutTOPICz = ()=> {
-            let writeTOPICZ_DEV = ()=>{//---------------------------------output 3 : DEV TOPICZ
+            let writeTOPICZ_DEV = ()=>{//---------------------------------output 4 : DEV TOPICZ
                 let write_out_all_topic_tokenz_dev = () => {
                     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_topic_tokenz){return}
-                    let tgt = "all_topic_tokenz_3.json"
+                    let tgt = "all_topic_tokenz_4.json"
                     fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_topic_tokenz), err => {
                         if (err) { console.error(err); } //dehydrate with JSON.parse()
                         RUNTIME_STATE.manifest.output.push(tgt)
@@ -1243,7 +1293,7 @@
                 //------------------------------------------------------
                 let write_out_all_quote_tokenz_dev = () => {
                     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_quote_tokenz){return}
-                    let tgt = "all_quote_tokenz_3.json"
+                    let tgt = "all_quote_tokenz_4.json"
                     fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_quote_tokenz), err => {
                         if (err) { console.error(err); } //dehydrate with JSON.parse()
                         RUNTIME_STATE.manifest.output.push(tgt)
@@ -1253,7 +1303,7 @@
                 //-------------------------------------------------------------------
                 let write_out_all_star_topicz_dev = () => {
                     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_star_topicz){return}
-                    let tgt = "all_star_topicz_3.json"
+                    let tgt = "all_star_topicz_4.json"
                     fs.writeFile(RUNTIME_STATE.manifest.output[0]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_star_topicz), err => {
                         if (err) { console.error(err); } //dehydrate with JSON.parse()
                         RUNTIME_STATE.manifest.output.push(tgt)
@@ -1265,7 +1315,7 @@
             let writeTOPICZ_PROD = ()=>{  //--------------------------------output 4 : PROD TOPICZ
                 let write_out_all_topic_tokenz_prod = () => {
                     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_topic_tokenz){return}
-                    let tgt = "all_topic_tokenz_3.json"
+                    let tgt = "all_topic_tokenz_4.json"
                     fs.writeFile(RUNTIME_STATE.manifest.output[2]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_topic_tokenz), err => {
                         if (err) { console.error(err); } //dehydrate with JSON.parse()
                         RUNTIME_STATE.manifest.output.push(tgt)
@@ -1275,7 +1325,7 @@
                 //------------------------------------------------------
                 let write_out_all_quote_tokenz_prod = () => {
                     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_quote_tokenz){return}
-                    let tgt = "all_quote_tokenz_3.json"
+                    let tgt = "all_quote_tokenz_4.json"
                     fs.writeFile(RUNTIME_STATE.manifest.output[2]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_quote_tokenz), err => {
                         if (err) { console.error(err); } //dehydrate with JSON.parse()
                         RUNTIME_STATE.manifest.output.push(tgt)
@@ -1285,7 +1335,7 @@
                 //-------------------------------------------------------------------
                 let write_out_all_star_topicz_prod = () => {
                     if(!RUNTIME_STATE || !RUNTIME_STATE.setz.all_star_topicz){return}
-                    let tgt = "all_star_topicz_3.json"
+                    let tgt = "all_star_topicz_4.json"
                     fs.writeFile(RUNTIME_STATE.manifest.output[2]+"/"+tgt, JSON.stringify(RUNTIME_STATE.setz.all_star_topicz), err => {
                         if (err) { console.error(err); } //dehydrate with JSON.parse()
                         RUNTIME_STATE.manifest.output.push(tgt)
@@ -1303,7 +1353,7 @@
                     for(var i = 0; i<RUNTIME_STATE.setz.prime_card_filez.length;i++){
                         if(!RUNTIME_STATE.setz.prime_card_filez[i].key){continue}
                         card_file_tgt = RUNTIME_STATE.setz.prime_card_filez[i].key.toLowerCase();
-                        card_file_tgt = `card${card_file_tgt}3.json`//prime key wrapped in _
+                        card_file_tgt = `card${card_file_tgt}4.json`//prime key wrapped in _
                         card_data = RUNTIME_STATE.setz.prime_card_filez[i]; //get data payload
                         if(card_data){
                             console.log(' - Written to dynamic file:', RUNTIME_STATE.manifest.output[0]+'/'+card_file_tgt)
@@ -1327,7 +1377,7 @@
                     for(var i = 0; i<RUNTIME_STATE.setz.prime_card_filez.length;i++){
                         if(!RUNTIME_STATE.setz.prime_card_filez[i].key){continue}
                         card_file_tgt = RUNTIME_STATE.setz.prime_card_filez[i].key.toLowerCase();
-                        card_file_tgt = `card${card_file_tgt}3.json`//prime key wrapped in _
+                        card_file_tgt = `card${card_file_tgt}4.json`//prime key wrapped in _
                         card_data = RUNTIME_STATE.setz.prime_card_filez[i]; //get data payload
                         if(card_data){
                             console.log(' - Written to dynamic file:', RUNTIME_STATE.manifest.output[3]+'/'+card_file_tgt)

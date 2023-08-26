@@ -179,7 +179,8 @@
      let subtxt_line = [] 
      let txt_tokenz = [];
      let txt_tgt = '';
-     let last_omni_key = ''  //use for special_operator_: to assign meta_data.     
+     let last_omni_key = ''  //use for special_operator_: to assign meta_data.   
+     let last_prime_key = ''  
 
     /********************************************************\
      * cleanMarkdown  : PURPOSE :  
@@ -251,50 +252,210 @@
      * delimit_KEY_tokenz  : PURPOSE :  
      * search tokenz for multiple types : ALPHA, MIX, UNI, and OMNI. 
      - TRAILZ and special_operatorsz(clarifierz). For example alias_:
-    \********************************************************/    
+    \********************************************************/  
     let delimit_KEY_tokenz = () => {  //delimit PRIME_KEYZ to key_idx.
+        for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
+           txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];
+           txt_tgt = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKENZ
+           if(txt_tgt.indexOf('SIG_')>-1||txt_tgt.indexOf('YMD_')>-1){continue;} //SKIP SIG and YMD
+           if(txt_tgt.indexOf('-')>-1){continue;}
+           else if (txt_tgt.indexOf('_') === 0){ //UNI_KEY_TOKEN found
+               aToken = new Object(); // regex filter spaces and check for underscore wrapper.
+               if(txt_tgt.split('').filter(itm=>{if(!itm || itm===' '){return false}; return true;}).reverse()[0] ==='_'){
+                   aToken.type = 'prime_key' //token
+                   console.log('PrimeKey:',txt_tgt)       // FOUND: PRIME_KEY
+                   // last_omni_key = txt_tgt;
+                   let check_unique_prime_key = ()=> { //FOUND: PRIME_KEY_DUPLICATE
+                       for(var j=0; j<RUNTIME_STATE.setz.prime_key_idx.length;j++){
+                           if(RUNTIME_STATE.setz.prime_key_idx[j]===txt_tgt){
+                               console.log('Duplicate key def Found',txt_tgt)
+                               return; //if exists, skip, else append.
+                           }
+                       }
+                       RUNTIME_STATE.setz.prime_key_idx.push(txt_tgt);
+                   }; check_unique_prime_key();
+
+                   // RUNTIME_STATE.setz.prime_key_idx.push(txt_tgt);
+               } else {                                  // FOUND: SUB_PRIME_KEY
+                   aToken.type = 'sub_prime_key' //token
+               }
+               aToken.key = txt_tgt
+               RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //POPULATE: OMNI_iNDEX
+               ++RUNTIME_STATE.manifest.total_key_count;
+               continue;
+           } else if(txt_tgt.indexOf('_') > 0){           //FOUND: UNI_KEY_TOKEN
+               if(txt_tgt.indexOf('_:')>-1){ //FOUND: SPECIAL_OPERATOR SOPZ SKIP - use later? //TODO
+                   console.log('special_operator found', txt_tgt)
+                   let special_operator_factory = ()=>{
+                       if(txt_tgt.match(/alias|aliaz/)){ //get_LAST_KEY and look_ahead_line
+                           last_omni_key = RUNTIME_STATE.setz.all_key_tokenz[RUNTIME_STATE.setz.all_key_tokenz.length-1];
+                           if(!last_omni_key){return;}
+                           console.log('Sets alias for:',last_omni_key)
+                           if(!RUNTIME_STATE.setz.alias_matrix[last_omni_key]){ //create new alias object.
+                               RUNTIME_STATE.setz.alias_matrix[last_omni_key] = {
+                                   key:last_omni_key, aliaz:[]
+                               }
+                           }
+                           txt_slice = [];
+                           let lookahead_line_aliaslist = ()=>{ //
+                               // let lookahead_title_line = ()=>{
+                                   for(j = i+1; j < RUNTIME_STATE.setz.all_raw_tokenz.length; j++){ //SUB-TOKENZ
+                                       if(RUNTIME_STATE.setz.all_raw_tokenz[j].indexOf(';') === 0 
+                                         || j+1>=RUNTIME_STATE.setz.all_raw_tokenz.length){ //SECTION_END found
+                                           txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(i+1,j)
+                                           txt_slice = txt_slice.join(' ').replace(/[,.;]/g,'');
+                                           txt_slice = txt_slice.trim().toLowerCase(); //CLEAN ALIAZ
+                                           txt_slice = txt_slice.split(' ')
+                                           break;
+                                       } 
+                                   }
+                               //  }; lookahead_title_line();
+                           }; lookahead_line_aliaslist();
+                           
+                           if(txt_slice && txt_slice.length){
+                               RUNTIME_STATE.setz.alias_matrix[last_omni_key].aliaz.push(...txt_slice)
+                               RUNTIME_STATE.setz.all_alias_list.push(...txt_slice) //use for all aliases.
+                           }
+                           /*****************************************\
+                            * POPULATES: alias_matrix
+                            * - with things like plural or long_form_text.
+                            *****************************************/
+                       } 
+                       else if(txt_tgt.match(/or/)){ }
+                       else if(txt_tgt.match(/and/)){ }
+                       else if(txt_tgt.match(/is|iz/)){ }
+                       else if(txt_tgt.match(/means|meanz/)){ }
+                   };special_operator_factory();
+                   continue;
+               }
+
+               // UNIVERSAL_KEY******************************************FOUND: UNIVERSAL_KEY
+                aToken = new Object();
+                aToken.type = 'uni_key'  //token
+                aToken.key = txt_tgt
+                RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
+                ++RUNTIME_STATE.manifest.total_key_count;
+                continue;       
+           } else if( txt_tgt.charAt(0)==='a'               //FOUND: ALPHA, aWORDZa match
+               && !!txt_tgt.charAt(1).match(/[A-Z]/) ){ 
+                   aToken = new Object();
+                   aToken.type = 'alpha_key' //token
+                   aToken.key = txt_tgt
+                   RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
+                   ++RUNTIME_STATE.manifest.total_key_count;
+                   continue;   
+           } else if( (()=>{ // COMPLEX ALPHA_CASES : check ascendingCase and MixCase. 
+                   if(txt_tgt.charAt(0).match(/[a-z]/)){
+                       if(txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length >= 1){
+                           return true;
+                       }// ascendingCase_match
+                   }
+                   if(txt_tgt.length - txt_tgt.replace(/[a-z]/g, '').length > 1){
+                       if(txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length > 1){
+                           return true;
+                       } // MixedCase_match
+                   } 
+                   return false; 
+               })() ){   // FOUND: MIXED_CASE: more than one uppercase AND more than one lowercase.
+               aToken = new Object();
+               aToken.type = 'mix_key' //token
+               aToken.key = txt_tgt
+               RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
+               ++RUNTIME_STATE.manifest.total_key_count;
+               continue;   
+           } 
+           else if( !!txt_tgt.match(/z$|Z$/) //FOUND: TRAILZ, trailing_z_match and all upper case.
+              && txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length=== txt_tgt.length ){ 
+                aToken = new Object(); 
+                aToken.type = 'trailz_key' //token
+                aToken.key = txt_tgt
+                RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
+                ++RUNTIME_STATE.manifest.total_key_count;
+                continue;  
+           } 
+       } //endLOOP
+   }; delimit_KEY_tokenz();       
+    
+    let delimit_KEY_tokenz_old = () => {  //delimit PRIME_KEYZ to key_idx.
+        let key_tgt=''
          for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
-            txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];
-            txt_tgt = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKENZ
-            if(txt_tgt.indexOf('SIG_')>-1||txt_tgt.indexOf('YMD_')>-1){continue;} //SKIP SIG and YMD
-            if(txt_tgt.indexOf('-')>-1){continue;}
-            else if (txt_tgt.indexOf('_') === 0){ //UNI_KEY_TOKEN found
+            key_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];
+            key_tgt = key_tgt.replace(/[~.,]/g,'');//CLEAN_TOKENZ
+            last_omni_key = '';
+            last_prime_key= ''; //for special operators.
+            // debugger;
+            if(key_tgt.indexOf('SIG_')>-1||key_tgt.indexOf('YMD_')>-1){
+                console.log('skip nonkey',key_tgt); continue;} //SKIP: SIG and YMD lines
+            // if(key_tgt.indexOf('-')>-1){continue;}
+            if(key_tgt.indexOf('~~~')===0||key_tgt.indexOf('---')===0){console.log('skip nonkey',key_tgt);continue;} //SKIP: SIG and YMD lines
+            if(key_tgt.indexOf(';')===0){console.log('skip nonkey',key_tgt);continue;} //SKIP: SIG and YMD lines
+            if(key_tgt.indexOf('#')===0){console.log('skip nonkey',key_tgt);continue;} //SKIP: SIG and YMD lines
+
+            // else if (key_tgt.indexOf('_') === 0){ //UNI_KEY_TOKEN found
+            if (key_tgt.indexOf('_') === 0){ //************************************FOUND: UNI_KEY_TOKEN
                 aToken = new Object(); // regex filter spaces and check for underscore wrapper.
-                if(txt_tgt.split('').filter(itm=>{if(!itm || itm===' '){return false}; return true;}).reverse()[0] ==='_'){
+                if(key_tgt.split('').filter(itm=>{if(!itm || itm===' '){return false}; return true;}).reverse()[0] ==='_'){
                     aToken.type = 'prime_key' //token
-                    console.log('PrimeKey:',txt_tgt)       // FOUND: PRIME_KEY
-                    // last_omni_key = txt_tgt;
-                    let check_unique_prime_key = ()=> { //FOUND: PRIME_KEY_DUPLICATE
+                    console.log('FOUND PRIMEKEY:',key_tgt)       // FOUND: PRIME_KEY
+                    last_prime_key = key_tgt;
+                    let check_unique_prime_key = ()=> { //F******************OUND: PRIME_KEY_DUPLICATE
                         for(var j=0; j<RUNTIME_STATE.setz.prime_key_idx.length;j++){
-                            if(RUNTIME_STATE.setz.prime_key_idx[j]===txt_tgt){
-                                console.log('Duplicate key def Found',txt_tgt)
+                            if(RUNTIME_STATE.setz.prime_key_idx[j]===key_tgt){
+                                console.log('Duplicate key def Found',key_tgt)
                                 return; //if exists, skip, else append.
                             }
                         }
-                        RUNTIME_STATE.setz.prime_key_idx.push(txt_tgt);
+                        RUNTIME_STATE.setz.prime_key_idx.push(key_tgt);
                     }; check_unique_prime_key();
 
-                    // RUNTIME_STATE.setz.prime_key_idx.push(txt_tgt);
+                    // RUNTIME_STATE.setz.prime_key_idx.push(key_tgt);
                 } else {                                  // FOUND: SUB_PRIME_KEY
                     aToken.type = 'sub_prime_key' //token
                 }
-                aToken.key = txt_tgt
+                aToken.key = key_tgt
                 RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //POPULATE: OMNI_iNDEX
                 ++RUNTIME_STATE.manifest.total_key_count;
                 continue;
-            } else if(txt_tgt.indexOf('_') > 0){           //FOUND: UNI_KEY_TOKEN
-                if(txt_tgt.indexOf('_:')>-1){ //FOUND: SPECIAL_OPERATOR SOPZ SKIP - use later? //TODO
-                    console.log('special_operator found', txt_tgt)
+                //todo breakout?
+            // } else if(key_tgt.indexOf('_') > 0){           //FOUND: UNI_KEY_TOKEN
+            } 
+            if(key_tgt.indexOf('_') > 0){           //**********************FOUND: UNIVERSAL_KEY_TOKEN
+                if(key_tgt.indexOf('_:')>-1){ //****************************FOUND: SPECIAL_OPERATORZ : SOPZ
+                    console.log('FOUND: special_operator', key_tgt)
                     let special_operator_factory = ()=>{
-                        if(txt_tgt.match(/alias|aliaz/)){ //get_LAST_KEY and look_ahead_line
-                            last_omni_key = RUNTIME_STATE.setz.all_key_tokenz[RUNTIME_STATE.setz.all_key_tokenz.length-1];
-                            if(!last_omni_key){return;}
-                            console.log('Sets alias for:',last_omni_key)
-                            if(!RUNTIME_STATE.setz.alias_matrix[last_omni_key]){ //create new alias object.
-                                RUNTIME_STATE.setz.alias_matrix[last_omni_key] = {
-                                    key:last_omni_key, aliaz:[]
+                        if(key_tgt.match(/alias_:|aliaz_:/)){ //get_LAST_KEY and look_ahead_line
+                            // last_omni_key = RUNTIME_STATE.setz.all_key_tokenz[RUNTIME_STATE.setz.all_key_tokenz.length-1];
+                            // if(!last_omni_key){return;}
+                            // console.log('Sets alias for:',last_omni_key)
+                            // debugger;
+                            // if(!RUNTIME_STATE.setz.alias_matrix[last_omni_key]){ //create new alias object.
+                            //     RUNTIME_STATE.setz.alias_matrix[last_omni_key] = {
+                            //         key:last_omni_key, aliaz:[]
+                            //     }
+                            // }
+                            if(last_prime_key){
+                                // debugger;
+                                last_prime_key = RUNTIME_STATE.setz.all_key_tokenz[RUNTIME_STATE.setz.all_key_tokenz.length-1];
+                                // if(!last__key){return;}
+                                console.log('FOUND: Set alias for:',last_prime_key)
+                                debugger;
+                                if(!RUNTIME_STATE.setz.alias_matrix[last_prime_key]){ //create new alias object.
+                                    RUNTIME_STATE.setz.alias_matrix[last_prime_key] = {
+                                        key:last_prime_key, aliaz:[]
+                                    }
+                                }
+                            } else if (last_omni_key){
+                                debugger;
+                                last_omni_key = RUNTIME_STATE.setz.all_key_tokenz[RUNTIME_STATE.setz.all_key_tokenz.length-1];
+                                // if(!last_omni_key){return;}
+                                console.log('Sets alias for:',last_omni_key)
+                                if(!RUNTIME_STATE.setz.alias_matrix[last_omni_key]){ //create new alias object.
+                                    RUNTIME_STATE.setz.alias_matrix[last_omni_key] = {
+                                        key:last_omni_key, aliaz:[]
+                                    }
                                 }
                             }
+                                
                             txt_slice = [];
                             let lookahead_line_aliaslist = ()=>{ //
                                 // let lookahead_title_line = ()=>{
@@ -310,9 +471,15 @@
                                     }
                                 //  }; lookahead_title_line();
                             }; lookahead_line_aliaslist();
-                            
+                            //POPULATE ALIASLIST
                             if(txt_slice && txt_slice.length){
-                                RUNTIME_STATE.setz.alias_matrix[last_omni_key].aliaz.push(...txt_slice)
+                                // debugger;
+                                if(last_prime_key){
+                                    RUNTIME_STATE.setz.alias_matrix[last_prime_key].aliaz.push(...txt_slice)
+                                } else if (last_omni_key){
+                                    RUNTIME_STATE.setz.alias_matrix[last_omni_key].aliaz.push(...txt_slice)
+                                }
+                                // RUNTIME_STATE.setz.alias_matrix[last_omni_key].aliaz.push(...txt_slice)
                                 RUNTIME_STATE.setz.all_alias_list.push(...txt_slice) //use for all aliases.
                             }
                             /*****************************************\
@@ -320,37 +487,42 @@
                              * - with things like plural or long_form_text.
                              *****************************************/
                         } 
-                        else if(txt_tgt.match(/or/)){ }
-                        else if(txt_tgt.match(/and/)){ }
-                        else if(txt_tgt.match(/is|iz/)){ }
-                        else if(txt_tgt.match(/means|meanz/)){ }
+                        else if(key_tgt.match(/or/)){ }
+                        else if(key_tgt.match(/and/)){ }
+                        else if(key_tgt.match(/is|iz/)){ }
+                        else if(key_tgt.match(/means|meanz/)){ }
                     };special_operator_factory();
-                    continue;
-                }
-
-                // UNIVERSAL_KEY******************************************FOUND: UNIVERSAL_KEY
-                 aToken = new Object();
-                 aToken.type = 'uni_key'  //token
-                 aToken.key = txt_tgt
-                 RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
-                 ++RUNTIME_STATE.manifest.total_key_count;
-                 continue;       
-            } else if( txt_tgt.charAt(0)==='a'               //FOUND: ALPHA, aWORDZa match
-                && !!txt_tgt.charAt(1).match(/[A-Z]/) ){ 
+                    // continue;
+                } //END  special_operatorz 
+                // else {
+                    // UNI_KEY******************************************FOUND: UNI_KEY
                     aToken = new Object();
-                    aToken.type = 'alpha_key' //token
-                    aToken.key = txt_tgt
+                    aToken.type = 'uni_key'  //token
+                    aToken.key = key_tgt
                     RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
                     ++RUNTIME_STATE.manifest.total_key_count;
-                    continue;   
-            } else if( (()=>{ // COMPLEX ALPHA_CASES : check ascendingCase and MixCase. 
-                    if(txt_tgt.charAt(0).match(/[a-z]/)){
-                        if(txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length >= 1){
+                    //  continue;       
+                // }
+            // } else if( key_tgt.charAt(0)==='a'               //FOUND: ALPHA, aWORDZa match
+            } 
+            if( key_tgt.charAt(0)==='a'               //FOUND: ALPHA, aWORDZa match
+                && !!key_tgt.charAt(1).match(/[A-Z]/) ){ 
+                    aToken = new Object();
+                    aToken.type = 'alpha_key' //token
+                    aToken.key = key_tgt
+                    RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
+                    ++RUNTIME_STATE.manifest.total_key_count;
+                    // continue;   
+            // } else if( (()=>{ // COMPLEX ALPHA_CASES : check ascendingCase and MixCase. 
+            } 
+            if( (()=>{ // COMPLEX ALPHA_CASES : check ascendingCase and MixCase. 
+                    if(key_tgt.charAt(0).match(/[a-z]/)){
+                        if(key_tgt.length - key_tgt.replace(/[A-Z]/g, '').length >= 1){
                             return true;
                         }// ascendingCase_match
                     }
-                    if(txt_tgt.length - txt_tgt.replace(/[a-z]/g, '').length > 1){
-                        if(txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length > 1){
+                    if(key_tgt.length - key_tgt.replace(/[a-z]/g, '').length > 1){
+                        if(key_tgt.length - key_tgt.replace(/[A-Z]/g, '').length > 1){
                             return true;
                         } // MixedCase_match
                     } 
@@ -358,22 +530,23 @@
                 })() ){   // FOUND: MIXED_CASE: more than one uppercase AND more than one lowercase.
                 aToken = new Object();
                 aToken.type = 'mix_key' //token
-                aToken.key = txt_tgt
+                aToken.key = key_tgt
                 RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
                 ++RUNTIME_STATE.manifest.total_key_count;
-                continue;   
+                // continue;   
             } 
-            else if( !!txt_tgt.match(/z$|Z$/) //FOUND: TRAILZ, trailing_z_match and all upper case.
-               && txt_tgt.length - txt_tgt.replace(/[A-Z]/g, '').length=== txt_tgt.length ){ 
+            // else if( !!key_tgt.match(/z$|Z$/) //FOUND: TRAILZ, trailing_z_match and all upper case.
+            if( !!key_tgt.match(/z$|Z$/) //FOUND: TRAILZ, trailing_z_match and all upper case.
+               && key_tgt.length - key_tgt.replace(/[A-Z]/g, '').length=== key_tgt.length ){ 
                  aToken = new Object(); 
                  aToken.type = 'trailz_key' //token
-                 aToken.key = txt_tgt
+                 aToken.key = key_tgt
                  RUNTIME_STATE.setz.all_key_tokenz.push(aToken.key); //for iNDEX
                  ++RUNTIME_STATE.manifest.total_key_count;
-                 continue;  
+                //  continue;  
             } 
         } //endLOOP
-    }; delimit_KEY_tokenz();   
+    }; delimit_KEY_tokenz_old();   //todo remove
     /********************************************************\
      * POPULATED: prime_key_idx && all_key_tokenz 
      - PRIME_KEYZ : used to organize CARDZ. (defined by _underscoreWrapper_ to keep numz smaller.)
@@ -440,7 +613,12 @@
                     ++RUNTIME_STATE.idx.TOPIC_IDX;
                     RUNTIME_STATE.idx.SUBTOPIC_IDX = 0;
                     RUNTIME_STATE.idx.SERIEZ_IDX = 0;    
-                    aToken.ymdz = RUNTIME_STATE.ymdz;              
+                    // aToken.ymdz = RUNTIME_STATE.ymdz; //no ymdz without ymdz    
+
+                    if(RUNTIME_STATE.ymdz && RUNTIME_STATE.ymdz.length){
+                        // debugger;
+                        aToken.ymdz = RUNTIME_STATE.ymdz;              
+                    }
                     aToken.sigz = RUNTIME_STATE.sigz;              
                 } else { aToken.type = 'subtopic';   }   
                 RUNTIME_STATE.idx.QUOTE_IDX = 0;
@@ -451,7 +629,7 @@
                let lookahead_title_line = ()=>{
                    for(j = i+1; j < RUNTIME_STATE.setz.all_raw_tokenz.length; j++){ //SUB-TOKENZ
                        if(RUNTIME_STATE.setz.all_raw_tokenz[j].indexOf(';') === 0 
-                         || j+1>=RUNTIME_STATE.setz.all_raw_tokenz.length){ //SECTION_END found
+                         || j+1>=RUNTIME_STATE.setz.all_raw_tokenz.length){ //***********FOUND: TITLE_SLICE
                            txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(i+1,j+1)
                            txt_slice = txt_slice.join(' ').replace(/[;]/g,'');
                            txt_slice = txt_slice.trim();
@@ -463,11 +641,13 @@
                 let lookahead_subtxt = ()=>{
                    for(k = j+1; k < RUNTIME_STATE.setz.all_raw_tokenz.length; k++){ //SUB-TOKENZ
                        if(RUNTIME_STATE.setz.all_raw_tokenz[k].indexOf('#') === 0
-                           || k+1>=RUNTIME_STATE.setz.all_raw_tokenz.length){    // FOUND: SECTION_END 
-                                txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(j+1,k+1)
+                           || k+1>=RUNTIME_STATE.setz.all_raw_tokenz.length){
+                               txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(j+1,k+1)
+                            // debugger; //top of all txt slicing!
+                        //    ||RUNTIME_STATE.setz.all_raw_tokenz[k].indexOf(';;') >-1){    // FOUND: TXT_SLICE
                             if(txt_slice.indexOf('>') > -1  // FOUND: for FACTORY: QUOTE, SERIEZ, STARZ
-                              || txt_slice.join('').match(/[0-9]./) 
-                              || txt_slice.join('').match(/!!!|~~~/) ){
+                              || txt_slice.join('').match(/[0-9]./)          //SERIEZ
+                              || txt_slice.join('').match(/!!!|~~~|!i!/) ){
                                 /******************************************\
                                  * lookahead_txt_tokenz : PURPOSE :
                                  * SERIEZ, STARZ and QUOTEZ FACTORY.
@@ -475,25 +655,33 @@
                                 \******************************************/
                                 let lookahead_txt_tokenz = () => {  //SERIEZ, STARZ and QUOTEZ FACTORY.
                                     txt_tokenz = [];
-                                    subtxt_line = txt_slice.join(' ').split(';');
                                     // debugger;
+                                    subtxt_line = txt_slice.join(' ').split(';;');
+                                    // subtxt_line = txt_slice.join(' ').split(';');
+                                    // subtxt_line = txt_slice.join(' ').split(';;').join(' ').split(';');
                                     for(var i = 0; i< subtxt_line.length; i++){ 
+                                        subtxt_line[i] = subtxt_line[i].trim(); //CLEAN sentences, with magic_tokenz!
                                         // if(subtxt_line[i].match(/~0~/) ){ //FOUND: THE_ENDZ!!! 
                                         //     //TODO: test this, or move up?
                                         //     break;
                                         // }  
                                         //---STARZ--------------------------------------------
-                                        if(subtxt_line[i].match(/!!!/) && RUNTIME_STATE.idx.STAR_TOPICZ_FLAG===0 ){ //STAR_TOPICZ
+                                        if(subtxt_line[i].match(/!!!|!i!/) && RUNTIME_STATE.idx.STAR_TOPICZ_FLAG===0 ){ //STAR_TOPICZ
                                             txtToken = new Object();                   //FOUND: STARZ token **** or !!!
                                             txtToken.type = 'star_txt' //txt token
                                             txtToken.txt = subtxt_line[i]
                                             txtToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}`+
                                                             `.${RUNTIME_STATE.idx.SUBTOPIC_IDX}`+
                                                             `.star:${++RUNTIME_STATE.idx.STAR_TOPICZ_IDX}`;                
-                                            txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);              
+                                            if(RUNTIME_STATE.ymdz && RUNTIME_STATE.ymdz.length){
+                                                txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);              
+                                            }
+                                            // txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);              
                                             txtToken.sigz = new Array(...RUNTIME_STATE.sigz); 
                                             if(txtToken.txt.indexOf('SIG_')>-1){txtToken.sigz.push( txtToken.txt.match(/SIG_[^\s]+/)[0] );  }
-                                            if(txtToken.txt.indexOf('YMD_')>-1){txtToken.ymdz.push( txtToken.txt.match(/YMD_[^\s]+/)[0] );  } 
+                                            if(txtToken.txt.indexOf('YMD_')>-1){
+                                                if(!txtToken.ymdz){txtToken.ymdz=[]}
+                                                txtToken.ymdz.push( txtToken.txt.match(/YMD_[^\s]+/)[0] );  } 
                                             RUNTIME_STATE.setz.all_star_topicz.push(txtToken)  
                                             ++RUNTIME_STATE.manifest.total_key_topic_count;              
                                         } 
@@ -506,23 +694,34 @@
                                                 txtToken = new Object();
                                                 txtToken.type = 'starz_txt' //txt token
                                                 txtToken.txt = subtxt_line[i]
+                                                txtToken.txtz = []
                                                 txtToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}`+
                                                                 `.${RUNTIME_STATE.idx.SUBTOPIC_IDX}`+
                                                                 `.starz:${++RUNTIME_STATE.idx.STAR_TOPICZ_IDX}`;                
-                                                txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);              
+                                                // txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);   
+                                                if(RUNTIME_STATE.ymdz && RUNTIME_STATE.ymdz.length){
+                                                    txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);              
+                                                }           
                                                 txtToken.sigz = new Array(...RUNTIME_STATE.sigz); 
                                                 if(txtToken.txt.indexOf('SIG_')>-1){txtToken.sigz.push( txtToken.txt.match(/SIG_[^\s]+/)[0] );  }
-                                                if(txtToken.txt.indexOf('YMD_')>-1){txtToken.ymdz.push( txtToken.txt.match(/YMD_[^\s]+/)[0] );  } 
-                                                let lookahead_endtilde = () => { //lookahead pattern
+                                                if(txtToken.txt.indexOf('YMD_')>-1){
+                                                    if(!txtToken.ymdz){txtToken.ymdz=[]}
+                                                    txtToken.ymdz.push( txtToken.txt.match(/YMD_[^\s]+/)[0] );  } 
+                                                let lookahead_endtilde = () => { //lookahead pattern to dynamic load TXTZ
                                                     for(var j = i+1; j< subtxt_line.length; j++){
                                                         if(subtxt_line[j].indexOf('~~~')>-1 
                                                         || subtxt_line[j].indexOf('#')>-1
                                                         || j===subtxt_line.length-1){
+                                                            // debugger;
                                                             txtToken.txt = subtxt_line.slice(i+1,j).join('');
+                                                            txtToken.txtz.push({type:'magic_tilde_open',txt:'~~~'});
+                                                            txtToken.txtz.push(subtxt_line.slice(i+1,j));
+                                                            txtToken.txtz.push({type:'magic_tilde_open',txt:'~~~'});
                                                             break;
                                                         }
                                                     }
                                                 }; lookahead_endtilde(); 
+                                                // debugger;
                                                 RUNTIME_STATE.idx.STAR_TOPICZ_FLAG = 1; //open state.
                                                 RUNTIME_STATE.setz.all_star_topicz.push(txtToken)
                                                 ++RUNTIME_STATE.manifest.total_key_topic_count;
@@ -539,12 +738,16 @@
                                             txtToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}`+
                                                             `.${RUNTIME_STATE.idx.SUBTOPIC_IDX}`+
                                                             `.quote:${++RUNTIME_STATE.idx.QUOTE_IDX}`;                
-                                            txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);              
+                                            // txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz); 
+                                            if(RUNTIME_STATE.ymdz && RUNTIME_STATE.ymdz.length){
+                                                txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);              
+                                            }                                                          
                                             txtToken.sigz = new Array(...RUNTIME_STATE.sigz); 
                                             if(txtToken.txt.indexOf('SIG_')>-1){
                                                 txtToken.sigz.push( txtToken.txt.match(/SIG_[^\s]+/)[0] );
                                             }
                                             if(txtToken.txt.indexOf('YMD_')>-1){
+                                                if(!txtToken.ymdz){txtToken.ymdz=[]}
                                                 txtToken.ymdz.push( txtToken.txt.match(/YMD_[^\s]+/)[0] );
                                             } 
                                             txt_tokenz.push(txtToken)
@@ -557,15 +760,22 @@
                                         \******************************************/                                          
                                         // TODO break these out?
                                         //--SERIEZ------------------------------------------
-                                        else if (subtxt_line[i].match(/\d+\./g)) { //FOUND: SERIEZ txt
+                                        else if (subtxt_line[i].match(/\d+\./g)) { //***************FOUND: SERIEZ txt
                                             txtToken = new Object();
                                             txtToken.type = 'seriez_txt' //token
                                             txtToken.txt = subtxt_line[i]
                                             txtToken.seriez = subtxt_line[i].match(/\d+\./g).toString(); //FIRST_MATCH
-                                            RUNTIME_STATE.idx.SERIEZ_IDX = txtToken.seriez;
+                                            if(RUNTIME_STATE.ymdz && RUNTIME_STATE.ymdz.length){
+                                                txtToken.ymdz = new Array(...RUNTIME_STATE.ymdz);              
+                                            } 
+                                            RUNTIME_STATE.idx.SERIEZ_IDX = txtToken.seriez.replace('.','');
                                             txtToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}`+
                                                             `.${RUNTIME_STATE.idx.SUBTOPIC_IDX}`+
                                                             `.set:${RUNTIME_STATE.idx.SERIEZ_IDX}`;
+                                            if(txtToken.txt.indexOf('YMD_')>-1){
+                                                if(!txtToken.ymdz){txtToken.ymdz=[]}
+                                                txtToken.ymdz.push( txtToken.txt.match(/YMD_[^\s]+/)[0] );
+                                            } 
                                             txt_tokenz.push(txtToken)
                                             ++RUNTIME_STATE.manifest.total_subtopic_count;
                                             continue; 
@@ -573,11 +783,24 @@
                                              * POPULATES : SERIEZ TXT.
                                             \******************************************/  
                                         }  
-                                        //-------SUBTXT---------------------------------------
+                                        //-------MAGIC_TOKENZ---------------------------------------
+                                        else if (subtxt_line[i].indexOf('~~~') >-1
+                                          || subtxt_line[i].indexOf('---') >-1
+                                          || subtxt_line[i].indexOf('_:') >-1) {                 // FOUND: MAGIC_TXTZ
+                                            txtToken = new Object();
+                                            txtToken.type = 'magic_token' //token
+                                            txtToken.txt = subtxt_line[i]
+                                            txtToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}`+
+                                                            `.${RUNTIME_STATE.idx.SUBTOPIC_IDX}`+
+                                                            `.mtok:${++RUNTIME_STATE.idx.TXT_IDX}`;                
+                                            txt_tokenz.push(txtToken)
+                                            ++RUNTIME_STATE.manifest.total_subtopic_count;
+                                            continue;                                            
+                                        }//-------SUBTXT---------------------------------------
                                         else if (subtxt_line[i]) {                     // FOUND: SUBTXTZ
-                                            if(subtxt_line[i].indexOf('~~~') >-1 ){ continue }
-                                            if(subtxt_line[i].indexOf('---') >-1 ){ continue }
-                                            if( subtxt_line[i].indexOf('#') >-1 ){ break }
+                                            // if(subtxt_line[i].indexOf('~~~') >-1 ){ continue }  
+                                            // if(subtxt_line[i].indexOf('---') >-1 ){ continue }   
+                                            if( subtxt_line[i].indexOf('#') >-1 ){ break }       //FOUND END_TOPIC
                                             txtToken = new Object();
                                             txtToken.type = 'sub_txt' //token
                                             txtToken.txt = subtxt_line[i]
@@ -593,16 +816,17 @@
                                     return txt_tokenz;
                                 }; //END lookahead_txt_tokenz
                                 txt_slice = lookahead_txt_tokenz();
+                                // debugger;
                                 /******************************************\
                                  * POPULATES : txt_slice
                                  * like a SERIEZ, STARZ and QUOTEZ FACTORY.
                                 \******************************************/
-                            } else //END FACTORY for QUOTE, SERIES, STARZ
+                            } else //END FACTORY for QUOTE, SERIES, STARZ, solotxt does not include
                             { //SOLO_TXT--------------------------------------FOUND: SOLO_TXT
                                 subtxt_line = [];
-                                // if(txt_slice.indexOf(';;')>=-1){ //IMPORTANT: BREAKUP_SUB_TXTZ
-                                if(false){
-                                    debugger 
+                                if(txt_slice.indexOf(';;')>=-1){ //IMPORTANT: BREAKUP_SUB_TXTZ
+                                // if(false){
+                                    // debugger 
                                     txt_slice = txt_slice.join(' ').split(/;;/)
                                     for(let idx = 0; idx < txt_slice.length; idx++){
                                         // txt_slice = {
@@ -610,6 +834,11 @@
                                         //     txt:txt_slice[idx],
                                         //     numz:`${RUNTIME_STATE.idx.TOPIC_IDX}:${RUNTIME_STATE.idx.SUBTOPIC_IDX}:${++RUNTIME_STATE.idx.TXT_IDX}`
                                         // }
+                                        txt_slice[idx] = txt_slice[idx].replace(/[#]/g,'');
+                                        // txt_slice[idx] = txt_slice[idx].replace('---','')//CLEAN_TOKENZ
+                                        txt_slice[idx] = txt_slice[idx].trim();
+                                        if(!txt_slice[idx]){continue}
+
                                         subtxt_line.push( {
                                             type:'solo_sub_txt',
                                             txt:txt_slice[idx],
@@ -619,7 +848,7 @@
                                 }else{
                                     // txt_slice = txt_slice.join(' ').replace(/[;#]/g,'');
                                     txt_slice = txt_slice.join(' ').replace(/[#]/g,'');
-                                    txt_slice = txt_slice.replace('---','')//CLEAN_TOKENZ
+                                    // txt_slice = txt_slice.replace('---','')//CLEAN_TOKENZ
                                     txt_slice = txt_slice.trim();
                                 }
                                 // // txt_slice = txt_slice.join(' ').replace(/[;#]/g,'');
@@ -627,17 +856,18 @@
                                 // txt_slice = txt_slice.replace('---','')//CLEAN_TOKENZ
                                 // txt_slice = txt_slice.trim();
                                 // debugger;
-                                if(txt_slice) txt_slice = { //todo is this necessary?
-                                    type:'solo_txt',
-                                    txt:txt_slice,
-                                    numz:`${RUNTIME_STATE.idx.TOPIC_IDX}:${RUNTIME_STATE.idx.SUBTOPIC_IDX}:${++RUNTIME_STATE.idx.TXT_IDX}`
-                                }
+                                // if(txt_slice) txt_slice = { //todo is this necessary?
+                                //     type:'odd_txt',
+                                //     txt:txt_slice,
+                                //     numz:`${RUNTIME_STATE.idx.TOPIC_IDX}:${RUNTIME_STATE.idx.SUBTOPIC_IDX}:${++RUNTIME_STATE.idx.TXT_IDX}`
+                                // }
                             } //END IF TOKEN.
                             // debugger;
                             // let load_Token_TXTZ = ()=>{
-                            //     // if(subtxt_line.length){aToken.txtz.push(...subtxt_line)}
-                                if(false){aToken.txtz.push(...subtxt_line)}
+                                if(subtxt_line.length){aToken.txtz.push(...subtxt_line)}
+                                // if(false){aToken.txtz.push(...subtxt_line)}
                                 else if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
+                                // if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
                                 else if(txt_slice.txt){ aToken.txtz.push(txt_slice) }
                             // }; load_Token_TXTZ();
                             // // let load_Token_TXTZ = ()=>{
@@ -664,6 +894,24 @@
     * use for CARDZ
     \******************************************/
     //------------------------------------------------------------------------
+    debugger;
+    let populate_auto_aliases = ()=> {
+
+        for( aliaz in RUNTIME_STATE.setz.alias_matrix){
+            debugger;
+            if(RUNTIME_STATE.setz.alias_matrix[aliaz].aliaz.indexOf(aliaz.replace('_',''))){
+                //FOUND : correct auto_alias
+            } else { //ADD : auto_alias
+                RUNTIME_STATE.setz.alias_matrix[aliaz].aliaz.push(aliaz.replace('_',''));
+            }
+        }
+
+    }; populate_auto_aliases();
+    /******************************************\
+    * POPULATES : ALIAS_MATRIX with auto aliases
+    * Example: 'this' and '_this_' are aliases.
+    \******************************************/
+    //------------------------------------------------------------------------
     /******************************************\
     * build_token_cardz : PURPOSE : 
      - use all_topic_tokenz, with aToken.txtz 
@@ -680,7 +928,7 @@
 
         let subtopic_tgt = {}, topic_tgt = {}
         // for(let i = 0; i< RUNTIME_STATE.setz.all_key_tokenz.length; i++){ //KEY-TOKENZ as TXT_TGTZ
-        // debugger;
+        debugger;
         // for(let i = 0; i< RUNTIME_STATE.setz.omni_key_idx.length; i++){ //KEY-TOKENZ as TXT_TGTZ
             // key_tgt = RUNTIME_STATE.setz.omni_key_idx[i]; //FOR ALL_OMNI_KEYZ (non_dupe): todo omni_key_tgt
         for(let i = 0; i< RUNTIME_STATE.setz.prime_key_idx.length; i++){ //KEY-TOKENZ as TXT_TGTZ
@@ -729,7 +977,7 @@
                             /****************SECTION 2  - ALIAS_PK check on TITLE.
                             //alias check on TITLE : does the TITLE contain any alias?
                             */
-                            // debugger;
+                            debugger;
                             // RUNTIME_STATE.setz.all_alias_list.forEach( alias_tgt => {
                                 prime_key_aliaz.forEach( alias_tgt => {
                                 // search_topic_txt = RUNTIME_STATE.setz.all_topic_tokenz[j].title;
@@ -782,9 +1030,17 @@
                         if(RUNTIME_STATE.setz.all_topic_tokenz[j].txtz){ 
                             for(let k = 0; k < RUNTIME_STATE.setz.all_topic_tokenz[j].txtz.length; k++){
                                 search_topic_txt = RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k].txt;
-                                if(!search_topic_txt){debugger;}
-                                search_topic_txt = search_topic_txt.toLowerCase();
+                                if(!search_topic_txt){
+                                    // debugger; //todo
+                                    search_topic_txt = RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k]
+                                }
+                                if(search_topic_txt.join){
+                                    // debugger; //todo combining back magic_txts into sub_txts, probably new (deeper) loop.
+                                    search_topic_txt = search_topic_txt.join(' ')
+                                }
+                                // debugger;
                                 console.log('search3',search_topic_txt);
+                                search_topic_txt = search_topic_txt.toLowerCase();
                                 //TODO: if maintitle alias check also //if main_title_prime_key put all references in title txt.
                                 // if(RUNTIME_STATE.setz.all_topic_tokenz[j].txtz[k].txt.indexOf(prime_key_tgt)>-1){ 
                                 if(search_topic_txt.indexOf(prime_key_clean)>-1){                         //FOUND EXACT_PK in TXT
@@ -797,7 +1053,7 @@
                                     //***************************** POPULATE :  */ TXTz to TOKEN.
                                     
                                 } else{  //**************************SECTON 4: ALIAS PK in TXT
-                                        // debugger;
+                                        debugger;
                                         prime_key_aliaz.forEach( alias_tgt => {
                                             if(search_topic_txt.indexOf(alias_tgt)>-1){                         //FOUND EXACT_PK in TXT
                                                 // debugger; 
@@ -859,7 +1115,10 @@
                             aToken.title = (token_state.title)?RUNTIME_STATE.setz.all_topic_tokenz[j].title:'';                        
                             aToken.txtz = (token_state.txtz.length)?token_state.txtz:[];
                             aToken.topicz = token_state.topicz;
-                            aToken.aliaz = (RUNTIME_STATE.setz.alias_matrix[prime_key_tgt])?RUNTIME_STATE.setz.alias_matrix[prime_key_tgt].aliaz:[];
+                            // aToken.aliaz = (RUNTIME_STATE.setz.alias_matrix[prime_key_tgt])?RUNTIME_STATE.setz.alias_matrix[prime_key_tgt].aliaz:[];
+                            if(RUNTIME_STATE.setz.alias_matrix[prime_key_tgt]){ // no array if no aliaz
+                                aToken.aliaz = RUNTIME_STATE.setz.alias_matrix[prime_key_tgt].aliaz;
+                            }
                             aToken.keyz = (token_state.keyz)? token_state.keyz:[];
                             //aToken.alias = [];
                             //aToken.alias.push(...generateAlias(aToken))
@@ -867,7 +1126,7 @@
                             // ymdz? sigz?
                             // aToken.numz.push(RUNTIME_STATE.setz.all_topic_tokenz[j].numz);
                             aToken.numz = RUNTIME_STATE.setz.all_topic_tokenz[j].numz+
-                            `.${++RUNTIME_STATE.idx.CARD_IDX}:cardz`; 
+                            `.cardz:${++RUNTIME_STATE.idx.CARD_IDX}`; 
                             // aToken.numz.push(RUNTIME_STATE.setz.all_topic_tokenz[j].numz+
                             //   `.${++RUNTIME_STATE.idx.CARD_IDX}cardz`); 
                             // aToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}`+
@@ -911,15 +1170,24 @@
                 RUNTIME_STATE.setz.prime_key_cardz[primeKeyTgt].push(primeKeyObj)
 
             } else { //FOUND: CARD DOES NOT EXIST. CREATE ARRAY.
+                // debugger;
                 aToken = new Object();
                 aToken.type = 'prime_card_token'
                 aToken.key = primeKeyTgt;
                 aToken.keyz = (primeKeyObj.keyz)?primeKeyObj.keyz:[];
                 aToken.title = (primeKeyObj.title)?primeKeyObj.title:'';
                 aToken.txtz = (primeKeyObj.txtz)?primeKeyObj.txtz:[];
-                aToken.aliaz = (primeKeyObj.aliaz)?primeKeyObj.aliaz:[];
+                if(primeKeyObj.aliaz && primeKeyObj.aliaz.length){ //no aliaz if blank.
+                    debugger;
+                    aToken.aliaz = primeKeyObj.aliaz;
+                }
+                // aToken.aliaz = (primeKeyObj.aliaz)?primeKeyObj.aliaz:[];
+
                 aToken.topicz = (primeKeyObj.topicz)?primeKeyObj.topicz:[];
-                aToken.ymdz = (primeKeyObj.ymdz)?primeKeyObj.ymdz:[];
+                if(primeKeyObj.ymdz && primeKeyObj.ymdz.length){ // no ymdz without ymdz
+                    aToken.ymdz = primeKeyObj.ymdz;
+                }
+                // aToken.ymdz = (primeKeyObj.ymdz)?primeKeyObj.ymdz:[];
                 aToken.numz = (primeKeyObj.numz)?primeKeyObj.numz:[];
                 RUNTIME_STATE.setz.prime_key_cardz[primeKeyTgt] = [aToken];
 
@@ -970,7 +1238,11 @@
             aToken.key = prime_key;
             aToken.txtz = RUNTIME_STATE.setz.prime_key_cardz[prime_key];
             aToken.tgt_path =  RUNTIME_STATE.tgt_path;
-            aToken.ymdz=[]; aToken.ymdz.push(RUNTIME_STATE.ymdz);
+            if(RUNTIME_STATE.ymdz && RUNTIME_STATE.ymdz.length){
+                aToken.ymdz=[]; 
+                aToken.ymdz.push(RUNTIME_STATE.ymdz);
+            }
+            // aToken.ymdz=[]; aToken.ymdz.push(RUNTIME_STATE.ymdz);
             aToken.input = "LIBZ";
             aToken.output = "CARDZ";
             aToken.version ='444';
@@ -1490,6 +1762,7 @@
          writeOutCounts();
          //THE_0_END && _0_ //todo aSYMBOLZa _*_ aSPARKa sig_: enzo~:)
      }; MAIN_PROCESS();
+    //  }; try{ MAIN_PROCESS(); } catch(e){console.log(e)}
  };
  main();
  

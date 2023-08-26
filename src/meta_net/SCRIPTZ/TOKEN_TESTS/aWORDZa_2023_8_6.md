@@ -18,7 +18,7 @@ goalz_: to generate_better_words, and concepts_underneath_words, with a new and 
 
 pronounced_: ah-word-ah-GAHM-eee, like oragami.
 
-meanz_: actual word oragami.
+meanz_: A game of wordcrafting. Like actual word oragami. 
 
 aliaz_: aWORDaGAME, word_game, actual_word_game, actual_act_of_word_games, awordagamea.
 
@@ -30,7 +30,10 @@ aWORDaGAME_Challenge meanz_: convert wordz to more accurately describe actual_re
 
 ## How to play aWORDaGAMEa?
 
-Start by exploring in any direction. Literally, any_viewz_you_aCHOOZE is a_good_start.
+Start by exploring in any direction. 
+
+> Literally, any_viewz_you_CHOOZE is a_good_start.
+
 Pick any of the wordz, and start pulling on that thread... called seeking. 
 
 Basically, you start by start_seeking_clues.
@@ -79,7 +82,7 @@ It has many principles to most simply, structure vast arrays of text with topics
 
 Here are a few principles.
 
-### Principle_of_fewest_letters_and_words
+### aWordza Principle_of_fewest_letters_and_words
 
 > The goal is to maximize concept articulation, with the fewest characters possible.
 
@@ -92,7 +95,7 @@ Here are a few principles.
       - self-descriptive,
       - memorable
 
-3. And as you find aBetterWordz later, quickly adapt to aBetterWordza.
+3. And as you find aBetterWordz later, quickly adapt to aBetteraWordza.
 
     It's not as easy as you may think. Here it becomes and infinitely_complex_word_puzzle.
 
@@ -106,19 +109,28 @@ It is tremendously fulfilling to experience.
 
 ### How does is work?
 
-aWordza uses a simplified_language_syntax, called _Enhanced_English_. It is more flexible, and robust, to combine words together, and articulate_conceptz_exactly. Major aspects were improved, as syntax and naming convention, to reduce the complexities into simplicities.
+aWordza uses a simplified_language_syntax, called _Enhanced_English_. 
 
-Future wordz, will detail the many design principles applied elegantly, to try ENHANCE_HUMAN_LANGUAGE to maximum level using tools. 
+It is more flexible, and robust, to combine words, and articulate_conceptz_exactly - for yet_to_be_well_named_concepts. 
 
-- From a technical standpoint, aWORDZa is just a loop over all words, and then a system for describing them exactly in metadata. 
+Major aspects of language were improved, with subtle (minor) syntax and naming convention alterations.
 
-- From a design standpoint - it is a_GAME_of_WORDZ. 
+Future_wordz, will detail the many design principles applied elegantly, to ENHANCE_HUMAN_LANGUAGE to maximum level for use in new tools in language expression. 
 
-Following the SIMPLIFIED_LANGUAGE_SYNTAX (naming-convention) - a_WORD_GAME of playing aWORDaGAMEa through aPRYZMaWORDZa.
 
-> Where a goal is to fold_wordz_like_oragami, until we randomly arrive at, a_clearer_reflection_of_actual_reality.
+> Where a goal is to fold_wordz_like_oragami, until we arrive at, better_meta_data, and if we are lucky, a_clearer_reflection_of_actual_reality.
 
-conzeptz_await_us, and aWORDZa folds them into existence before us, as a game.
+- From a technical standpoint, aWORDZa is just a loop over words, with a system that describes them exactly in metadata. 
+
+- From a design standpoint - it is like a_GAME_of_WORDZ. 
+
+Following the SIMPLIFIED_LANGUAGE_SYNTAX (naming-convention) 
+
+- aWordza is a_WORD_GAME of playing aWORDaGAMEa within aPRYZMaWORDZa.
+
+> use artificial intelligence to decipher actual_reality, into actual_intelligence. !i!
+
+conzeptz_await_us, and aWORDZa folds them into existence - as a game.
 
 ---
 

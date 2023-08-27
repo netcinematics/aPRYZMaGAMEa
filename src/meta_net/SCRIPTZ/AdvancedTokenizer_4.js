@@ -606,7 +606,7 @@
     let delimit_all_topicz = ()=>{
         for(let i = 0; i< RUNTIME_STATE.setz.all_raw_tokenz.length; i++){ //KEY-TOKENZ
             txt_tgt = RUNTIME_STATE.setz.all_raw_tokenz[i];  
-            if(txt_tgt.indexOf('#') === 0){ //TITLE_TOKEN found
+            if(txt_tgt.indexOf('#') === 0){ //****************************** FOUND: TOPIC
                 aToken = new Object();
                 if(txt_tgt.length === 1){
                     aToken.type = 'maintopic';
@@ -625,6 +625,7 @@
                 RUNTIME_STATE.idx.TXT_IDX = 0; //reset_IDX
                 aToken.key = txt_tgt.replace(/[~.,]/g,'');//CLEAN_TOKEN
                 aToken.txtz = [];
+                // txt_slice = '', subtxt_line='';
                let j=0,k=0; // LOOKAHEAD-PATTERNZ (watchers) fns trigger to create tokenz.
                let lookahead_title_line = ()=>{
                    for(j = i+1; j < RUNTIME_STATE.setz.all_raw_tokenz.length; j++){ //SUB-TOKENZ
@@ -641,10 +642,10 @@
                 let lookahead_subtxt = ()=>{
                    for(k = j+1; k < RUNTIME_STATE.setz.all_raw_tokenz.length; k++){ //SUB-TOKENZ
                        if(RUNTIME_STATE.setz.all_raw_tokenz[k].indexOf('#') === 0
-                           || k+1>=RUNTIME_STATE.setz.all_raw_tokenz.length){
+                           || k+1>=RUNTIME_STATE.setz.all_raw_tokenz.length){               // FOUND: END_TXT
                                txt_slice = RUNTIME_STATE.setz.all_raw_tokenz.slice(j+1,k+1)
                             // debugger; //top of all txt slicing!
-                        //    ||RUNTIME_STATE.setz.all_raw_tokenz[k].indexOf(';;') >-1){    // FOUND: TXT_SLICE
+                        //    ||RUNTIME_STATE.setz.all_raw_tokenz[k].indexOf(';;') >-1){  
                             if(txt_slice.indexOf('>') > -1  // FOUND: for FACTORY: QUOTE, SERIEZ, STARZ
                               || txt_slice.join('').match(/[0-9]./)          //SERIEZ
                               || txt_slice.join('').match(/!!!|~~~|!i!/) ){
@@ -815,7 +816,8 @@
                                     }
                                     return txt_tokenz;
                                 }; //END lookahead_txt_tokenz
-                                txt_slice = lookahead_txt_tokenz();
+                                subtxt_line = lookahead_txt_tokenz();
+                                // txt_slice = lookahead_txt_tokenz();
                                 // debugger;
                                 /******************************************\
                                  * POPULATES : txt_slice
@@ -862,13 +864,22 @@
                                 //     numz:`${RUNTIME_STATE.idx.TOPIC_IDX}:${RUNTIME_STATE.idx.SUBTOPIC_IDX}:${++RUNTIME_STATE.idx.TXT_IDX}`
                                 // }
                             } //END IF TOKEN.
-                            // debugger;
+                            debugger;
                             // let load_Token_TXTZ = ()=>{
-                                if(subtxt_line.length){aToken.txtz.push(...subtxt_line)}
+                                if(subtxt_line.length){ console.log('load1: ',subtxt_line);
+                                    aToken.txtz.push(...subtxt_line)}
+                                // if(subtxt_line.length){aToken.txtz.push(...subtxt_line)}
                                 // if(false){aToken.txtz.push(...subtxt_line)}
-                                else if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
+                                else 
+                                if(txt_slice.length){ console.log('load2: ',txt_slice);
+                                     aToken.txtz.push(...txt_slice) }
+                                // else if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
                                 // if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
-                                else if(txt_slice.txt){ aToken.txtz.push(txt_slice) }
+                                else if(txt_slice.txt){ console.log('load3: ',txt_slice);
+                                     aToken.txtz.push(txt_slice) }
+                                // else if(txt_slice.txt){ aToken.txtz.push(txt_slice) }
+debugger;
+
                             // }; load_Token_TXTZ();
                             // // let load_Token_TXTZ = ()=>{
                             //     if(txt_slice.length){ aToken.txtz.push(...txt_slice) }
@@ -879,14 +890,14 @@
                             * POPULATES : aToken.txtz
                             * both types: txtz or txt. Then brea
                             \******************************************/
-                        } 
+                        } //IF # TOPIC FOUND in TXT
                    }
                 }; lookahead_subtxt();
                 aToken.numz = `${RUNTIME_STATE.idx.TOPIC_IDX}.${RUNTIME_STATE.idx.SUBTOPIC_IDX++}`
                 RUNTIME_STATE.setz.all_topic_tokenz.push(aToken)
                 ++RUNTIME_STATE.manifest.total_topic_count;
                 continue;
-            } 
+            } // IF #  TOPIC FOUND
         } //ENDLOOP
     }; delimit_all_topicz();
     /******************************************\

@@ -6,6 +6,8 @@ alias_: actual_act_of_wordz, awordz, wordz, awordza.
 pronounced_: ah-words-ah.
 goalz_: ai_mapz_to_asymbolza and ai_mapz_to_axi.
 
+YMD_:2023_1_10
+
 ---
 
 ## What is aWORDZa?
@@ -21,6 +23,8 @@ pronounced_: ah-word-ah-GAHM-eee, like oragami.
 meanz_: A game of wordcrafting. Like actual word oragami. 
 
 aliaz_: aWORDaGAME, word_game, actual_word_game, actual_act_of_word_games, awordagamea.
+
+YMD_2023_1_2
 
 ~~~
 
@@ -68,11 +72,15 @@ _aSEEKa_ alias_: aSeeka_Conceptas_BeyondUs
 
 3. Practice_Actual_Focus
 
-4. then aPRYZMaGAMEa, and aSYMBOLza.
+4. then aPRYZMaGAMEa, and aSYMBOLZa.
 
 That's the high level overview! 
 
 > aWORDZa is an ai wordgame, first used to rhyme song lyrics.
+
+_aWORDZa_ alias_: awordza.
+
+_aBetterWordza_ alias_: abetterwordz abetterawordza.
 
 ## INTO aWORDZa
 
@@ -105,7 +113,9 @@ That is where the real fun is! Exciting and rapid. It is important. And it appea
 
 > Use aWORDZa to, look_and_see, through aPRYZMaVIEWZ of actual_reality.
 
-It is tremendously fulfilling to experience.
+_aSeeka_ alias_: actual_actz_of_seeking.
+
+A_fulfilling_existanze_awaitsUs.
 
 ### How does is work?
 
@@ -132,6 +142,8 @@ Following the SIMPLIFIED_LANGUAGE_SYNTAX (naming-convention)
 
 conzeptz_await_us, and aWORDZa folds them into existence - as a game.
 
+YMD_2023_5_5
+
 ---
 
 ### Origin Story
@@ -139,6 +151,8 @@ conzeptz_await_us, and aWORDZa folds them into existence - as a game.
 The original intent of aWordza was to provide meta_context for rock and roll song lyrics! Then the search was to create STORY within EDM MUSIC VIDEOS.
 
 As far back as 2002, this was common endeavor in _ai. But also, this approach was a unique perspective of artistry and word-crafting. The many scripts and syntax, and tokenizers - morphed, or evolved into an ongoing aWORDaGAMEa.
+
+YMD_2023_1_3
 
 ---
 
@@ -149,6 +163,8 @@ The PRIME_GOAL is to:
 1. SEEK-METADATA, for ALL-WORDS, as if SONG-LYRICS.
 
 2. Then compare those song lyrics together in abstract ways.
+
+YMD_2023_8_8
 
 > aWORDZa is an easy puzzle to learn, and infinitely difficult to master!
 
@@ -166,6 +182,8 @@ principz_:
 
 Overall, the game is to identify - the clearest possible articulations - of actual_reality, and apply them in max_human_readable_form.
 
+YMD_2023_7_7
+
 ---
 
 
@@ -174,7 +192,7 @@ Overall, the game is to identify - the clearest possible articulations - of actu
 The SLS (simplified_language_syntax), reduces the complexity_of_english.
 With remarkably few characters!
 
-1. UNIVERSAL_UNDERSCORE, meanz: a single character to define all metadata. Underscore wrapped words meanz: PRIME_KEY. Underscores internally, are called sub_key. 
+1. UNIVERSAL_UNDERSCORE, meanz: a single character to define all metadata. Underscore wrapped words meanz: PRIME_KEY. Underscores internally, are called omni_key. 
 
 GOALZ_: most_human_readable and most_human_memorable, and most_human_usable!!!
 
@@ -188,11 +206,13 @@ Wrapped inbetween two little-a's. The little_a_prefix, meanz: 'actual' giving a 
 
 4. **z-miss-spelling**, meanz: enhanced, articulated, or remarkable. And its primary purpose is to reliably make common_words_unique, for ability to define exactness again.
 
+YMD_2023_6_6
+
 ---
 
 ## CONCLUSIONS
 
-Give it a try. Chooze to study aWORDZa. Start combining wordz. And experience JOY in the discovery of all_that_exists. Beyond_your_mind, and beyond_all_human_mind. Use aWORDaGAMEa to define many viewz, and experience the thrill_of_discovery, as words become WORDZ and concepts generatively_reflect_actureality.
+Give it a try. Chooze to study aWORDZa. Start combining wordz. And experience JOY in the discovery of all_that_exists. Beyond_your_mind, and beyond_all_human_mind. Use aWORDaGAMEa to define many viewz, and experience the thrill_of_discovery, as words become WORDZ and concepts generatively_reflect_actureality. YMD_2023_1_4
 
 nJoy!!!
 SIG_ENZO_~:)

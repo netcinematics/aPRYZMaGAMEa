@@ -30,7 +30,7 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
         // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_0.json', //prod url
         // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_2.json', //prod url
         // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/omni_key_idx_1.json', //prod url
-        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/IDXZ/prime_key_idx_3.json', //prod url
+        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/IDXZ/prime_key_idx_4.json', //prod url
     }
     axios.request(options).then((response) => {
         // setTokenz_INDEX_DATA(response.data.token_index)
@@ -176,12 +176,14 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
         if(!token){ return }
         let lookupTitle = token.key;
             lookupTitle = lookupTitle.replaceAll('~','')
-            lookupTitle = lookupTitle.replaceAll('_','')
+            // lookupTitle = lookupTitle.replaceAll('_','')
             lookupTitle = lookupTitle.replaceAll('.','')
             lookupTitle = lookupTitle.toLowerCase()
-        let tokenBatch = 3;
+            lookupTitle = lookupTitle.replace(/^\s+|\s+$/g, '') //replace white space
+               .replace(/^_+|_+$/g, '');// and remove prime key _ wrapper.
+        let tokenBatch = 4; // *****************************<- UPDATE VERSION FLAG HERE
         lookupTitle = `card_${lookupTitle}_${tokenBatch}`;
-        console.log('load: src/meta_net/CARDZ/ ', lookupTitle+'.json')
+        console.log('LOAD_FILEZ: src/meta_net/CARDZ/ ', lookupTitle+'.json')
         const options = {
             method: 'GET',
             // url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
@@ -299,12 +301,12 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
         console.log('populate dynamic article', )
         let displayResult = [1,2,3,4]
 
-debugger;
+// debugger;
         displayResult = localTXTz.map((item,idx)=>{ 
                 console.log('hidden',item.title)
                 if (idx+1 > loadTXTidx){ return '' }
                 console.log('TESTAA',item.title, item.type)
-                debugger;
+                // debugger;
 
                 return <section className='scrollBarPage' style={{}}>
                 <header style={{display:'flex',justifyContent:'space-between'}}>
@@ -312,7 +314,7 @@ debugger;
                     <span>&nbsp;</span> 
                     <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
                 </header> 
-                <article className={(item.type==='prime_card_token')?'txtBox2':'itemTXTZ'} style={
+                <article className={(item.type==='prime_card_token')?'txtBoxQuote':'itemTXTZ'} style={
                     (item.type==='quotez_txt')
                     ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
                     ,fontStyle:'italic'}
@@ -324,7 +326,7 @@ debugger;
                     (item.type==='seriez_txt' && item.txtz.length)
                     // :(item.type==='seriez' && item.txtz.length)
                     ? item.txtz.map( (txtitem,idx)=>{
-                        debugger;
+                        // debugger;
                         console.log('TESTCC',txtitem.type)
 
                         return <section className='seriezItem' style={
@@ -409,7 +411,7 @@ debugger;
                 console.log('hidden',item.title)
                 if (idx+1 > loadTXTidx){ return '' }
                 console.log('TESTAA',item.title, item.type)
-                debugger;
+                // debugger;
                 return <section className='scrollBarPage' style={{}}>
                 <header style={{display:'flex',justifyContent:'space-between'}}>
                     <aside style={{fontSize:'small'}}>{item.numz}</aside>
@@ -420,7 +422,8 @@ debugger;
                 {/* todo move to dynamic article */}
 
                 {/* <article className={(item.type==='txtz')?'txtBox2':'itemTXTZ'} style={ */}
-                <article className={(item.type==='prime_card_token')?'txtBox2':'itemTXTZ'} style={
+                <article className={(item.type==='prime_card_token')
+                    ?'txtBoxQuote':'itemTXTZ'} style={
                     (item.type==='quotez')
                     ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
                     ,fontStyle:'italic'}
@@ -435,7 +438,7 @@ debugger;
                     (item.type==='seriez_txt' && item.txtz.length)
                     // :(item.type==='seriez' && item.txtz.length)
                     ? item.txtz.map( (txtitem,idx)=>{
-                        debugger;
+                        // debugger;
                         console.log('TESTCC',txtitem.type)
 
                         return <section className='seriezItem' style={

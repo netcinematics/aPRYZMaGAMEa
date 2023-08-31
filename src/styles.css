@@ -62,38 +62,6 @@
     background: cornflowerblue;
   }
   
-  .square {
-    background: #fff;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 34px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-  }
-  
-  .board-row:after {
-    clear: both;
-    content: '';
-    display: table;
-  }
-  
-  .status {
-    margin-bottom: 10px;
-  }
-  .game {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .game-info {
-    margin-left: 20px;
-  }
   
    .cardTileBtn{
     background: rgb(111, 172, 247);
@@ -151,15 +119,17 @@
     padding-left: 10%; 
   }
 
-  .txtBox2{
+  .txtBoxQuote{
     font-size: 1em;
     margin: 0.222em 4%;
-    padding: 0 1em 0 8%;
+    /* padding: 1 1em 1 8%; */
     color: steelblue;
     border: solid 1px steelblue;
     border-radius: 20px;
     box-shadow: inset 0px -1px 5px 0px #1c2296;
     text-align: left;
+    padding: 1.444em;
+    font-style: italic;
   }
 
  /* PC */
@@ -192,7 +162,7 @@
     .scrollBarPage{padding:0 4%;}
     .seriezItem{font-size:1.2em;}
     .txzItem{font-size:1.111em;}
-    .txtBox2{margin:0.111em 2%;}
+    .txtBoxQuote{margin:0.111em 2%;}
   }  
   @media only screen and (max-width: 500px) { /* PHONE */
     body{ margin:4px;  background-color: #07589f;}
@@ -209,7 +179,7 @@
     .scrollBarPage{padding:0 3%;}
     .seriezItem{font-size:1em;}
     .txtzItem{font-size:1em;}
-    .txtBox2{margin:0 1%;}
+    .txtBoxQuote{margin:0 1%;}
   }
 
   /* end mobile styles  ----------------------------------------- */

@@ -121,12 +121,16 @@ A_fulfilling_existanze_awaitsUs.
 
 aWordza uses a simplified_language_syntax, called _Enhanced_English_. 
 
-It is more flexible, and robust, to combine words, and articulate_conceptz_exactly - for yet_to_be_well_named_concepts. 
+It is more flexible, to combine_words, and articulate_conceptz_exactly - for yet_to_be_well_named_concepts. 
 
-Major aspects of language were improved, with subtle (minor) syntax and naming convention alterations.
+Major aspects of language were improved, like CONJUGATION, and self_expressiveness.
 
-Future_wordz, will detail the many design principles applied elegantly, to ENHANCE_HUMAN_LANGUAGE to maximum level for use in new tools in language expression. 
+With subtle, syntax and naming convention alterations.
 
+Future_wordz, will detail the many design principles applied elegantly, to ENHANCE_HUMAN_LANGUAGE to maximum level for use in new tools and language expression. 
+
+
+# Self_expressiveness, aCombinability, and aBrevia
 
 > Where a goal is to fold_wordz_like_oragami, until we arrive at, better_meta_data, and if we are lucky, a_clearer_reflection_of_actual_reality.
 

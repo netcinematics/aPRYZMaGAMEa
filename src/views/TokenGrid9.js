@@ -104,7 +104,7 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
             setShowEyes(1)
         }
 
-        dynamicArticleDisplay();
+        // dynamicArticleDisplay();
         // tokenAddFn(addLocalTXTz)
         // if(token.details){ //remove
         //     // console.log("INIT details",token.title)
@@ -296,188 +296,67 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
     }
 
 
-    function dynamicArticleDisplay() {
-
-        console.log('populate dynamic article', )
-        let displayResult = [1,2,3,4]
-
-// debugger;
-        displayResult = localTXTz.map((item,idx)=>{ 
-                console.log('hidden',item.title)
-                if (idx+1 > loadTXTidx){ return '' }
-                console.log('TESTAA',item.title, item.type)
-                // debugger;
-
-                return <section className='scrollBarPage' style={{}}>
-                <header style={{display:'flex',justifyContent:'space-between'}}>
-                    <aside style={{fontSize:'small'}}>{item.numz}</aside>
-                    <span>&nbsp;</span> 
-                    <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
-                </header> 
-                <article className={(item.type==='prime_card_token')?'txtBoxQuote':'itemTXTZ'} style={
-                    (item.type==='quotez_txt')
-                    ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
-                    ,fontStyle:'italic'}
-                    :(item.type==='seriez_txt')
-                    ?{fontSize:'0.888em',fontFamily:'monospace'}
-                    :{fontSize:'1em'}
-                  }>
-                  {
-                    (item.type==='seriez_txt' && item.txtz.length)
-                    // :(item.type==='seriez' && item.txtz.length)
-                    ? item.txtz.map( (txtitem,idx)=>{
-                        // debugger;
-                        console.log('TESTCC',txtitem.type)
-
-                        return <section className='seriezItem' style={
-                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
-                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
-                            :{textAlign:'justify',margin:'1.444em 0em',color:'#8461cc'}
-                        }>{txtitem.txt}</section>;
-                      })
-                    :  (item.txtz.length) //default txtbox
-                    ? item.txtz.map( (txtitem,idx)=>{
-                        console.log('TESTBC',txtitem.type)
-
-                        return <section className='txtzItem' style={
-                            // (item.split(" ").filter( item => item )[0]==='-') //special_hyphen
-                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
-                            ?{margin:'0em',color:'#50718c',fontStyle:'italic'
-                            ,padding:'0.444em 0 0.444em 0.444em'}
-                            :{margin:'1.444em 0em'}
-                        }>{txtitem.txt}</section>;
-                        // }>{item}</section>;
-                    } )
-                    : item.txt }
-
+    function dynamicArticleTXTz(token) { //*************** POPULATE : Token TXTz
+        if(!token || !token.txtz || !token.txtz.length){return}
+        let dynamicTXTz = [];
+        let className = 'txtBoxQuote';
+        debugger;
+        dynamicTXTz = token.txtz.map((item,idx)=>{
+            debugger;
+            return (
+                <article  className={className}>
+                    {item.txt}
                 </article>
-
-                <footer style={{display:'flex',justifyContent:'space-between',
-                    marginTop:'1.666em'}}>
-                    <aside style={{fontSize:'xx-small'}}>{item.ymd}</aside>
-                    <aside style={{fontSize:'xx-small'}}>{item.type}</aside>
-                </footer>
-                <hr></hr>
-
-                </section>
-                // return <div>Key: {item.key}, <br/> Title: {item.title}, <br/>
-                // {item.txt} <hr></hr>{idx}</div>
-            })
-
-
-
-
-        setArticleDisplay(displayResult)
-        // return(
-        // <><span className='yoyo'>{token.title}</span>
-        // </>)
+            )
+        });
+        return (<section>{dynamicTXTz}</section>)
     }
 
     return(
     <>
   
         {dynamicTitleDisplay()}
-        {/* {dynamicArticleDisplay()} */}
-        {/* {displayTokenTXTArray()} */}
         <hr style={{marginBottom:'1em'}}></hr>
-        {/* {()=>{
-            return <div>youyoyo</div>
-        }} */}
+
         { (loadTXTidx===0)
-        // { (loadTXTidx===0)
             ?<span style={{fontSize:'x-small'}}>
                 chooze_to_look...</span>
             :(localTXTz.length===0 && loadTXTidx===1)?'loading...'
             :(localTXTz.length===0 && loadTXTidx>1)?'no data'
             :''}
-    {(loadTXTidx===0)?<>
-  <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',
-    border:'1px solid steelblue',fontSize:'0.666em',
-    boxShadow:'0px 0px 2px 2px #4aef58',
-    paddingBottom:'0.444em'}} 
-    onClick={()=>{ addLocalTXTz()}
-    }><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;
-    </button>  
-    <hr style={{marginBottom:'0.666em'}}></hr>
-          </>
-    :''}  
-        <section className='scrollBarDoc' style={{ padding:'0 3%',
-            maxHeight:'18em'}}>
-
-            {/* {tokenTXT_ARTICLES} */}
-
-            {
-            localTXTz.map((item,idx)=>{ 
-                console.log('hidden',item.title)
+        { (loadTXTidx===0)?<>
+            <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',
+                border:'1px solid steelblue',fontSize:'0.666em',
+                boxShadow:'0px 0px 2px 2px #4aef58',
+                paddingBottom:'0.444em'}} 
+                onClick={()=>{ addLocalTXTz()}
+                }><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;
+                </button>  
+                <hr style={{marginBottom:'0.666em'}}></hr>
+                    </>
+                :''
+        }  
+        <section className='scrollBarDoc' style={{ padding:'0 3%',maxHeight:'18em'}}>
+            { localTXTz.map((item,idx)=>{ 
                 if (idx+1 > loadTXTidx){ return '' }
-                console.log('TESTAA',item.title, item.type)
-                // debugger;
-                return <section className='scrollBarPage' style={{}}>
-                <header style={{display:'flex',justifyContent:'space-between'}}>
-                    <aside style={{fontSize:'small'}}>{item.numz}</aside>
-                    <span>&nbsp;</span> 
-                    <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
-                </header> 
-                    
-                {/* todo move to dynamic article */}
-
-                {/* <article className={(item.type==='txtz')?'txtBox2':'itemTXTZ'} style={ */}
-                <article className={(item.type==='prime_card_token')
-                    ?'txtBoxQuote':'itemTXTZ'} style={
-                    (item.type==='quotez')
-                    ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
-                    ,fontStyle:'italic'}
-                    :(item.type==='seriez')
-                    ?{fontSize:'0.888em',fontFamily:'monospace'}
-                    :{fontSize:'1em'}
-                  }>
-                  {/* {(item.type==='txtz' && item.txtz.length) */}
-                  {
-                        // populateDynamicArticles()
-                //   (item.type==='prime_card_token' && item.txtz.length)
-                    (item.type==='seriez_txt' && item.txtz.length)
-                    // :(item.type==='seriez' && item.txtz.length)
-                    ? item.txtz.map( (txtitem,idx)=>{
-                        // debugger;
-                        console.log('TESTCC',txtitem.type)
-
-                        return <section className='seriezItem' style={
-                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
-                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
-                            :{textAlign:'justify',margin:'1.444em 0em',color:'#8461cc'}
-                        }>{txtitem.txt}</section>;
-                      })
-                    :  (item.txtz.length) //default txtbox
-                    ? item.txtz.map( (txtitem,idx)=>{
-                        console.log('TESTBC',txtitem.type)
-
-                        return <section className='txtzItem' style={
-                            // (item.split(" ").filter( item => item )[0]==='-') //special_hyphen
-                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
-                            ?{margin:'0em',color:'#50718c',fontStyle:'italic'
-                            ,padding:'0.444em 0 0.444em 0.444em'}
-                            :{margin:'1.444em 0em'}
-                        }>{txtitem.txt}</section>;
-                        // }>{item}</section>;
-                    } )
-                    : item.txt }
-
-                </article>
-
-                <footer style={{display:'flex',justifyContent:'space-between',
-                    marginTop:'1.666em'}}>
-                    <aside style={{fontSize:'xx-small'}}>{item.ymd}</aside>
-                    <aside style={{fontSize:'xx-small'}}>{item.type}</aside>
-                </footer>
-                <hr></hr>
+                return (
+                <section className='scrollBarPage' style={{}}>
+                    <header style={{display:'flex',justifyContent:'space-between'}}>
+                        <aside style={{fontSize:'small'}}>{item.numz}</aside>
+                        <span>&nbsp;</span> 
+                        <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
+                    </header> 
+                    { dynamicArticleTXTz(item) }
+                    <footer style={{display:'flex',justifyContent:'space-between',
+                        marginTop:'1.666em'}}>
+                        <aside style={{fontSize:'xx-small'}}>{item.ymd}</aside>
+                        <aside style={{fontSize:'xx-small'}}>{item.type}</aside>
+                    </footer>
+                    <hr></hr>
 
                 </section>
-                // return <div>Key: {item.key}, <br/> Title: {item.title}, <br/>
-                // {item.txt} <hr></hr>{idx}</div>
-            })
-            }
-
-               
+              )
+            })}
 
     <div ref={autoScrollDown} />
                 {/* <div><button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 

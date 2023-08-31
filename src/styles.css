@@ -109,28 +109,99 @@
     box-shadow: inset 1px 1px 10px 0px #209320;    
   }
 
-  .txtBox1{
-    border: solid 1px steelblue;
-    border-radius: 20px;
-    margin: 1em 8%;
+  .plainTXT{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 1em 0;
     padding: 1em 0;
-    box-shadow: 0px 6px 10px 0px #1c2296;   
     text-align: left;
     padding-left: 10%; 
+    margin-top: 1em;
+    margin-bottom: 1em;
+    white-space: pre-line;
   }
 
-  .txtBoxQuote{
+  .txtBox1{
+    /* border: solid 1px steelblue; */
+    /* border-radius: 20px; */
+    font-family: monospace;
+    margin: 1em 2%;
+    padding: 1em 0;
+    /* box-shadow: 0px 6px 10px 0px #1c2296;    */
+    text-align: left;
+    padding-left: 10%; 
+    margin-top: 1em;
+    margin-bottom: 1em;
+    white-space: pre-line;
+  }
+
+  .txtBox2{
     font-size: 1em;
     margin: 0.222em 4%;
     /* padding: 1 1em 1 8%; */
-    color: steelblue;
-    border: solid 1px steelblue;
-    border-radius: 20px;
-    box-shadow: inset 0px -1px 5px 0px #1c2296;
+    color: #2b766d;
+    border: solid 1px #2b766d;
+    border-radius: 22px;
+    /* box-shadow: inset 0px -1px 5px 0px #1c2296; */
     text-align: left;
     padding: 1.444em;
     font-style: italic;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    white-space: pre-line;
   }
+  .txtBox3{
+    font-size: 1em;
+    margin: 0.222em 4%;
+    /* padding: 1 1em 1 8%; */
+    color: #4962b3;
+    /* border: solid 1px steelblue; */
+    border-radius: 22px;
+    box-shadow: inset 1px -1px 6px 0px #8084d4;
+    text-align: left;
+    padding: 1.444em;
+    /* font-style: italic; */
+    margin-top: 1em;
+    margin-bottom: 1em;
+    white-space: pre-line;
+  }
+
+
+
+                  /* {
+
+                <article className={(item.type==='prime_card_token')?'txtBoxQuote':'itemTXTZ'} 
+                //     style={
+                //     (item.type==='quotez')
+                //     ?{fontSize:'1.444em',fontFamily:'serif',color:'#498663'
+                //     ,fontStyle:'italic'}
+                //     :(item.type==='seriez')
+                //     ?{fontSize:'0.888em',fontFamily:'monospace'}
+                //     :{fontSize:'1em'}
+                //   }
+                  >
+
+
+                    (item.type==='seriez_txt' && item.txtz.length)
+                    ? item.txtz.map( (txtitem,idx)=>{
+                        console.log('TESTCC',txtitem.type)
+                        return <section className='seriezItem' style={
+                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
+                            ?{textAlign:'justify',margin:'0em',color:'#5279f5',fontStyle:'italic'}
+                            :{textAlign:'justify',margin:'1.444em 0em',color:'#8461cc'}
+                        }>{txtitem.txt}</section>;
+                      })
+                    :  (item.txtz.length) //default txtbox
+                    ? item.txtz.map( (txtitem,idx)=>{
+                        console.log('TESTBC',txtitem.type)
+                        return <section className='txtzItem' style={
+                            (txtitem.txt.split(" ").filter( skipitem => skipitem )[0]==='-') //special_hyphen
+                            ?{margin:'0em',color:'#50718c',fontStyle:'italic'
+                            ,padding:'0.444em 0 0.444em 0.444em'}
+                            :{margin:'1.444em 0em'}
+                        }>{txtitem.txt}</section>;
+                    } )
+                    : item.txt }  */
+
 
  /* PC */
   .App{min-height:96vh;}
@@ -162,7 +233,9 @@
     .scrollBarPage{padding:0 4%;}
     .seriezItem{font-size:1.2em;}
     .txzItem{font-size:1.111em;}
-    .txtBoxQuote{margin:0.111em 2%;}
+    .txtBox1{margin:0.111em 2%;}
+    .txtBox2{margin:0.111em 2%;}
+    .txtBox3{margin:0.111em 2%;}
   }  
   @media only screen and (max-width: 500px) { /* PHONE */
     body{ margin:4px;  background-color: #07589f;}
@@ -179,7 +252,9 @@
     .scrollBarPage{padding:0 3%;}
     .seriezItem{font-size:1em;}
     .txtzItem{font-size:1em;}
-    .txtBoxQuote{margin:0 1%;}
+    .txtBox1{margin:0 1%;}
+    .txtBox2{margin:0 1%;}
+    .txtBox3{margin:0 1%;}
   }
 
   /* end mobile styles  ----------------------------------------- */

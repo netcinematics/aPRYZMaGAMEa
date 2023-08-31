@@ -216,95 +216,60 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
         //load page view with new selected token
     }
     function dynamicTitleDisplay(){
-    return(
-        <>
-        {/* <h1 className='pageTitle' style={{cursor:"pointer"}} onClick={ ()=>dynamicLink(token)}>
-        {(token && token.key && token.key.length<18)
-            ?token.key
-            :(token.key.length>30)
-            ?<span style={{fontSize:'x-small'}}>{token.key}</span>
-            :<span style={{fontSize:'medium'}}>{token.key}</span>
-        }</h1> */}
-            <section className='pageHeader' style={{}}>
-                <header style={{display:'flex',justifyContent:'space-between'}}>
-                    <aside style={{fontSize:'xx-small'}}>numz</aside>
-                    <span>&nbsp;</span> 
-                    <aside style={{fontSize:'xx-small'}}>title</aside> 
-                </header>
-                    
+    return(  <>
+        <section className='pageHeader' style={{}}>
+            <header style={{display:'flex',justifyContent:'space-between'}}>
+                <aside style={{fontSize:'xx-small'}}>numz</aside>
+                <span>&nbsp;</span> 
+                <aside style={{fontSize:'xx-small'}}>title</aside> 
+            </header>
 
-                <h1 className='pageTitle' style={{cursor:"pointer"}} onClick={ ()=>dynamicLink(token)}>
-                {(token && token.key && token.key.length<18)
-                    ?token.key
-                    :(token.key.length>30)
-                    ?<span style={{fontSize:'x-small'}}>{token.key}</span>
-                    :<span style={{fontSize:'medium'}}>{token.key}</span>
-                }</h1>
+            <h1 className='pageTitle' style={{cursor:"pointer"}} onClick={ ()=>dynamicLink(token)}>
+            {(token && token.key && token.key.length<18)
+                ?token.key
+                :(token.key.length>30)
+                ?<span style={{fontSize:'x-small'}}>{token.key}</span>
+                :<span style={{fontSize:'medium'}}>{token.key}</span>
+            }</h1>
 
+            <footer style={{display:'flex',justifyContent:'space-between'}}>
+                <aside style={{fontSize:'xx-small'}}>date</aside>
+                <aside style={{fontSize:'xx-small'}}>type</aside>
+            </footer>
+            {/* <hr></hr> */}
 
-                <footer style={{display:'flex',justifyContent:'space-between'}}>
-                    <aside style={{fontSize:'xx-small'}}>date</aside>
-                    <aside style={{fontSize:'xx-small'}}>type</aside>
-                </footer>
-                {/* <hr></hr> */}
+        </section>
+    </>)}
 
-            </section>
-
-
-
-        {/* {(token && token.state && token.state.txtz && token.state.txtz.length)?
-            token.state.txtz[0] : 'unlocked' }
-        <br></br> */}
-        {/* {(token && token.timestamp)?token.timestamp:'no date'}
-        <br></br> */}
-        {/* {(token && token.txtz)?
-            token.txtz.map( (item, idx)=> { //short description txt
-                return (item && item.key && item.key==="short")?item.txtz[0]:'';
-            }):'no short description'
-        }
-        <br></br>
-        {(token && token.txtz)?
-            token.txtz.map( (item, idx)=> { //long description txt
-                return (item.key==="long")?item.txtz[0]:'';
-            }):'no long description'
-        } */}
-    </>)
-    }
-
-    function displayTokenTXTArray(){
-        return (
-            <> 
-            {/* {tokenTXT_ARRAY.map( (item,idx)=>{
-                if(item.key){
-                    return <h1>{item.key}</h1>   
-                }
-                return idx
-            })} */}
-            {/* {tokenTXT_ARRAY.length} */}
-
-            
-            {/* {tokenTXT_ARRAY.map( (item,idx)=>{
-                if(item.txt && item.txt.length){
-                    if(!item.txt.map){ return <div>{item.txt}!</div>}
-                    return item.txt.map( (txtitem,txtidx)=>{
-                        return (<p><h1>txtitem.key</h1>{txtidx}:{txtitem}</p>)
-                    }) 
-                }
-                return idx
-            })}             */}
-            </>)        
-    }
-
-
-    function dynamicArticleTXTz(token) { //*************** POPULATE : Token TXTz
+    function dynamicArticleTXTz(token,idx) { //*************** POPULATE : Token TXTz : FACTORY
         if(!token || !token.txtz || !token.txtz.length){return}
-        let dynamicTXTz = [];
-        let className = 'txtBoxQuote';
-        debugger;
+        let dynamicTXTz = [], specialOperators = '';
+        let styleName = ''; //(idx===0)?'txtBox1':(idx===1)?'txtBox2':'txtBox3';
+        //if box is seriez or token cards
         dynamicTXTz = token.txtz.map((item,idx)=>{
-            debugger;
+            styleName = 'plainTXT' // default style
+            item.txt = item.txt.replace(';','\n')    //Newline requires special css.
+            if(item.txt.indexOf('---')>-1){
+                return <hr></hr>
+            } else if(item.txt.indexOf('YMD_')>-1){
+                return <code style={{textAlign:'left',marginTop:'2em',display:'flex',fontSize:'0.888em'}}>{item.txt}</code>
+            } else if(item.txt.indexOf('SIG_')>-1){
+                return <pre style={{textAlign:'left',marginTop:'2em'}}>{item.txt}</pre>
+            } else if(item.type==='quote_txt'){
+                styleName = 'txtBox2';
+            } else if(item.type==='seriez_txt'){
+                styleName = 'txtBox3';
+            } else if(item.type==='magic_token'){
+                styleName = 'txtBox1';
+            }
+            specialOperators = /meanz_ |alias_ |aliaz_ |goalz_/;
+            if(specialOperators.test(item.txt)){
+                // item.txt.replace(/meanz_/g,'<div>meanz_!!!</div>')
+                styleName = 'txtBox1';
+            }
+            // debugger;
             return (
-                <article  className={className}>
+                <article  className={styleName}>
                     {item.txt}
                 </article>
             )
@@ -346,10 +311,13 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
                         <span>&nbsp;</span> 
                         <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
                     </header> 
-                    { dynamicArticleTXTz(item) }
+                    { dynamicArticleTXTz(item,idx) }
                     <footer style={{display:'flex',justifyContent:'space-between',
-                        marginTop:'1.666em'}}>
-                        <aside style={{fontSize:'xx-small'}}>{item.ymd}</aside>
+                        marginTop:'0.666em'}}>
+                        <aside style={{fontSize:'xx-small'}}>
+                            {(item.ymdz.length)?item.ymdz:token.ymdz}
+                            {/* {item.ymdz} */}
+                        </aside>
                         <aside style={{fontSize:'xx-small'}}>{item.type}</aside>
                     </footer>
                     <hr></hr>
@@ -358,59 +326,28 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
               )
             })}
 
-    <div ref={autoScrollDown} />
-                {/* <div><button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
-                onClick={()=>{ addLocalTXTz()}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button></div> */}
-                <article style={{background:'skyblue',
-                    boxShadow:'inset -1px -2px 7px 0px blue',
-                    margin:'0.444em',
-                    borderRadius:'22px',fontSize:'12px',padding:'1em', }}>
-                        
-                    <div style={{margin:'1em 0 0 0',}}>
-                        COUNT: {loadTXTidx} of {localTXTz.length}
-                    </div>
-                    &nbsp; 
+            <div ref={autoScrollDown} />
+
+            <article style={{background:'skyblue',
+                boxShadow:'inset -1px -2px 7px 0px blue',
+                margin:'0.444em',
+                borderRadius:'22px',fontSize:'12px',padding:'1em', }}>
                     
-                    <hr></hr>
-                    &#127984;   &#128161;  &#9889; &#127775;
-                    <hr></hr>
-                    &#8987; &#8986; &#9200; &#9201; &#9203; &#9875;
-                    <hr></hr> 
+                <div style={{margin:'1em 0 0 0',}}>
+                    COUNT: {loadTXTidx} of {localTXTz.length}
+                </div>
+                &nbsp; 
+                
+                <hr></hr>
+                &#127984;   &#128161;  &#9889; &#127775;
+                <hr></hr>
+                &#8987; &#8986; &#9200; &#9201; &#9203; &#9875;
+                <hr></hr> 
 
-                </article> 
+            </article> 
 
-        <div ref={autoScrollEnd} style={{height:'1em'}}/>
-        </section>
-        {/* <button style={{marginTop:'1em'}} onClick={()=>{ addLocalDetails()}}>add details</button>  */}
-        {/* <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
-                onClick={()=>{ addLocalTXTz()}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button> */}
-        {/* <button style={{marginTop:'1em'}} onClick={()=>{ addLocalTXTz()}}>unlock text!</button> */}
-
-        {/* {localDetails.map((item,idx)=>{ return <div>{item.txt}</div>})} */}
-
-
-        {/* {(tokenTXT_ARRAY && tokenTXT_ARRAY.length)?
-            tokenTXT_ARRAY.map( (item, token_idx)=> { //txt_tokenz
-                return (
-                    <>
-                        <section >{item.title}</section>
-                        {(item.txtz && item.txtz.length)?
-                            item.txtz.map( (txt, txt_idx)=> { //txt_tokenz
-                                return (
-                                    <>
-                                        <section>{txt}</section>
-                                    </>
-                                )
-                            })
-                            :'no txtz'
-                        }
-                    </>
-                )
-            })
-            :'no tokenz'
-        } */}
-
-
+            <div ref={autoScrollEnd} style={{height:'1em'}}/>
+        </section> {/*END SCROLL DOC*/}
     </>
     )
 }

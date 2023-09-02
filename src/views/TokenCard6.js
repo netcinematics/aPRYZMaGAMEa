@@ -5,7 +5,6 @@ let sonicWoop = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nx
 function TokenCard ( { token, setTokenViewfn } ) {
     useEffect(() => { 
         document.key = (token && token.key)?token.key:'';  //title on html tab
-        // token.numz = humanIDX.toString()+'.'+idx;       //apply dynamic_numz
     }, [token]);
     // hovered is why token frame is a sub component.
     let [isHovered, setHovered] = useState(false);
@@ -42,8 +41,7 @@ function TokenCard ( { token, setTokenViewfn } ) {
         <button  className={isHovered ? 'btnHover' : ''} style={cardStyle}
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
             onClick={onTokenCardClick}>
-            { (token.state)?
-            // add to background color unlocked: #95d2f8;
+            { (token.state)?  // add to background color unlocked: #95d2f8;
                 <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
                     borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
                     color:gameFontColor, flexDirection:'column',
@@ -58,11 +56,11 @@ function TokenCard ( { token, setTokenViewfn } ) {
                     borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
                     color:'#2374b7',alignItems:'flex-end',
                     whiteSpace:'pre-wrap',overflowWrap:'break-word',
-                    fontSize: (token.key.length>20)
-                       ? 'x-small' : (token.key.length>10)
+                    fontSize: (token.title.length>20)
+                       ? 'x-small' : (token.title.length>10)
                        ?'small':'large'
                     ,padding:'2%'}}>
-                    { (token.key && token.displayKey)? token.displayKey : token.key }
+                    { (token.title && token.title)? token.title : token.key }
                 </section>            
             }
             

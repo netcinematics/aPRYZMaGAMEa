@@ -20,32 +20,40 @@ export default function RuleView () {
             method: 'GET',
             // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_0.json', //prod url
             // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_2.json', //prod url
-            url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/IDXZ/omni_key_idx_3.json', //prod url
+            // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/IDXZ/omni_key_idx_3.json', //prod url
             // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/omni_key_idx_1.json', //prod url
+            url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/IDXZ/omni_key_idx_5.json', //prod url
         }
         axios.request(options).then((response) => {
-            // setTokenz_INDEX_DATA(response.data.token_index)
-            
-            setTokenz_INDEX_DATA(response.data.omni_key_idx)
-            // setTokenz_INDEX_DATA(response.data.omni_key_index)
-            // setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
-            // setTokenz_CARD_COUNT("token_index "+response.data.omni_key_index.length)
+            setTokenz_INDEX_DATA(format_INDEX_DATA(response.data.omni_key_idx))
+            // setTokenz_INDEX_DATA(response.data.omni_key_idx)
         }).catch((error) => {
             console.error(error)
             // setTokenz_CARD_COUNT("no data")
         })    
     }
 
+    function format_INDEX_DATA(server_data){ //from str into token and set
+        let formatted_data = []
+        formatted_data = server_data.map( (item, idx)=>{
+            if(item.title && item.title.length>10){
+               //add underscore in front of any capital letter.
+               item.title = item.title.replaceAll('_','_ ') //word wrap in browser
+            }
+             return item;
+        }  )
+        return formatted_data;
+    }
 
     function ListView (){ 
         let COLNUM=6; //column length, must be dependent on layout, per device.
-        let colmz = [];
-        let colm  = [];
+        let ROWz = [];
+        let ROW  = [];
         let humanIDX = 0; //column header
         let tokenCOLUMNS = [];
         for(let i=0; i < tokenz_INDEX_DATA.length; i += COLNUM){
-            colm = tokenz_INDEX_DATA.slice(i, i+COLNUM);
-            colmz.push(colm);
+            ROW = tokenz_INDEX_DATA.slice(i, i+COLNUM);
+            ROWz.push(ROW);
             ++humanIDX;
              tokenCOLUMNS.push( 
              <div  key={'col_'+i} style={{display:'flex',flexDirection:'column',
@@ -54,15 +62,15 @@ export default function RuleView () {
                 <header style={{minHeight:'2em'}}></header>
                 <header>{humanIDX}</header>
                 { 
-                colm.map( (token,idx) => { 
-                    token = {key:token}
+                ROW.map( (token,idx) => { 
+                    // token = {key:token}
                     token.numz = humanIDX.toString()+'.'+(idx+1).toString();       //apply dynamic_numz
                     return <section style={{
                         textAlign:'left',
                         marginLeft:'1em',
                         padding:'0.666em 0'
                         }}>
-                        {token.title} {token.numz} {token.key}</section>
+                        {token.title} | {token.numz} </section>
                     // return <Token token={token}/>
                 }) 
                 }
@@ -84,7 +92,7 @@ export default function RuleView () {
         <header style={{borderRadius:'13px',fontSize:'xxx-large',
         marginBottom:'0.666em'}}>
         {/* <Zoom>Welcome!</Zoom> */}
-        Guide~View
+        INDEX
         </header>
         <article style={{height:'90%',display:'flex',flexDirection:'column',justifyContent:'space-evenly',
             borderRadius:'10px', backgroundColor: 'rgb(22 35 62)',paddingTop:'2em'}}>

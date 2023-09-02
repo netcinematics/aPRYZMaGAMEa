@@ -8,7 +8,8 @@
 
   body {
     font-family: sans-serif;
-    margin: 20px;
+    margin: 8px;
+    /* margin: 20px; */
     padding: 0;
     height: 100%;
   }
@@ -206,7 +207,7 @@
  /* PC */
   .App{min-height:96vh;}
   .AppMain{margin: 0.222em 2.222em 0.222em 2.222em;}
-  .appTitle{margin:1em 0}
+  .appTitle{ margin: 0 0 0.888em 0;}
   .pageTitle{font-size:1.555em; margin: 0 1em;}
   .mainBorder{ padding: 5% 10%; margin-top:1em;}
   .mainframe{ padding: 1em;}
@@ -290,6 +291,13 @@
   background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0.6) 26%, transparent 26%, transparent 51%, rgba(255, 255, 255, -0.4) 51%, rgba(255, 255, 255, 0.6) 74%, transparent 74%, transparent);
 }
 
+.scrollBarSmall { border-radius:13px; }
+.scrollBarSmall::-webkit-scrollbar-track { border-radius: 13px; }
+.scrollBarSmall::-webkit-scrollbar { width: 100%; height: 1.3em; }
+.scrollBarSmall::-webkit-scrollbar-thumb { background-color: #04223c; border-radius: 13px;
+  background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.6) 26%, transparent 26%, transparent 51%, rgba(255, 255, 255, -0.4) 51%, rgba(255, 255, 255, 0.6) 74%, transparent 74%, transparent);
+}
+
 hr{
   width: 95%;
   height: 3px;
@@ -319,6 +327,7 @@ hr{
 }
 
 body {
+  /* overflow-y:scroll; */
   overflow-y:hidden;
 }
 

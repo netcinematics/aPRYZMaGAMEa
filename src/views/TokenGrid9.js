@@ -1,8 +1,6 @@
 import "../styles.css";
 import { useState, useEffect, useRef } from 'react';
 import TokenCard from "./TokenCard6";
-// import omni_key_idx from '../meta_net/CARDZ/omni_key_idx_2.js'
-// import * as omni_key_idx from '../meta_net/CARDZ/omni_key_idx_1.json';
 import axios from 'axios'
 
 let sonicSonar = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/nxSonar1d.mp3")
@@ -17,47 +15,26 @@ let [tokenz_CARD_COUNT, setTokenz_CARD_COUNT] = useState("");
 let [tokenz_COLUMN_COUNT, setTokenz_COLUMN_COUNT] = useState(0);
 let [tokenz_COLUMN_LENGTH, setTokenz_COLUMN_LENGTH] = useState(0);
 
-// useEffect(() => { 
-    // debugger;
-    // console.log('omni',omni_key_idx.length)
-    // setTokenz_INDEX_DATA(omni_key_index)
-    // setTokenz_CARD_COUNT("token_indexes "+omni_key_index.length)
-// }, []); 
 useEffect(() => { getTokenzINDEX() }, [setTokenz_INDEX_DATA]); 
 function getTokenzINDEX(){ //SHOW MAIN CARDS.
     const options = {
         method: 'GET',
-        // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_0.json', //prod url
-        // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/token_index_2.json', //prod url
-        // url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/omni_key_idx_1.json', //prod url
-        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/IDXZ/prime_key_idx_4.json', //prod url
+        url: 'https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/IDXZ/prime_key_idx_5.json', //prod url
     }
     axios.request(options).then((response) => {
-        // setTokenz_INDEX_DATA(response.data.token_index)
-        debugger;
-        // setTokenz_INDEX_DATA(format_INDEX_DATA(response.data.omni_key_index))
         setTokenz_INDEX_DATA(format_INDEX_DATA(response.data.prime_key_idx))
-        // setTokenz_INDEX_DATA(response.data.omni_key_index)
-        // setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
         setTokenz_CARD_COUNT("token_index "+response.data.prime_key_idx.length)
-        // setTokenz_CARD_COUNT("token_index "+response.data.omni_key_index.length)
     }).catch((error) => {
         console.error(error)
         setTokenz_CARD_COUNT("no data")
     })    
 }
 
-function format_INDEX_DATA(server_data){ //from str into token
+function format_INDEX_DATA(server_data){ //from str into token and set
     let formatted_data = []
-    // let output = '';
     formatted_data = server_data.map( (item, idx)=>{
-        if(item && item.length>10){
-            item = {key:item}
-           //add underscore in front of any capital letter.
-           // output = item.key.replace(/([A-Z])/g, '_$1');
-           item.displayKey = item.key.replaceAll('_','_ ')
-        } else {
-            item = {key:item}
+        if(item.title && item.title.length>10){ //add underscore in front of any capital letter.
+           item.title = item.title.replaceAll('_','_ ') //word wrap in browser
         }
          return item;
     }  )
@@ -65,37 +42,16 @@ function format_INDEX_DATA(server_data){ //from str into token
 }
 
 let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenTXTView
-// let TXTViewz =  ( {token, reloadTXTidx} ) => { 
-// let TXTViewz =  ( {token} ) => { 
     const autoScrollDown = useRef(null);
     const autoScrollEnd = useRef(null);
-    
-    // let [localDetails,setLocalDetails] = useState([]) //TODO REMOVE
     let [loadTXTidx,setLoadTXTidx] = useState(0) 
     let [localTXTz,setLocalTXTz] = useState([]) 
-
-    //todo remove
-    // let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
-    // let [tokenTXT_COUNT,setTokenTXTCOUNT] = useState(0)
     let [tokenTXT_ARRAY,setTokenTXTARRAY] = useState([])
-    // let [tokenTXT_ARTICLES,setArticleDisplay] = useState([])
 
     useEffect(() => { //load txtz from outside page component.
-    // useEffect(() => { //load txtz from outside page component.
         console.log('load from outside idx change',reloadTXTidx) 
-        if(reloadTXTidx>0){
-            addLocalTXTz();
-            // setShowEyes(1)
-        }
-        
-    //     console.log('txtz',localTXTz.length) 
-    //     //performloadTXTidx(); //children function of interest
-    //     if(loadTXTidx===0){ //avoid initial load
-    //     } else if (loadTXTidx===1) {
-    //         load_all_TXTZ()
-    //     } else { loadTXTbyIDX() }
+        if(reloadTXTidx>0){ addLocalTXTz();  }
     }, [reloadTXTidx]);
-
 
     useEffect(() => {
         console.log("INIT TXTz",token.title) 
@@ -103,13 +59,6 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
             setTokenTXTARRAY(token.txtz) 
             setShowEyes(1)
         }
-
-        // dynamicArticleDisplay();
-        // tokenAddFn(addLocalTXTz)
-        // if(token.details){ //remove
-        //     // console.log("INIT details",token.title)
-        //     setLocalDetails(token.details)  //todo remove
-        // }
 
         if(token.loadTXTidx){
             console.log('new idx',token.loadTXTidx)
@@ -123,33 +72,6 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
         }
      }, [token])
 
-    //  let extraTXTz = {key:'a14',txt:"added txtz",title:'a15'}
-
-    function loadTXTbyIDX() { //load from outer button
-        // debugger;
-        if(localTXTz.length && loadTXTidx>=localTXTz.length)return;
-        sonicTally.play()
-        if(loadTXTidx===0){
-            // token.loadTXTidx = loadTXTidx+1;
-            load_all_TXTZ();
-            setLoadTXTidx(loadTXTidx+1)
-            // autoScrollDown.current.scrollIntoView({ behavior: "smooth" });
-            return;
-        }
-        // let txtSET = [];
-        // for(var i=0; i<loadTXTidx;i++){
-        //     extraTXTz.key += i;
-        //     txtSET = [...localTXTz , extraTXTz]
-        // }
-        setSelectedTXTz([...localTXTz],loadTXTidx+1) //save between card viewz
-        setLoadTXTidx(loadTXTidx+1)
-        autoScrollDown.current.scrollIntoView({ behavior: "smooth" });
-        // setLocalTXTz(txtSET)
-        // setSelectedTXTz(txtSET)
-
-    }
-    // function addUnlockTXTz(  ){
-
     function addLocalTXTz (){ //load from inner button
         if(localTXTz.length && loadTXTidx>=localTXTz.length){
             autoScrollEnd.current.scrollIntoView({ behavior: "smooth" });
@@ -160,40 +82,31 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
             load_all_TXTZ();
             setLoadTXTidx(loadTXTidx+1)
             setShowEyes(1)
-            // autoScrollDown.current.scrollIntoView({ behavior: "smooth" });
             return;
         }
-
         setSelectedTXTz([...localTXTz],loadTXTidx+1) //reloads between card viewz
         setLoadTXTidx(loadTXTidx+1)
         autoScrollDown.current.scrollIntoView({ behavior: "smooth" });
-
     };
-
-
 
     function load_all_TXTZ(){ //call api to load card data.
         if(!token){ return }
         let lookupTitle = token.key;
             lookupTitle = lookupTitle.replaceAll('~','')
-            // lookupTitle = lookupTitle.replaceAll('_','')
             lookupTitle = lookupTitle.replaceAll('.','')
             lookupTitle = lookupTitle.toLowerCase()
             lookupTitle = lookupTitle.replace(/^\s+|\s+$/g, '') //replace white space
                .replace(/^_+|_+$/g, '');// and remove prime key _ wrapper.
-        let tokenBatch = 4; // *****************************<- UPDATE VERSION FLAG HERE
+        let tokenBatch = 5; // *****************************<- UPDATE VERSION FLAG HERE
         lookupTitle = `card_${lookupTitle}_${tokenBatch}`;
         console.log('LOAD_FILEZ: src/meta_net/CARDZ/ ', lookupTitle+'.json')
         const options = {
             method: 'GET',
-            // url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
             url : `https://raw.githubusercontent.com/netcinematics/aPRYZMaGAMEa/main/src/meta_net/CARDZ/${lookupTitle}.json`
         }
         axios.request(options).then((response) => {
-            // debugger;
             let card_data = response.data
             let newTXTData = [...card_data.txtz]
-            // let newTXTData = [...localTXTz , extraTXTz]
             setLocalTXTz(newTXTData)
             setSelectedTXTz(newTXTData,loadTXTidx+1) //save between card viewz
 
@@ -209,16 +122,12 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
     function dynamicLink(token){
         if(!token || !token.key) return;
         console.log('clicked',token.key)
-        // debugger;
-        // setTokenViewfn( "detailview" , title );
         setTokenViewfn( "pageview" , token );
-        // getDynamicTokenz(title)
         //load page view with new selected token
     }
+
     function dynamicTitleDisplay(){
-        // debugger;
-        let docTitle = (selectedToken.txtz && selectedToken.txtz[0].title)?selectedToken.txtz[0].title:token.key;
-        // console.log(docTitle);
+        let docTitle = (token && token.title)?token.title:token.key;
     return(  <>
         <section className='pageHeader' style={{}}>
             <header style={{display:'flex',justifyContent:'space-between'}}>
@@ -234,19 +143,12 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
                 ?<span style={{fontSize:'x-small'}}>{docTitle}</span>
                 :<span style={{fontSize:'medium'}}>{docTitle}</span>
             }
-            {/* {(token && token.key && token.key.length<18)
-                ?token.key
-                :(token.key.length>30)
-                ?<span style={{fontSize:'x-small'}}>{token.key}</span>
-                :<span style={{fontSize:'medium'}}>{token.key}</span>
-            } */}
             </h1>
 
             <footer style={{display:'flex',justifyContent:'space-between'}}>
                 <aside style={{fontSize:'xx-small'}}>date</aside>
                 <aside style={{fontSize:'xx-small'}}>type</aside>
             </footer>
-            {/* <hr></hr> */}
 
         </section>
     </>)}
@@ -254,7 +156,7 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
     function dynamicArticleTXTz(token,idx) { //*************** POPULATE : Token TXTz : FACTORY
         if(!token || !token.txtz || !token.txtz.length){return}
         let dynamicTXTz = [], specialOperators = '';
-        let styleName = ''; //(idx===0)?'txtBox1':(idx===1)?'txtBox2':'txtBox3';
+        let styleName = ''; 
         
         //if box is seriez or token cards
         dynamicTXTz = token.txtz.map((item,idx)=>{
@@ -273,12 +175,10 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
             } else if(item.type==='magic_token'){
                 styleName = 'txtBox1';
             }
-            specialOperators = /meanz_ |alias_ |aliaz_ |goalz_/;
+            specialOperators = /meanz_ |alias_ |aliaz_ |goalz_/; //todo
             if(specialOperators.test(item.txt)){
-                // item.txt.replace(/meanz_/g,'<div>meanz_!!!</div>')
                 styleName = 'txtBox1';
             }
-            // debugger;
             return (
                 <article  className={styleName}>
                     {item.txt}
@@ -288,9 +188,7 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
         return (<section>{dynamicTXTz}</section>)
     }
 
-    return(
-    <>
-  
+    return( <>
         {dynamicTitleDisplay()}
         <hr style={{marginBottom:'1em'}}></hr>
 
@@ -323,10 +221,10 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
                         <aside style={{fontSize:'x-small'}}>{item.title}</aside> 
                     </header> 
                     { dynamicArticleTXTz(item,idx) }
-                    <footer style={{display:'flex',justifyContent:'space-between',
+                    <footer  className='scrollBarSmall' style={{display:'flex',justifyContent:'space-between',
                         marginTop:'0.666em'}}>
                         <aside style={{fontSize:'xx-small'}}>
-                            {(item.ymdz.length)?item.ymdz:token.ymdz}
+                            {(item.ymdz && item.ymdz.length)?item.ymdz:token.ymdz}
                             {/* {item.ymdz} */}
                         </aside>
                         <aside style={{fontSize:'xx-small'}}>{item.type}</aside>
@@ -337,7 +235,7 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
               )
             })}
 
-            <div ref={autoScrollDown} />
+            {/* <div ref={autoScrollDown} /> */}
 
             <article style={{background:'skyblue',
                 boxShadow:'inset -1px -2px 7px 0px blue',
@@ -347,27 +245,25 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
                 <div style={{margin:'1em 0 0 0',}}>
                     COUNT: {loadTXTidx} of {localTXTz.length}
                 </div>
-                &nbsp; 
                 
-                <hr></hr>
-                &#127984;   &#128161;  &#9889; &#127775;
+                &nbsp;               
+                {/* <hr></hr>
+                &#127984;   &#128161;  &#9889; &#127775; */}
                 <hr></hr>
                 &#8987; &#8986; &#9200; &#9201; &#9203; &#9875;
-                <hr></hr> 
+                {/* <hr></hr>  */}
 
             </article> 
-
+            <div ref={autoScrollDown} />
             <div ref={autoScrollEnd} style={{height:'1em'}}/>
         </section> {/*END SCROLL DOC*/}
     </>
     )
 }
- 
-
-        // {/* <article> &#9935; &#10035;  &#10036;  &#10050;  &#10055;  &#10052;
+        // TODO: GAMIFY WITH THESE ICONS
+         // {/* <article> &#9935; &#10035;  &#10036;  &#10050;  &#10055;  &#10052;
         // <hr></hr>
         // &#10083;  &#11088;  &#11093;  &#12336; &#127760; &#9889;
-
         // <hr></hr>
         // &#127775; &#127879; &#127880;  &#127881; &#127919;
         // <hr></hr>
@@ -421,8 +317,6 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenT
         //       <hr></hr> 
         // </article>      
         // */}
-
-
         //       {/* &#10531; 	&#10532; 	&#10533; &#10534;
         //       <hr></hr>
         //       &#10556; 	&#10555; 	&#10554; 	&#10552; 
@@ -458,31 +352,17 @@ function CardView (){
                 return <TokenCard token={token} idx={idx} setTokenViewfn={setTokenViewfn} key={'tokencard'+token.numz}/>
             }) 
             }
-            {/* <footer style={{minHeight:'3em'}}></footer> */}
          </div> 
          );
     }  
     setTokenz_COLUMN_COUNT(humanIDX)  
     setTokenz_COLUMN_LENGTH(COLNUM)  
-
     return(tokenCOLUMNS)
 }
 
 let TokenCardz = ( {token} ) => { //todo rename TokenPage, TokenCard and TokenTXT and TokenGrid.
-    // let tokenViewAddfn = null;
-    // function initTokenfn(handleToViewfn){
-    //     console.log('parent')
-    //     tokenViewAddfn = handleToViewfn
-    // }
-    
     const [showEyes, setShowEyes] = useState(0);
     const [reloadTXTidx, reloadTXT] = useState(0);
-
-
-
-    // useEffect(() => { 
-    //     if(reloadTXTidx){showEyes(1)}
-    // }, []);
 
     function setCardViewContent(direction){
         if(direction==='home'){
@@ -525,23 +405,7 @@ let TokenCardz = ( {token} ) => { //todo rename TokenPage, TokenCard and TokenTX
             let nextToken = lookUpNUMZToken(tgt);
             if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
         } else if (direction==='extra'){
-            // setSelectedTXTz([],reloadTXTidx+1);
             reloadTXT( reloadTXTidx + 1 )
-            // reloadTXT(prev => prev + 1)
-            // debugger;
-            // if(selectedToken){
-             
-            //     let newObj = selectedToken
-            //     // newObj.txtz = newTXTz
-            //     if(newObj.loadTXTidx){
-            //         newObj.loadTXTidx += newObj.loadTXTidx;
-            //     } else {
-            //         newObj.loadTXTidx = 1 
-            //     }
-            //     setSelectedTokenObj(newObj);
-   
-            // }
-
         }
     }
 
@@ -554,10 +418,7 @@ let TokenCardz = ( {token} ) => { //todo rename TokenPage, TokenCard and TokenTX
         width:'100%'
         }}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
-            background:'#8db7dc',
-            borderRadius:'6px',
-            border:'1px solid #3540a0',
-            padding:'0.666em'}}>
+            background:'#8db7dc',borderRadius:'6px',border:'1px solid #3540a0',padding:'0.666em'}}>
             <button className='btnLeft' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('up')}}><span style={{fontSize:'1.555em'}}>&#10531;</span>&nbsp;UP</button>
             <button style={{width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
@@ -566,37 +427,20 @@ let TokenCardz = ( {token} ) => { //todo rename TokenPage, TokenCard and TokenTX
             <button className='btnRight' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('down')}}>DOWN <span style={{fontSize:'1.555em'}}>&#10533;</span></button>
         </header>
-        <article style={{
-            // flex:1, 
-            color:'steelblue',
-            boxShadow:'inset 0px 0px 10px 0px #0a0a79',
-            maxHeight:'53vh',
-            }}>
+        <article style={{color:'steelblue',boxShadow:'inset 0px 0px 10px 0px #0a0a79',maxHeight:'53vh' }}>
             <hr style={{marginBottom:'0.555em'}}></hr>
             <TXTViewz setShowEyes={setShowEyes} reloadTXTidx={reloadTXTidx} token={selectedToken} key={'txt.'+token.numz}/>
-            {/* <TXTViewz reloadTXTidx={reloadTXTidx} token={selectedToken} key={'txt.'+token.numz}/> */}
-            {/* <TXTViewz token={selectedToken} key={'txt.'+token.numz}/> */}
         </article>
-        <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
-            padding:'0.666em',
-            background:'#8db7dc',
-            borderRadius:'6px',
-            border:'1px solid #3540a0'
-            }}>
+        <footer style={{width:'100%',display:'flex',justifyContent:'space-between',padding:'0.666em',background:'#8db7dc',
+            borderRadius:'6px',border:'1px solid #3540a0'  }}>
             <button className='btnLeft' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
                 onClick={ ()=>{setCardViewContent('left')}}><span style={{fontSize:'1.555em'}}>&#10534;</span>&nbsp;LEFT</button>
-
-            {/* {(selectedToken)? */}
             {(showEyes)?
-            // <>                
-            // num {selectedToken.loadTXTidx}
             <button style={{width:'4em',cursor:'pointer',
                 boxShadow:'0px 0px 2px 2px #4aef58',
                 borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em',paddingBottom:'0.444em'}} 
                 onClick={ ()=>{setCardViewContent('extra')}}><span style={{fontSize:'1.555em'}}>&#128064;</span>&nbsp;</button>
-                // </>
             : ''
-            // <div style={{color:'black'}}>num {selectedToken.loadTXTidx}</div>
             }
 
             <button className='btnRight' style={{width:'6em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue',fontSize:'0.666em'}} 
@@ -606,76 +450,39 @@ let TokenCardz = ( {token} ) => { //todo rename TokenPage, TokenCard and TokenTX
     </>)
 }
 
-
 function setTokenViewfn(selectedView,token){ //update app, show view
     console.log("setTokenView",selectedView, token.key)
     setViewState(selectedView);
     setSelectedTokenObj(token);
 }
 
-// function setSelectedDetails(newDetails){
-//     let newObj = selectedToken
-//     newObj.details = newDetails
-//     setSelectedTokenObj(newObj);
-// }
-
 // necessary for moving between cardz.
 function setSelectedTXTz(newTXTz,loadTXTidx){
     let newObj = selectedToken
+    // newObj.txtz = newTXTz.txtz
     newObj.txtz = newTXTz
     newObj.loadTXTidx = loadTXTidx;
     setSelectedTokenObj(newObj);
 }
 
-// function clickNav( viewName ){
-//     console.log('view ', viewName)
-//     if(viewName===''){
-
-//     }
-// }
-
 return (
 <>
 
-<article style={{
-    // maxHeight:'77vh'
-    flex:'1',
-    display:'flex',
-    flexWrap:'wrap',
-    justifyContent:'center',
-    alignContent:'stretch'
-
-    }}>
-
-{/* <section> */}
-<h1 className="appTitle">aPRYZMaGAMEa</h1>
+<article style={{flex:'1',display:'flex',flexWrap:'wrap',justifyContent:'center',alignContent:'stretch' }}>
+<h1 className="appTitle">WORD_GAME</h1>
 <div className='scrollBarV' style={{maxHeight:'83vh',minWidth:'98%'}} >
-<div className='scrollBarH' style={{
-    maxHeight:'83vh'
-    }} >
-<main className='cardMain' style={{display:'flex'
-// ,minWidth:'98%'
-// ,paddingRight:'3em'
-    // ,justifyContent:'center'
-}}>
+<div className='scrollBarH' style={{maxHeight:'83vh' }} >
+<main className='cardMain' style={{display:'flex'}}>
     <section className='mainframe' style={{display:'flex',
     boxShadow:'0px 1px 14px 1px purple',
-    // padding:'1em',
     marginTop:'0.444em',
-    // paddingLeft:'1.444em',paddingRight:'1.444em',
-    // marginRight:'1em',marginLeft:'1em',
-    // marginRight:'1em'
-    // marginRight:'3em',
     flex:'1 1 auto',
     borderRadius:'13px',
-    // maxHeight:'75vh',
-    // width:'100%'
     } }>
         { (!tokenz_CARD_COUNT)?
             <div style={{width:'100%',margin:'44%',marginLeft:'40%'}}>loading...</div>
           :'' 
         }
-
         { (viewState==='overview') ? 
             <CardView/>
         : (viewState==='pageview') ? //todo pageview?
@@ -687,8 +494,7 @@ return (
         </main>
         </div>
         </div>
-        {/* </section> */}
-        <footer style={{marginTop:'1em',fontSize:'smaller'}}>
+        <footer style={{marginTop:'1em',fontSize:'xx-small'}}>
           WORD_GAME : {tokenz_CARD_COUNT}
         </footer>
         </article>

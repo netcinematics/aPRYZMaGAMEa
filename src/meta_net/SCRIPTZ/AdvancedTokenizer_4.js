@@ -127,8 +127,10 @@
   * - TARGET FILE and ALL FILES in DIRECTORY.
   ********************************************************/
  const readAllMarkdownFiles = async (dirname) => {
+    debugger;
      try {
-         const filenames = await readdir(dirname);
+         let filenames = await readdir(dirname);
+         filenames = filenames.filter(item=> {return (item.indexOf('.md')<0)? false :  true;}) //only .md
          console.log(" - all file names:", filenames, filenames.length);
          //todo test
          // RUNTIME.srcmap.push(...filenames);//for trace back
@@ -136,8 +138,9 @@
          const files_promise = filenames.map(filename => {
              return readFile(dirname + filename, 'utf-8');
          });
-         const response = await Promise.all(files_promise);
-         return response
+         let dataFiles = await Promise.all(files_promise);
+         return dataFiles;
+        //  return response
          // return filenames.reduce((accumulator, filename, currentIndex) => {
          //     const content = response[currentIndex];
          //     accumulator[filename] = { content };
@@ -1111,6 +1114,7 @@
                 aToken.type = 'prime_card_token'
                 aToken.key = primeKeyTgt;
                 aToken.keyz = (primeKeyObj.keyz)?primeKeyObj.keyz:[];
+                // debugger; //todo title
                 aToken.title = (primeKeyObj.title)?primeKeyObj.title:'';
                 aToken.txtz = (primeKeyObj.txtz)?primeKeyObj.txtz:[];
                 if(primeKeyObj.aliaz && primeKeyObj.aliaz.length){ //no aliaz if blank.
@@ -1178,7 +1182,10 @@
             //     txtz: RUNTIME_STATE.setz.all_card_tokenz[i].txtz,
             //     numz: RUNTIME_STATE.setz.all_card_tokenz[i].numz,
             aToken = new Object();
-            aToken.type = 'prime_key_card' //token            
+            aToken.type = 'prime_key_card' //token      
+            // debugger; //todo title
+            aToken.title = (RUNTIME_STATE.setz.prime_key_cardz[prime_key].txtz[0].title)
+            ?RUNTIME_STATE.setz.prime_key_cardz[prime_key][0].title:prime_key;      
             aToken.key = prime_key;
             aToken.txtz = RUNTIME_STATE.setz.prime_key_cardz[prime_key];
             aToken.tgt_path =  RUNTIME_STATE.tgt_path;

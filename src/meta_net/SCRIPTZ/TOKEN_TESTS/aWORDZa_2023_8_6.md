@@ -1,12 +1,12 @@
 # _aWORDZa_
 
-meanz_: actual_actz_of_wordz.
-alias_: actual_act_of_wordz, awordz, wordz, awordza.
+meanz_ actual_actz_of_wordz.
+alias_ actual_act_of_wordz, awordz, wordz, awordza.
 
-pronounced_: ah-words-ah.
-goalz_: ai_mapz_to_asymbolza and ai_mapz_to_axi.
+pronounced_ ah-words-ah.
+goalz_ ai_mapz_to_asymbolza and ai_mapz_to_axi.
 
-YMD_:2023_1_10
+YMD_2023_1_1
 
 ---
 
@@ -14,21 +14,21 @@ YMD_:2023_1_10
 
 aWordza is a WORD_GAME, designed to solve the ai problem of GENERATING articulated_context_metadata for large language models.
 
-goalz_: to generate_better_words, and concepts_underneath_words, with a new and improved SYNTAX and NAMING CONVENTION, for a unique and reliable source of ai training.
+goalz_ to generate_better_words, and concepts_underneath_words, with a new and improved SYNTAX and NAMING CONVENTION, for a unique and reliable source of ai training. YMD_2023_2_2
 
 ### _aWORDaGAMEa_
 
-pronounced_: ah-word-ah-GAHM-eee, like oragami.
+pronounced_ ah-word-ah-GAHM-eee, like oragami.
 
-meanz_: A game of wordcrafting. Like actual word oragami. 
+meanz_ A game of wordcrafting. Like actual word oragami. 
 
-aliaz_: aWORDaGAME, word_game, actual_word_game, actual_act_of_word_games, awordagamea.
+aliaz_ aWORDaGAME, word_game, actual_word_game, actual_act_of_word_games, awordagamea.
 
-YMD_2023_1_2
+YMD_2023_3_3
 
 ~~~
 
-aWORDaGAME_Challenge meanz_: convert wordz to more accurately describe actual_reality, in as few characters as possible.
+aWORDaGAME_Challenge meanz_ convert wordz to more accurately describe actual_reality, in as few characters as possible.
 
 ~~~
 
@@ -62,11 +62,11 @@ Begin listening to all words, and transform them into CONZEPTZ_beneath_WORDZ.
 
 ~~~
 
-With the advanced version of aWORDaGAMEa to_: Seek_conceptz_no_human_mind_has_ever_thought_before.
+With the advanced version of aWORDaGAMEa to_ Seek_conceptz_no_human_mind_has_ever_thought_before.
 
 ~~~
 
-_aSEEKa_ alias_: aSeeka_Conceptas_BeyondUs
+_aSEEKa_ alias_ aSeeka_Conceptas_BeyondUs
 
 > Look_into_questions_that_all_human_minds_overlook.
 
@@ -78,9 +78,9 @@ That's the high level overview!
 
 > aWORDZa is an ai wordgame, first used to rhyme song lyrics.
 
-_aWORDZa_ alias_: awordza.
+_aWORDZa_ alias_ awordza.
 
-_aBetterWordza_ alias_: abetterwordz abetterawordza.
+_aBetterWordza_ alias_ abetterwordz abetterawordza.
 
 ## INTO aWORDZa
 
@@ -113,7 +113,7 @@ That is where the real fun is! Exciting and rapid. It is important. And it appea
 
 > Use aWORDZa to, look_and_see, through aPRYZMaVIEWZ of actual_reality.
 
-_aSeeka_ alias_: actual_actz_of_seeking.
+_aSeeka_ alias_ actual_actz_of_seeking.
 
 A_fulfilling_existanze_awaitsUs.
 
@@ -146,7 +146,7 @@ Following the SIMPLIFIED_LANGUAGE_SYNTAX (naming-convention)
 
 conzeptz_await_us, and aWORDZa folds them into existence - as a game.
 
-YMD_2023_5_5
+YMD_2023_4_4
 
 ---
 
@@ -156,7 +156,7 @@ The original intent of aWordza was to provide meta_context for rock and roll son
 
 As far back as 2002, this was common endeavor in _ai. But also, this approach was a unique perspective of artistry and word-crafting. The many scripts and syntax, and tokenizers - morphed, or evolved into an ongoing aWORDaGAMEa.
 
-YMD_2023_1_3
+YMD_2023_5_5
 
 ---
 
@@ -168,13 +168,13 @@ The PRIME_GOAL is to:
 
 2. Then compare those song lyrics together in abstract ways.
 
-YMD_2023_8_8
+YMD_2023_6_6
 
 > aWORDZa is an easy puzzle to learn, and infinitely difficult to master!
 
 ## PRINCIPLES_of_aWORDZa
 
-principz_:
+principz_
 
 1. **a_self_descriptiveness**, means: All META-DATA needs to be all_human_self_descriptive. Where, all_human_mind should be able to read wordz and understand simultaneously max degree, with minimum aConfuzion.
 
@@ -198,7 +198,7 @@ With remarkably few characters!
 
 1. UNIVERSAL_UNDERSCORE, meanz: a single character to define all metadata. Underscore wrapped words meanz: PRIME_KEY. Underscores internally, are called omni_key. 
 
-GOALZ_: most_human_readable and most_human_memorable, and most_human_usable!!!
+GOALZ_ most_human_readable and most_human_memorable, and most_human_usable!!!
 
 2. ALPHA_KEYZ, are in the camel-case format of aWORDZa.
 
@@ -210,15 +210,15 @@ Wrapped inbetween two little-a's. The little_a_prefix, meanz: 'actual' giving a 
 
 4. **z-miss-spelling**, meanz: enhanced, articulated, or remarkable. And its primary purpose is to reliably make common_words_unique, for ability to define exactness again.
 
-YMD_2023_6_6
+YMD_2023_8_8
 
 ---
 
 ## CONCLUSIONS
 
-Give it a try. Chooze to study aWORDZa. Start combining wordz. And experience JOY in the discovery of all_that_exists. Beyond_your_mind, and beyond_all_human_mind. Use aWORDaGAMEa to define many viewz, and experience the thrill_of_discovery, as words become WORDZ and concepts generatively_reflect_actureality. YMD_2023_1_4
+Give it a try. Chooze to study aWORDZa. Start combining wordz. And experience JOY in the discovery of all_that_exists. Beyond_your_mind, and beyond_all_human_mind. Use aWORDaGAMEa to define many viewz, and experience the thrill_of_discovery, as words become WORDZ and concepts generatively_reflect_actureality. YMD_2023_9_9
 
 nJoy!!!
 SIG_ENZO_~:)
-YMD_2023_8_6
+YMD_2023_10_10
 ~0~ THE_ENDZ!!!

@@ -34,7 +34,7 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
     }
     axios.request(options).then((response) => {
         // setTokenz_INDEX_DATA(response.data.token_index)
-        
+        debugger;
         // setTokenz_INDEX_DATA(format_INDEX_DATA(response.data.omni_key_index))
         setTokenz_INDEX_DATA(format_INDEX_DATA(response.data.prime_key_idx))
         // setTokenz_INDEX_DATA(response.data.omni_key_index)
@@ -64,7 +64,7 @@ function format_INDEX_DATA(server_data){ //from str into token
     return formatted_data;
 }
 
-let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { 
+let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => { //todo rename TokenTXTView
 // let TXTViewz =  ( {token, reloadTXTidx} ) => { 
 // let TXTViewz =  ( {token} ) => { 
     const autoScrollDown = useRef(null);
@@ -75,10 +75,10 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
     let [localTXTz,setLocalTXTz] = useState([]) 
 
     //todo remove
-    let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
-    let [tokenTXT_COUNT,setTokenTXTCOUNT] = useState(0)
+    // let [tokenTXT_INDEX,setTokenTXTINDEX] = useState(0)
+    // let [tokenTXT_COUNT,setTokenTXTCOUNT] = useState(0)
     let [tokenTXT_ARRAY,setTokenTXTARRAY] = useState([])
-    let [tokenTXT_ARTICLES,setArticleDisplay] = useState([])
+    // let [tokenTXT_ARTICLES,setArticleDisplay] = useState([])
 
     useEffect(() => { //load txtz from outside page component.
     // useEffect(() => { //load txtz from outside page component.
@@ -216,6 +216,9 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
         //load page view with new selected token
     }
     function dynamicTitleDisplay(){
+        // debugger;
+        let docTitle = (selectedToken.txtz && selectedToken.txtz[0].title)?selectedToken.txtz[0].title:token.key;
+        // console.log(docTitle);
     return(  <>
         <section className='pageHeader' style={{}}>
             <header style={{display:'flex',justifyContent:'space-between'}}>
@@ -225,12 +228,19 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
             </header>
 
             <h1 className='pageTitle' style={{cursor:"pointer"}} onClick={ ()=>dynamicLink(token)}>
-            {(token && token.key && token.key.length<18)
+            {(docTitle && docTitle.length<18)
+                ?docTitle
+                :(docTitle.length>30)
+                ?<span style={{fontSize:'x-small'}}>{docTitle}</span>
+                :<span style={{fontSize:'medium'}}>{docTitle}</span>
+            }
+            {/* {(token && token.key && token.key.length<18)
                 ?token.key
                 :(token.key.length>30)
                 ?<span style={{fontSize:'x-small'}}>{token.key}</span>
                 :<span style={{fontSize:'medium'}}>{token.key}</span>
-            }</h1>
+            } */}
+            </h1>
 
             <footer style={{display:'flex',justifyContent:'space-between'}}>
                 <aside style={{fontSize:'xx-small'}}>date</aside>
@@ -245,6 +255,7 @@ let TXTViewz =  ( {token, reloadTXTidx, setShowEyes} ) => {
         if(!token || !token.txtz || !token.txtz.length){return}
         let dynamicTXTz = [], specialOperators = '';
         let styleName = ''; //(idx===0)?'txtBox1':(idx===1)?'txtBox2':'txtBox3';
+        
         //if box is seriez or token cards
         dynamicTXTz = token.txtz.map((item,idx)=>{
             styleName = 'plainTXT' // default style
@@ -457,7 +468,7 @@ function CardView (){
     return(tokenCOLUMNS)
 }
 
-let TokenCardz = ( {token} ) => {
+let TokenCardz = ( {token} ) => { //todo rename TokenPage, TokenCard and TokenTXT and TokenGrid.
     // let tokenViewAddfn = null;
     // function initTokenfn(handleToViewfn){
     //     console.log('parent')

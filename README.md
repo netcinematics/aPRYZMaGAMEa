@@ -43,20 +43,6 @@ LINK: https://netcinematics.github.io/aPRYZMaGAMEa/
 # ~ : ) 
 
 ---
-1. Artificial Intelligence USE-CASES with NATURAL_LANGUAGE_PROCESSING (NLP)
-2. Constructs, Data Structures, and Design Patterns.
-3. To deploy aWordza 2.
----
-
-## AI-Generated Word-Game & Song-Lyrics & Story-Tree UI.
-
-INSTRUCTIONS:
-X - Navigate a Tree of Puzzles.
-O - Unlock new puzzles.
-X - Word Puzzles
-O - EPICZ MixMedia renderer
-
----
 
 ## aWORDaGAMi
 
@@ -66,6 +52,15 @@ O - EPICZ MixMedia renderer
      of OpenAI and "emergent" capabilities???
 
      > Let's SEE!
+
+
+### aWORDZa -  DESIGN_PRINCIPLES
+
+Uses short, self-descriptive naming-convention, 
+to enhance english, with significant results.
+generative plasticity mechanism. Still under review.
+
+---
 
 ## AI INTEGRATIONS? ChatGPT
 - graduate difficulty, based on score.
@@ -88,25 +83,11 @@ https://raw.githubusercontent.com/netcinematics/aWordaGami/main/cardz/aWORDZa.js
 ---
 
 ### OPTIMIZED PATH v2 (aPRYZMa):
-
 X - minimal reactjs
 X - sound test
 X - minimal deploy (github pages)
 
 ### MINIMAL PATH v1 (aWORDZa): 
-
-X Merge 5 sandboxes, in perfect order. Priority by order of construction.
-X aWORDaGAME first.  Because TXT and Game mechanics easy.
-X Data "stubbed" as MockData (save time && gr84 Info Architecture Design)
-X Reveal UI (sandbox).
-  X - Minimum Overview to DappMap
-  X - Minimum Item / CARD_plain to NUMZ file. 
-  X - NextJS_with_Reveal_Template
-  X - Port into aWordaGame minimum (no build/server)
-X into NEW NextJS/React (sandbox)
-X into aWORDaGAMi
--
-
 
 ---
 
@@ -170,17 +151,6 @@ cancel-culture
 anti-vaxxers
 fake-news
 
-
-
-
-### aWORDZa -  DESIGN_PRINCIPLES
-
-Uses short, self-descriptive naming-convention, 
-to enhance english, with significant results.
-generative plasticity mechanism. Still under review.
-
----
-
 ### UI TODO:
 
 X - clean up, check in, deploy react to gh-pages
@@ -202,31 +172,17 @@ X - GRID in song lyrics. shows Rhyme_Strength. FOCUS.
 O - non reload Local Storage
 O - icon / menu
 O - menu / game routing
-
 O - sonics tally invert, up pitch
 O - sonics win shorter cut beat
 O - sonics up is swoosh
 X - locked - puzzle - prize - examples.
----
-
-
-# HYPOTHESIS
-
-The endless search for new viewz in language.
-
-
-# CONCLUSIONS / 
-
-> X VERCEL NodeJS with Express on hold (serverless)
-> X Use ChatGPT as copilot with Google to code. on hold (not needed)
-> X Use GitHub as forever storage, self-generative app. DONE.
-> X Use JS/JSON as dynamic, multi-faceted, prysm of viewz. DONE.
-> O GAMIFY front end with local storage.
 
 ---
 
 
 ## Manifest v2
+
+~~~
 // X npm init
 // X npm i create-react-app //this was wrong
 // extreemely weird copy over problem to get name...
@@ -246,6 +202,7 @@ The endless search for new viewz in language.
 ---
 // to make warning go away npm install --save-dev @babel/plugin-proposal-private-property-in-object
 //did not install
+~~~
 
 PROD LINK: https://netcinematics.github.io/aPRYZMaGAMEa/
 REQUIRES > // npm run deploy to push updated after checkin.
@@ -497,3 +454,36 @@ O write syntax introduction as docs.
 O render quote
 O render series
 O render titles.
+
+
+1. Artificial Intelligence USE-CASES with NATURAL_LANGUAGE_PROCESSING (NLP)
+2. Constructs, Data Structures, and Design Patterns.
+3. To deploy aWordza 2.
+---
+
+## AI-Generated Word-Game & Song-Lyrics & Story-Tree UI.
+
+INSTRUCTIONS:
+X - Navigate a Tree of Puzzles.
+O - Unlock new puzzles.
+X - Word Puzzles
+O - EPICZ MixMedia renderer
+
+---
+
+
+
+# HYPOTHESIS
+
+The endless search for new viewz in language.
+
+
+# CONCLUSIONS / 
+
+> X Minimum Viable Product, forever Ai text.
+> X Use ChatGPT as copilot with Google to code.
+> X Use GitHub as forever storage, self-generative app.
+> X Use JS/JSON as dynamic, multi-faceted, prysm of viewz. 
+> O GAMIFY front end with local storage.
+
+---

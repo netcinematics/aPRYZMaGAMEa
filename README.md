@@ -487,3 +487,5 @@ The endless search for new viewz in language.
 > O GAMIFY front end with local storage.
 
 ---
+
+EMOJIS: https://www.w3schools.com/charsets/ref_emoji.asp

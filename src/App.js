@@ -12,73 +12,78 @@ let sonicSonar = new Audio("https://netcinematics.github.io/aPRYZMaGAMEa/sonic/n
 
 function App() {
 
-  const [appIDX, setAppIDX] = useState('home'); 
+  const [appIDX, setAppIDX] = useState('home');
   // function Click_APP (e) { setAppIDX(e.target.innerText); }
 
-  function clickNav( viewName ){
+  function clickNav(viewName) {
     console.log('view ', viewName)
     setAppIDX(viewName);
-}
+  }
 
   return (
-    <article className="App" style={{display:'flex',flexDirection:'column',
+    <article className="App" style={{
+      display: 'flex', flexDirection: 'column',
       backgroundColor: 'black',
       // maxWidth:'55em',
-      
-      // margin:'0 auto',
-      padding:'0.444em',borderRadius:'15px'}}>
-   
-      <main className="AppMain" style={{color:'skyblue', 
-      // paddingTop:'0.222em',
-        borderRadius:'13px',height:'90%', 
-        display:'flex',flexDirection:'column'
-        ,overflowY:'hidden',flex:'2'
-        }}>
-          <nav className='iconNav' style={{display:'flex',
-    justifyContent:'space-between'}}>
-      {/* appIDX */}
-        <span className={(appIDX==='home')?'selectedAppHalo':''} onClick={(e)=>{clickNav('home')}}>&#127984;</span>
-        <span className={(appIDX==='game')?'selectedAppHalo':''} onClick={(e)=>{clickNav('game')}}>&#9889;</span>
-        <span className={(appIDX==='stats')?'selectedAppHalo':''} onClick={(e)=>{clickNav('stats')}}>&#127775;</span> 
-        <span className={(appIDX==='rules')?'selectedAppHalo':''} onClick={(e)=>{clickNav('rules')}}>&#128161;</span>
-         </nav>
 
-      {         
-        (() => { //SIMPLE-DYNAMIC-VIEW-DISPLAY: (design~innovation) // Routing - nah...
-          if (appIDX === "game") {
-            sonicBlip.play();
-            return <TokenGridFrame/>;
-          } else if (appIDX === "home") {
-            // sonicSonar.play();
-            return <MainView/>;
-          } else if (appIDX === 'stats'){
-            sonicSonar.play();
-            return <StatsView/>;            
-          } else if (appIDX === 'rules'){
-            sonicSonar.play();
-            return <RulesView/>;
-          }
-          
-          // else {
-          //   return <MainView/>;
-          // }
-        })()
-      }
+      // margin:'0 auto',
+      padding: '0.444em', borderRadius: '15px'
+    }}>
+
+      <main className="AppMain" style={{
+        color: 'skyblue',
+        // paddingTop:'0.222em',
+        borderRadius: '13px', height: '90%',
+        display: 'flex', flexDirection: 'column'
+        , overflowY: 'hidden', flex: '2'
+      }}>
+        <nav className='iconNav' style={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}>
+          {/* appIDX */}
+          <span className={(appIDX === 'home') ? 'selectedAppHalo' : ''} onClick={(e) => { clickNav('home') }}>&#127984;</span>
+          <span className={(appIDX === 'game') ? 'selectedAppHalo' : ''} onClick={(e) => { clickNav('game') }}>&#9889;</span>
+          <span className={(appIDX === 'stats') ? 'selectedAppHalo' : ''} onClick={(e) => { clickNav('stats') }}>&#127775;</span>
+          <span className={(appIDX === 'rules') ? 'selectedAppHalo' : ''} onClick={(e) => { clickNav('rules') }}>&#128161;</span>
+        </nav>
+
+        {
+          (() => { //SIMPLE-DYNAMIC-VIEW-DISPLAY: (design~innovation) // Routing - nah...
+            if (appIDX === "game") {
+              sonicBlip.play();
+              return <TokenGridFrame />;
+            } else if (appIDX === "home") {
+              // sonicSonar.play();
+              return <MainView />;
+            } else if (appIDX === 'stats') {
+              sonicSonar.play();
+              return <StatsView />;
+            } else if (appIDX === 'rules') {
+              sonicSonar.play();
+              return <RulesView />;
+            }
+
+            // else {
+            //   return <MainView/>;
+            // }
+          })()
+        }
       </main>
-      <footer style={{flex:'0'}}>
-        <nav style={{marginTop:'0.5em'}}>
-          <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px purple'}}
-            onClick={(e)=>{clickNav('home')}}>HOME</button>
+      <footer style={{ flex: '0' }}>
+        <nav style={{ marginTop: '0.5em' }}>
+          <button style={{ cursor: 'pointer', borderRadius: '8px', margin: '0px 10px', boxShadow: '1px 1px 5px purple' }}
+            onClick={(e) => { clickNav('home') }}>HOME</button>
           {/* <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px yellow'}}
             onClick={Click_APP}>TicTacToe</button> */}
-          <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
-            onClick={(e)=>{clickNav('game')}}>aPRYZMaGAMEa</button>
+          <button style={{ cursor: 'pointer', borderRadius: '8px', margin: '0px 10px', boxShadow: '1px 1px 5px orange' }}
+            onClick={(e) => { clickNav('game') }}>aPRYZMaGAMEa</button>
         </nav>
-        <section style={{color:'steelblue',fontSize:'x-small',marginTop:'1em'}}>
+        <section style={{ color: 'steelblue', fontSize: 'x-small', marginTop: '1em' }}>
           MIT - work in progress by envolveren  - &copy; 2023
-        </section>      
+        </section>
       </footer>
-   </article>
+    </article>
   );
 
 }

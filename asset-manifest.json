@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/aPRYZMaGAMEa/static/css/main.9305b20f.css",
-    "main.js": "/aPRYZMaGAMEa/static/js/main.4d3cdf1a.js",
+    "main.js": "/aPRYZMaGAMEa/static/js/main.f839dbcb.js",
     "index.html": "/aPRYZMaGAMEa/index.html",
     "main.9305b20f.css.map": "/aPRYZMaGAMEa/static/css/main.9305b20f.css.map",
-    "main.4d3cdf1a.js.map": "/aPRYZMaGAMEa/static/js/main.4d3cdf1a.js.map"
+    "main.f839dbcb.js.map": "/aPRYZMaGAMEa/static/js/main.f839dbcb.js.map"
   },
   "entrypoints": [
     "static/css/main.9305b20f.css",
-    "static/js/main.4d3cdf1a.js"
+    "static/js/main.f839dbcb.js"
   ]
 }
